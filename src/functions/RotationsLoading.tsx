@@ -1,7 +1,13 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated} from 'react-native';
+import {Animated, ViewStyle} from 'react-native';
 
-const Loading = () => {
+interface RotationsLoadingProps{
+    children: React.ReactNode;
+    duration?: number;
+    style?: ViewStyle;
+};
+
+const RotationsLoading: React.FC<RotationsLoadingProps> = ({children, duration = 2000, style}) => {
     const loadSpinValue = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
@@ -12,12 +18,18 @@ const Loading = () => {
                 useNativeDriver: true,
             })
         ).start();
-    }, [loadSpinValue]);
+    }, [loadSpinValue, duration]);
 
     const rotate = loadSpinValue.interpolate({
-        inputRange: [0,1];
+        inputRange: [0,1],
         outputRange: ['0deg','360deg'],
     });
+
+    return (
+        <Animated.View style={[style, {transform: [{rotate}]}]}>
+            {children}
+        </Animated.View>
+    );
 };
 
-export default Loading();
+export default RotationsLoading;

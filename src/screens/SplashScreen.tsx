@@ -1,15 +1,19 @@
 import React from 'react';
-import {SafeAreaView, TouchableOpacity} from 'react-native';
-import NormalText from '../components/NormalText.tsx';
-import GlobalStyles from '../components/GlobalStyles.tsx';
+import {Image, ImageBackground, View} from 'react-native';
+import GlobalStyles, {houseLocationImage, logoImage, wallpaperBackground} from '../components/GlobalStyles.tsx';
+import RotationsLoading from '../functions/RotationsLoading.tsx';
+
 
 const SplashScreen = ({navigation}: any) => {
     return (
-        <SafeAreaView style={GlobalStyles.pageContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
-                <NormalText text={'Olav De Linde'} textColor={'#ffffff'} fontSize={10} />
-            </TouchableOpacity>
-        </SafeAreaView>
+        <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
+            <View style={GlobalStyles.logoImageContainer}>
+                <Image source={logoImage} style={GlobalStyles.mainLogo} />
+                <RotationsLoading duration={2000}>
+                    <Image source={houseLocationImage} style={GlobalStyles.rotationalLogo} />
+                </RotationsLoading>
+            </View>
+        </ImageBackground>
     );
 };
 
