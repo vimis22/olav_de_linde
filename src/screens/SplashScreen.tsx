@@ -1,10 +1,11 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native';
+import {SafeAreaView, TouchableOpacity} from 'react-native';
 import NormalText from '../components/NormalText.tsx';
+import GlobalStyles from '../components/GlobalStyles.tsx';
 
 const SplashScreen = ({navigation}: any) => {
     return (
-        <SafeAreaView style={styles.pageContainer}>
+        <SafeAreaView style={GlobalStyles.pageContainer}>
             <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
                 <NormalText text={'Olav De Linde'} textColor={'#ffffff'} fontSize={10} />
             </TouchableOpacity>
@@ -12,13 +13,5 @@ const SplashScreen = ({navigation}: any) => {
     );
 };
 
-const styles = StyleSheet.create({
-    pageContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#330099',
-    },
-});
 
 export default SplashScreen;

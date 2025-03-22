@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, TextInput} from "react-native";
+import {View, StyleSheet, TextInput} from 'react-native';
 import NormalText from './NormalText.tsx';
 
 interface LabeledInputFieldProps {
