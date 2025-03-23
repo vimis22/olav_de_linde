@@ -1,45 +1,51 @@
-import React from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import React, {useState} from 'react';
+import {Image, ImageSourcePropType, TextInput, TouchableOpacity, View} from 'react-native';
+import GlobalStyles from '../Styling/GlobalStyles.tsx';
 
-interface InputFieldAreaProps{
-    textColor?: string;
-    backgroundColor?: string;
-    secureTextEntry?: boolean;
-    height?: number;
-    width?: number;
+
+interface InputFieldAreaProps {
     placeholder?: string;
-    value: string;
-    onChangeText: (text: string) => void;
+    fieldIconBackground?: string;
+    whenPassword: boolean;
+    fieldIcon: ImageSourcePropType;
+    displayIcon?: ImageSourcePropType;
+    hideIcon?: ImageSourcePropType;
+    visiblePasswordIcon?: string;
+    containerHeight?: number;
+    containerRadius?: number;
+    fieldIconSize?: number;
+    backgroundColor?: string;
+    textColor?: string;
 }
 
 const InputFieldArea: React.FC<InputFieldAreaProps> = ({
-    textColor = '#000000', backgroundColor = '#ffffff',
-    secureTextEntry = false, height = 20, width = 250,
-    placeholder, value, onChangeText,
-}) => {
-    return (
-        <TextInput
-            placeholder={placeholder}
-            value={value}
-            onChangeText={onChangeText}
-            secureTextEntry={secureTextEntry}
-            style={[styles.inputField,
-                {color: textColor, backgroundColor, height, width},
-            ]}
-        />
-    )
-}
+    placeholder = 'TEXT', fieldIcon, fieldIconBackground = '#5C6855', whenPassword = false,
+    displayIcon, hideIcon, visiblePasswordIcon = '#000000', containerHeight = 60, containerRadius = 30,
+    fieldIconSize = 40, backgroundColor = '#ffffff', textColor = '#000000'}) => {
+    const [whenPasswordIsVisible, setWhenPasswordIsVisible] = useState(false);
 
-const styles = StyleSheet.create({
-    container: {
-        marginVertical: 10,
-    },
-    inputField: {
-        borderWidth: 1,
-        borderRadius: 8,
-        paddingHorizontal: 10,
-        fontSize: 16,
-    },
-});
+    const makePasswordVisible = () => {
+        setWhenPasswordIsVisible(prev => !prev);
+    };
 
+    return(
+        <View style={[GlobalStyles.circleContainer, {height: containerHeight, borderRadius: containerRadius, backgroundColor}]}>
+            <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
+                borderRadius: fieldIconSize / 2, backgroundColor: fieldIconBackground,
+            }]}>
+                <Image source={fieldIcon} style={GlobalStyles.icon} resizeMode={'contain'} />
+            </View>
+            <TextInput placeholder={placeholder} style={[GlobalStyles.textInput, {color: textColor}]} secureTextEntry={whenPassword && !whenPasswordIsVisible} />
+            {whenPassword ? (
+                <TouchableOpacity onPress={makePasswordVisible} style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
+                    borderRadius: fieldIconSize / 2, backgroundColor: visiblePasswordIcon}]}>
+                    <Image source={whenPassword ? hideIcon! : displayIcon!} style={GlobalStyles.icon} resizeMode={"contain"}/>
+                    <View style={{width: fieldIconSize, height: fieldIconSize}} />
+                </TouchableOpacity>
+            ) : (
+                <View style={{width: fieldIconSize, height: fieldIconSize}} />
+            )}
+        </View>
+    );
+};
 export default InputFieldArea;

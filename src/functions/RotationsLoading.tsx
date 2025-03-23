@@ -1,24 +1,32 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, ViewStyle} from 'react-native';
+import {Animated, Easing, ViewStyle} from 'react-native';
 
+/*
+    @link https://reactnative.dev/docs/animated
+    The inspiration for this code has been taken from the link, standing above.
+ */
 interface RotationsLoadingProps{
     children: React.ReactNode;
     duration?: number;
     style?: ViewStyle;
+    whenFinished?: () => void;
 };
 
-const RotationsLoading: React.FC<RotationsLoadingProps> = ({children, duration = 2000, style}) => {
+const RotationsLoading: React.FC<RotationsLoadingProps> = ({children, duration = 30, style, whenFinished}) => {
     const loadSpinValue = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.loop(
-            Animated.timing(loadSpinValue, {
-                toValue: 1,
-                duration: 2000,
-                useNativeDriver: true,
-            })
-        ).start();
-    }, [loadSpinValue, duration]);
+        Animated.timing(loadSpinValue, {
+            toValue: 1,
+            easing: Easing.linear,
+            duration: 2000,
+            useNativeDriver: true,
+        }).start(() => {
+            if (whenFinished) {
+                whenFinished();
+            }
+        });
+    }, [loadSpinValue, duration, whenFinished]);
 
     const rotate = loadSpinValue.interpolate({
         inputRange: [0,1],
