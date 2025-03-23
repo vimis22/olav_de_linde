@@ -1,35 +1,43 @@
-# Resolve react_native_pods.rb with node to allow for hoisting
+# 1) Hent react_native_pods.rb via node
 require Pod::Executable.execute_command('node', ['-p',
   'require.resolve(
     "react-native/scripts/react_native_pods.rb",
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
+# 2) Angiv iOS-platform. Hvis du har en metode min_ios_version_supported, brug den.
+#    Ellers sæt fx platform :ios, '12.0'
 platform :ios, min_ios_version_supported
+
+# 3) Forbered React Native-projekt (fra RN 0.70+)
 prepare_react_native_project!
 
-linkage = ENV['USE_FRAMEWORKS']
-if linkage != nil
-  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
-  use_frameworks! :linkage => linkage.to_sym
-end
+# 4) Tving dynamiske frameworks, så Firebase m.fl. ikke fejler over statisk linking
+#    (Hvis du ikke sætter USE_FRAMEWORKS i miljøvariablen, falder vi tilbage til "dynamic")
+linkage = ENV['USE_FRAMEWORKS'] || 'dynamic'
+Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+use_frameworks! :linkage => linkage.to_sym
 
 target 'Olav_De_Linde' do
+  # 5) Autolink: finder dine Native Modules
   config = use_native_modules!
 
+  # 6) (Valgfrit) Firebase
+  pod 'Firebase/Core'  # Tilføj hvis du bruger Firebase
+
+  # 7) React Native standard opsætning
   use_react_native!(
     :path => config[:reactNativePath],
-    # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
+    # :new_architecture_enabled => false  # <- Klassisk arkitektur
   )
 
+  # 8) post_install: lad RN justere build settings
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
       config[:reactNativePath],
-      :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
+      :mac_catalyst_enabled => false
     )
   end
 end
