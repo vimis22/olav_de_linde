@@ -4,10 +4,8 @@ import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '
 import globalStyles from '../Styling/GlobalStyles.tsx';
 import InputFieldArea from '../components/InputFieldArea.tsx';
 import ActionButton from '../components/ActionButton.tsx';
-import SplashScreen from './SplashScreen.tsx';
-import NormalText from '../components/NormalText.tsx';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -26,8 +24,11 @@ const LoginScreen = () => {
                     label={'Password'} placeholder={'Password'}
                     value={password} onChangeText={setPassword} height={50} borderRadius={20}/>
 
-                <ActionButton onPress={SplashScreen} title={'Login'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
-                <Text><Text style={GlobalStyles.textButton}>Glemt Kode</Text> eller <Text style={GlobalStyles.textButton}>Opret Profil</Text></Text>
+                <ActionButton onPress={() => navigation.navigate('PopupScreen')} title={'Login'}
+                              backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
+
+                <Text><Text style={GlobalStyles.textButton} onPress={() => navigation.navigate('ForgotPasswordScreen')}>Glemt Kode
+                </Text> eller <Text style={GlobalStyles.textButton}>Opret Profil</Text></Text>
             </View>
         </ImageBackground>
     );

@@ -76,5 +76,10 @@ export default StyleSheet.create({
     },
     textButton: {
         fontWeight: 'bold',
-    }
+    },
+    popupContainer: {
+        backgroundColor: '#F9F9F4',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
