@@ -10,7 +10,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		28616AE2EF62D38964A36257 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		761780ED2CA45674006654EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761780EC2CA45674006654EE /* AppDelegate.swift */; };
-		7966F8082D90B5F6004BE83B /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7966F8072D90B5F6004BE83B /* GoogleService-Info-2.plist */; };
+		7966F8082D90B5F6004BE83B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7966F8072D90B5F6004BE83B /* GoogleService-Info.plist */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A3BC4C52B59C1A5911EE8C7B /* Pods_Olav_De_Linde.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 854CF687761C2C3219284E04 /* Pods_Olav_De_Linde.framework */; };
 /* End PBXBuildFile section */
@@ -23,7 +23,7 @@
 		3B4392A12AC88292D35C810B /* Pods-Olav_De_Linde.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olav_De_Linde.debug.xcconfig"; path = "Target Support Files/Pods-Olav_De_Linde/Pods-Olav_De_Linde.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-Olav_De_Linde.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Olav_De_Linde.release.xcconfig"; path = "Target Support Files/Pods-Olav_De_Linde/Pods-Olav_De_Linde.release.xcconfig"; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Olav_De_Linde/AppDelegate.swift; sourceTree = "<group>"; };
-		7966F8072D90B5F6004BE83B /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-2.plist"; sourceTree = "<group>"; };
+		7966F8072D90B5F6004BE83B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Olav_De_Linde/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		854CF687761C2C3219284E04 /* Pods_Olav_De_Linde.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Olav_De_Linde.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -44,7 +44,7 @@
 		13B07FAE1A68108700A75B9A /* Olav_De_Linde */ = {
 			isa = PBXGroup;
 			children = (
-				7966F8072D90B5F6004BE83B /* GoogleService-Info-2.plist */,
+				7966F8072D90B5F6004BE83B /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				761780EC2CA45674006654EE /* AppDelegate.swift */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -166,7 +166,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				7966F8082D90B5F6004BE83B /* GoogleService-Info-2.plist in Resources */,
+				7966F8082D90B5F6004BE83B /* GoogleService-Info.plist in Resources */,
 				28616AE2EF62D38964A36257 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,10 +394,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -477,10 +474,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
