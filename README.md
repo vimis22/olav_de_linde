@@ -22,3 +22,10 @@ If your are MAC-user, we strongly recommend you to install XCode from AppStore.<
 
 <p>After running these commands, while XCode being open. 
 The user should be able to see the application.</p>
+
+<h1>Any Errors?</h1>
+<p>If any errors occur, we recommend the user on opening the project in XCodeWorkspace</p>
+<p>Otherwise we recommend the user to run the following command,
+in order to update the dependencies.</p>
+
+```npm install```

@@ -13,7 +13,7 @@ const PopupScreen = ({navigation}:any) => {
         <View style={globalStyles.popupContainer}>
             <NormalText text={'Popup'} fontSize={18} fontWeight={'bold'}/>
             <NormalText text={'Vi har sendt en mail til dig med et link til gendannelse af dit kodeord.'} />
-            <ActionButton onPress={LoginScreen} title={'Ok'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50}/>
+            <ActionButton onPress={()=>navigation.navigate(LoginScreen)} title={'Ok'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50}/>
         </View>
     );
 };
