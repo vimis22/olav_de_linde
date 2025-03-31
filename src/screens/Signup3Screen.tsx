@@ -6,7 +6,7 @@ import InputFieldArea from '../components/InputFieldArea.tsx';
 import ActionButton from '../components/ActionButton.tsx';
 import LoginScreen from "./LoginScreen.tsx";
 
-const SignupPrimaryScreen = ({navigation}: any) => {
+const Signup3Screen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,7 +23,7 @@ const SignupPrimaryScreen = ({navigation}: any) => {
                 <InputFieldArea fieldIcon={callIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'TLF.Nummer'}
                                 value={password} onChangeText={(text) => setPassword(text)} height={50} borderRadius={20}/>
 
-                <ActionButton onPress={()=>navigation.navigate(LoginScreen)} title={'Login'}
+                <ActionButton onPress={()=>navigation.navigate(LoginScreen)} title={'Næste'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
 
             </View>
@@ -31,4 +31,4 @@ const SignupPrimaryScreen = ({navigation}: any) => {
     );
 };
 
-export default SignupPrimaryScreen;
+export default Signup3Screen;

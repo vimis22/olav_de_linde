@@ -16,25 +16,58 @@ const RotationsLoading: React.FC<RotationsLoadingProps> = ({children, duration =
     const loadSpinValue = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        Animated.timing(loadSpinValue, {
-            toValue: 1,
-            easing: Easing.linear,
-            duration: 2000,
-            useNativeDriver: true,
-        }).start(() => {
-            if (whenFinished) {
+        const enableRotation = () => {
+            Animated.sequence([
+                Animated.timing(loadSpinValue, {
+                    toValue: 1,
+                    easing: Easing.linear,
+                    duration: 2000,
+                    useNativeDriver: true,
+                }),
+                Animated.timing(loadSpinValue, {
+                    toValue: 0,
+                    easing: Easing.linear,
+                    duration: 2000,
+                    useNativeDriver: true,
+                })
+            ]).start(() => {
                 whenFinished();
-            }
-        });
+                enableRotation();
+            });
+        };
+        enableRotation();
     }, [loadSpinValue, duration, whenFinished]);
 
-    const rotate = loadSpinValue.interpolate({
-        inputRange: [0,1],
-        outputRange: ['0deg','360deg'],
+
+    //     Animated.timing(loadSpinValue, {
+    //         toValue: 1,
+    //         easing: Easing.linear,
+    //         duration: 2000,
+    //         useNativeDriver: true,
+    //     }),
+    //     Animated.timing(loadSpinValue, {
+    //         toValue: 0,
+    //         easing: Easing.linear,
+    //         duration: 2000,
+    //         useNativeDriver: true,
+    //     }).start(() => {
+    //         if (whenFinished) {
+    //             whenFinished();
+    //         }
+    //     });
+    // }, [loadSpinValue, duration, whenFinished]);
+
+    const rotationBoundaries = loadSpinValue.interpolate({
+        inputRange: [0,0.5,1],
+        outputRange: ['0deg','180deg','360deg'],
     });
 
+    const boundaryDirection = {
+        transform: [{rotate: rotationBoundaries}],
+    };
+
     return (
-        <Animated.View style={[style, {transform: [{rotate}]}]}>
+        <Animated.View style={[boundaryDirection,style]}>
             {children}
         </Animated.View>
     );

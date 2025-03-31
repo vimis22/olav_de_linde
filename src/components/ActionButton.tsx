@@ -12,6 +12,7 @@ interface ActionButtonProps{
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 250, width = 150}) => {
+
     return (
         <TouchableOpacity style={[GlobalStyles.button, { backgroundColor, height, width }]} onPress={onPress}>
             <Text style={[GlobalStyles.buttonText, { color: textColor }]}>{title}</Text>

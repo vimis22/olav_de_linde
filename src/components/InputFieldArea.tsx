@@ -39,7 +39,7 @@ const InputFieldArea: React.FC<InputFieldAreaProps> = ({
             {whenPassword ? (
                 <TouchableOpacity onPress={makePasswordVisible} style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
                     borderRadius: fieldIconSize / 2, backgroundColor: visiblePasswordIcon}]}>
-                    <Image source={whenPassword ? hideIcon! : displayIcon!} style={GlobalStyles.icon} resizeMode={"contain"}/>
+                    <Image source={whenPassword ? hideIcon! : displayIcon!} style={GlobalStyles.icon} resizeMode={'contain'}/>
                     <View style={{width: fieldIconSize, height: fieldIconSize}} />
                 </TouchableOpacity>
             ) : (

@@ -21,7 +21,7 @@ const ForgotPasswordScreen = ({navigation}: any) => {
 
                 <NormalText text={'Indtast din email, så sender vi en mail til gendannelse af password'} fontSize={14} textColor={'#5C6855'}/>
 
-                <ActionButton onPress={()=> navigation.navigate('PopupScreen')} title={'Send'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
+                <ActionButton onPress={()=> navigation.navigate('Popup')} title={'Send'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
 
                 <Text>eller <Text style={GlobalStyles.textButton} onPress={() => navigation.navigate('SplashScreen')}>Opret Profil</Text></Text>
             </View>

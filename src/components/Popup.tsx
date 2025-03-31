@@ -1,22 +1,37 @@
 import React from 'react';
-import {View} from 'react-native';
-import NormalText from '../components/NormalText.tsx';
-import ActionButton from '../components/ActionButton.tsx';
-import LoginScreen from './LoginScreen.tsx';
-import globalStyles from '../Styling/GlobalStyles.tsx';
+import {ImageBackground, Modal, StyleSheet, Text, View} from 'react-native';
+import globalStyles, {wallpaperBackground} from '../Styling/GlobalStyles.tsx';
+import NormalText from './NormalText.tsx';
+import ActionButton from './ActionButton.tsx';
+import LoginScreen from '../screens/LoginScreen.tsx';
 
 /*
 @link https://blog.logrocket.com/creating-a-pop-up-modal-in-react-native/
  */
-const PopupScreen = ({navigation}:any) => {
+
+const Popup = ({makeVisible, closeVisibility}) => {
     return (
-        <View style={globalStyles.popupContainer}>
-            <NormalText text={'Popup'} fontSize={18} fontWeight={'bold'}/>
-            <NormalText text={'Vi har sendt en mail til dig med et link til gendannelse af dit kodeord.'} />
-            <ActionButton onPress={()=>navigation.navigate(LoginScreen)} title={'Ok'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50}/>
-        </View>
+        <ImageBackground source={wallpaperBackground} style={globalStyles.popupImage} resizeMode={'cover'}>
+            <View style={styles.popup}>
+                <NormalText text={'Check din Mail'} fontWeight={'bold'} fontSize={20}/>
+                <NormalText text={'Vi har sendt en mail til dig med et link til gendannelse af dit kodeord.'} fontWeight={'normal'} fontSize={15}/>
+                <ActionButton onPress={LoginScreen} title={'Ok'}
+                              backgroundColor={'#5C6855'} textColor={'#ffffff'}
+                              height={50} width={250}/>
+            </View>
+        </ImageBackground>
     );
 };
 
+const styles = StyleSheet.create({
+    popup: {
+        padding: 20,
+        borderRadius: 10,
+        borderColor: 'black',
+        borderStyle: 'solid',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
-export default PopupScreen;
+export default Popup;

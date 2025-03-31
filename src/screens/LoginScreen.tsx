@@ -5,8 +5,8 @@ import globalStyles from '../Styling/GlobalStyles.tsx';
 import InputFieldArea from '../components/InputFieldArea.tsx';
 import ActionButton from '../components/ActionButton.tsx';
 import ForgotPasswordScreen from './ForgotPasswordScreen.tsx';
-import PopupScreen from './PopupScreen.tsx';
-import {loginWithEmail} from '../functions/Authentication.tsx';
+import {signupWithEmail} from '../functions/Authentication.tsx';
+import Signup1Screen from './Signup1Screen.tsx';
 
 const LoginScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
@@ -14,9 +14,9 @@ const LoginScreen = ({navigation}: any) => {
 
     const handleLogin = async () => {
         try{
-            const user = await loginWithEmail(email, password);
+            const user = await signupWithEmail(email, password);
             console.log('The user has logged in', user?.uid);
-            navigation.navigate(PopupScreen);
+            navigation.navigate(Signup1Screen);
             Alert.alert('Login Success');
         } catch (error: any){
             Alert.alert('Login Failed', error.message);
@@ -40,7 +40,7 @@ const LoginScreen = ({navigation}: any) => {
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
 
                 <Text><Text style={GlobalStyles.textButton} onPress={() => navigation.navigate(ForgotPasswordScreen)}>Glemt Kode
-                </Text> eller <Text style={GlobalStyles.textButton} onPress={() => navigation.navigate(ForgotPasswordScreen)}>Opret Profil</Text></Text>
+                </Text> eller <Text style={GlobalStyles.textButton} onPress={() => navigation.navigate(Signup1Screen)}>Opret Profil</Text></Text>
             </View>
         </ImageBackground>
     );

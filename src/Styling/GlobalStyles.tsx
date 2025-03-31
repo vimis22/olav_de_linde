@@ -5,7 +5,10 @@ export const logoImage = require('../assets/OLD_Logo.png');
 export const houseLocationImage = require('../assets/HouseLocationImage.png');
 export const userIcon = require('../assets/OLD_UserIcon.png');
 export const lockIcon = require('../assets/OLD_LockIcon.png');
-
+export const houseIcon = require('../assets/OLD_HouseIcon.png');
+export const locationIcon = require('../assets/OLD_LocationIcon.png');
+export const tickMarkIcon = require('../assets/OLD_TickMarkIcon.png');
+export const callIcon = require('../assets/OLD_CallIcon.png');
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,
@@ -57,6 +60,7 @@ export default StyleSheet.create({
     circleContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        textAlign: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
         marginVertical: 8,
@@ -77,9 +81,9 @@ export default StyleSheet.create({
     textButton: {
         fontWeight: 'bold',
     },
-    popupContainer: {
-        backgroundColor: '#F9F9F4',
-        justifyContent: 'center',
-        alignItems: 'center',
+    popupImage: {
+        flex: 1,
+        width: '100%',
+        height: '30%',
     },
 });
