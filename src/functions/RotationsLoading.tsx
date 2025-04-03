@@ -25,14 +25,16 @@ const RotationsLoading: React.FC<RotationsLoadingProps> = ({children, duration =
                     useNativeDriver: true,
                 }),
                 Animated.timing(loadSpinValue, {
-                    toValue: 0,
+                    toValue: -1,
                     easing: Easing.linear,
                     duration: 2000,
                     useNativeDriver: true,
                 })
             ]).start(() => {
-                whenFinished();
-                enableRotation();
+                if (whenFinished) {
+                    whenFinished();
+                    enableRotation();
+                }
             });
         };
         enableRotation();
@@ -58,8 +60,8 @@ const RotationsLoading: React.FC<RotationsLoadingProps> = ({children, duration =
     // }, [loadSpinValue, duration, whenFinished]);
 
     const rotationBoundaries = loadSpinValue.interpolate({
-        inputRange: [0,0.5,1],
-        outputRange: ['0deg','180deg','360deg'],
+        inputRange: [-1,0,1],
+        outputRange: ['-360deg','0deg','360deg'],
     });
 
     const boundaryDirection = {

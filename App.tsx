@@ -17,11 +17,11 @@ export default function App() {
             <NavigationContainer>
                 <Stack.Navigator initialRouteName={'SplashScreen'}>
                     <Stack.Screen name={'SplashScreen'} component={SplashScreen}/>
-                    <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
                     <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
                     <Stack.Screen name={'Signup1Screen'} component={Signup1Screen} />
                     <Stack.Screen name={'Signup2Screen'} component={Signup2Screen} />
                     <Stack.Screen name={'Signup3Screen'} component={Signup3Screen} />
+                    <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </GestureHandlerRootView>

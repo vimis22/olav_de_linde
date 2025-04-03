@@ -9,6 +9,8 @@ export const houseIcon = require('../assets/OLD_HouseIcon.png');
 export const locationIcon = require('../assets/OLD_LocationIcon.png');
 export const tickMarkIcon = require('../assets/OLD_TickMarkIcon.png');
 export const callIcon = require('../assets/OLD_CallIcon.png');
+export const locationLoadingIcon = require('../assets/OLD_LocationLoadingIcon.png');
+export const houseLoadingIcon = require('../assets/OLD_HouseLoadingIcon.png')
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,
@@ -36,10 +38,16 @@ export default StyleSheet.create({
         height: 250,
         marginBottom: 20,
     },
-    rotationalLogo: {
-        width: 100,
-        height: 200,
-        marginBottom: 10,
+    loadingRotationLogo: {
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+        marginBottom: 30,
+    },
+    houseRotationalLogo: {
+        width: 150,
+        height: 150,
+        resizeMode: 'contain',
     },
     button: {
         justifyContent: 'center',
