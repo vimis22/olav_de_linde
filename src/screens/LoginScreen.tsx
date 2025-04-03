@@ -14,6 +14,7 @@ const LoginScreen = ({navigation}: any) => {
 
     const handleLogin = async () => {
         try{
+            console.log('Inserted values', email, password);
             const user = await loginWithEmail(email, password);
             console.log('The user has logged in', user?.uid);
             Alert.alert('Login Success');
@@ -34,11 +35,11 @@ const LoginScreen = ({navigation}: any) => {
 
             <View style={GlobalStyles.textContainer}>
                 <InputFieldArea fieldIcon={userIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Email'}
-                                value={email} onChangeText={(text) => setEmail(text)} height={50} borderRadius={20}/>
+                                value={email} onChangeText={setEmail} height={50} borderRadius={20}/>
 
 
                 <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Password'}
-                                value={password} onChangeText={(text) => setPassword(text)} height={50} borderRadius={20}/>
+                                value={password} onChangeText={setPassword} height={50} borderRadius={20}/>
 
 
                 <ActionButton onPress={handleLogin} title={'Login'}
