@@ -1,14 +1,14 @@
-import React from 'react';
 import {View} from 'react-native';
 import NormalText from '../components/NormalText.tsx';
 import ActionButton from '../components/ActionButton.tsx';
-import LoginScreen from './LoginScreen.tsx';
 import globalStyles from '../Styling/GlobalStyles.tsx';
+import LoginScreen from '../screens/LoginScreen.tsx';
+
 
 /*
 @link https://blog.logrocket.com/creating-a-pop-up-modal-in-react-native/
- */
-const PopupScreen = ({navigation}:any) => {
+*/
+const Popup = ({navigation}:any) => {
     return (
         <View style={globalStyles.popupContainer}>
             <NormalText text={'Popup'} fontSize={18} fontWeight={'bold'}/>
@@ -19,4 +19,6 @@ const PopupScreen = ({navigation}:any) => {
 };
 
 
-export default PopupScreen;
+
+
+export default Popup;
