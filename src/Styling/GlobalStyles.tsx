@@ -11,6 +11,7 @@ export const tickMarkIcon = require('../assets/OLD_TickMarkIcon.png');
 export const callIcon = require('../assets/OLD_CallIcon.png');
 export const locationLoadingIcon = require('../assets/OLD_LocationLoadingIcon.png');
 export const houseLoadingIcon = require('../assets/OLD_HouseLoadingIcon.png')
+
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,
@@ -38,16 +39,10 @@ export default StyleSheet.create({
         height: 250,
         marginBottom: 20,
     },
-    loadingRotationLogo: {
-        width: 50,
-        height: 50,
-        resizeMode: 'contain',
-        marginBottom: 30,
-    },
-    houseRotationalLogo: {
-        width: 150,
-        height: 150,
-        resizeMode: 'contain',
+    rotationalLogo: {
+        width: 100,
+        height: 200,
+        marginBottom: 10,
     },
     button: {
         justifyContent: 'center',
@@ -68,7 +63,6 @@ export default StyleSheet.create({
     circleContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        textAlign: 'center',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
         marginVertical: 8,
@@ -89,9 +83,9 @@ export default StyleSheet.create({
     textButton: {
         fontWeight: 'bold',
     },
-    popupImage: {
-        flex: 1,
-        width: '100%',
-        height: '30%',
+    popupContainer: {
+        backgroundColor: '#F9F9F4',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
