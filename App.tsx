@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import Popup from './src/components/Popup.tsx';
+import CreateCompanySignup from './src/screens/CreateCompanySignup.tsx';
 import SplashScreen from './src/screens/SplashScreen.tsx';
 import LoginScreen from './src/screens/LoginScreen.tsx';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen.tsx';
 import auth from '@react-native-firebase/auth';
 import {LogBox} from 'react-native';
+import CreateNameSignup from "./src/screens/CreateNameSignup.tsx";
+import CreatePasswordSignup from "./src/screens/CreatePasswordSignup.tsx";
 
 
 
@@ -38,7 +40,9 @@ export default function App() {
                     <Stack.Screen name={'SplashScreen'} component={SplashScreen}/>
                     <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
                     <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
-                    <Stack.Screen name={'Popup'} component={Popup} />
+                    <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
+                    <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
+                    <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
                 </Stack.Navigator>
             </NavigationContainer>
         </GestureHandlerRootView>

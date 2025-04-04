@@ -5,6 +5,12 @@ export const logoImage = require('../assets/OLD_Logo.png');
 export const houseLocationImage = require('../assets/HouseLocationImage.png');
 export const userIcon = require('../assets/OLD_UserIcon.png');
 export const lockIcon = require('../assets/OLD_LockIcon.png');
+export const houseIcon = require('../assets/OLD_HouseIcon.png');
+export const locationIcon = require('../assets/OLD_LocationIcon.png');
+export const tickMarkIcon = require('../assets/OLD_TickMarkIcon.png');
+export const callIcon = require('../assets/OLD_CallIcon.png');
+export const locationLoadingIcon = require('../assets/OLD_LocationLoadingIcon.png');
+export const houseLoadingIcon = require('../assets/OLD_HouseLoadingIcon.png')
 
 export default StyleSheet.create({
     pageContainer: {
