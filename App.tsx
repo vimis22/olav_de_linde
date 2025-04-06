@@ -8,14 +8,11 @@ import LoginScreen from './src/screens/LoginScreen.tsx';
 import ForgotPasswordScreen from './src/screens/ForgotPasswordScreen.tsx';
 import auth from '@react-native-firebase/auth';
 import {LogBox} from 'react-native';
-import CreateNameSignup from "./src/screens/CreateNameSignup.tsx";
-import CreatePasswordSignup from "./src/screens/CreatePasswordSignup.tsx";
-
-
-
+import CreateNameSignup from './src/screens/CreateNameSignup.tsx';
+import CreatePasswordSignup from './src/screens/CreatePasswordSignup.tsx';
+import StepProgress from './src/functions/StepProgress.tsx';
 
 const Stack = createStackNavigator();
-
 
 export default function App() {
     useEffect(() => {
@@ -43,8 +40,9 @@ export default function App() {
                     <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
                     <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
                     <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
+                    <Stack.Screen name={'StepProgress'} component={StepProgress} />
                 </Stack.Navigator>
             </NavigationContainer>
         </GestureHandlerRootView>
     );
-};
+}

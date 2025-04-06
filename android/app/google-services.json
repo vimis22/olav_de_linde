@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "307309133855",
+    "project_id": "olav-de-linde-da446",
+    "storage_bucket": "olav-de-linde-da446.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307309133855:android:5164f4de42ed42b101552a",
+        "android_client_info": {
+          "package_name": "com.olav_de_linde"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0Aof_Z1k-Sy4SzuM9IWMoxXtV08ruVZ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

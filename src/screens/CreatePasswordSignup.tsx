@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {houseIcon, lockIcon, logoImage, userIcon, wallpaperBackground} from '../Styling/GlobalStyles.tsx';
+import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../Styling/GlobalStyles.tsx';
 import InputFieldArea from '../components/InputFieldArea.tsx';
 import ActionButton from '../components/ActionButton.tsx';
-import ForgotPasswordScreen from "./ForgotPasswordScreen.tsx";
+import ProgressBar from '../functions/StepProgress.tsx';
 
 const CreatePasswordSignup = ({navigation}: any) => {
     const [email, setEmail] = useState('');
@@ -25,9 +25,10 @@ const CreatePasswordSignup = ({navigation}: any) => {
                 <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Gentag Kodeord'}
                                 value={confirmPassword} onChangeText={setConfirmPassword} containerHeight={50} containerRadius={20} />
 
-                <ActionButton onPress={() => navigation.navigate(ForgotPasswordScreen)} title={'Opret'}
+                <ActionButton onPress={() => navigation.navigate(ProgressBar)} title={'Opret'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
             </View>
+
         </ImageBackground>
     );
 };
