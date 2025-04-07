@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import CreateCompanySignup from '../screens/authentication_area/CreateCompanySignup.tsx';
-import CreateNameSignup from '../screens/authentication_area/CreateNameSignup.tsx';
-import CreatePasswordSignup from '../screens/authentication_area/CreatePasswordSignup.tsx';
+import CreateCompanySignup from '../screens/authentication_area/signup/CreateCompanySignup.tsx';
+import CreateNameSignup from '../screens/authentication_area/signup/CreateNameSignup.tsx';
+import CreatePasswordSignup from '../screens/authentication_area/signup/CreatePasswordSignup.tsx';
 
 /*
 @link https://medium.com/@senalisa/creating-a-customizable-multi-step-progress-component-in-react-native-1678f4a0ae45

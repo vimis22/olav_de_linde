@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {houseIcon, logoImage, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
-import InputFieldArea from '../../components/InputFieldArea.tsx';
-import ActionButton from '../../components/ActionButton.tsx';
+import GlobalStyles, {houseIcon, logoImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import ActionButton from '../../../components/ActionButton.tsx';
 import CreatePasswordSignup from './CreatePasswordSignup.tsx';
-import ProgressIndicator from "../../functions/ProgressIndicator.tsx";
+import ProgressIndicator from "../../../functions/ProgressIndicator.tsx";
 
 const CreateNameSignup = ({navigation}: any) => {
     const [name, setName] = useState('');

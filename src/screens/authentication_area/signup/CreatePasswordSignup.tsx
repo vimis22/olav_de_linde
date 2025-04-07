@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
-import InputFieldArea from '../../components/InputFieldArea.tsx';
-import ActionButton from '../../components/ActionButton.tsx';
-import ProgressBar from '../../functions/StepProgress.tsx';
-import StepProgress from "../../functions/StepProgress.tsx";
-import ProgressIndicator from "../../functions/ProgressIndicator.tsx";
+import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import ActionButton from '../../../components/ActionButton.tsx';
+import ProgressBar from '../../../functions/StepProgress.tsx';
+import StepProgress from "../../../functions/StepProgress.tsx";
+import ProgressIndicator from "../../../functions/ProgressIndicator.tsx";
 import SignupVerification from "./SignupVerification.tsx";
 
 const CreatePasswordSignup = ({navigation}: any) => {

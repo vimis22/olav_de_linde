@@ -1,14 +1,14 @@
 import React from 'react';
-import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {houseLocationImage, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
-import NormalText from '../../components/NormalText.tsx';
+import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
+import GlobalStyles, {houseLocationImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import NormalText from '../../../components/NormalText.tsx';
 
 const SignupVerification = ({navigation}: any) => {
     return(
         <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-            <View style={GlobalStyles.logoImageContainer}>
+            <TouchableOpacity style={GlobalStyles.logoImageContainer} onPress={() => navigation.navigate('BiometricsVerification')}>
                 <Image source={houseLocationImage} style={GlobalStyles.mainLogo} />
-            </View>
+            </TouchableOpacity>
 
             <View style={GlobalStyles.textCenter}>
                 <NormalText text={'Afventer Godkendelse'} fontSize={20} textColor={'#000000'} fontWeight={'bold'} />
