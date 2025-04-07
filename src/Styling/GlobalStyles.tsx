@@ -88,4 +88,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    textCenter: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: '50%',
+    },
 });

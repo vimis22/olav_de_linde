@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, Text, View} from 'react-native';
-import globalStyles, {logoImage, userIcon, wallpaperBackground} from '../Styling/GlobalStyles.tsx';
-import GlobalStyles from '../Styling/GlobalStyles.tsx';
-import InputFieldArea from '../components/InputFieldArea.tsx';
-import ActionButton from '../components/ActionButton.tsx';
-import NormalText from '../components/NormalText.tsx';
+import globalStyles, {logoImage, userIcon, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
+import GlobalStyles from '../../Styling/GlobalStyles.tsx';
+import InputFieldArea from '../../components/InputFieldArea.tsx';
+import ActionButton from '../../components/ActionButton.tsx';
+import NormalText from '../../components/NormalText.tsx';
 
 const ForgotPasswordScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');

@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {houseIcon, logoImage, wallpaperBackground} from '../Styling/GlobalStyles.tsx';
-import InputFieldArea from '../components/InputFieldArea.tsx';
-import ActionButton from '../components/ActionButton.tsx';
+import GlobalStyles, {houseIcon, logoImage, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
+import InputFieldArea from '../../components/InputFieldArea.tsx';
+import ActionButton from '../../components/ActionButton.tsx';
 import CreatePasswordSignup from './CreatePasswordSignup.tsx';
+import ProgressIndicator from "../../functions/ProgressIndicator.tsx";
 
 const CreateNameSignup = ({navigation}: any) => {
     const [name, setName] = useState('');
@@ -23,6 +24,8 @@ const CreateNameSignup = ({navigation}: any) => {
 
                 <ActionButton onPress={() => navigation.navigate(CreatePasswordSignup)} title={'Næste'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
+
+                <ProgressIndicator step={2} />
             </View>
         </ImageBackground>
     );

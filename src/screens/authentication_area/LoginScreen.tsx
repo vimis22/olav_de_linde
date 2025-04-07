@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Alert, Image, ImageBackground, Text, View} from 'react-native';
-import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../Styling/GlobalStyles.tsx';
-import InputFieldArea from '../components/InputFieldArea.tsx';
-import ActionButton from '../components/ActionButton.tsx';
+import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
+import InputFieldArea from '../../components/InputFieldArea.tsx';
+import ActionButton from '../../components/ActionButton.tsx';
 import ForgotPasswordScreen from './ForgotPasswordScreen.tsx';
-import {loginWithEmail} from '../functions/Authentication.tsx';
+import {loginWithEmail} from '../../functions/Authentication.tsx';
 
 
 const LoginScreen = ({navigation}: any) => {

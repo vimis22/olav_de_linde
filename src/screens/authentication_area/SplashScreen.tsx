@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {houseLocationImage, logoImage, wallpaperBackground} from '../Styling/GlobalStyles.tsx';
-import RotationsLoading from '../functions/RotationsLoading.tsx';
+import GlobalStyles, {houseLocationImage, logoImage, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
+import RotationsLoading from '../../functions/RotationsLoading.tsx';
 import LoginScreen from './LoginScreen.tsx';
 
 const SplashScreen = ({navigation}: any) => {

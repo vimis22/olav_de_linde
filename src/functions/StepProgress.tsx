@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import CreateCompanySignup from '../screens/authentication_area/CreateCompanySignup.tsx';
+import CreateNameSignup from '../screens/authentication_area/CreateNameSignup.tsx';
+import CreatePasswordSignup from '../screens/authentication_area/CreatePasswordSignup.tsx';
 
 /*
 @link https://medium.com/@senalisa/creating-a-customizable-multi-step-progress-component-in-react-native-1678f4a0ae45
@@ -36,9 +39,9 @@ const StepProgress = ({navigation}: any) => {
             {renderStepIndicator()}
 
             <View style={styles.contentContainer}>
-                {step === 1 && <Text>Content for Step 1</Text>}
-                {step === 2 && <Text>Content for Step 2</Text>}
-                {step === 3 && <Text>Content for Step 3</Text>}
+                {step === 1 && <CreateCompanySignup/>}
+                {step === 2 && <CreateNameSignup/>}
+                {step === 3 && <CreatePasswordSignup/>}
             </View>
 
             <View style={styles.buttonContainer}>
@@ -85,7 +88,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 500,
     },
     activeStep: {
         borderColor: 'pink',
