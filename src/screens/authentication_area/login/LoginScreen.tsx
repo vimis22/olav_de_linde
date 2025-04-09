@@ -4,7 +4,8 @@ import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
-import {loginWithEmail} from '../../../functions/Authentication.tsx';
+import {loginWithEmail } from '../../../functions/Authentication.tsx';
+import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
 
 
 const LoginScreen = ({navigation}: any) => {
@@ -47,7 +48,7 @@ const LoginScreen = ({navigation}: any) => {
 
 
                 <Text><Text style={GlobalStyles.textButton} onPress={() => navigation.navigate(ForgotPasswordScreen)}>Glemt Kode
-                </Text> eller <Text style={GlobalStyles.textButton} onPress={() => navigation.navigate(ForgotPasswordScreen)}>Opret Profil</Text></Text>
+                </Text> eller <Text style={GlobalStyles.textButton} onPress={() => navigation.navigate(CreateCompanySignup)}>Opret Profil</Text></Text>
             </View>
         </ImageBackground>
     );

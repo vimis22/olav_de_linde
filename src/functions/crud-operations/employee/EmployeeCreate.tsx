@@ -1,14 +1,16 @@
 import firestore from '@react-native-firebase/firestore';
 import {EmployeeInfo} from './EmployeeInfo.ts';
 import auth from '@react-native-firebase/auth';
-
-export const createAllEmployees = async (all: EmployeeInfo[]): Promise<number> => {
+import {EnumMessages} from '../EnumMessages.ts';
+export const createAllEmployees = async (allEmployeeInfo: EmployeeInfo[]): Promise<number> => {
     try{
-        if (!all || all.length === 0) return -1;
+        if (!allEmployeeInfo || allEmployeeInfo.length === 0){
+            return -2;
+        }
 
         const batch = firestore().batch();
 
-        all.forEach(employee => {
+        allEmployeeInfo.forEach(employee => {
             const employeeRef = firestore().collection('Employee').doc(employee.id);
             batch.set(employeeRef, {
                 name: employee.name,
@@ -22,7 +24,7 @@ export const createAllEmployees = async (all: EmployeeInfo[]): Promise<number> =
             });
         });
         await batch.commit();
-        return 0;
+        return 1;
     } catch (error) {
         console.error('An Error occurred in createEmployee', error);
         return -1;
@@ -31,16 +33,29 @@ export const createAllEmployees = async (all: EmployeeInfo[]): Promise<number> =
 
 export const createEmployeeWithEmail = async (email: string, password: string): Promise<number> => {
     try{
+        //Vi laver vores konto i authentication.
         const credentials = await auth().createUserWithEmailAndPassword(email, password);
         const {uid} = credentials.user;
-
-        await firestore().collection('Employee').doc(uid).set({
+        //Vi har fyldt email: email og password: password, hvor de resterende er med '' og det er fordi vi vil gerne fylde blanke værdier på dem.
+        let employeeInfo: EmployeeInfo = {
+            id: uid,
             email: email,
             password: password,
-            createdAt: firestore.FieldValue.serverTimestamp(),
-        });
+            name: '',
+            phone: '',
+            address: '',
+            role: '',
+            country: '',
+            zipcode: '',
+        };
 
-        console.log('An Employee has been created successfully with an email', email);
+        //Kontoen som er lavet i Authentication bliver automatisk oprettet i firestore.
+        const employeeValue = [employeeInfo];
+        let num = createAllEmployees(employeeValue);
+        //Her kaldes fejlbesked fra Enum;
+        let message = EnumMessages(await num);
+
+        console.log('An Employee has been created successfully with an email', email, message);
         return 0;
     } catch (error) {
         console.error('An Error occured in createEmployeeWithEmail:', error);
