@@ -14,12 +14,16 @@ export const createAllEmployees = async (allEmployeeInfo: EmployeeInfo[]): Promi
             const employeeRef = firestore().collection('Employee').doc(employee.id);
             batch.set(employeeRef, {
                 name: employee.name,
-                role: employee.role,
+                //Vi har fjernet role, fordi den bliver oprettet uanset hvad. Hvilket er en ulempe ift. dokument-databaser.
+                //Du har en foreign key ved tabellen mellem Employee og Role og det gør at foreign key vil skabe ballade.
                 email: employee.email,
-                phone: employee.phone,
-                address: employee.address,
-                country: employee.country,
+                streetname: employee.streetname,
+                housenumber: employee.housenumber,
+                city: employee.city,
                 zipcode: employee.zipcode,
+                country: employee.country,
+                phone: employee.phone,
+                countrycode: employee.countrycode,
                 createAt: firestore.FieldValue.serverTimestamp(),
             });
         });
@@ -42,11 +46,14 @@ export const createEmployeeWithEmail = async (email: string, password: string): 
             email: email,
             password: password,
             name: '',
-            phone: '',
-            address: '',
+            streetname: '',
+            housenumber: '',
             role: '',
             country: '',
             zipcode: '',
+            city: '',
+            phone: '',
+            countrycode: 0,
         };
 
         //Kontoen som er lavet i Authentication bliver automatisk oprettet i firestore.
