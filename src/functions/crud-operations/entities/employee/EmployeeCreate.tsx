@@ -24,7 +24,7 @@ export const createAllEmployees = async (allEmployeeInfo: UserInfo[]): Promise<n
                 country: employee.country,
                 phone: employee.phone,
                 countrycode: employee.countrycode,
-                createAt: firestore.FieldValue.serverTimestamp(),
+                createdAt: firestore.FieldValue.serverTimestamp(),
             });
         });
         await batch.commit();

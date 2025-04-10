@@ -55,7 +55,7 @@ export const getAllEmployeeByFirstname = async (firstname: string) => {
           return {id: doc.id, ...doc.data()};
         });
     } catch (error) {
-        console.error('System is not able fetch by Firstname', error);
+        console.error('System is not able to fetch by Firstname', error);
         return {id: -2};
     }
 };
@@ -71,7 +71,7 @@ export const getAllEmployeeByLastname = async (lastname: string) => {
           ...doc.data(),
         }));
     } catch (error) {
-        console.error('System is not able fetch by Lastname', error);
+        console.error('System is not able to fetch by Lastname', error);
         return {id: -2};
     }
 };
