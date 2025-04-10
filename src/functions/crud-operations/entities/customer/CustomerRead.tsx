@@ -1,7 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 
 export const getCustomerById = async (id: string) => {
-    try{
+    try {
         const doc = await firestore().collection('Customer').doc(id).get();
         if (doc.exists) {
             //Dette her return er default.

@@ -44,7 +44,7 @@ export const updateEmailForEmployeeByEmail = async (oldEmail: string, newEmail: 
             .where('Email','==',oldEmail)
             .get();
 
-        if (snapShot.empty()) {
+        if (snapShot.empty) {
             console.log('No Employee has been found with the email: ' + newEmail);
             return -2;
         }
@@ -131,7 +131,7 @@ export const updateAddressForEmployeeByEmail = async (employeeInfo: UserInfo) =>
             .where('Email', '==', employeeInfo.email)
             .get();
 
-        if (snapShot.empty()){
+        if (snapShot.empty){
             console.log('The address of Employee has not been found');
         }
 
@@ -179,7 +179,7 @@ export const updatePhoneNumberForEmployeeByEmail = async (employeeInfo: UserInfo
             .where('Email','==',employeeInfo.email)
             .get();
 
-        if(snapShot.empty()) {
+        if(snapShot.empty) {
             const docRef = snapShot.docs[0].ref;
 
             await docRef.update({

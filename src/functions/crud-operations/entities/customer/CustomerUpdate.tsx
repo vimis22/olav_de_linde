@@ -44,7 +44,7 @@ export const updateEmailForCustomerByEmail = async (oldEmail: string, newEmail: 
             .where('Email','==',oldEmail)
             .get();
 
-        if (snapShot.empty()) {
+        if (snapShot.empty) {
             console.log('No Customer has been found with the email: ' + newEmail);
             return -2;
         }
@@ -84,7 +84,7 @@ export const updatePasswordForCustomerByEmail = async (password: string, email: 
             .where('Email','==',email)
             .get();
 
-        if (snapShot.empty()) {
+        if (snapShot.empty) {
             console.log('No Customer has been found with the email: ' + email);
             return -2;
         }
@@ -131,7 +131,7 @@ export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) =>
             .where('Email', '==', customerInfo.email)
             .get();
 
-        if (snapShot.empty()){
+        if (snapShot.empty){
             console.log('The address of Employee has not been found');
         }
 
@@ -179,7 +179,7 @@ export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo
             .where('Email','==',customerInfo.email)
             .get();
 
-        if(snapShot.empty()) {
+        if(snapShot.empty) {
             const docRef = snapShot.docs[0].ref;
 
             await docRef.update({

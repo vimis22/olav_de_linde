@@ -40,7 +40,7 @@ export const getAllCustomerByFirstname = async (firstname: string) => {
             return {id: doc.id, ...doc.data()};
         });
     } catch (error) {
-        console.error('System is not able fetch by Firstname', error);
+        console.error('System is not able to fetch by Firstname', error);
         return {id: -2};
     }
 };
