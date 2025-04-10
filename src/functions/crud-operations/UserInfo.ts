@@ -1,4 +1,4 @@
-export type EmployeeInfo = {
+export type UserInfo = {
     id?: string,
     email?: string,
     password?: string,

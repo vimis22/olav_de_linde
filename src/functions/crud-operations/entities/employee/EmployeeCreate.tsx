@@ -1,8 +1,8 @@
 import firestore from '@react-native-firebase/firestore';
-import {EmployeeInfo} from './EmployeeInfo.ts';
+import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
-import {EnumMessages} from '../EnumMessages.ts';
-export const createAllEmployees = async (allEmployeeInfo: EmployeeInfo[]): Promise<number> => {
+import {EnumMessages} from '../../EnumMessages.ts';
+export const createAllEmployees = async (allEmployeeInfo: UserInfo[]): Promise<number> => {
     try{
         if (!allEmployeeInfo || allEmployeeInfo.length === 0){
             return -2;
@@ -41,7 +41,7 @@ export const createEmployeeWithEmail = async (email: string, password: string): 
         const credentials = await auth().createUserWithEmailAndPassword(email, password);
         const {uid} = credentials.user;
         //Vi har fyldt email: email og password: password, hvor de resterende er med '' og det er fordi vi vil gerne fylde blanke værdier på dem.
-        let employeeInfo: EmployeeInfo = {
+        let employeeInfo: UserInfo = {
             id: uid,
             email: email,
             password: password,
@@ -63,7 +63,7 @@ export const createEmployeeWithEmail = async (email: string, password: string): 
         let message = EnumMessages(await num);
 
         console.log('An Employee has been created successfully with an email', email, message);
-        return 0;
+        return 1;
     } catch (error) {
         console.error('An Error occured in createEmployeeWithEmail:', error);
         return -1;

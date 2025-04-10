@@ -1,20 +1,19 @@
-import React from 'react';
-import firestore from 'react-native-firebase/firestore';
-import {EmployeeInfo} from './EmployeeInfo.ts';
+import firestore from '@react-native-firebase/firestore';
+import {UserInfo} from '../../UserInfo.ts';
 
-export const deleteEmployeeById = async (employeeId: EmployeeInfo) => {
+export const deleteEmployeeById = async (employeeId: UserInfo) => {
     try {
         const docRef = firestore().collection('Employee').doc(employeeId.id);
         const doc = await docRef.get();
 
         if (!doc.exists) {
-            console.log('System has deleted the employee by thge email', employeeId.id);
+            console.log('System has successfully deleted the employee by the email', employeeId.id);
         }
 
         await docRef.delete();
-        return console.log('System has successfully deleted the employee by ID:');
+        return 1;
     } catch (error) {
-        console.log('An Error occured while updating the employee by ID', error);
+        console.log('An Error occurred while updating the employee by ID', error);
         return -1;
     }
 };

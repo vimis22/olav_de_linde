@@ -1,52 +1,51 @@
-import React from 'react';
-import firestore from 'react-native-firebase/firestore';
-import {EmployeeInfo} from './EmployeeInfo.ts';
+import firestore from '@react-native-firebase/firestore';
+import {UserInfo} from '../../UserInfo.ts';
 
-export const updateEmployee = async (employeeInfo: EmployeeInfo) => {
+export const updateCustomer = async (customerInfo: UserInfo) => {
     try {
-        const {id, ...updatedData} = employeeInfo;
-        const docRef = firestore().collection('Employee').doc(id);
+        const {id, ...updatedData} = customerInfo;
+        const docRef = firestore().collection('Customer').doc(id);
         const doc = await docRef.get();
 
         if (!doc.exists){
-            console.log('System cannot recognize employee information');
+            console.log('System cannot recognize customer information');
             await docRef.update(updatedData);
             return updatedData;
         }
     } catch (error) {
-        console.error('An Error occured while updating the employee', error);
+        console.error('An Error occured while updating the customer', error);
         return -1;
     }
 };
 
-export const updateEmailForEmployee = async (employeeId: string, newEmail: string) => {
+export const updateEmailForCustomer = async (customerId: string, newEmail: string) => {
     try {
         //Kan man overveje at tage ting som er i fælleskab og smide den over i en metode.
-        const docRef = firestore().collection('Employee').doc(employeeId);
+        const docRef = firestore().collection('Customer').doc(customerId);
         const doc = await docRef.get();
 
         if (!doc.exists) {
-            console.log('Non Employee has been found with ID: ' + employeeId);
+            console.log('Non Customer has been found with ID: ' + customerId);
             return 1;
         }
 
         await docRef.update({Email: newEmail});
-        console.log('System has updated the ${employeeId} with: ' + newEmail);
+        console.log('System has updated the ${customerId} with: ' + newEmail);
     } catch (error) {
         console.error('An Error has occured while updating by ID', error);
         return -1;
     }
 };
 
-export const updateEmailForEmployeeByEmail = async (oldEmail: string, newEmail: string) => {
+export const updateEmailForCustomerByEmail = async (oldEmail: string, newEmail: string) => {
     try {
         const snapShot = await firestore()
-            .collection('Employee')
+            .collection('Customer')
             .where('Email','==',oldEmail)
             .get();
 
         if (snapShot.empty()) {
-            console.log('No Employee has been found with the email: ' + newEmail);
+            console.log('No Customer has been found with the email: ' + newEmail);
             return -2;
         }
 
@@ -59,13 +58,13 @@ export const updateEmailForEmployeeByEmail = async (oldEmail: string, newEmail: 
     }
 };
 
-export const updatePasswordForEmployee = async (employeeId: string, password: string) => {
+export const updatePasswordForCustomer = async (employeeId: string, password: string) => {
     try {
-        const docRef = firestore().collection('Employee').doc(employeeId);
+        const docRef = firestore().collection('Customer').doc(employeeId);
         const doc = await docRef.get();
 
         if (!doc.exists) {
-            console.log('Non Employee has been found with ID: ${employeeId}`');
+            console.log('Non Customer has been found with ID: ${employeeId}`');
             return;
         }
 
@@ -77,16 +76,16 @@ export const updatePasswordForEmployee = async (employeeId: string, password: st
     }
 };
 
-export const updatePasswordForEmployeeByEmail = async (password: string, email: string) => {
+export const updatePasswordForCustomerByEmail = async (password: string, email: string) => {
     try {
         //Husk, at de områder hvor der står byEmail skal kopiere følgende sætning.
         const snapShot = await firestore()
-            .collection('Employee')
+            .collection('Customer')
             .where('Email','==',email)
             .get();
 
         if (snapShot.empty()) {
-            console.log('No Employee has been found with the email: ' + email);
+            console.log('No Customer has been found with the email: ' + email);
             return -2;
         }
         const docRef = snapShot.docs[0].ref;
@@ -101,35 +100,35 @@ export const updatePasswordForEmployeeByEmail = async (password: string, email: 
 };
 
 
-export const updateAddressForEmployee = async (employeeInfo: EmployeeInfo) => {
+export const updateAddressForCustomer = async (customerInfo: UserInfo) => {
     try {
-        const docRef = firestore().collection('Employee').doc(employeeInfo.id);
+        const docRef = firestore().collection('Customer').doc(customerInfo.id);
         const doc = await docRef.get();
 
         if(!doc.exists){
-            return console.log('The Employee has not been found');
+            return console.log('The Customer has not been found');
         }
 
         await docRef.update({
-            Streetname: employeeInfo.streetname,
-            Housenumber: employeeInfo.housenumber,
-            City: employeeInfo.city,
-            Zipcode: employeeInfo.zipcode,
-            Country: employeeInfo.country,
+            Streetname: customerInfo.streetname,
+            Housenumber: customerInfo.housenumber,
+            City: customerInfo.city,
+            Zipcode: customerInfo.zipcode,
+            Country: customerInfo.country,
         });
 
-        return employeeInfo.id;
+        return customerInfo.id;
     } catch (error) {
         console.log('An Error occured while updating the address', error);
         return -1;
     }
 };
 
-export const updateAddressForEmployeeByEmail = async (employeeInfo: EmployeeInfo) => {
+export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) => {
     try {
         const snapShot = await firestore()
-            .collection('Employee')
-            .where('Email', '==', employeeInfo.email)
+            .collection('Customer')
+            .where('Email', '==', customerInfo.email)
             .get();
 
         if (snapShot.empty()){
@@ -139,23 +138,23 @@ export const updateAddressForEmployeeByEmail = async (employeeInfo: EmployeeInfo
         const docRef = snapShot.docs[0].ref;
 
         await docRef.update({
-            Streetname: employeeInfo.streetname,
-            Housenumber: employeeInfo.housenumber,
-            City: employeeInfo.city,
-            Zipcode: employeeInfo.zipcode,
-            Country: employeeInfo.country,
+            Streetname: customerInfo.streetname,
+            Housenumber: customerInfo.housenumber,
+            City: customerInfo.city,
+            Zipcode: customerInfo.zipcode,
+            Country: customerInfo.country,
         });
 
-        return console.log('System has succesfully updated the email: ', employeeInfo.email);
+        return console.log('System has succesfully updated the email: ', customerInfo.email);
     } catch (error) {
         console.error('An Error occured while updating the address by Email', error);
         return -1;
     }
 };
 
-export const updatePhoneNumberForEmployee = async (employeeInfo: EmployeeInfo) => {
+export const updatePhoneNumberForCustomer = async (customerInfo: UserInfo) => {
     try {
-        const docRef = firestore().collection('Employee').doc(employeeInfo.id);
+        const docRef = firestore().collection('Customer').doc(customerInfo.id);
         const doc = await docRef.get();
 
         if (!doc.exists) {
@@ -163,32 +162,32 @@ export const updatePhoneNumberForEmployee = async (employeeInfo: EmployeeInfo) =
         }
 
         await docRef.update({
-            Countrycode: employeeInfo.countrycode,
-            Phone: employeeInfo.phone,
+            Countrycode: customerInfo.countrycode,
+            Phone: customerInfo.phone,
         });
 
-        return console.log('System was succesful in updating the users telehphone number', employeeInfo.id);
+        return console.log('System was succesful in updating the users telehphone number', customerInfo.id);
     } catch (error) {
-        console.error('An Error occured while updating the Telephone Number', employeeInfo.id);
+        console.error('An Error occured while updating the Telephone Number', customerInfo.id);
     }
 };
 
-export const updatePhoneNumberForEmployeeByEmail = async (employeeInfo: EmployeeInfo) => {
+export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo) => {
     try {
         const snapShot = await firestore()
-            .collection('Employee')
-            .where('Email','==',employeeInfo.email)
+            .collection('Customer')
+            .where('Email','==',customerInfo.email)
             .get();
 
         if(snapShot.empty()) {
             const docRef = snapShot.docs[0].ref;
 
             await docRef.update({
-                Countrycode: employeeInfo.countrycode,
-                Phone: employeeInfo.phone,
+                Countrycode: customerInfo.countrycode,
+                Phone: customerInfo.phone,
             });
 
-            return console.log('System has updated the employees phone number, by this email' , employeeInfo.email);
+            return console.log('System has updated the employees phone number, by this email' , customerInfo.email);
         }
     } catch(error) {
         console.error('An Error occured while updating the phone number through email', error);
