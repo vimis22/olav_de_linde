@@ -13,7 +13,7 @@ export const updateCustomer = async (customerInfo: UserInfo) => {
             return updatedData;
         }
     } catch (error) {
-        console.error('An Error occured while updating the customer', error);
+        console.error('An Error occurred while updating the customer', error);
         return -1;
     }
 };
@@ -32,7 +32,7 @@ export const updateEmailForCustomer = async (customerId: string, newEmail: strin
         await docRef.update({Email: newEmail});
         console.log('System has updated the ${customerId} with: ' + newEmail);
     } catch (error) {
-        console.error('An Error has occured while updating by ID', error);
+        console.error('An Error has occurred while updating by ID', error);
         return -1;
     }
 };

@@ -25,7 +25,7 @@ export const deleteEmployeeByEmail = async (email: string) => {
             .where('Email','==',email)
             .get();
 
-        if (snapShot.empty()){
+        if (snapShot.empty){
             console.log('System is not able to find employee in the system');
         }
 

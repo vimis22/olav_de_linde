@@ -17,7 +17,7 @@ export const createRole = async (name: string) => {
 
         return 1;
     } catch(error) {
-        console.error('Error when creating a new Role', error);
+        console.error('An Error when creating a new Role', error);
         return -1;
     }
 };
