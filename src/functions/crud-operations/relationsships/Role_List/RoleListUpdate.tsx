@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 
-export const updateRolelistByEmployeeId = async (OldEmployee_Id: string, NewEmployee_Id: string) => {
+export const updateRoleListByEmployeeId = async (OldEmployee_Id: string, NewEmployee_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Role_List')
@@ -9,7 +9,7 @@ export const updateRolelistByEmployeeId = async (OldEmployee_Id: string, NewEmpl
 
         if (snapShot.empty) {
             console.log('System is not able to recognize role_list information');
-            return -1;
+            return -2;
         }
 
         const batch = firestore().batch();
@@ -28,7 +28,7 @@ export const updateRolelistByEmployeeId = async (OldEmployee_Id: string, NewEmpl
     }
 };
 
-export const updateRolelistByRoleId = async (OldRole_Id: string, NewRole_Id: string) => {
+export const updateRoleListByRoleId = async (OldRole_Id: string, NewRole_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Role_List')
@@ -37,7 +37,7 @@ export const updateRolelistByRoleId = async (OldRole_Id: string, NewRole_Id: str
 
         if (snapShot.empty) {
             console.log('System is not able to recognize role_list information');
-            return -1;
+            return -2;
         }
 
         const batch = firestore().batch();
@@ -51,7 +51,7 @@ export const updateRolelistByRoleId = async (OldRole_Id: string, NewRole_Id: str
         console.log('System has updated the ' + OldRole_Id + 'with: ' + NewRole_Id);
         return 1;
     } catch (error) {
-        console.error('An Error occured while updating the Role_List by New Value', error);
+        console.error('An Error occurred while updating the Role_List by New Value', error);
         return -1;
     }
 };

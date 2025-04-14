@@ -7,6 +7,7 @@ export const deletePropertyListById = async (id: string) => {
 
         if (!doc.exists) {
             console.log('System has successfully deleted a relation in PropertyList by Id', id);
+            return 1;
         }
 
         await docRef.delete();
@@ -17,7 +18,7 @@ export const deletePropertyListById = async (id: string) => {
     }
 };
 
-export const deletePropertyByCustomer = async (Customer_Id: string) => {
+export const deletePropertyListByCustomer = async (Customer_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property_List')
@@ -34,6 +35,9 @@ export const deletePropertyByCustomer = async (Customer_Id: string) => {
         await docRef.delete();
         console.log('System has successfully deleted the property_list by customer_id');
         return 1;
+    } catch (error) {
+        console.log('An Error occurred while deleting the property_list by customer_id', error);
+        return -1;
     }
 };
 
@@ -54,6 +58,9 @@ export const deletePropertyByProperty = async (Property_Id: string) => {
         await docRef.delete();
         console.log('System has successfully deleted the property_list by property_id');
         return 1;
+    } catch (error) {
+        console.log('An Error occurred while deleting the property_list by property_id', error);
+        return -1;
     }
 };
 
@@ -71,11 +78,13 @@ export const deletePropertyByListByCustomerProperty = async (Customer_Id: string
         }
 
         const docRef = snapShot.docs[0].ref;
-        const docId = snapShot.docs[0].id;
 
         await docRef.delete();
-        console.log('System has successfully deleted the property_list by both the customer_id and property_id ', docId);
+        console.log('System has successfully deleted the property_list by both the customer_id and property_id');
         return 1;
+    } catch (error) {
+        console.log('An Error occurred while deleting the property_list by both customer_id and property_id', error);
+        return -1;
     }
 };
 

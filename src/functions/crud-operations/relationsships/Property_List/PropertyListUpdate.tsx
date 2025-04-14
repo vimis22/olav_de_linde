@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 
-export const updatePropertyListCustomerId(OldCustomer_Id: string, NewCustomer_Id: string) => {
+export const updatePropertyListCustomerId= async (OldCustomer_Id: string, NewCustomer_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property_List')
@@ -28,7 +28,7 @@ export const updatePropertyListCustomerId(OldCustomer_Id: string, NewCustomer_Id
     }
 };
 
-export const updatePropertyByListPropertyId(OldProperty_Id: string, NewProperty_Id: string) => {
+export const updatePropertyByListPropertyId = async (OldProperty_Id: string, NewProperty_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property_List')

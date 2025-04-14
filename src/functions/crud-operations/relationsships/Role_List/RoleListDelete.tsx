@@ -17,7 +17,7 @@ export const deleteRoleListById = async (id: string) => {
     }
 };
 
-export const deleteRolelistByEmployee = async (Employee_Id: string) => {
+export const deleteRoleListByEmployee = async (Employee_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Role_List')
@@ -33,10 +33,13 @@ export const deleteRolelistByEmployee = async (Employee_Id: string) => {
 
         await docRef.delete();
         return console.log('System has successfully deleted the property_list by employee_id: ', docId);
+    } catch (error) {
+        console.log('An Error occurred while deleting the role_list by employee_id', error);
+        return -1;
     }
 };
 
-export const deleteRolelistByRole = async (Role_Id: string) => {
+export const deleteRoleListByRole = async (Role_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Role_List')
@@ -52,10 +55,13 @@ export const deleteRolelistByRole = async (Role_Id: string) => {
 
         await docRef.delete();
         return console.log('System has successfully deleted the property_list by role_id: ', docId);
+    } catch (error) {
+        console.log('An Error occurred while deleting the role_list by role_id', error);
+        return -1;
     }
 };
 
-export const deleteRolelistByEmployeeRole = async (Employee_Id: string, Role_Id: string) => {
+export const deleteRoleListByEmployeeRole = async (Employee_Id: string, Role_Id: string) => {
     try {
         const snapShot = await firestore()
             .collection('Role_List')
@@ -72,5 +78,8 @@ export const deleteRolelistByEmployeeRole = async (Employee_Id: string, Role_Id:
 
         await docRef.delete();
         return console.log('System has successfully deleted the property_list by both the employee_id and role_id: ', docId);
+    } catch (error) {
+        console.log('An Error occurred while deleting the role_list by both employee_id and role_id', error);
+        return -1;
     }
 };
