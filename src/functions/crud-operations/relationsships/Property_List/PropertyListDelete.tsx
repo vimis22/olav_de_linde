@@ -26,13 +26,14 @@ export const deletePropertyByCustomer = async (Customer_Id: string) => {
 
         if (snapShot.empty){
             console.log('System is not able to find customer_id in the system');
+            return -2;
         }
 
         const docRef = snapShot.docs[0].ref;
-        const docId = snapShot.docs[0].id;
 
         await docRef.delete();
-        return console.log('System has successfully deleted the property_list by customer_id: ', docId);
+        console.log('System has successfully deleted the property_list by customer_id');
+        return 1;
     }
 };
 
@@ -45,13 +46,14 @@ export const deletePropertyByProperty = async (Property_Id: string) => {
 
         if (snapShot.empty) {
             console.log('System is not able to find property_id in the system');
+            return -2;
         }
 
         const docRef = snapShot.docs[0].ref;
-        const docId = snapShot.docs[0].id;
 
         await docRef.delete();
-        return console.log('System has successfully deleted the property_list by property_id ', docId);
+        console.log('System has successfully deleted the property_list by property_id');
+        return 1;
     }
 };
 
@@ -65,13 +67,15 @@ export const deletePropertyByListByCustomerProperty = async (Customer_Id: string
 
         if (snapShot.empty) {
             console.log('System is not able to find property_id in the system');
+            return -2;
         }
 
         const docRef = snapShot.docs[0].ref;
         const docId = snapShot.docs[0].id;
 
         await docRef.delete();
-        return console.log('System has successfully deleted the property_list by both the customer_id and property_id ', docId);
+        console.log('System has successfully deleted the property_list by both the customer_id and property_id ', docId);
+        return 1;
     }
 };
 

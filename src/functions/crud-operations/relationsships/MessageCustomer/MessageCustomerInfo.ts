@@ -3,4 +3,5 @@ export type MessageCustomerInfo = {
     Chat_Id?: string,
     Customer_Id?: string,
     Message?: string,
+    Timestamp?: Date,
 }

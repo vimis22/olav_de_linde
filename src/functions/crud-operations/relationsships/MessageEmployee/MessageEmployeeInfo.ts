@@ -3,4 +3,5 @@ export type MessageEmployeeInfo = {
     Chat_Id?: string,
     Employee_Id?: string,
     Message?: string,
+    Timestamp?: Date,
 }
