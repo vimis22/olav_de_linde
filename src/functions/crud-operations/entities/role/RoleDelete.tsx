@@ -13,7 +13,7 @@ export const deleteRoleById = async (id: string) => {
         await docRef.delete();
         return 1;
     } catch (error) {
-        console.log('An Error occured while updating the role by ID', error);
+        console.log('An Error occurred while updating the role by ID', error);
         return -1;
     }
 };

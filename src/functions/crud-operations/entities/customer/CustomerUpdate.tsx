@@ -30,7 +30,7 @@ export const updateEmailForCustomer = async (customerId: string, newEmail: strin
         }
 
         await docRef.update({Email: newEmail});
-        console.log('System has updated the ${customerId} with: ' + newEmail);
+        console.log('System has updated the ' + id + ' with: ' + newEmail);
     } catch (error) {
         console.error('An Error has occurred while updating by ID', error);
         return -1;
@@ -53,7 +53,7 @@ export const updateEmailForCustomerByEmail = async (oldEmail: string, newEmail: 
         await docRef.update({ Email: newEmail});
         console.log('System has updated email from: :' + oldEmail + ' to' + newEmail);
     } catch (error) {
-        console.log('An Error occured while updating the email by an old email ', error);
+        console.log('An Error occurred while updating the email by an old email ', error);
         return -1;
     }
 };

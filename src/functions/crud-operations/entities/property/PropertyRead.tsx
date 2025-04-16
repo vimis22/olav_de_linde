@@ -20,7 +20,7 @@ export const readAllProperties = async () => {
         const snapShot = await firestore().collection('Property').get();
         return snapShot.docs.map((doc: {id: any; data: () => any}) => {
             return {id: doc.id, ...doc.data()};
-        })
+        });
     } catch (error) {
         console.log('System is not able to fetch all Properties', error);
         return {id: -2};

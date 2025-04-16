@@ -1,5 +1,5 @@
 import firestore from '@react-native-firebase/firestore';
-import {PropertyInfo} from "./PropertyInfo.ts";
+import {PropertyInfo} from './PropertyInfo.ts';
 
 export const updatePropertyById = async (propertyInfo: PropertyInfo) => {
     try {
@@ -18,7 +18,7 @@ export const updatePropertyById = async (propertyInfo: PropertyInfo) => {
     }
 };
 
-export const upddatePropertyByStreetname = async (Oldstreetname: string, Newstreetname: string, city: string) => {
+export const updatePropertyByStreetname = async (Oldstreetname: string, Newstreetname: string, city: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property')
@@ -41,7 +41,7 @@ export const upddatePropertyByStreetname = async (Oldstreetname: string, Newstre
     }
 };
 
-export const upddatePropertyByCity = async (Oldcity: string, Newcity: string, zipcode: string) => {
+export const updatePropertyByCity = async (Oldcity: string, Newcity: string, zipcode: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property')
@@ -64,7 +64,7 @@ export const upddatePropertyByCity = async (Oldcity: string, Newcity: string, zi
     }
 };
 
-export const upddatePropertyByZipcode = async (Oldzipcode: number, Newzipcode: number) => {
+export const updatePropertyByZipcode = async (Oldzipcode: number, Newzipcode: number) => {
     try {
         const snapShot = await firestore()
             .collection('Property')
