@@ -2,7 +2,7 @@ export type CaseInfo = {
     id: string,
     title: string,
     description: string,
-    creationDate: Date,
-    updateDate: Date,
-    deadline: Date,
+    creationDate?: Date,
+    updateDate?: Date,
+    deadline?: Date,
 }

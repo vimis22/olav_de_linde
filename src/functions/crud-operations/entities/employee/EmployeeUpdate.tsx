@@ -84,7 +84,7 @@ export const updatePasswordForEmployeeByEmail = async (password: string, email: 
             .where('Email','==',email)
             .get();
 
-        if (snapShot.empty()) {
+        if (snapShot.empty) {
             console.log('No Employee has been found with the email: ' + email);
             return -2;
         }

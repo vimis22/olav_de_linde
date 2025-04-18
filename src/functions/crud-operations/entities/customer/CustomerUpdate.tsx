@@ -30,7 +30,7 @@ export const updateEmailForCustomer = async (customerId: string, newEmail: strin
         }
 
         await docRef.update({Email: newEmail});
-        console.log('System has updated the ' + id + ' with: ' + newEmail);
+        console.log('System has updated the ' + customerId + ' with: ' + newEmail);
     } catch (error) {
         console.error('An Error has occurred while updating by ID', error);
         return -1;
@@ -92,7 +92,8 @@ export const updatePasswordForCustomerByEmail = async (password: string, email: 
         //Husk, at denne sætning fortæller hvad vi ønsker at opdatere og ændre.
         await docRef.update({ Password: password});
 
-        return console.log('Sucesss has been made in updating their Password by Email');
+        console.log('Sucesss has been made in updating their Password by Email');
+        return 1;
     } catch (error) {
         console.error('An Error has occured while updating the Telephone Number', error);
         return -1;
@@ -105,7 +106,7 @@ export const updateAddressForCustomer = async (customerInfo: UserInfo) => {
         const docRef = firestore().collection('Customer').doc(customerInfo.id);
         const doc = await docRef.get();
 
-        if(!doc.exists){
+        if (!doc.exists){
             return console.log('The Customer has not been found');
         }
 
@@ -145,7 +146,8 @@ export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) =>
             Country: customerInfo.country,
         });
 
-        return console.log('System has succesfully updated the email: ', customerInfo.email);
+        console.log('System has succesfully updated the email: ', customerInfo.email);
+        return 1;
     } catch (error) {
         console.error('An Error occured while updating the address by Email', error);
         return -1;
@@ -166,7 +168,8 @@ export const updatePhoneNumberForCustomer = async (customerInfo: UserInfo) => {
             Phone: customerInfo.phone,
         });
 
-        return console.log('System was succesful in updating the users telehphone number', customerInfo.id);
+        console.log('System was succesful in updating the users telehphone number', customerInfo.id);
+        return 1;
     } catch (error) {
         console.error('An Error occured while updating the Telephone Number', customerInfo.id);
     }
@@ -187,7 +190,8 @@ export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo
                 Phone: customerInfo.phone,
             });
 
-            return console.log('System has updated the employees phone number, by this email' , customerInfo.email);
+            console.log('System has updated the employees phone number, by this email' , customerInfo.email);
+            return 1;
         }
     } catch(error) {
         console.error('An Error occured while updating the phone number through email', error);

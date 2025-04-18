@@ -18,38 +18,6 @@ export const deleteScheduledById = async (allCaseInfo: CaseInfo) => {
     }
 };
 
-export const deleteScheduledByName = async (name: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Scheduled')
-            .where('Name','==',name)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-    } catch (error) {
-        console.error('System is not able fetch by Name', error);
-        return {id: -2};
-    }
-};
-
-export const deleteScheduledByTimestamp = async (timestamp: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Scheduled')
-            .where('Timestamp','==',timestamp)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-    } catch (error) {
-        console.error('System is not able fetch by Timestamp', error);
-        return {id: -2};
-    }
-};
-
 export const deleteScheduledByCaseId = async (caseId: string) => {
     try {
         const snapshot = await firestore()

@@ -18,36 +18,29 @@ export const updateCase = async (caseInfo: CaseInfo) => {
     }
 };
 
-export const updateCaseByCreationCase = async (id: string, creationDate: Date) => {
+
+export const updateAllUsers = async (allCases: CaseInfo[]): Promise<number> => {
     try {
-        const docRef = firestore().collection('Case').doc(id);
-        const doc = await docRef.get();
-        if (!doc.exists) {
-            console.log('Non Customer has been found with ID: ' + id);
-            return 1;
+        if (!allCases || allCases.length === 0) {
+            return -2;
         }
 
-        await docRef.update({creationDate: creationDate});
-        console.log('System has updated the' + id + 'with: ' + creationDate);
-    } catch (error) {
-        console.error('An Error has occurred while updating by ID', error);
-        return -1;
-    }
-};
+        const batch = firestore().batch();
 
-export const updateCaseByUpdatedCase = async (id: string, updateDate: Date) => {
-    try {
-        const docRef = firestore().collection('Case').doc(id);
-        const doc = await docRef.get();
-        if (!doc.exists) {
-            console.log('Non Customer has been found with ID: ' + id);
-            return 1;
-        }
-
-        await docRef.update({creationDate: updateDate});
-        console.log('System has updated the' + id + 'with: ' + updateDate);
+        allCases.forEach(defect => {
+            const caseRef = firestore().collection('Case').doc(defect.id);
+            batch.update(caseRef, {
+                title: defect.title,
+                description: defect.description,
+                creationDate: firestore.FieldValue.serverTimestamp(),
+                updateDate: firestore.FieldValue.serverTimestamp(),
+                deadline: firestore.FieldValue.serverTimestamp(),
+            });
+        });
+        await batch.commit();
+        return 1;
     } catch (error) {
-        console.error('An Error has occurred while updating by ID', error);
+        console.error('An Error occurred in updating allCases', error);
         return -1;
     }
 };
@@ -57,14 +50,14 @@ export const updateCaseByDeadline = async (id: string, deadline: Date) => {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
         if (!doc.exists) {
-            console.log('Non Customer has been found with ID: ' + id);
+            console.log('Case has been found with Deadline: ' + deadline);
             return 1;
         }
 
         await docRef.update({deadline: deadline});
-        console.log('System has updated the' + id + 'with: ' + deadline);
+        console.log('System has updated the' + deadline + 'with: ' + deadline);
     } catch (error) {
-        console.error('An Error has occurred while updating by ID', error);
+        console.error('An Error has occurred while updating by Deadline', error);
         return -1;
     }
 };
@@ -74,14 +67,14 @@ export const updateCaseByTitle = async (id: string, title: string) => {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
         if (!doc.exists) {
-            console.log('Non Customer has been found with ID: ' + id);
+            console.log('Non Customer has been found with Title: ' + title);
             return 1;
         }
 
         await docRef.update({title: title});
-        console.log('System has updated the' + id + 'with: ' + title);
+        console.log('System has updated the' + title + 'with: ' + title);
     } catch (error) {
-        console.error('An Error has occurred while updating by ID', error);
+        console.error('An Error has occurred while updating by Title', error);
         return -1;
     }
 };
@@ -91,14 +84,14 @@ export const updateCaseByDescription = async (id: string, description: string) =
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
         if (!doc.exists) {
-            console.log('Non Customer has been found with ID: ' + id);
+            console.log('Non Customer has been found with Description: ' + description);
             return 1;
         }
 
         await docRef.update({description: description});
-        console.log('System has updated the' + id + 'with: ' + description);
+        console.log('System has updated the' + description + 'with: ' + description);
     } catch (error) {
-        console.error('An Error has occurred while updating by ID', error);
+        console.error('An Error has occurred while updating by Description', error);
         return -1;
     }
 };
