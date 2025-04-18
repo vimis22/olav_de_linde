@@ -15,4 +15,4 @@ export const deleteCustomerImageById = async (id: string) => {
         console.log('An Error occurred while deleting the CustomerImage by ID', error);
         return -1;
     }
-}
+};

@@ -27,7 +27,7 @@ export const updateAllCustomerImage = async (allCustomerImage: EmployeeImageInfo
         const batch = firestore().batch();
 
         allCustomerImage.forEach(employeeimage => {
-            const employeeimageRef = firestore().collection('TermsConditions').doc(employeeimage.id);
+            const employeeimageRef = firestore().collection('EmployeeImage').doc(employeeimage.id);
             batch.update(employeeimageRef, {
                 filesize: employeeimage.filesize,
                 name: employeeimage.name,

@@ -1,58 +1,57 @@
 import firestore from '@react-native-firebase/firestore';
-import {CustomerImageInfo} from './CustomerImageInfo.ts';
+import {FileInfo} from './FileInfo.ts';
 
-export const updateCustomerImage = async (customerImage: CustomerImageInfo) => {
+export const updateFile = async (fileInfo: FileInfo) => {
     try {
-        const {id, ...updatedData} = customerImage;
-        const docRef = firestore().collection('CustomerImage').doc(id);
+        const {id, ...updatedData} = fileInfo;
+        const docRef = firestore().collection('File').doc(id);
         const doc = await docRef.get();
 
         if (!doc.exists) {
-            console.log('System cannot recognize customerImage information');
+            console.log('System cannot recognize File information');
             await docRef.update(updatedData);
             return updatedData;
         }
     } catch (error) {
-        console.log('An Error occurred while updating the customerImage', error);
+        console.log('An Error occurred while updating the File', error);
         return -1;
     }
 };
 
-export const updateAllCustomerImage = async (allCustomerImage: CustomerImageInfo[]) => {
+export const updateAllFile = async (allFile: FileInfo[]) => {
     try {
-        if (!allCustomerImage || allCustomerImage.length === 0) {
+        if (!allFile || allFile.length === 0) {
             return -2;
         }
 
         const batch = firestore().batch();
 
-        allCustomerImage.forEach(customerimage => {
-            const customerImageRef = firestore().collection('CustomerImage').doc(customerimage.id);
-            batch.update(customerImageRef, {
-                filesize: customerimage.filesize,
-                name: customerimage.name,
-                type: customerimage.type,
+        allFile.forEach(employeeimage => {
+            const employeeimageRef = firestore().collection('File').doc(employeeimage.id);
+            batch.update(employeeimageRef, {
+                filesize: employeeimage.filesize,
+                name: employeeimage.name,
+                type: employeeimage.type,
                 timestamp: firestore.FieldValue.serverTimestamp(),
-                customerId: customerimage.customerId,
             });
         });
         await batch.commit();
         return 1;
     } catch (error) {
-        console.error('An Error occurred in updating allCustomerImage', error);
+        console.error('An Error occurred in updating allFile', error);
         return -1;
     }
 };
 
-export const updateNameForCustomerImageById = async (name: string, id: string) => {
+export const updateNameForFileById = async (name: string, id: string) => {
     try {
         const snapshot = await firestore()
-            .collection('CustomerImage')
+            .collection('File')
             .where('Id','==',id)
             .get();
 
         if (snapshot.empty) {
-            console.log('No CustomerImage has been found with the id', + id);
+            console.log('No File has been found with the id', + id);
             return -2;
         }
 
@@ -60,41 +59,41 @@ export const updateNameForCustomerImageById = async (name: string, id: string) =
         await docRef.update({name: name});
         console.log('System has updated name from: ' + name + 'to ' + name);
     } catch (error) {
-        console.log('An Error occurred while updating the name by an old name ', error);
+        console.log('An Error occurred while updating the File by an old File ', error);
         return -1;
     }
 };
 
-export const updateTimestampForCustomerImageById = async (timestamp: Date, id: string) => {
+export const updateTimestampForFileById = async (timestamp: Date, id: string) => {
     try {
         const snapshot = await firestore()
-            .collection('CustomerImage')
+            .collection('File')
             .where('Id','==',id)
             .get();
 
         if (snapshot.empty) {
-            console.log('No CustomerImage has been found with the id ' + id);
+            console.log('No File has been found with the id ' + id);
             return -2;
         }
 
         const docRef = snapshot.docs[0].ref;
         await docRef.update({timestamp: timestamp});
-        console.log('System has updated timestamp from: ' + timestamp + 'to ' + timestamp);
+        console.log('System has updated File from: ' + timestamp + 'to ' + timestamp);
     } catch (error) {
-        console.log('An Error occurred while updating the timestamp by an old timestamp ', error);
+        console.log('An Error occurred while updating the File by an old File ', error);
         return -1;
     }
 };
 
-export const updateFilesizeForCustomerImageById = async (filesize: string, id: string) => {
+export const updateFilesizeForFileById = async (filesize: string, id: string) => {
     try {
         const snapshot = await firestore()
-            .collection('CustomerImage')
+            .collection('File')
             .where('Id','==',id)
             .get();
 
         if (snapshot.empty) {
-            console.log('No CustomerImage has been found with the id ' + id);
+            console.log('No File has been found with the id ' + id);
             return -2;
         }
 
@@ -107,15 +106,15 @@ export const updateFilesizeForCustomerImageById = async (filesize: string, id: s
     }
 };
 
-export const updateTypeForCustomerImageById = async (type: string, id: string) => {
+export const updateTypeForFileById = async (type: string, id: string) => {
     try {
         const snapshot = await firestore()
-            .collection('CustomerImage')
+            .collection('File')
             .where('Id','==',id)
             .get();
 
         if (snapshot.empty) {
-            console.log('No CustomerImage has been found with the id ' + id);
+            console.log('No File has been found with the id ' + id);
             return -2;
         }
 
