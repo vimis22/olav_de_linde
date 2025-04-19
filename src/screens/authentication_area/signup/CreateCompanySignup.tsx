@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import GlobalStyles, {houseIcon, locationIcon, logoImage, tickMarkIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {
+  houseIcon,
+  locationIcon, lockIcon,
+  logoImage,
+  tickMarkIcon,
+  userIcon,
+  wallpaperBackground,
+} from '../../../Styling/GlobalStyles.tsx';
 import {ImageBackground, Image, View} from 'react-native';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import OptionButton from '../../../components/OptionButton.tsx';
@@ -13,6 +20,7 @@ const CreateCompanySignup = ({navigation}: any) => {
     const [address, setAddress] = useState('');
     const [floor, setFloorValue] = useState('');
     const [optionalVisibility, setOptionalVisibility] = useState(false);
+    const [current, setCurrentStep] = useState(1);
     return (
         <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
             <View style={GlobalStyles.logoImageContainer}>
@@ -30,7 +38,7 @@ const CreateCompanySignup = ({navigation}: any) => {
                                 value={address} onChangeText={setAddress} containerHeight={50} containerRadius={20} />
 
                 <OptionButton fieldIcon={tickMarkIcon} fieldIconSize={28} onPress={() => setOptionalVisibility(!optionalVisibility)}
-                              title={'Jeg deler addressen med andre'} backgroundColor={wallpaperBackground} height={50} fontSize={16} tickMarkIcon={optionalVisibility}  />
+                              title={'Jeg deler addressen med andre'} backgroundColor={wallpaperBackground} height={50} fontSize={16} tickMarkIcon={optionalVisibility} />
                 {optionalVisibility && (
                     <InputFieldArea fieldIcon={houseIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Etage/Lokale/Indgang'}
                                     value={floor} onChangeText={setFloorValue} containerHeight={50} containerRadius={20} />
@@ -39,7 +47,7 @@ const CreateCompanySignup = ({navigation}: any) => {
                 <ActionButton onPress={() => navigation.navigate(CreateNameSignup)} title={'Næste'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
 
-                <ProgressIndicator step={1}/>
+                <ProgressIndicator step={current} icon1={houseIcon} icon2={userIcon} icon3={lockIcon} progressColor={'#5C6855'}/>
             </View>
 
         </ImageBackground>

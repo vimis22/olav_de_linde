@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, View} from 'react-native';
-import GlobalStyles, {houseIcon, logoImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {
+  houseIcon,
+  lockIcon,
+  logoImage,
+  userIcon,
+  wallpaperBackground,
+} from '../../../Styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import CreatePasswordSignup from './CreatePasswordSignup.tsx';
@@ -9,6 +15,7 @@ import ProgressIndicator from "../../../functions/ProgressIndicator.tsx";
 const CreateNameSignup = ({navigation}: any) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
+    const [current, setCurrentStep] = useState(2);
     return (
         <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
             <View style={GlobalStyles.logoImageContainer}>
@@ -25,7 +32,7 @@ const CreateNameSignup = ({navigation}: any) => {
                 <ActionButton onPress={() => navigation.navigate(CreatePasswordSignup)} title={'Næste'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
 
-                <ProgressIndicator step={2} />
+                <ProgressIndicator step={current} icon1={houseIcon} icon2={userIcon} icon3={lockIcon} progressColor={'#5C6855'} />
             </View>
         </ImageBackground>
     );
