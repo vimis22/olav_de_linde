@@ -15,7 +15,6 @@ interface OptionButtonProps{
     fieldIcon: ImageSourcePropType;
     tickMarkIcon: boolean;
 }
-
 const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width,
                                                        fieldIconSize = 40, fontSize, fieldIconBackground = '#4CAF50', fieldIcon, tickMarkIcon = false}) => {
     return (
@@ -24,7 +23,9 @@ const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundCo
                 <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
                     borderRadius: fieldIconSize / 2, backgroundColor: fieldIconBackground,
                 }]}>
+                  {tickMarkIcon && (
                     <Image source={fieldIcon} style={GlobalStyles.icon} resizeMode={'contain'} />
+                  )}
                 </View>
             )}
             <Text style={[GlobalStyles.textInput, { color: textColor, fontSize: fontSize }]}>{title}</Text>

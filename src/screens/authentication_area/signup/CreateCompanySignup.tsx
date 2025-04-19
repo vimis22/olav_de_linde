@@ -30,7 +30,7 @@ const CreateCompanySignup = ({navigation}: any) => {
                                 value={address} onChangeText={setAddress} containerHeight={50} containerRadius={20} />
 
                 <OptionButton fieldIcon={tickMarkIcon} fieldIconSize={28} onPress={() => setOptionalVisibility(!optionalVisibility)}
-                              title={'Jeg deler addressen med andre'} backgroundColor={wallpaperBackground} height={50} fontSize={16} tickMarkIcon={true} showIcon={true} />
+                              title={'Jeg deler addressen med andre'} backgroundColor={wallpaperBackground} height={50} fontSize={16} tickMarkIcon={optionalVisibility}  />
                 {optionalVisibility && (
                     <InputFieldArea fieldIcon={houseIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Etage/Lokale/Indgang'}
                                     value={floor} onChangeText={setFloorValue} containerHeight={50} containerRadius={20} />
