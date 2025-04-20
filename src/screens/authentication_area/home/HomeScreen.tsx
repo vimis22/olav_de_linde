@@ -1,11 +1,11 @@
 import React from 'react';
-import {Image, ImageBackground, View, StyleSheet, Text} from 'react-native';
+import {Image, ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
 import GlobalStyles, {pentiaHouseBackground, plusIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
 const HomeScreen = () => {
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-      <View style={styles.mainContainer}>
+      <ScrollView style={styles.mainContainer}>
         <View style={styles.topSection}>
           <Image source={pentiaHouseBackground} style={styles.houseImage}/>
         </View>
@@ -15,13 +15,23 @@ const HomeScreen = () => {
           <Text style={styles.description}>
             Overblik over dine aktive sager. Tryk på sagen for at se flere informationer.
           </Text>
-          <CaseBox onPress={'LoginScreen'} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={'50%'} caseContainerWidth={'100%'}
+          <CaseBox onPress={'LoginScreen'} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
                    caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
                    imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
           />
-
         </View>
-      </View>
+
+        <View style={styles.bottomSection}>
+          <Text style={styles.title}>Afsluttede sager</Text>
+          <Text style={styles.description}>
+            Overblik over dine afsluttede sager. Tryk på sagen for at se flere informationer.
+          </Text>
+          <CaseBox onPress={'LoginScreen'} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
+                   caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
+                   imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
+          />
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 };
