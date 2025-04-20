@@ -13,6 +13,7 @@ import CreatePasswordSignup from './src/screens/authentication_area/signup/Creat
 import SignupVerification from './src/screens/authentication_area/signup/SignupVerification.tsx';
 import BiometricsVerification from "./src/screens/authentication_area/signup/BiometricsVerification.tsx";
 import NotificationVerification from "./src/screens/authentication_area/signup/NotificationVerification.tsx";
+import HomeScreen from './src/screens/authentication_area/home/HomeScreen.tsx';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ export default function App() {
                     <Stack.Screen name={'SignupVerification'} component={SignupVerification} />
                     <Stack.Screen name={'BiometricsVerification'} component={BiometricsVerification} />
                     <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
+                    <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
                 </Stack.Navigator>
             </NavigationContainer>
         </GestureHandlerRootView>

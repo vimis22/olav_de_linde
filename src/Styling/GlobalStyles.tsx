@@ -13,7 +13,8 @@ export const locationLoadingIcon = require('../assets/OLD_LocationLoadingIcon.pn
 export const houseLoadingIcon = require('../assets/OLD_HouseLoadingIcon.png');
 export const biometricsVerificationImage = require('../assets/OLD_Biometrics.png');
 export const notificationsVerificationImage = require('../assets/OLD_Notification.png');
-
+export const pentiaHouseBackground = require('../assets/OLD_PentiaHouse.png');
+export const plusIcon = require('../assets/OLD_PlusIcon.png');
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,

@@ -36,11 +36,11 @@ const LoginScreen = ({navigation}: any) => {
 
             <View style={GlobalStyles.textContainer}>
                 <InputFieldArea fieldIcon={userIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Email'}
-                                value={email} onChangeText={setEmail} height={50} borderRadius={20}/>
+                                value={email} onChangeText={setEmail} containerHeight={50} containerRadius={20}/>
 
 
                 <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Password'}
-                                value={password} onChangeText={setPassword} height={50} borderRadius={20}/>
+                                value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20}/>
 
 
                 <ActionButton onPress={handleLogin} title={'Login'}
