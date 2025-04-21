@@ -1,15 +1,24 @@
 import React from 'react';
-import {Image, ImageBackground, TouchableOpacity, View, StyleSheet} from 'react-native';
-import GlobalStyles, {
-    biometricsVerificationImage,
-    wallpaperBackground
-} from '../../../Styling/GlobalStyles.tsx';
+import {Image, ImageBackground, TouchableOpacity, View, StyleSheet, Alert} from 'react-native';
+import GlobalStyles, {biometricsVerificationImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 
 const BiometricsVerification = ({navigation}: any) => {
     const handleSkipNavigation = async () => {
         navigation.navigate('NotificationVerification');
+    };
+
+    const createThreeButtonAlert = () => {
+      Alert.alert('Vil du bruge <biometri> for at logge ind?', 'Det er nemmere, hurtigere og mere sikkert.' ,[
+        {text: 'Nej',
+          onPress: () => navigation.navigate('NotificationVerification'),
+        },
+        {text: 'Brug <biometri>',
+          onPress: () => navigation.navigate('NotificationVerification'),
+          style: 'cancel',
+        },
+      ]);
     };
 
     return (
@@ -23,7 +32,7 @@ const BiometricsVerification = ({navigation}: any) => {
                 <NormalText text={'Når vi har en godkendt oprettelsen fa din profil kn du logge ind. Vent venligst indtil da.'} fontSize={18}/>
                 <ActionButton onPress={handleSkipNavigation} title={'Aktiver'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
-                <ActionButton onPress={handleSkipNavigation} title={'Spring over'}
+                <ActionButton onPress={createThreeButtonAlert} title={'Spring over'}
                               backgroundColor={'transparent'} textColor={'#FF6A00'} height={50} width={250}/>
             </View>
 
@@ -37,6 +46,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: '25%',
   },
 });
 export default BiometricsVerification;
