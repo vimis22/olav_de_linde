@@ -9,10 +9,9 @@ import GlobalStyles, {
 } from '../../../Styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
-import ProgressBar from '../../../functions/StepProgress.tsx';
-import StepProgress from "../../../functions/StepProgress.tsx";
-import ProgressIndicator from "../../../functions/ProgressIndicator.tsx";
-import SignupVerification from "./SignupVerification.tsx";
+import ProgressIndicator from '../../../functions/ProgressIndicator.tsx';
+import SignupVerification from './SignupVerification.tsx';
+import BiometricsVerification from './BiometricsVerification.tsx';
 
 const CreatePasswordSignup = ({navigation}: any) => {
     const [email, setEmail] = useState('');
@@ -35,7 +34,7 @@ const CreatePasswordSignup = ({navigation}: any) => {
                 <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Gentag Kodeord'}
                                 value={confirmPassword} onChangeText={setConfirmPassword} containerHeight={50} containerRadius={20} />
 
-                <ActionButton onPress={() => navigation.navigate(SignupVerification)} title={'Opret'}
+                <ActionButton onPress={() => navigation.navigate(BiometricsVerification)} title={'Opret'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
 
                 <ProgressIndicator step={current} icon1={houseIcon} icon2={userIcon} icon3={lockIcon} progressColor={'#5C6855'}/>

@@ -1,3 +1,4 @@
+import {LogBox, View, Image, Text, StyleSheet} from 'react-native';
 import React, { useEffect } from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -8,15 +9,14 @@ import SplashScreen from './src/screens/authentication_area/SplashScreen.tsx';
 import LoginScreen from './src/screens/authentication_area/login/LoginScreen.tsx';
 import ForgotPasswordScreen from './src/screens/authentication_area/signup/ForgotPasswordScreen.tsx';
 import auth from '@react-native-firebase/auth';
-import {LogBox, View, Image, Text, StyleSheet} from 'react-native';
 import CreateNameSignup from './src/screens/authentication_area/signup/CreateNameSignup.tsx';
 import CreatePasswordSignup from './src/screens/authentication_area/signup/CreatePasswordSignup.tsx';
 import SignupVerification from './src/screens/authentication_area/signup/SignupVerification.tsx';
 import BiometricsVerification from './src/screens/authentication_area/signup/BiometricsVerification.tsx';
 import NotificationVerification from './src/screens/authentication_area/signup/NotificationVerification.tsx';
-import HomeScreen from './src/screens/authentication_area/home/HomeScreen.tsx';
-import CaseScreen from './src/screens/authentication_area/home/CaseScreen.tsx';
-import SettingsScreen from './src/screens/authentication_area/home/SettingsScreen.tsx';
+import HomeScreen from './src/screens/gallery_area/home/HomeScreen.tsx';
+import CaseScreen from './src/screens/gallery_area/case/CaseScreen.tsx';
+import SettingsScreen from './src/screens/gallery_area/settings/SettingsScreen.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -107,7 +107,7 @@ function NavbarNavigation(){
             <Image source={source} style={[styles.icon, focused ? styles.iconFocused : styles.iconUnfocused]} resizeMode={'contain'} />
             <Text style={[styles.label, focused && styles.labelFocused]}>{title}</Text>
           </View>
-        )
+        );
       }
     })}>
       <Tab.Screen name={'HomeScreen'} component={HomeScreen} />
@@ -138,10 +138,10 @@ const styles = StyleSheet.create({
   },
   iconFocused: {
     tintColor: '#ff6a00',
-  },
+  } as const,
   iconUnfocused: {
     tintColor: '#999',
-  },
+  } as const,
   label: {
     fontSize: 8,
     textAlign: 'center',
@@ -149,6 +149,6 @@ const styles = StyleSheet.create({
   },
   labelFocused: {
     color: '#ff6a00',
-    fontWeight: 6,
+    fontWeight: '600',
   },
 });

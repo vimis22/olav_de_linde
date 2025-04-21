@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageBackground, View} from 'react-native';
+import {Image, ImageBackground, View, StyleSheet} from 'react-native';
 import GlobalStyles, {
     notificationsVerificationImage,
     wallpaperBackground
@@ -9,7 +9,7 @@ import ActionButton from '../../../components/ActionButton.tsx';
 
 const NotificationVerification = ({navigation}: any) => {
     const handleSkipNavigation = async () => {
-        navigation.navigate('LoginScreen');
+        navigation.navigate('HomeScreen');
     };
 
     return (
@@ -18,15 +18,24 @@ const NotificationVerification = ({navigation}: any) => {
                 <Image source={notificationsVerificationImage} style={GlobalStyles.mainLogo} />
             </View>
 
-            <View style={GlobalStyles.textCenter}>
+            <View style={styles.navigationBox}>
                 <NormalText text={'Afventer Godkendelse'} fontSize={20} textColor={'#000000'} fontWeight={'bold'} />
                 <NormalText text={'Når vi har en godkendt oprettelsen fa din profil kn du logge ind. Vent venligst indtil da.'} fontSize={18}/>
-                <ActionButton onPress={handleSkipNavigation} title={'Login'}
+                <ActionButton onPress={handleSkipNavigation} title={'Aktiver'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
+                <ActionButton onPress={handleSkipNavigation} title={'Spring over'}
+                              backgroundColor={'transparent'} textColor={'#FF6A00'} height={50} width={250}/>
             </View>
 
         </ImageBackground>
     );
 };
 
+const styles = StyleSheet.create({
+  navigationBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default NotificationVerification;

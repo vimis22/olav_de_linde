@@ -19,7 +19,7 @@ const LoginScreen = ({navigation}: any) => {
             const user = await loginWithEmail(email, password);
             console.log('The user has logged in', user?.uid);
             Alert.alert('Login Success');
-            navigation.navigate('CreateCompanySignup');
+            navigation.navigate('HomeScreen');
         } catch (error: any){
             console.error('The Login has failed', error?.code, error?.message);
             Alert.alert('The Login has failed', error?.message ?? 'No Message');

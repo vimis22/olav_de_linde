@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, ImageBackground, TouchableOpacity, View} from "react-native";
+import {Image, ImageBackground, TouchableOpacity, View, StyleSheet} from 'react-native';
 import GlobalStyles, {
     biometricsVerificationImage,
     wallpaperBackground
@@ -9,8 +9,8 @@ import ActionButton from '../../../components/ActionButton.tsx';
 
 const BiometricsVerification = ({navigation}: any) => {
     const handleSkipNavigation = async () => {
-        navigation.navigate('LoginScreen');
-    }
+        navigation.navigate('NotificationVerification');
+    };
 
     return (
         <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -18,11 +18,13 @@ const BiometricsVerification = ({navigation}: any) => {
                 <Image source={biometricsVerificationImage} style={GlobalStyles.mainLogo} />
             </TouchableOpacity>
 
-            <View style={GlobalStyles.textCenter}>
+            <View style={styles.navigationBox}>
                 <NormalText text={'Afventer Godkendelse'} fontSize={20} textColor={'#000000'} fontWeight={'bold'} />
                 <NormalText text={'Når vi har en godkendt oprettelsen fa din profil kn du logge ind. Vent venligst indtil da.'} fontSize={18}/>
-                <ActionButton onPress={handleSkipNavigation} title={'Login'}
+                <ActionButton onPress={handleSkipNavigation} title={'Aktiver'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
+                <ActionButton onPress={handleSkipNavigation} title={'Spring over'}
+                              backgroundColor={'transparent'} textColor={'#FF6A00'} height={50} width={250}/>
             </View>
 
 
@@ -30,4 +32,11 @@ const BiometricsVerification = ({navigation}: any) => {
     );
 };
 
+const styles = StyleSheet.create({
+  navigationBox: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 export default BiometricsVerification;
