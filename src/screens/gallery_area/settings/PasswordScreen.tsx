@@ -1,15 +1,30 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, View} from 'react-native';
-import GlobalStyles, {wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
+import GlobalStyles, {lockIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import CircularBox from '../../../components/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';
+import NormalText from '../../../components/NormalText.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
 
 const PasswordScreen = ({navigation}: any) => {
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-      <View style={styles.topSection}>
-        <CircularBox onPress={CaseScreen} height={200} width={200} borderRadius={'50%'} />
-      </View>
+      <ScrollView>
+        <View style={styles.topSection}>
+          <CircularBox onPress={CaseScreen} height={200} width={200} borderRadius={'50%'} />
+        </View>
+        <View style={styles.bottomSection}>
+          <NormalText text={'Skift dit kodeord til din Olav De Linde konto'} fontSize={20} />
+          <NormalText text={'Du skal skrive din nuværende konto for at lave et nyt kodeord'} fontSize={14}/>
+          <View style={styles.bottomSection}>
+            <NormalText text={'Nuværende kodeord'} fontSize={12} />
+            <InputFieldArea whenPassword={true} fieldIcon={lockIcon} value={'KODEORD'} />
+            <NormalText text={'Nyt kodeord'} fontSize={12} />
+            <InputFieldArea whenPassword={true} fieldIcon={lockIcon} value={'NYT KODEORD'} />
+            <InputFieldArea whenPassword={true} fieldIcon={lockIcon} value={'GENTAG KODEORD'} />
+          </View>
+        </View>
+      </ScrollView>
     </ImageBackground>
   );
 };

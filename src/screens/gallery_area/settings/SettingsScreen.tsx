@@ -11,8 +11,6 @@ import NormalText from '../../../components/NormalText.tsx';
 import CircularBox from '../../../components/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';
 import MenuOptions from '../../../components/MenuOptions.tsx';
-import HomeScreen from '../home/HomeScreen.tsx';
-import ProfileScreen from './ProfileScreen.tsx';
 
 const SettingsScreen = ({navigation}: any) => {
   return (
@@ -26,12 +24,12 @@ const SettingsScreen = ({navigation}: any) => {
       </View>
 
       <View style={styles.bottomSection}>
-        <MenuOptions icon={userIcon} onPress={ProfileScreen} title={'MIN PROFIL'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderColor={'black'} borderWidth={3}/>
-        <MenuOptions icon={lockIcon} onPress={HomeScreen} title={'KODEORD'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
-        <MenuOptions icon={callIcon} onPress={HomeScreen} title={'KONTAKT'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
-        <MenuOptions icon={documentIcon} onPress={HomeScreen} title={'VILKÅR OG BETINGELSER'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
-        <MenuOptions icon={protectionIcon} onPress={HomeScreen} title={'DATAHÅNDTERING'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
-        <MenuOptions icon={logIcon} onPress={HomeScreen} title={'LOGOUT'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
+        <MenuOptions icon={userIcon} onPress={() => navigation.navigate('ProfileScreen')} title={'MIN PROFIL'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderColor={'black'} borderWidth={3}/>
+        <MenuOptions icon={lockIcon} onPress={() => navigation.navigate('PasswordScreen')} title={'KODEORD'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
+        <MenuOptions icon={callIcon} onPress={() => navigation.navigate('ContactScreen')} title={'KONTAKT'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
+        <MenuOptions icon={documentIcon} onPress={() => navigation.navigate('HomeScreen')} title={'VILKÅR OG BETINGELSER'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
+        <MenuOptions icon={protectionIcon} onPress={() => navigation.navigate('HomeScreen')} title={'DATAHÅNDTERING'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
+        <MenuOptions icon={logIcon} onPress={() => navigation.navigate('HomeScreen')} title={'LOGOUT'} iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'} width={'110%'} borderRadius={10} borderWidth={3}/>
       </View>
     </ImageBackground>
   );

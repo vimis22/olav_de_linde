@@ -43,9 +43,7 @@ export default function App() {
     return (
       <GestureHandlerRootView style={{flex: 1}}>
         <NavigationContainer>
-          <Stack.Navigator
-            initialRouteName={'SplashScreen'}
-            screenOptions={{headerShown: false}}>
+          <Stack.Navigator initialRouteName={'SplashScreen'} screenOptions={{headerShown: false}}>
             <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
             <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
             <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
@@ -97,11 +95,21 @@ function NavbarNavigation(){
     })}>
       <Tab.Screen name={'HomeScreen'} component={HomeScreen} />
       <Tab.Screen name={'CaseScreen'} component={CaseScreen} />
-      <Tab.Screen name={'SettingsScreen'} component={SettingsScreen} />
+      <Tab.Screen name={'SettingsScreen'} component={SettingsNavigation} />
     </Tab.Navigator>
   );
 };
 
+function SettingsNavigation(){
+  return (
+    <Stack.Navigator initialRouteName={'SettingsScreen'}>
+      <Stack.Screen name={'SettingsScreen'} component={SettingsScreen} />
+      <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
+      <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
+      <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
+    </Stack.Navigator>
+  );
+}
 const styles = StyleSheet.create({
   tabBar: {
     height: 75,
