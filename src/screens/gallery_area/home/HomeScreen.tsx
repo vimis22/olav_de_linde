@@ -1,13 +1,21 @@
 import React from 'react';
-import {Image, ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
+import {ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import GlobalStyles, {pentiaHouseBackground, plusIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
+  const [selectedValue, setSelectedValue] = React.useState<string>('option1');
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topSection}>
-          <Image source={pentiaHouseBackground} style={styles.houseImage}/>
+          <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}>
+            <Picker selectedValue={selectedValue} style={styles.dropdown} onValueChange={(itemValue: string) => setSelectedValue(itemValue)}>
+              <Picker.Item label="Option 1" value="option1" />
+              <Picker.Item label="Option 2" value="option2" />
+              <Picker.Item label="Option 3" value="option3" />
+            </Picker>
+          </ImageBackground>
         </View>
 
         <View style={styles.bottomSection}>
@@ -15,9 +23,9 @@ const HomeScreen = () => {
           <Text style={styles.description}>
             Overblik over dine aktive sager. Tryk på sagen for at se flere informationer.
           </Text>
-          <CaseBox onPress={'LoginScreen'} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
-                   caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
-                   imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
+          <CaseBox onPress={() => navigation.navigate('LoginScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
+                     caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
+                     imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
           />
         </View>
 
@@ -26,7 +34,7 @@ const HomeScreen = () => {
           <Text style={styles.description}>
             Overblik over dine afsluttede sager. Tryk på sagen for at se flere informationer.
           </Text>
-          <CaseBox onPress={'LoginScreen'} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
+          <CaseBox onPress={() => navigation.navigate('LoginScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
                    caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
                    imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
           />
@@ -47,12 +55,18 @@ const styles = StyleSheet.create({
   },
   houseImage: {
     height: 350,
-    width: '95%',
+    width: '99%',
     marginTop: 20,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     borderWidth: 1,
-    borderColor: 'black',
+  },
+  dropdown: {
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 20,
+    backgroundColor: 'blue',
+    borderRadius: 8,
   },
   bottomSection: {
     paddingHorizontal: 20,
