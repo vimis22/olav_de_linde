@@ -23,7 +23,7 @@ interface InputFieldAreaProps {
 const InputFieldArea: React.FC<InputFieldAreaProps> = ({
     value, onChangeText, placeholder = 'TEXT', fieldIcon, fieldIconBackground = '#5C6855', whenPassword = false,
     displayIcon, hideIcon, visiblePasswordIcon = '#000000', containerHeight = 60, containerRadius = 30,
-    fieldIconSize = 40, backgroundColor = '#ffffff', textColor = '#000000'}) => {
+    fieldIconSize = 40, backgroundColor  = '#ffffff', textColor = '#000000'}) => {
     const [whenPasswordIsVisible, setWhenPasswordIsVisible] = useState(false);
 
     const makePasswordVisible = () => {

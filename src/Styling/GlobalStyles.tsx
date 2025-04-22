@@ -15,6 +15,9 @@ export const biometricsVerificationImage = require('../assets/OLD_Biometrics.png
 export const notificationsVerificationImage = require('../assets/OLD_Notification.png');
 export const pentiaHouseBackground = require('../assets/OLD_PentiaHouse.png');
 export const plusIcon = require('../assets/OLD_PlusIcon.png');
+export const documentIcon = require('../assets/OLD_DocumentIcon.png');
+export const protectionIcon = require('../assets/OLD_ProtectionIcon.png');
+export const logIcon = require('../assets/OLD_LogIcon.png');
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,

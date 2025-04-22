@@ -17,6 +17,9 @@ import NotificationVerification from './src/screens/authentication_area/signup/N
 import HomeScreen from './src/screens/gallery_area/home/HomeScreen.tsx';
 import CaseScreen from './src/screens/gallery_area/case/CaseScreen.tsx';
 import SettingsScreen from './src/screens/gallery_area/settings/SettingsScreen.tsx';
+import ProfileScreen from './src/screens/gallery_area/settings/ProfileScreen.tsx';
+import PasswordScreen from './src/screens/gallery_area/settings/PasswordScreen.tsx';
+import ContactScreen from './src/screens/gallery_area/settings/ContactScreen.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,34 +48,16 @@ export default function App() {
             screenOptions={{headerShown: false}}>
             <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
             <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
-            <Stack.Screen
-              name={'ForgotPasswordScreen'}
-              component={ForgotPasswordScreen}
-            />
-            <Stack.Screen
-              name={'CreateCompanySignup'}
-              component={CreateCompanySignup}
-            />
-            <Stack.Screen
-              name={'CreateNameSignup'}
-              component={CreateNameSignup}
-            />
-            <Stack.Screen
-              name={'CreatePasswordSignup'}
-              component={CreatePasswordSignup}
-            />
-            <Stack.Screen
-              name={'SignupVerification'}
-              component={SignupVerification}
-            />
-            <Stack.Screen
-              name={'BiometricsVerification'}
-              component={BiometricsVerification}
-            />
-            <Stack.Screen
-              name={'NotificationVerification'}
-              component={NotificationVerification}
-            />
+            <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
+            <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
+            <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
+            <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
+            <Stack.Screen name={'SignupVerification'} component={SignupVerification} />
+            <Stack.Screen name={'BiometricsVerification'} component={BiometricsVerification} />
+            <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
+            <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
+            <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
+            <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
             <Stack.Screen name={'HomeScreen'} component={NavbarNavigation} />
           </Stack.Navigator>
         </NavigationContainer>
@@ -138,10 +123,10 @@ const styles = StyleSheet.create({
   },
   iconFocused: {
     tintColor: '#ff6a00',
-  } as const,
+  },
   iconUnfocused: {
     tintColor: '#999',
-  } as const,
+  },
   label: {
     fontSize: 8,
     textAlign: 'center',
