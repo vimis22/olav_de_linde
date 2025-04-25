@@ -1,16 +1,11 @@
 import React, {useState} from 'react';
-import {ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
-import GlobalStyles, {
-  houseIcon,
-  pentiaHouseBackground,
-  plusIcon,
-  wallpaperBackground,
-} from '../../../Styling/GlobalStyles.tsx';
-import CaseBox from '../../../components/CaseBox.tsx';
+import GlobalStyles, {houseIcon, pentiaHouseBackground, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import {ImageBackground, ScrollView, StyleSheet,  View} from 'react-native';
 import DropdownMenu from '../../../components/DropdownMenu.tsx';
 import IconText from '../../../components/IconText.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
 
-const HomeScreen = ({navigation}: any) => {
+const PropertyInfoScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
 
   return (
@@ -42,7 +37,7 @@ const HomeScreen = ({navigation}: any) => {
               </View>
               <View style={styles.iconRoot}>
                 <IconText
-                  onPress={() => navigation.navigate('PropertyInfoScreen')}
+                  onPress={() => navigation.navigate('HomeScreen')}
                   icon={houseIcon}
                   backgroundColor={'#868595'}
                   borderWidth={1}
@@ -53,30 +48,17 @@ const HomeScreen = ({navigation}: any) => {
             </View>
           </ImageBackground>
         </View>
-
+        {/* ... resten uændret ... */}
         <View style={styles.bottomSection}>
-          <Text style={styles.title}>Aktive sager</Text>
-          <Text style={styles.description}>
-            Overblik over dine aktive sager. Tryk på sagen for at se flere informationer.
-          </Text>
-          <CaseBox onPress={() => navigation.navigate('LoginScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
-                     caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
-                     imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
-          />
-        </View>
-        <View style={styles.bottomSection}>
-          <Text style={styles.title}>Afsluttede sager</Text>
-          <Text style={styles.description}>
-            Overblik over dine afsluttede sager. Tryk på sagen for at se flere informationer.
-          </Text>
-          <CaseBox onPress={() => navigation.navigate('LoginScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
-                   caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
-                   imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
-          />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Virksomhedsnavn'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Størrelse'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'??'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Forbrug'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Regninger'} />
         </View>
       </ScrollView>
     </ImageBackground>
-  );
+  )
 };
 
 const styles = StyleSheet.create({
@@ -132,4 +114,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default PropertyInfoScreen;

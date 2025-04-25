@@ -20,6 +20,10 @@ import SettingsScreen from './src/screens/gallery_area/settings/SettingsScreen.t
 import ProfileScreen from './src/screens/gallery_area/settings/ProfileScreen.tsx';
 import PasswordScreen from './src/screens/gallery_area/settings/PasswordScreen.tsx';
 import ContactScreen from './src/screens/gallery_area/settings/ContactScreen.tsx';
+import PropertyInfoScreen from './src/screens/gallery_area/home/PropertyInfoScreen.tsx';
+import CaseTitle from './src/screens/gallery_area/case/CaseTitle.tsx';
+import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx';
+import CaseImage from './src/screens/gallery_area/case/CaseImage.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -93,13 +97,32 @@ function NavbarNavigation(){
         );
       }
     })}>
-      <Tab.Screen name={'HomeScreen'} component={HomeScreen} />
-      <Tab.Screen name={'CaseScreen'} component={CaseScreen} />
+      <Tab.Screen name={'HomeScreen'} component={HomeNavigation} />
+      <Tab.Screen name={'CaseScreen'} component={CaseNavigation} />
       <Tab.Screen name={'SettingsScreen'} component={SettingsNavigation} />
     </Tab.Navigator>
   );
 };
 
+function HomeNavigation() {
+  return (
+    <Stack.Navigator initialRouteName={'HomeScreen'}>
+      <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
+      <Stack.Screen name={'PropertyInfoScreen'} component={PropertyInfoScreen} />
+    </Stack.Navigator>
+  );
+}
+
+function CaseNavigation(){
+  return (
+    <Stack.Navigator initialRouteName={'CaseScreen'}>
+      <Stack.Screen name={'CaseScreen'} component={CaseScreen} />
+      <Stack.Screen name={'CaseTitle'} component={CaseTitle} />
+      <Stack.Screen name={'CaseImage'} component={CaseImage} />
+      <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
+    </Stack.Navigator>
+  );
+}
 function SettingsNavigation(){
   return (
     <Stack.Navigator initialRouteName={'SettingsScreen'}>
