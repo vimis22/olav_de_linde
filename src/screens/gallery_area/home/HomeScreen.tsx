@@ -1,23 +1,55 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import GlobalStyles, {pentiaHouseBackground, plusIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {
+  houseIcon,
+  pentiaHouseBackground,
+  plusIcon,
+  wallpaperBackground,
+} from '../../../Styling/GlobalStyles.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
+import DropdownMenu from '../../../components/DropdownMenu.tsx';
+import IconText from '../../../components/IconText.tsx';
+
 const HomeScreen = ({navigation}: any) => {
-  const [selectedValue, setSelectedValue] = React.useState<string>('option1');
+  const [_selectedValue, setSelectedValue] = useState('');
+
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       <ScrollView style={styles.mainContainer}>
         <View style={styles.topSection}>
           <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}>
-            <Picker selectedValue={selectedValue} style={styles.dropdown} onValueChange={(itemValue: string) => setSelectedValue(itemValue)}>
-              <Picker.Item label="Option 1" value="option1" />
-              <Picker.Item label="Option 2" value="option2" />
-              <Picker.Item label="Option 3" value="option3" />
-            </Picker>
+            <View style={styles.dropdownContainer}>
+              <View style={styles.dropdownRoot}>
+                <DropdownMenu
+                  data={[
+                    { key: '1', value: 'Edisionsvej 2, 5000 Odense C' },
+                    { key: '2', value: 'Risingvej 65, 5000 Odense C' },
+                    { key: '3', value: 'Vestergade 13, 5000 Odense C' },
+                    { key: '4', value: 'Rewentlovsvej 132, 5000 Odense C' },
+                  ]}
+                  setSelected={setSelectedValue}
+                  dropdownStyles={styles.dropdownStyles}
+                  dropdownItemStyles={styles.dropdownStyles}
+                  backgroundColor={'#868595'}
+                  placeholder="Vælg en mulighed"
+                  containerHeight={40}
+                  containerWidth={300}
+                />
+              </View>
+              <View style={styles.iconRoot}>
+                <IconText
+                  onPress={() => navigation.navigate('HomeScreen')}
+                  icon={houseIcon}
+                  backgroundColor={'#868595'}
+                  borderWidth={1}
+                  height={40}
+                  width={30}
+                />
+              </View>
+            </View>
           </ImageBackground>
         </View>
-
+        {/* ... resten uændret ... */}
         <View style={styles.bottomSection}>
           <Text style={styles.title}>Aktive sager</Text>
           <Text style={styles.description}>
@@ -28,7 +60,6 @@ const HomeScreen = ({navigation}: any) => {
                      imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
           />
         </View>
-
         <View style={styles.bottomSection}>
           <Text style={styles.title}>Afsluttede sager</Text>
           <Text style={styles.description}>
@@ -57,16 +88,28 @@ const styles = StyleSheet.create({
     height: 350,
     width: '99%',
     marginTop: 20,
-    borderTopRightRadius: 10,
-    borderBottomRightRadius: 10,
-    borderWidth: 1,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
   },
-  dropdown: {
-    width: '90%',
-    alignSelf: 'center',
-    marginTop: 20,
-    backgroundColor: 'blue',
-    borderRadius: 8,
+  dropdownContainer: {
+    marginTop: '75%',
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    zIndex: 10,
+  },
+  dropdownRoot: {
+    flex: 1,
+    zIndex: 20,
+  },
+  dropdownStyles: {
+    backgroundColor: '#868595',
+    color: '#ffffff',
+  },
+  iconRoot: {
+    justifyContent: 'flex-start',
+    height: 40,
+    width: 50,
+    alignItems: 'center',
   },
   bottomSection: {
     paddingHorizontal: 20,
