@@ -32,6 +32,9 @@ const CaseScreen = ({navigation}: any) => {
                 dropdownItemTextStyle={{}}
                 searchBoxStyles={{}}
                 searchBoxTextStyle={{}}
+                optionsHeight={180}
+                optionsWidth={300}
+                textColor={'#ffffff'}
               />
             </View>
             <View style={styles.iconRoot}>
