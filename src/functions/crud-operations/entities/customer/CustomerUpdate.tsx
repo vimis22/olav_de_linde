@@ -111,11 +111,8 @@ export const updateAddressForCustomer = async (customerInfo: UserInfo) => {
         }
 
         await docRef.update({
-            Streetname: customerInfo.streetname,
+            Address: customerInfo.address,
             Housenumber: customerInfo.housenumber,
-            City: customerInfo.city,
-            Zipcode: customerInfo.zipcode,
-            Country: customerInfo.country,
         });
 
         return customerInfo.id;
@@ -139,11 +136,8 @@ export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) =>
         const docRef = snapShot.docs[0].ref;
 
         await docRef.update({
-            Streetname: customerInfo.streetname,
-            Housenumber: customerInfo.housenumber,
-            City: customerInfo.city,
-            Zipcode: customerInfo.zipcode,
-            Country: customerInfo.country,
+          Address: customerInfo.address,
+          Housenumber: customerInfo.housenumber,
         });
 
         console.log('System has succesfully updated the email: ', customerInfo.email);
@@ -164,7 +158,6 @@ export const updatePhoneNumberForCustomer = async (customerInfo: UserInfo) => {
         }
 
         await docRef.update({
-            Countrycode: customerInfo.countrycode,
             Phone: customerInfo.phone,
         });
 
@@ -186,7 +179,6 @@ export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo
             const docRef = snapShot.docs[0].ref;
 
             await docRef.update({
-                Countrycode: customerInfo.countrycode,
                 Phone: customerInfo.phone,
             });
 

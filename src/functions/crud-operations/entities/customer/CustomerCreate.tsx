@@ -15,15 +15,13 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
         allCustomersInfo.forEach(customer => {
             const customerRef = firestore().collection('Customer').doc(customer.id);
             batch.set(customerRef, {
-                name: customer.name,
+                address: customer.address,
                 email: customer.email,
-                streetname: customer.streetname,
+                firstname: customer.firstname,
+                lastname: customer.lastname,
                 housenumber: customer.housenumber,
-                city: customer.city,
-                zipcode: customer.zipcode,
-                country: customer.country,
                 phone: customer.phone,
-                countrycode: customer.countrycode,
+                password: customer.password,
                 createAt: firestore.FieldValue.serverTimestamp(),
             });
         });
@@ -35,7 +33,7 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
     }
 };
 
-export const createEmployeeWithEmail = async (email: string, password: string, name: string, streetname: string, housenumber: string, city: string, zipcode: string, country: string, phone: string, countrycode: number) => {
+export const createEmployeeWithEmail = async (email: string, password: string) => {
     try {
         const credentials = await auth().createUserWithEmailAndPassword(email, password);
         const {uid} = credentials.user;
@@ -43,15 +41,11 @@ export const createEmployeeWithEmail = async (email: string, password: string, n
             id: uid,
             email: email,
             password: password,
-            name: name,
-            streetname: streetname,
-            housenumber: housenumber,
-            role: '',
-            country: country,
-            zipcode: zipcode,
-            city: city,
-            phone: phone,
-            countrycode: countrycode,
+            address: '',
+            firstname: '',
+            lastname: '',
+            housenumber: '',
+            phone: '',
         };
 
         const customerValue = [customerInfo];

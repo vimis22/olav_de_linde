@@ -1,10 +1,7 @@
 export type LogInfo = {
     id: string,
-    streetname?: string,
+    address?: string,
     housenumber?: string,
-    city?: string,
-    zipcode?: string,
-    country?: string,
     timestamp?: Date,
     message?: string,
 }

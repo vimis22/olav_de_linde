@@ -27,11 +27,11 @@ export const readAllProperties = async () => {
     }
 };
 
-export const readPropertyByStreetname = async (streetname: string) => {
+export const readPropertyByAddress = async (address: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property')
-            .where('Streetname','==',streetname)
+            .where('Address','==',address)
             .get();
         return snapShot.docs.map((doc: {id: any; data: () => any}) => {
             return {id: doc.id, ...doc.data()};
@@ -42,11 +42,11 @@ export const readPropertyByStreetname = async (streetname: string) => {
     }
 };
 
-export const readPropertyByHousenumber = async (streetname: string, housenumber: string) => {
+export const readPropertyByHousenumber = async (address: string, housenumber: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property')
-            .where('Streetname', '==', streetname)
+            .where('Address', '==', address)
             .where('Housenumber', '==', housenumber)
             .get();
         return snapShot.docs.map((doc: {id: any; data: () => any}) => ({
@@ -55,36 +55,6 @@ export const readPropertyByHousenumber = async (streetname: string, housenumber:
         }));
     } catch (error) {
         console.error('System is not able to fetch by Housenumber through Streetname', error);
-        return -1;
-    }
-};
-
-export const readPropertyByZipcode = async (zipcode: string) => {
-    try {
-        const snapShot = await firestore()
-            .collection('Property')
-            .where('Zipcode','==',zipcode)
-            .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.error('System is not able to fetch by Zipcode', error);
-        return -1;
-    }
-};
-
-export const readPropertyByCity = async (city: string) => {
-    try {
-        const snapShot = await firestore()
-            .collection('Property')
-            .where('City','==',city)
-            .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.error('System is not able to fetch by City', error);
         return -1;
     }
 };

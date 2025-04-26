@@ -29,11 +29,8 @@ export const updateAllLog = async (allLog: LogInfo[]): Promise<number> => {
         allLog.forEach(log => {
             const logRef = firestore().collection('Log').doc(log.id);
             batch.update(logRef, {
-                streetname: log.streetname,
+                address: log.address,
                 housenumber: log.housenumber,
-                city: log.city,
-                zipcode: log.zipcode,
-                country: log.country,
                 timestamp: firestore.FieldValue.serverTimestamp(),
                 message: log.message,
             });
@@ -46,7 +43,7 @@ export const updateAllLog = async (allLog: LogInfo[]): Promise<number> => {
     }
 };
 
-export const updateStreetnameForLogById = async (streetname: string, id: string) => {
+export const updateAddressForLogById = async (address: string, id: string) => {
     try {
         const snapshot = await firestore()
             .collection('Log')
@@ -59,11 +56,11 @@ export const updateStreetnameForLogById = async (streetname: string, id: string)
         }
 
         const docRef = snapshot.docs[0].ref;
-        await docRef.update({streetname: streetname});
-        console.log('System has updated name from: :' + streetname + ' to' + streetname);
+        await docRef.update({address: address});
+        console.log('System has updated name from: :' + address + ' to' + address);
         return 1;
     } catch (error) {
-        console.log('An Error occurred while updating the Streetname by an Id ', error);
+        console.log('An Error occurred while updating the Address by an Id ', error);
         return -1;
     }
 };
@@ -86,72 +83,6 @@ export const updateHousenumberForLogById = async (housenumber: string, id: strin
         return 1;
     } catch (error) {
         console.log('An Error occurred while updating the Housenumber by an Id ', error);
-        return -1;
-    }
-};
-
-export const updateZipcodeForLogById = async (zipcode: string, id: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Log')
-            .where('Id','==',id)
-            .get();
-
-        if (snapshot.empty) {
-            console.log('No Log has been found with the id: ' + id);
-            return -2;
-        }
-
-        const docRef = snapshot.docs[0].ref;
-        await docRef.update({zipcode: zipcode});
-        console.log('System has updated name from: ' + zipcode + ' to' + zipcode);
-        return 1;
-    } catch (error) {
-        console.log('An Error occurred while updating the Zipcode by an Id ', error);
-        return -1;
-    }
-};
-
-export const updateCityForLogById = async (city: string, id: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Log')
-            .where('Id','==',id)
-            .get();
-
-        if (snapshot.empty) {
-            console.log('No Log has been found with the id: ' + id);
-            return -2;
-        }
-
-        const docRef = snapshot.docs[0].ref;
-        await docRef.update({zipcode: city});
-        console.log('System has updated name from: ' + city + ' to' + city);
-        return 1;
-    } catch (error) {
-        console.log('An Error occurred while updating the City by an Id ', error);
-        return -1;
-    }
-};
-
-export const updateCountryForLogById = async (country: string, id: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Log')
-            .where('Id','==',id)
-            .get();
-
-        if (snapshot.empty) {
-            console.log('No Log has been found with the id: ' + id);
-            return -2;
-        }
-
-        const docRef = snapshot.docs[0].ref;
-        await docRef.update({zipcode: country});
-        console.log('System has updated name from: ' + country + ' to' + country);
-        return 1;
-    } catch (error) {
-        console.log('An Error occurred while updating the Country by an Id ', error);
         return -1;
     }
 };

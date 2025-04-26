@@ -12,11 +12,8 @@ export const createProperty = async (allPropertyInfo: PropertyInfo[]) => {
         allPropertyInfo.forEach(property => {
             const propertyRef = firestore().collection('Property').doc(property.id);
             batch.set(propertyRef, {
-                streetname: property.streetname,
+                address: property.address,
                 housenumber: property.housenumber,
-                city: property.city,
-                zipcode: property.zipcode,
-                country: property.country,
                 createdAt: firestore.FieldValue.serverTimestamp(),
             });
         });

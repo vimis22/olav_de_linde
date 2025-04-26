@@ -1,8 +1,5 @@
 export type PropertyInfo = {
     id?: string,
-    streetname?: string,
+    address?: string,
     housenumber?: string,
-    city?: string,
-    zipcode?: string,
-    country?: string,
 };

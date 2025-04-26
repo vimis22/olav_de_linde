@@ -1,14 +1,11 @@
 export type UserInfo = {
     id?: string,
+    firstname?: string,
+    lastname?: string,
     email?: string,
     password?: string,
-    name?: string,
-    streetname?: string,
+    address?: string,
     housenumber?: string,
     role?: string,
-    city?: string,
-    zipcode?: string,
-    country?: string,
     phone?: string,
-    countrycode?: number;
 };

@@ -13,18 +13,16 @@ export const createAllEmployees = async (allEmployeeInfo: UserInfo[]): Promise<n
         allEmployeeInfo.forEach(employee => {
             const employeeRef = firestore().collection('Employee').doc(employee.id);
             batch.set(employeeRef, {
-                name: employee.name,
-                //Vi har fjernet role, fordi den bliver oprettet uanset hvad. Hvilket er en ulempe ift. dokument-databaser.
-                //Du har en foreign key ved tabellen mellem Employee og Role og det gør at foreign key vil skabe ballade.
-                email: employee.email,
-                streetname: employee.streetname,
-                housenumber: employee.housenumber,
-                city: employee.city,
-                zipcode: employee.zipcode,
-                country: employee.country,
-                phone: employee.phone,
-                countrycode: employee.countrycode,
-                createdAt: firestore.FieldValue.serverTimestamp(),
+              //Vi har fjernet role, fordi den bliver oprettet uanset hvad. Hvilket er en ulempe ift. dokument-databaser.
+              //Du har en foreign key ved tabellen mellem Employee og Role og det gør at foreign key vil skabe ballade.
+              address: employee.address,
+              email: employee.email,
+              firstname: employee.firstname,
+              lastname: employee.lastname,
+              housenumber: employee.housenumber,
+              phone: employee.phone,
+              password: employee.password,
+              createAt: firestore.FieldValue.serverTimestamp(),
             });
         });
         await batch.commit();
@@ -45,15 +43,11 @@ export const createEmployeeWithEmail = async (email: string, password: string): 
             id: uid,
             email: email,
             password: password,
-            name: '',
-            streetname: '',
+            address: '',
+            firstname: '',
+            lastname: '',
             housenumber: '',
-            role: '',
-            country: '',
-            zipcode: '',
-            city: '',
             phone: '',
-            countrycode: 0,
         };
 
         //Kontoen som er lavet i Authentication bliver automatisk oprettet i firestore.

@@ -18,71 +18,24 @@ export const updatePropertyById = async (propertyInfo: PropertyInfo) => {
     }
 };
 
-export const updatePropertyByStreetname = async (Oldstreetname: string, Newstreetname: string, city: string) => {
+export const updatePropertyByAddress = async (Oldaddress: string, Newaddress: string) => {
     try {
         const snapShot = await firestore()
             .collection('Property')
-            .where('Oldstreetname','==',Oldstreetname)
-            .where('Newstreetname','==',Newstreetname)
-            .where('City','==',city)
+            .where('Oldaddress','==',Oldaddress)
+            .where('Newaddress','==',Newaddress)
             .get();
 
         if (snapShot.empty) {
-            console.log('No Property has been found with the Streetname: ' + Oldstreetname);
+            console.log('No Property has been found with the Oldaddress: ' + Oldaddress);
             return -2;
         }
 
         const docRef = snapShot.docs[0].ref;
-        await docRef.update({ Oldstreetname: Oldstreetname, Newstreetname: Newstreetname});
-        console.log('System has updated email from: :' + Oldstreetname + ' to' + Newstreetname);
+        await docRef.update({ Oldaddress: Oldaddress, Newaddress: Newaddress});
+        console.log('System has updated address from: :' + Oldaddress + ' to' + Newaddress);
     } catch (error) {
-        console.log('An Error occured while updating the email by an old email ', error);
+        console.log('An Error occured while updating the address by an old address ', error);
         return -1;
     }
 };
-
-export const updatePropertyByCity = async (Oldcity: string, Newcity: string, zipcode: string) => {
-    try {
-        const snapShot = await firestore()
-            .collection('Property')
-            .where('Oldcity','==',Oldcity)
-            .where('Newcity','==',Newcity)
-            .where('Zipcode','==',zipcode)
-            .get();
-
-        if (snapShot.empty) {
-            console.log('No Property has been found with the City: ' + Oldcity);
-            return -2;
-        }
-
-        const docRef = snapShot.docs[0].ref;
-        await docRef.update({ Oldcity: Oldcity, Newcity: Newcity});
-        console.log('System has updated city from: :' + Oldcity + ' to' + Newcity);
-    } catch (error) {
-        console.log('An Error occured while updating the city name by an old city name ', error);
-        return -1;
-    }
-};
-
-export const updatePropertyByZipcode = async (Oldzipcode: number, Newzipcode: number) => {
-    try {
-        const snapShot = await firestore()
-            .collection('Property')
-            .where('Oldzipcode','==',Oldzipcode)
-            .where('Newzipcode','==',Newzipcode)
-            .get();
-
-        if (snapShot.empty) {
-            console.log('No Property has been found with the Zipcode: ' + Oldzipcode);
-            return -2;
-        }
-
-        const docRef = snapShot.docs[0].ref;
-        await docRef.update({ Oldzipcode: Oldzipcode, Newzipcode: Newzipcode});
-        console.log('System has updated zipcode from: :' + Oldzipcode + ' to' + Newzipcode);
-    } catch (error) {
-        console.log('An Error occured while updating the zipcode by an old zipcode ', error);
-        return -1;
-    }
-};
-

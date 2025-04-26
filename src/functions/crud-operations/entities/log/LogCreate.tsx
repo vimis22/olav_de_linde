@@ -13,11 +13,8 @@ export const createLog = async (allLogInfo: LogInfo[]) => {
             const logRef = firestore().collection('Log').doc(log.id);
             batch.set(logRef, {
                 id: log.id,
-                streetname: '',
+                address: '',
                 housenumber: '',
-                city: '',
-                zipcode: '',
-                country: '',
                 timestamp: firestore.FieldValue.serverTimestamp(),
                 message: '',
             });

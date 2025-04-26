@@ -28,17 +28,17 @@ export const getAllLog = async () => {
     }
 };
 
-export const readAllLogByStreetname = async (streetname: string) => {
+export const readAllLogByAddress = async (address: string) => {
     try {
         const snapshot = await firestore()
             .collection('Log')
-            .where('Streetname','==',streetname)
+            .where('Address','==',address)
             .get();
         return snapshot.docs.map((doc: {id: any; data: () => any}) => {
             return {id: doc.id, ...doc.data()};
         });
     } catch (error) {
-        console.error('System is not able fetch by Log Streetname', error);
+        console.error('System is not able fetch by Log Address', error);
         return {id: -2};
     }
 };
@@ -58,51 +58,6 @@ export const readAllLogByHousenumber = async (housenumber: string) => {
     }
 };
 
-export const readAllLogByZipcode = async (zipcode: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Log')
-            .where('Zipcode','==',zipcode)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.error('System is not able fetch by Log Zipcode', error);
-        return {id: -2};
-    }
-};
-
-export const readAllLogByCity = async (city: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Log')
-            .where('City','==',city)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.error('System is not able fetch by Log City', error);
-        return {id: -2};
-    }
-};
-
-export const readAllLogByCountry = async (country: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Log')
-            .where('Country','==',country)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.error('System is not able fetch by Log Country', error);
-        return {id: -2};
-    }
-};
-
 export const readAllLogByTimestamp = async (timestamp: Date) => {
     try {
         const snapshot = await firestore()
@@ -118,7 +73,7 @@ export const readAllLogByTimestamp = async (timestamp: Date) => {
     }
 };
 
-export const readAllLogByMessager = async (message: string) => {
+export const readAllLogByMessage = async (message: string) => {
     try {
         const snapshot = await firestore()
             .collection('Log')
