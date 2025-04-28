@@ -48,7 +48,7 @@ export const deleteEmployeeByRole = async (role: string) => {
             .where('Role','==',role)
             .get();
 
-        if (snapShot.empty()){
+        if (snapShot.empty){
             console.log('System as not able to find Employee by Role');
         }
 

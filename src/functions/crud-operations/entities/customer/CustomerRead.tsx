@@ -28,33 +28,17 @@ export const getAllCustomer = async () => {
     }
 };
 
-export const getAllCustomerByFirstname = async (firstname: string) => {
+export const getAllCustomerByName = async (name: string) => {
     try {
         const snapshot = await firestore()
             .collection('Customer')
-            .where('Firstname','==',firstname)
+            .where('Name','==',name)
             .get();
         return snapshot.docs.map((doc: {id: any; data: () => any}) => {
             return {id: doc.id, ...doc.data()};
         });
     } catch (error) {
-        console.error('System is not able fetch by Customer Firstname', error);
-        return {id: -2};
-    }
-};
-
-export const getAllCustomerByLastname = async (lastname: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Customer')
-            .where('Lastname','==',lastname)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-    } catch (error) {
-        console.error('System is not able fetch by Customer Lastname', error);
+        console.error('System is not able fetch by Customer Name', error);
         return {id: -2};
     }
 };

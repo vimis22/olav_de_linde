@@ -4,7 +4,7 @@ import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
-import {loginWithEmail } from '../../../functions/Authentication.tsx';
+import {loginWithEmail } from '../../../functions/manager_services/AuthenticationManager.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
 
 

@@ -45,33 +45,17 @@ export const getAllEmployeeByRole = async (role: string) => {
     }
 };
 
-export const getAllEmployeeByFirstname = async (firstname: string) => {
+export const getAllEmployeeByName = async (name: string) => {
     try {
         const snapshot = await firestore()
             .collection('Employee')
-            .where('Firstname','==',firstname)
+            .where('Name','==',name)
             .get();
         return snapshot.docs.map((doc: {id: any; data: () => any}) => {
           return {id: doc.id, ...doc.data()};
         });
     } catch (error) {
-        console.error('System is not able to fetch by Firstname', error);
-        return {id: -2};
-    }
-};
-
-export const getAllEmployeeByLastname = async (lastname: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Employee')
-            .where('Lastname','==',lastname)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-    } catch (error) {
-        console.error('System is not able to fetch by Lastname', error);
+        console.error('System is not able to fetch by Name', error);
         return {id: -2};
     }
 };

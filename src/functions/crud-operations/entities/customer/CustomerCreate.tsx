@@ -1,8 +1,10 @@
 import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
-import {EnumMessages} from '../../EnumMessages.ts';
-import {createAllEmployees} from '../employee/EmployeeCreate.tsx';
+// These imports are for reference to match the example in the issue description
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth, db } from "./firebase";
+// import { doc, setDoc } from "firebase/firestore";
 
 export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<number> => {
     try {
@@ -17,9 +19,10 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
             batch.set(customerRef, {
                 address: customer.address,
                 email: customer.email,
-                firstname: customer.firstname,
-                lastname: customer.lastname,
+                name: customer.name,
                 housenumber: customer.housenumber,
+                companyname: customer.companyName,
+                cvrnumber: customer.cvrnumber,
                 phone: customer.phone,
                 password: customer.password,
                 createAt: firestore.FieldValue.serverTimestamp(),
@@ -33,29 +36,61 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
     }
 };
 
-export const createEmployeeWithEmail = async (email: string, password: string) => {
-    try {
-        const credentials = await auth().createUserWithEmailAndPassword(email, password);
-        const {uid} = credentials.user;
-        let customerInfo: UserInfo = {
-            id: uid,
-            email: email,
-            password: password,
-            address: '',
-            firstname: '',
-            lastname: '',
-            housenumber: '',
-            phone: '',
-        };
+export async function createCustomerWithEmail(email: string, password: string, userData: any): Promise<number> {
+  try {
+    //Here a usual account has been made
+    const userCredential = await auth().createUserWithEmailAndPassword(email, password);
+    const uid = userCredential.user.uid;
 
-        const customerValue = [customerInfo];
-        let num = createAllEmployees(customerValue);
-        let message = EnumMessages(await num);
+    //Dette her gemmer ekstra data, som vi kan anvende i firestore efterfølgende.
+    const customerRef = firestore().collection('Customer').doc(uid);
+    const customerData = {
+      email: email,
+      // Her gemmer vi ekstra filer som vi ønsker, at gemme.
+      address: userData?.address ,
+      phone: userData?.phone,
+      fullName: userData?.fullName,
+      name: userData?.name || userData?.fullName,
+      companyname: userData?.companyname,
+      cvrnumber: userData?.cvrnumber,
+      housenumber: userData?.housenumber,
+      createdAt: firestore.FieldValue.serverTimestamp(),
+    };
+    await customerRef.set(customerData);
 
-        console.log('An Customer has been created successfully with information', email, message);
-        return 0;
-    } catch (error) {
-        console.error('An Error occured in createCustomerWithEmail:', error);
-        return -1;
-    }
-};
+    console.log('A Customer has been successfully created at :', uid);
+    return 0;
+  } catch (error) {
+    console.error('Fejl under oprettelse:', error);
+    return -1;
+  }
+}
+
+// export async function createCustomerWithEmail(email: string, password: string, userData?: any): Promise<number> {
+//   try {
+//     const credentials = await auth().createUserWithEmailAndPassword(email, password);
+//     const {uid} = credentials.user;
+//     const customerRef = firestore().collection('Customer').doc(uid);
+//     const customerData = {
+//       email: email,
+//       password: password,
+//       firstName: userData?.firstName || '',
+//       lastName: userData?.lastName || '',
+//       companyname: userData?.companyName || '',
+//       address: userData?.address || '',
+//       cvrnumber: userData?.cvrNumber || 0,
+//       phone: userData?.phoneNumber || '',
+//       floor: userData?.floor || '',
+//       sharesAddress: userData?.sharesAddress || false,
+//       createAt: firestore.FieldValue.serverTimestamp(),
+//       isActive: userData?.isActive || true,
+//     };
+//     await customerRef.set(customerData);
+//
+//     console.log(`Customer document created for user: ${uid}`);
+//     return 0;
+//   } catch (error) {
+//     console.error('An Error occured in createCustomerWithEmail:', error);
+//     return -1;
+//   }
+// }

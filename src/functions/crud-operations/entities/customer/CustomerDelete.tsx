@@ -18,49 +18,6 @@ export const deleteCustomerById = async (customerId: UserInfo) => {
     }
 };
 
-export const getAllCustomer = async () => {
-    try{
-        const snapshot = await firestore().collection('Customer').get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.log('System is not able fetch all Customers', error);
-        return {id: -2};
-    }
-};
-
-export const getAllCustomerByFirstname = async (firstname: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Customer')
-            .where('Firstname','==',firstname)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
-        });
-    } catch (error) {
-        console.error('System is not able to fetch by Firstname', error);
-        return {id: -2};
-    }
-};
-
-export const getAllCustomerByLastname = async (lastname: string) => {
-    try {
-        const snapshot = await firestore()
-            .collection('Customer')
-            .where('Lastname','==',lastname)
-            .get();
-        return snapshot.docs.map((doc: {id: any; data: () => any}) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-    } catch (error) {
-        console.error('System is not able fetch by Lastname', error);
-        return {id: -2};
-    }
-};
-
 export const deleteCustomerByEmail = async (email: string) => {
     try {
         const snapShot = await firestore()
