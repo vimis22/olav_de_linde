@@ -1,26 +1,34 @@
-import React, {useEffect} from 'react';
 import {Image, ImageBackground, View, StyleSheet} from 'react-native';
 import GlobalStyles, {logoImage, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
-import Rive from 'rive-react-native';
+import Rive, { Fit } from 'rive-react-native';
+import {useNavigation} from '@react-navigation/native';
+import {useCallback, useEffect} from 'react';
 
-const SplashScreen = ({navigation}: any) => {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      navigation.navigate('LoginScreen');
-    }, 3000);
-
-    return () => clearTimeout(timer);
+const SplashScreen = ({duration = 5000}) => {
+  const navigation = useNavigation<any>();
+  const changeToNextScreenAfterLoading = useCallback(() => {
+    navigation.navigate('LoginScreen');
   }, [navigation]);
 
+  useEffect(() => {
+    const timer = setTimeout(changeToNextScreenAfterLoading, duration);
+    return () => clearTimeout(timer);
+  }, [changeToNextScreenAfterLoading, duration]);
+
     return (
-      <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-          <View style={styles.logoImageContainer}>
-            <Image source={logoImage} style={styles.mainLogo} />
-            <Rive
-              resourceName={'old_animation_2'}
-              autoplay={false}
-            />
-          </View>
+      <ImageBackground
+        source={wallpaperBackground}
+        style={GlobalStyles.backgroundImage}
+        resizeMode={'cover'}>
+        <View style={styles.logoImageContainer}>
+          <Image source={logoImage} style={styles.mainLogo} />
+          <Rive
+            resourceName={'old_animation_2'}
+            autoplay={true}
+            fit={Fit.Contain}
+            style={{width: 200, height: 200}}
+          />
+        </View>
       </ImageBackground>
     );
 };
