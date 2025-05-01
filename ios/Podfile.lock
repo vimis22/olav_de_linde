@@ -3008,6 +3008,10 @@ PODS:
     - React-perflogger (= 0.78.0)
     - React-utils (= 0.78.0)
   - RecaptchaInterop (101.0.0)
+  - rive-react-native (9.2.1):
+    - React-Core
+    - RiveRuntime (= 6.7.4)
+  - RiveRuntime (6.7.4)
   - RNCPicker (2.11.0):
     - DoubleConversion
     - glog
@@ -3299,6 +3303,7 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - rive-react-native (from `../node_modules/rive-react-native`)
   - "RNCPicker (from `../node_modules/@react-native-picker/picker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
@@ -3333,6 +3338,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - RecaptchaInterop
+    - RiveRuntime
     - SocketRocket
 
 EXTERNAL SOURCES:
@@ -3469,6 +3475,8 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  rive-react-native:
+    :path: "../node_modules/rive-react-native"
   RNCPicker:
     :path: "../node_modules/@react-native-picker/picker"
   RNFBApp:
@@ -3576,6 +3584,8 @@ SPEC CHECKSUMS:
   ReactCodegen: 0f8899ac1bad260bf3b362ee848ef67a70b5a306
   ReactCommon: a30b578194de911fbe1698efb8247bfe4cb6abff
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
+  rive-react-native: 7d5145e9581744c0849f3153320b8a24f96f07f3
+  RiveRuntime: 1748a5e12764dbb732894ac719691f6abd4cad22
   RNCPicker: 21ca53c5927e9a7ad03eb4712dc55395114ebcc8
   RNFBApp: 4105e54d9ca4a1c10893a032268470f670181110
   RNFBAuth: 68dcd5fc893659b68b63646b1ff54d59001cb21a
