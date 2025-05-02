@@ -7,10 +7,10 @@ import GlobalStyles, {
   userIcon,
   wallpaperBackground,
 } from '../../../Styling/GlobalStyles.tsx';
-import CircularBox from '../../../components/CircularBox.tsx';
+import CircularBox from '../../../components/single/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import InputFieldArea from '../../../components/single/InputFieldArea.tsx';
+import ActionButton from '../../../components/single/ActionButton.tsx';
 import SettingsScreen from './SettingsScreen.tsx';
 
 const ProfileScreen = ({navigation}: any) => {

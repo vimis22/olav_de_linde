@@ -22,7 +22,7 @@ const PropertyProgressIndicator: React.FC<ProgressIndicatorProps> = ({step, icon
   const iconHeight = height - 10;
 
   return(
-    <View style={[styles.container, {width: width, height: height}]}>
+    <View style={[styles.generalProgressContainer, {width: width, height: height}]}>
       <View style={[styles.statusbar, {backgroundColor, height: height}]}/>
 
       <View style={[styles.progressContainer, {backgroundColor: progressColor, width: width * progressValue, height: height}]}/>
@@ -46,7 +46,7 @@ const PropertyProgressIndicator: React.FC<ProgressIndicatorProps> = ({step, icon
 };
 
 const styles = StyleSheet.create({
-  container: {
+  generalProgressContainer: {
     position: 'relative',
     alignItems: 'center',
   },

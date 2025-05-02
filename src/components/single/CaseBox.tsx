@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, StyleSheet, View} from 'react-native';
-import GlobalStyles from '../Styling/GlobalStyles.tsx';
+import GlobalStyles from '../../Styling/GlobalStyles.tsx';
 
 interface CaseBoxProps{
     onPress: () => void;

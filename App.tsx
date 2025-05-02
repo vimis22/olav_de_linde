@@ -21,7 +21,6 @@ import ProfileScreen from './src/screens/gallery_area/settings/ProfileScreen.tsx
 import PasswordScreen from './src/screens/gallery_area/settings/PasswordScreen.tsx';
 import ContactScreen from './src/screens/gallery_area/settings/ContactScreen.tsx';
 import CaseTitle from './src/screens/gallery_area/case/CaseTitle.tsx';
-import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx';
 import CaseImage from './src/screens/gallery_area/case/CaseImage.tsx';
 
 const Stack = createStackNavigator();
@@ -68,48 +67,56 @@ export default function App() {
 
 function NavbarNavigation(){
   return(
-    <Tab.Navigator screenOptions={({route}) => ({
-      tabBarShowLabel: false,
-      tabBarIcon: ({focused}) => {
-        let source;
-        let title;
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        tabBarShowLabel: false, tabBarIcon: ({focused}) => {
+          let source;
+          let title;
 
-        switch (route.name) {
-          case 'HomeScreen':
-            source = require('./src/assets/OLD_HomeIcon.png');
-            title = 'HJEM';
-            break;
-          case 'CaseScreen':
-            source = require('./src/assets/OLD_PlusIcon.png');
-            title = 'OPRET';
-            break;
-          case 'SettingsScreen':
-            source = require('./src/assets/OLD_MoreIcon.png');
-            title = 'MERE';
-            break;
-        }
-        return (
-          <View>
-            <Image source={source} style={[styles.icon, focused ? styles.iconFocused : styles.iconUnfocused]} resizeMode={'contain'} />
-            <Text style={[styles.label, focused && styles.labelFocused]}>{title}</Text>
-          </View>
-        );
-      }
-    })}>
-      <Tab.Screen name={'HomeScreen'} component={HomeNavigation} />
-      <Tab.Screen name={'CaseScreen'} component={CaseNavigation} />
-      <Tab.Screen name={'SettingsScreen'} component={SettingsNavigation} />
+          switch (route.name) {
+            case 'HomeTab':
+              source = require('./src/assets/OLD_HomeIcon.png');
+              title = 'HJEM';
+              break;
+            case 'CaseTab':
+              source = require('./src/assets/OLD_PlusIcon.png');
+              title = 'OPRET';
+              break;
+            case 'SettingsTab':
+              source = require('./src/assets/OLD_MoreIcon.png');
+              title = 'MERE';
+              break;
+            default:
+              source = require('./src/assets/OLD_HomeIcon.png');
+              title = '';
+          }
+          return (
+            <View>
+              <Image source={source} style={[styles.icon, focused ? styles.iconFocused : styles.iconUnfocused]}
+                resizeMode={'contain'}
+              />
+              <Text style={[styles.label, focused && styles.labelFocused]}>
+                {title}
+              </Text>
+            </View>
+          );
+        },
+      })}
+    >
+      <Tab.Screen name={'HomeTab'} component={HomeNavigation} />
+      <Tab.Screen name={'CaseTab'} component={CaseNavigation} />
+      <Tab.Screen name={'SettingsTab'} component={SettingsNavigation} />
     </Tab.Navigator>
   );
-};
+}
 
 function HomeNavigation() {
   return (
-    <Stack.Navigator initialRouteName={'HomeScreen'}>
-      <Stack.Screen name={'HomeScreen'} component={HomeScreen} />
+    <Stack.Navigator initialRouteName={'LandingsScreen'}>
+      <Stack.Screen name={'LandingsScreen'} component={HomeScreen} />
+      <Stack.Screen name={'CaseScreen'} component={CaseScreen} />
       <Stack.Screen name={'CaseTitle'} component={CaseTitle} />
       <Stack.Screen name={'CaseImage'} component={CaseImage} />
-      <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
     </Stack.Navigator>
   );
 }
@@ -120,7 +127,6 @@ function CaseNavigation(){
       <Stack.Screen name={'CaseScreen'} component={CaseScreen} />
       <Stack.Screen name={'CaseTitle'} component={CaseTitle} />
       <Stack.Screen name={'CaseImage'} component={CaseImage} />
-      <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
     </Stack.Navigator>
   );
 }
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 8,
     textAlign: 'center',
-    color: 'black'
+    color: 'black',
   },
   labelFocused: {
     color: '#ff6a00',

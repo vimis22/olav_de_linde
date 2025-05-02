@@ -7,10 +7,10 @@ import GlobalStyles, {
   userIcon,
   wallpaperBackground,
 } from '../../../Styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import CircularBox from '../../../components/CircularBox.tsx';
+import NormalText from '../../../components/single/NormalText.tsx';
+import CircularBox from '../../../components/single/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';
-import MenuOptions from '../../../components/MenuOptions.tsx';
+import MenuOptions from '../../../components/single/MenuOptions.tsx';
 
 const SettingsScreen = ({navigation}: any) => {
   return (

@@ -1,5 +1,6 @@
-import app from '@react-native-firebase/app';
-import auth from '@react-native-firebase/auth';
+import {initializeApp} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
+import {getFirestore} from 'firebase/firestore';
 
 // Her er dine Firebase-kontooplysninger:
 const firebaseConfig = {
@@ -12,11 +13,6 @@ const firebaseConfig = {
     measurementId: 'G-H9BEEF60QH',
 };
 
-// Initialisér Firebase appen
-if (!app.apps.length) {
-    app.initializeApp(firebaseConfig);
-}
-export { app };
-
-// Initialisér auth med AsyncStorage som persistence-lag
-export const authInstance = auth();
+const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+export const db = getFirestore(app);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
 import GlobalStyles, {houseLocationImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
+import NormalText from '../../../components/single/NormalText.tsx';
 
 const SignupVerification = ({navigation}: any) => {
     return(

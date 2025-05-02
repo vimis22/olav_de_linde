@@ -1,10 +1,10 @@
 import React from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
 import GlobalStyles, {lockIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
-import CircularBox from '../../../components/CircularBox.tsx';
+import CircularBox from '../../../components/single/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import NormalText from '../../../components/single/NormalText.tsx';
+import InputFieldArea from '../../../components/single/InputFieldArea.tsx';
 
 const PasswordScreen = ({navigation}: any) => {
   return (

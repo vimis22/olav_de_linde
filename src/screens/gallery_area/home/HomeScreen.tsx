@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import {ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
 import GlobalStyles, {
-  houseIcon,
+  alphabetIcon,
+  houseIcon, imageIcon,
   pentiaHouseBackground,
-  plusIcon,
+  plusIcon, userIcon,
   wallpaperBackground,
 } from '../../../Styling/GlobalStyles.tsx';
-import CaseBox from '../../../components/CaseBox.tsx';
-import DropdownMenu from '../../../components/DropdownMenu.tsx';
-import IconText from '../../../components/IconText.tsx';
+import CaseBox from '../../../components/single/CaseBox.tsx';
+import DropdownMenu from '../../../components/single/DropdownMenu.tsx';
+import IconText from '../../../components/single/IconText.tsx';
+import NormalText from '../../../components/single/NormalText.tsx';
+import ActiveCaseBox from '../../../components/single/ActiveCaseBox.tsx';
 
 const HomeScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
@@ -27,19 +30,14 @@ const HomeScreen = ({navigation}: any) => {
                     { key: '3', value: 'Vestergade 13, 5000 Odense C' },
                     { key: '4', value: 'Rewentlovsvej 132, 5000 Odense C' },
                   ]}
-                  setSelected={setSelectedValue}
-                  dropdownStyles={styles.dropdownStyles}
-                  dropdownItemStyles={styles.dropdownStyles}
-                  backgroundColor={'#868595'}
-                  placeholder="Vælg en mulighed"
-                  containerHeight={40}
-                  containerWidth={300}
-                  search={false}
-                  dropdownItemTextStyle={{}}
-                  searchBoxStyles={{}}
-                  searchBoxTextStyle={{}}
+                  setSelected={setSelectedValue} dropdownStyles={styles.dropdownStyles} dropdownItemStyles={styles.dropdownStyles}
+                  backgroundColor={'#868595'} placeholder="Vælg en mulighed"
+                  containerHeight={40} containerWidth={300} search={false}
+                  dropdownItemTextStyle={{}} searchBoxStyles={{}} searchBoxTextStyle={{}}
+                  optionsHeight={200} optionsWidth={300} textColor={'#ffffff'}
                 />
               </View>
+
               <View style={styles.iconRoot}>
                 <IconText
                   onPress={() => navigation.navigate('PropertyInfoScreen')}
@@ -55,24 +53,29 @@ const HomeScreen = ({navigation}: any) => {
         </View>
 
         <View style={styles.bottomSection}>
-          <Text style={styles.title}>Aktive sager</Text>
-          <Text style={styles.description}>
-            Overblik over dine aktive sager. Tryk på sagen for at se flere informationer.
-          </Text>
-          <CaseBox onPress={() => navigation.navigate('LoginScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
-                     caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
-                     imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
-          />
-        </View>
-        <View style={styles.bottomSection}>
-          <Text style={styles.title}>Afsluttede sager</Text>
-          <Text style={styles.description}>
-            Overblik over dine afsluttede sager. Tryk på sagen for at se flere informationer.
-          </Text>
-          <CaseBox onPress={() => navigation.navigate('LoginScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
+          <View>
+            <NormalText text={'Aktive sager'} fontSize={20} fontWeight={'bold'}/>
+            <NormalText text={'Overblik over dine aktive sager. Tryk på sagen for at se flere informationer.'} fontSize={16}/>
+          </View>
+
+          <CaseBox onPress={() => navigation.navigate('CaseScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
                    caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
                    imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
           />
+
+          <View>
+            <NormalText text={'Afsluttede sager'} fontSize={20} fontWeight={'bold'}/>
+            <NormalText text={'Overblik over dine afsluttede sager. Tryk på sagen for at se flere informationer.'} fontSize={16}/>
+          </View>
+
+          <ActiveCaseBox onPress={() => navigation.navigate('CaseScreen')} title1={'Manglende dørhåndtag'} title2={'Aftalt tid: 26/11, kl: 12:30'}
+                         backgroundColor={'#ffffff'} textColor1={'#D8D8CE'} textSize1={20} textColor2={'#D8D8CE'} textSize2={16}
+                         caseContainerHeight={200} caseContainerWidth={'100%'} caseContainerBorderRadius={10}
+                         textContainerHeight1={40} textContainerWidth1={'80%'} textContainerBorderRadius1={5} textContainerBackgroundColor1={'transparent'}
+                         textContainerHeight2={50} textContainerWidth2={'80%'} textContainerBorderRadius2={5} textContainerBackgroundColor2={'transparent'}
+                         icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}
+          />
+
         </View>
       </ScrollView>
     </ImageBackground>
@@ -126,9 +129,7 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   description: {
-    fontSize: 16,
     color: '#000',
-    marginTop: 10,
   },
 });
 

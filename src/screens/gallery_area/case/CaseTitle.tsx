@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
-import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
+import {ImageBackground, StyleSheet, View} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground,} from '../../../Styling/GlobalStyles.tsx';
-import DropdownMenu from '../../../components/DropdownMenu.tsx';
-import IconText from '../../../components/IconText.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
-import TextFieldArea from '../../../components/TextFieldArea.tsx';
+import DropdownMenu from '../../../components/single/DropdownMenu.tsx';
+import IconText from '../../../components/single/IconText.tsx';
+import ActionButton from '../../../components/single/ActionButton.tsx';
+import PropertyProgressIndicator from '../../../components/single/PropertyProgressIndicator.tsx';
+import TextFieldArea from '../../../components/single/TextFieldArea.tsx';
 
 const CaseTitle = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-      <ScrollView>
         <View style={styles.topSection}>
           <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}>
             <View style={styles.dropdownContainer}>
@@ -55,11 +54,11 @@ const CaseTitle = ({navigation}: any) => {
             <TextFieldArea placeholder={'Titel'} text={_selectedValue} />
             <TextFieldArea placeholder={'Beskriv din sag'} text={_selectedValue} />
             <ActionButton onPress={() => navigation.navigate('CaseImage')} title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'}
-                          height={50} width={100} borderColor={'#5C6855'}/>
-            <PropertyProgressIndicator step={1} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}/>
+                          height={50} width={100} borderColor={'#5C6855'} />
+
+            <PropertyProgressIndicator step={2} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}/>
           </View>
         </View>
-      </ScrollView>
     </ImageBackground>
   );
 };

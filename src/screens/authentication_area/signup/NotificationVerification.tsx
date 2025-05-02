@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, ImageBackground, View, StyleSheet, Alert} from 'react-native';
 import GlobalStyles, {notificationsVerificationImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import NormalText from '../../../components/single/NormalText.tsx';
+import ActionButton from '../../../components/single/ActionButton.tsx';
 
 const NotificationVerification = ({navigation}: any) => {
     const handleSkipNavigation = async () => {

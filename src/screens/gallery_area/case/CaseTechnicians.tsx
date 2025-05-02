@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {alphabetIcon, houseIcon, imageIcon, userIcon} from '../../../Styling/GlobalStyles.tsx';
-import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
+import PropertyProgressIndicator from '../../../components/single/PropertyProgressIndicator.tsx';
 
 const CaseTechnicians = () => {
   return (
