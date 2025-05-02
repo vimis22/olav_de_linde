@@ -1,15 +1,28 @@
 import React, {useState} from 'react';
 import {View, ImageBackground, ScrollView, StyleSheet} from 'react-native';
-import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground,} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {
+  alphabetIcon,
+  houseIcon,
+  imageIcon,
+  pentiaHouseBackground,
+  plusIcon,
+  userIcon,
+  wallpaperBackground,
+} from '../../../Styling/GlobalStyles.tsx';
 import PropertyProgressIndicator from '../../../components/single/PropertyProgressIndicator.tsx';
 import DropdownMenu from '../../../components/single/DropdownMenu.tsx';
 import IconText from '../../../components/single/IconText.tsx';
 import ActionButton from '../../../components/single/ActionButton.tsx';
-import InputFieldArea from '../../../components/single/InputFieldArea.tsx';
-import TextFieldArea from '../../../components/single/TextFieldArea.tsx';
+import CaseBox from '../../../components/single/CaseBox.tsx';
 
 const CaseImage = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
+
+  // Tilføj addImage-funktion
+  const addImage = () => {
+    // TODO: Implementer funktionalitet til at tilføje billede
+  };
+
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       <ScrollView>
@@ -19,10 +32,10 @@ const CaseImage = ({navigation}: any) => {
               <View style={styles.dropdownRoot}>
                 <DropdownMenu
                   data={[
-                    { key: '1', value: 'Edisionsvej 2, 5000 Odense C' },
-                    { key: '2', value: 'Risingvej 65, 5000 Odense C' },
-                    { key: '3', value: 'Vestergade 13, 5000 Odense C' },
-                    { key: '4', value: 'Rewentlovsvej 132, 5000 Odense C' },
+                    {key: '1', value: 'Edisionsvej 2, 5000 Odense C'},
+                    {key: '2', value: 'Risingvej 65, 5000 Odense C'},
+                    {key: '3', value: 'Vestergade 13, 5000 Odense C'},
+                    {key: '4', value: 'Rewentlovsvej 132, 5000 Odense C'},
                   ]}
                   setSelected={setSelectedValue}
                   dropdownStyles={styles.dropdownStyles}
@@ -53,14 +66,21 @@ const CaseImage = ({navigation}: any) => {
             </View>
           </ImageBackground>
           <View style={styles.bottomSection}>
-            <TextFieldArea placeholder={'Manglende Dørhåndtag'} text={_selectedValue} />
-            <TextFieldArea placeholder={'På anden sal for enden af trappen, mangler et dørhåndtag til mødelokalet indefra. Det er derfor muligt at lukke sig inde i lokalet.' +
-              'Vi har indtil nu sat....'} text={''} />
+            {/*Mangler en tekstbesked herhenne.*/}
 
-            <ActionButton onPress={() => navigation.navigate('CaseTitle')} title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'}
-                          height={50} width={100} borderColor={'#5C6855'}/>
+            <View>
+              <CaseBox
+                onPress={addImage} title={'Add Image'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
+                fieldIcon={imageIcon} caseContainerHeight={80} caseContainerWidth={80} caseContainerBorderRadius={20}
+                imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} imageContainerHeight={50} imageContainerWidth={50}
+                imageContainerBackgroundColor={'#ffffff'} textContainerHeight={0} textContainerWidth={0}
+              />
+            </View>
 
-            <PropertyProgressIndicator step={3} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}/>
+            <ActionButton onPress={() => navigation.navigate('CaseTitle')} title={'Næste'} backgroundColor={'transparent'}
+              textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
+
+            <PropertyProgressIndicator step={3} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'} />
           </View>
         </View>
       </ScrollView>

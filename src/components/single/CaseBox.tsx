@@ -24,7 +24,7 @@ interface CaseBoxProps{
     fieldIcon?: any;
 };
 
-const CaseBox: React.FC<CaseBoxProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000',
+const CaseBox: React.FC<CaseBoxProps> = ({onPress, title, backgroundColor = '#ffffff', textColor = '#000000',
                                            caseContainerHeight = 250, caseContainerWidth = 150, caseContainerBorderRadius = 10, fieldIcon, imageContainerBackgroundColor = '#ffec00', textContainerBackgroundColor = '#ffffff',
                                          textContainerHeight = 50, textContainerWidth = '100%', textContainerBorderRadius = 10, textContainerBorderColor = '#ffec00', imageContainerHeight = 50, imageContainerWidth = 50, imageContainerBorderRadius = 25, imageContainerBorderColor = '#000000', imageContainerBorderWidth = 3}) => {
   return (
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 10,
   },
   textContainer: {
     alignItems: 'center',

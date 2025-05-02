@@ -21,6 +21,7 @@ export const logIcon = require('../assets/OLD_LogIcon.png');
 export const atIcon = require('../assets/OLD_AtIcon.png');
 export const alphabetIcon = require('../assets/OLD_Alphabet.png');
 export const imageIcon = require('../assets/OLD_ImageIcon.png');
+
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,
