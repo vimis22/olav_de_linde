@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Image, ImageSourcePropType, TextInput, TouchableOpacity, View} from 'react-native';
-import GlobalStyles from '../../Styling/GlobalStyles.tsx';
+import GlobalStyles from '../Styling/GlobalStyles.tsx';
 
 
 interface InputFieldAreaProps {

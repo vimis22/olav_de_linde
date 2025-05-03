@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, View, ImageSourcePropType} from 'react-native';
-import GlobalStyles from '../../Styling/GlobalStyles.tsx';
+import GlobalStyles from '../Styling/GlobalStyles.tsx';
 
 interface OptionButtonProps{
     onPress: () => void;

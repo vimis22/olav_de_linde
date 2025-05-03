@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImageSourcePropType, TouchableOpacity, View, Image, StyleSheet} from 'react-native';
-import GlobalStyles from '../../Styling/GlobalStyles.tsx';
+import GlobalStyles from '../Styling/GlobalStyles.tsx';
 
 interface IconTextProps {
   onPress: () => void;

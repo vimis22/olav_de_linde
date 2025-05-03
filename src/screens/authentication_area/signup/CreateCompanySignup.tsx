@@ -1,18 +1,11 @@
 import React, {useState} from 'react';
-import GlobalStyles, {
-  houseIcon,
-  locationIcon, lockIcon,
-  logoImage,
-  tickMarkIcon,
-  userIcon,
-  wallpaperBackground,
-} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {houseIcon, locationIcon, lockIcon, logoImage, tickMarkIcon, userIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import {ImageBackground, Image, View} from 'react-native';
-import InputFieldArea from '../../../components/single/InputFieldArea.tsx';
-import OptionButton from '../../../components/single/OptionButton.tsx';
-import ActionButton from '../../../components/single/ActionButton.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import OptionButton from '../../../components/OptionButton.tsx';
+import ActionButton from '../../../components/ActionButton.tsx';
 import CreateNameSignup from './CreateNameSignup.tsx';
-import ProgressIndicator from '../../../components/single/ProgressIndicator.tsx';
+import ProgressIndicator from '../../../components/ProgressIndicator.tsx';
 
 const CreateCompanySignup = ({navigation}: any) => {
     const [companyName, setCompanyName] = useState('');

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import GlobalStyles, {houseIcon, pentiaHouseBackground, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import {ImageBackground, ScrollView, StyleSheet,  View} from 'react-native';
-import DropdownMenu from '../../../components/single/DropdownMenu.tsx';
-import IconText from '../../../components/single/IconText.tsx';
-import InputFieldArea from '../../../components/single/InputFieldArea.tsx';
+import DropdownMenu from '../../../components/DropdownMenu.tsx';
+import IconText from '../../../components/IconText.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
 
 const PropertyInfoScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');

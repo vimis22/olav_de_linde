@@ -7,9 +7,9 @@ import GlobalStyles, {
   userIcon,
   wallpaperBackground,
 } from '../../../Styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/single/InputFieldArea.tsx';
-import ActionButton from '../../../components/single/ActionButton.tsx';
-import ProgressIndicator from '../../../components/single/ProgressIndicator.tsx';
+import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import ActionButton from '../../../components/ActionButton.tsx';
+import ProgressIndicator from '../../../components/ProgressIndicator.tsx';
 import BiometricsVerification from './BiometricsVerification.tsx';
 import {signupWithEmail} from '../../../functions/manager_services/AuthenticationManager.tsx';
 

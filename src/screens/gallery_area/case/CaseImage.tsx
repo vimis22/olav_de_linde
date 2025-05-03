@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {View, ImageBackground, ScrollView, StyleSheet} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
-import PropertyProgressIndicator from '../../../components/single/PropertyProgressIndicator.tsx';
-import DropdownMenu from '../../../components/single/DropdownMenu.tsx';
-import IconText from '../../../components/single/IconText.tsx';
-import ActionButton from '../../../components/single/ActionButton.tsx';
-import CaseBox from '../../../components/single/CaseBox.tsx';
+import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
+import DropdownMenu from '../../../components/DropdownMenu.tsx';
+import IconText from '../../../components/IconText.tsx';
+import ActionButton from '../../../components/ActionButton.tsx';
+import CaseBox from '../../../components/CaseBox.tsx';
 
 const CaseImage = ({navigation}: any) => {
   const addImage = () => {
