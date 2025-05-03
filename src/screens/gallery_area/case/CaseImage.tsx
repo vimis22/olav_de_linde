@@ -1,14 +1,6 @@
 import React, {useState} from 'react';
 import {View, ImageBackground, ScrollView, StyleSheet} from 'react-native';
-import GlobalStyles, {
-  alphabetIcon,
-  houseIcon,
-  imageIcon,
-  pentiaHouseBackground,
-  plusIcon,
-  userIcon,
-  wallpaperBackground,
-} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
 import PropertyProgressIndicator from '../../../components/single/PropertyProgressIndicator.tsx';
 import DropdownMenu from '../../../components/single/DropdownMenu.tsx';
 import IconText from '../../../components/single/IconText.tsx';
@@ -16,16 +8,13 @@ import ActionButton from '../../../components/single/ActionButton.tsx';
 import CaseBox from '../../../components/single/CaseBox.tsx';
 
 const CaseImage = ({navigation}: any) => {
-  const [_selectedValue, setSelectedValue] = useState('');
-
-  // Tilføj addImage-funktion
   const addImage = () => {
-    // TODO: Implementer funktionalitet til at tilføje billede
+    // TODO: Implementér billede-tilføjelsesfunktionalitet her
   };
+  const [_selectedValue, setSelectedValue] = useState('');
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-      <ScrollView>
         <View style={styles.topSection}>
           <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}>
             <View style={styles.dropdownContainer}>
@@ -77,13 +66,12 @@ const CaseImage = ({navigation}: any) => {
               />
             </View>
 
-            <ActionButton onPress={() => navigation.navigate('CaseTitle')} title={'Næste'} backgroundColor={'transparent'}
+            <ActionButton onPress={() => navigation.navigate('CaseTechnicians')} title={'Næste'} backgroundColor={'transparent'}
               textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
 
             <PropertyProgressIndicator step={3} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'} />
           </View>
         </View>
-      </ScrollView>
     </ImageBackground>
   );
 };

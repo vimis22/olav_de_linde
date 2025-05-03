@@ -7,18 +7,37 @@ interface OptionButtonProps{
     title: string;
     backgroundColor: string;
     textColor?: string;
-    height?: number;
-    width?: number;
+    height?: any;
+    width?: any;
     fontSize?: number;
+    borderRadius?: number;
+    borderColor?: string;
+    borderWidth?: number;
     fieldIconSize?: number;
     fieldIconBackground?: string;
     fieldIcon: ImageSourcePropType;
     tickMarkIcon: boolean;
+    highlight?: boolean;
+    highlightOnPress?: boolean;
+    highlightColor?: string;
+    highlightTextColor?: string;
 }
-const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width,
-                                                       fieldIconSize = 40, fontSize, fieldIconBackground = '#4CAF50', fieldIcon, tickMarkIcon = false}) => {
-    return (
-        <TouchableOpacity style={[GlobalStyles.circleContainer, { backgroundColor, height, width }]} onPress={onPress}>
+const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width = '100%',
+                                                       fieldIconSize = 40, fontSize, fieldIconBackground = '#4CAF50', fieldIcon, tickMarkIcon = false,
+                                                     borderRadius, borderWidth, borderColor, highlight = false, highlightOnPress = false, highlightColor = '#FFEE99' , highlightTextColor = '#222222'}) => {
+  const [isHighlighted, setIsHighlighted] = React.useState(false);
+  const highlightPress = () => {
+    if (highlightOnPress) {
+      setIsHighlighted(prev => !prev);
+    }
+    onPress();
+  };
+
+  const currentTextColor = highlight || isHighlighted ? highlightTextColor : textColor;
+
+  return (
+        <TouchableOpacity style={[GlobalStyles.circleContainer, { backgroundColor: highlight || isHighlighted ? highlightColor : backgroundColor,
+          height, width, borderRadius, borderWidth, borderColor }]} onPress={highlightPress}>
             {tickMarkIcon && (
                 <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
                     borderRadius: fieldIconSize / 2, backgroundColor: fieldIconBackground,
@@ -28,7 +47,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundCo
                   )}
                 </View>
             )}
-            <Text style={[GlobalStyles.textInput, { color: textColor, fontSize: fontSize }]}>{title}</Text>
+            <Text style={[GlobalStyles.textInput, { color: currentTextColor, fontSize: fontSize }]}>{title}</Text>
         </TouchableOpacity>
     );
 };

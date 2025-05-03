@@ -21,7 +21,10 @@ export const logIcon = require('../assets/OLD_LogIcon.png');
 export const atIcon = require('../assets/OLD_AtIcon.png');
 export const alphabetIcon = require('../assets/OLD_Alphabet.png');
 export const imageIcon = require('../assets/OLD_ImageIcon.png');
-
+export const electricityIcon = require('../assets/OLD_ElectricityIcon.png');
+export const waterIcon = require('../assets/OLD_WaterIcon.png');
+export const hammerIcon = require('../assets/OLD_HammerIcon.png');
+export const paintingIcon = require('../assets/OLD_PaintingIcon.png');
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,
