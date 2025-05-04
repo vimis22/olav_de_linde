@@ -6,7 +6,7 @@ import GlobalStyles, {
   logoImage,
   userIcon,
   wallpaperBackground,
-} from '../../../Styling/GlobalStyles.tsx';
+} from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import ProgressIndicator from '../../../components/ProgressIndicator.tsx';

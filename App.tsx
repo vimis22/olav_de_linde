@@ -105,7 +105,12 @@ function NavbarNavigation(){
       })}
     >
       <Tab.Screen name={'HomeTab'} component={HomeNavigation} />
-      <Tab.Screen name={'CaseTab'} component={CaseNavigation} />
+      <Tab.Screen name={'CaseTab'} component={CaseNavigation} listeners={({navigation}) => ({
+        tabPress: (e) => {
+          e.preventDefault();
+          navigation.navigate('CaseTab', {screen: 'CaseScreen'});
+        },
+      })}/>
       <Tab.Screen name={'SettingsTab'} component={SettingsNavigation} />
     </Tab.Navigator>
   );

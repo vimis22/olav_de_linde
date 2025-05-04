@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import GlobalStyles, {houseIcon, locationIcon, lockIcon, logoImage, tickMarkIcon, userIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {houseIcon, locationIcon, lockIcon, logoImage, tickMarkIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import {ImageBackground, Image, View} from 'react-native';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import OptionButton from '../../../components/OptionButton.tsx';

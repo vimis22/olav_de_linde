@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, ImageBackground, TouchableOpacity, View, StyleSheet, Alert} from 'react-native';
-import GlobalStyles, {biometricsVerificationImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {biometricsVerificationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 

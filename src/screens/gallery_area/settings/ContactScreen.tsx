@@ -1,6 +1,6 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
-import GlobalStyles, {wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import CircularBox from '../../../components/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';
 

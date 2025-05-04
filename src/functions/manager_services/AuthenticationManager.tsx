@@ -37,3 +37,40 @@ export async function signupWithEmail(email: string, password: string, companyNa
     throw error;
   }
 };
+
+export async function updateLoginWithCredentials(password: string){
+  const user = await auth().currentUser;
+  if (user) {
+    try {
+      await user.updatePassword(password);
+      console.log('Password has been updated');
+    } catch (error) {
+      console.log('An unexpected error occured during password update', error);
+    }
+  } else {
+    console.log('A User is not logged in');
+  }
+}
+
+export const resetPasswordWithEmail = async (email: string) => {
+  try {
+    await auth().sendPasswordResetEmail(email);
+    console.log('Reset link has been sent to: ', email);
+  } catch (error) {
+    console.log('An Error occurred while sending the email', error);
+  }
+};
+
+export const deleteUser = async () => {
+  const user = await auth().currentUser;
+  if (user) {
+    try {
+      await user.delete();
+      console.log('Password has been deleted');
+    } catch (error) {
+      console.log('An unexpected error occured during account deletion', error);
+    }
+  } else {
+    console.log('A User has not logged in');
+  }
+}

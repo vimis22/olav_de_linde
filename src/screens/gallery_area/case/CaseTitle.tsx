@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
-import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground,} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import DropdownMenu from '../../../components/DropdownMenu.tsx';
 import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import TextFieldArea from '../../../components/TextFieldArea.tsx';
-
+import {handleCase} from '../../../functions/experiments/ExampleMethod.tsx';
 const CaseTitle = ({navigation}: any) => {
-  const [_selectedValue, setSelectedValue] = useState('');
+  const [, setSelectedValue] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
         <View style={styles.topSection}>
@@ -39,22 +41,17 @@ const CaseTitle = ({navigation}: any) => {
                 />
               </View>
               <View style={styles.iconRoot}>
-                <IconText
-                  onPress={() => navigation.navigate('PropertyInfoScreen')}
-                  icon={houseIcon}
-                  backgroundColor={'#868595'}
-                  borderWidth={1}
-                  height={40}
-                  width={30}
-                />
+                <IconText onPress={() => navigation.navigate('PropertyInfoScreen')} icon={houseIcon} backgroundColor={'#868595'} borderWidth={1} height={40} width={30} />
               </View>
             </View>
           </ImageBackground>
           <View style={styles.bottomSection}>
-            <TextFieldArea placeholder={'Titel'} text={_selectedValue} />
-            <TextFieldArea placeholder={'Beskriv din sag'} text={_selectedValue} />
-            <ActionButton onPress={() => navigation.navigate('CaseImage')} title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'}
-                          height={50} width={100} borderColor={'#5C6855'} />
+            <TextFieldArea placeholder={'Titel'} onChangeText={setTitle} value={title} />
+            <TextFieldArea placeholder={'Beskriv din sag'} onChangeText={setDescription} value={description} />
+            <ActionButton onPress={async () => {await handleCase(title, description); navigation.navigate('CaseImage');}}
+              title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'}
+              height={50} width={100} borderColor={'#5C6855'}
+            />
 
             <PropertyProgressIndicator step={2} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}/>
           </View>

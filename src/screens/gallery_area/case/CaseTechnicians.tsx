@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {ImageBackground, StyleSheet, View} from 'react-native';
-import GlobalStyles, {alphabetIcon, electricityIcon, hammerIcon, houseIcon, imageIcon, paintingIcon, userIcon, wallpaperBackground, waterIcon} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {alphabetIcon, electricityIcon, hammerIcon, houseIcon, imageIcon, paintingIcon, userIcon, wallpaperBackground, waterIcon} from '../../../styling/GlobalStyles.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import OptionButton from '../../../components/OptionButton.tsx';
@@ -43,7 +43,7 @@ const CaseTechnicians = ({navigation}: any) => {
               {notificationsEnabled && (
                 <View>
                   <PopupScreen title={'Oprettet'} description={'Din sag er nu oprettet og en tekniker vil tage sagen og vende tilbage med en dato'} height={200} width={200}
-                               optionText3={'Forstået'} optionTextColor3={'#ffffff'} optionTextBackgroundColor3={'#5C6855'} onOption3={() => { setNotificationsEnabled(false); navigation.navigate('LandingsScreen'); }}
+                               optionText3={'Forstået'} optionTextColor3={'#ffffff'} optionTextBackgroundColor3={'#5C6855'} onOption3={() => { setNotificationsEnabled(false); navigation.navigate('HomeTab'); }}
                                backgroundColor={'#000000'} titleColor={'#ffffff'} descriptionColor={'#ffffff'}/>
                 </View>
               )}

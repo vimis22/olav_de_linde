@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, ImageBackground, View, StyleSheet, Alert} from 'react-native';
-import GlobalStyles, {notificationsVerificationImage, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {notificationsVerificationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 

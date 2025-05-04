@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import GlobalStyles, {houseIcon, pentiaHouseBackground, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {houseIcon, pentiaHouseBackground, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import {ImageBackground, ScrollView, StyleSheet,  View} from 'react-native';
 import DropdownMenu from '../../../components/DropdownMenu.tsx';
 import IconText from '../../../components/IconText.tsx';

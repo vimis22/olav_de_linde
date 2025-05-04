@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Alert, Image, ImageBackground, Text, View} from 'react-native';
-import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
@@ -36,11 +36,11 @@ const LoginScreen = ({navigation}: any) => {
 
             <View style={GlobalStyles.textContainer}>
                 <InputFieldArea fieldIcon={userIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Email'}
-                                value={email} onChangeText={setEmail} containerHeight={50} containerRadius={20}/>
+                                value={email} onChangeText={setEmail} containerHeight={50} containerRadius={20} whenPassword={false}/>
 
 
                 <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Password'}
-                                value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20}/>
+                                value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20} whenPassword={true}/>
 
 
                 <ActionButton onPress={handleLogin} title={'Login'}

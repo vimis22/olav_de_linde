@@ -6,7 +6,7 @@ import GlobalStyles, {
   lockIcon, logIcon, protectionIcon,
   userIcon,
   wallpaperBackground,
-} from '../../../Styling/GlobalStyles.tsx';
+} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import CircularBox from '../../../components/CircularBox.tsx';
 import CaseScreen from '../case/CaseScreen.tsx';

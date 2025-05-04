@@ -1,5 +1,5 @@
 import {Image, ImageBackground, View, StyleSheet} from 'react-native';
-import GlobalStyles, {logoImage, wallpaperBackground} from '../../Styling/GlobalStyles.tsx';
+import GlobalStyles, {logoImage, wallpaperBackground} from '../../styling/GlobalStyles.tsx';
 import Rive, { Fit } from 'rive-react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useCallback, useEffect} from 'react';

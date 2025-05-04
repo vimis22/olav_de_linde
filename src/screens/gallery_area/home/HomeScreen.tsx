@@ -6,7 +6,7 @@ import GlobalStyles, {
   pentiaHouseBackground,
   plusIcon, userIcon,
   wallpaperBackground,
-} from '../../../Styling/GlobalStyles.tsx';
+} from '../../../styling/GlobalStyles.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
 import DropdownMenu from '../../../components/DropdownMenu.tsx';
 import IconText from '../../../components/IconText.tsx';
