@@ -6,7 +6,7 @@ import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import TextFieldArea from '../../../components/TextFieldArea.tsx';
-import {handleCase} from '../../../functions/experiments/ExampleMethod.tsx';
+import {createCase} from '../../../functions/manager_services/CaseManager.tsx';
 const CaseTitle = ({navigation}: any) => {
   const [, setSelectedValue] = useState('');
   const [title, setTitle] = useState('');
@@ -48,7 +48,7 @@ const CaseTitle = ({navigation}: any) => {
           <View style={styles.bottomSection}>
             <TextFieldArea placeholder={'Titel'} onChangeText={setTitle} value={title} />
             <TextFieldArea placeholder={'Beskriv din sag'} onChangeText={setDescription} value={description} />
-            <ActionButton onPress={async () => {await handleCase(title, description); navigation.navigate('CaseImage');}}
+            <ActionButton onPress={async () => {await createCase(title, description); navigation.navigate('CaseImage');}}
               title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'}
               height={50} width={100} borderColor={'#5C6855'}
             />

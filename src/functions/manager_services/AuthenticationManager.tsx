@@ -1,42 +1,77 @@
 import auth from '@react-native-firebase/auth';
-import {createCustomerWithEmail} from '../crud-operations/entities/customer/CustomerCreate.tsx';
+import firestore from '@react-native-firebase/firestore';
 
 export async function loginWithEmail(email: string, password: string){
     try{
         const credentials = await auth().signInWithEmailAndPassword(email, password);
-        console.log(`Login with Email: ${credentials.user.email} succeeded`);
+        const userId = credentials.user.uid;
+        const docRef = await firestore().collection('Customer').doc(userId).get();
+        const userInfoData = docRef.data();
+        console.log('Login with Email: ' + userInfoData + ' succeeded');
         return credentials.user;
     } catch (error: any){
-        console.log('An unexpected error occured at Login', error?.code, error?.message);
+        console.log('An unexpected error occurred in Login with Firestore and Authentication', error);
         throw error;
     }
 }
 
-
-export async function signupWithEmail(email: string, password: string, companyName: string, cvrnumber: number, name?: string, phone?: string, address?: string, housenumber?: number,) {
+export async function signupWithEmail(email: string, password: string) {
   try {
     const credentials = await auth().createUserWithEmailAndPassword(email, password);
-    const userData = {
-      companyName,
-      name,
-      email,
-      password,
-      phone,
-      address,
-      cvrnumber,
-      housenumber,
-      userId: credentials.user.uid,
-      createdAt: new Date().toISOString(),
-      isActive: true,
-    };
-    await createCustomerWithEmail(email, password, userData);
-    console.log(`Creation of User: ${credentials.user.email} succeeded with Firestore document`);
-    return credentials.user;
+    const userId = credentials.user.uid;
+    console.log('Creation of User: ' + credentials.user + ' succeeded with Firestore document');
+    return userId;
   } catch (error: any) {
-    console.log('An unexpected error occurred during signup or document creation', error?.code, error?.message);
+    console.log('An unexpected error occurred during signup in firebase authentication', error);
     throw error;
   }
 };
+
+export const signupWithAllInformation = async (name: string, email: string, password: string, confirmPassword: string,
+                                                       companyName: string, cvrNumber: string, address: string, houseNumber: string, phoneNumber: string) => {
+  console.log('The system is currently processing the following information ' + ':' + name, email, password,
+    companyName, cvrNumber, address, houseNumber, phoneNumber);
+  try {
+    const docRef = await firestore().collection('Customer').add({
+      name,
+      email,
+      password,
+      confirmPassword,
+      companyName,
+      cvrNumber,
+      address,
+      houseNumber,
+    });
+    console.log('The Document has the following ID: ', docRef.id);
+  } catch (error) {
+    console.log('An Error occurred while adding the following ID: ', error);
+    throw error;
+  }
+};
+
+export const signupWithUser = async (name: string, email: string, password: string, confirmPassword: string,
+                                     companyName: string, cvrNumber: string, address: string, houseNumber: string, phoneNumber: string) => {
+  console.log('The system is currently processing the folllowing information ' + ':' + name, email, password, companyName, cvrNumber, address, houseNumber, phoneNumber);
+  try {
+    const signupWithOnlyEmail = await signupWithEmail(email, password);
+    await signupWithAllInformation(name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
+    console.log('The User has been created with the following Information: ' + name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
+    return signupWithOnlyEmail;
+  } catch (error) {
+    console.log('An Error occurred while creating the following User: ', error);
+    throw error;
+  }
+};
+
+export async function logout(){
+  try {
+    await auth().signOut();
+    console.log('User has been logged out');
+  } catch (error) {
+    console.log('An unexpected error occured during logout', error);
+    throw error;
+  }
+}
 
 export async function updateLoginWithCredentials(password: string){
   const user = await auth().currentUser;
@@ -73,4 +108,6 @@ export const deleteUser = async () => {
   } else {
     console.log('A User has not logged in');
   }
-}
+};
+
+

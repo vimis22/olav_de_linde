@@ -4,14 +4,13 @@ import {ImageBackground, Image, View} from 'react-native';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import OptionButton from '../../../components/OptionButton.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
-import CreateNameSignup from './CreateNameSignup.tsx';
 import ProgressIndicator from '../../../components/ProgressIndicator.tsx';
 
 const CreateCompanySignup = ({navigation}: any) => {
     const [companyName, setCompanyName] = useState('');
     const [cvrNumber, setCVRNumber] = useState('');
     const [address, setAddress] = useState('');
-    const [housenumber, setHousenumberValue] = useState('');
+    const [houseNumber, setHouseNumberValue] = useState('');
     const [optionalVisibility, setOptionalVisibility] = useState(false);
     const [current, _setCurrentStep] = useState(1);
     return (
@@ -34,11 +33,10 @@ const CreateCompanySignup = ({navigation}: any) => {
                               title={'Jeg deler addressen med andre'} backgroundColor={wallpaperBackground} height={50} fontSize={16} tickMarkIcon={optionalVisibility} />
                 {optionalVisibility && (
                     <InputFieldArea fieldIcon={houseIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Etage/Lokale/Indgang'}
-                                    value={housenumber} onChangeText={setHousenumberValue} containerHeight={50} containerRadius={20} whenPassword={false} />
+                                    value={houseNumber} onChangeText={setHouseNumberValue} containerHeight={50} containerRadius={20} whenPassword={false} />
                 )}
 
-                <ActionButton onPress={() => navigation.navigate(CreateNameSignup, {companyName, cvrNumber, address,
-                                floor: optionalVisibility ? housenumber : '', sharesAddress: optionalVisibility})} title={'Næste'}
+                <ActionButton onPress={() => navigation.navigate('CreateNameSignup', {companyName, cvrNumber, address, houseNumber})} title={'Næste'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
 
                 <ProgressIndicator step={current} icon1={houseIcon} icon2={userIcon} icon3={lockIcon} progressColor={'#5C6855'}/>

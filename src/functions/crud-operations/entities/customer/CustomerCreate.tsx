@@ -36,35 +36,35 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
     }
 };
 
-export async function createCustomerWithEmail(email: string, password: string, userData: any): Promise<number> {
-  try {
-    //Here a usual account has been made
-    const userCredential = await auth().createUserWithEmailAndPassword(email, password);
-    const uid = userCredential.user.uid;
-
-    //Dette her gemmer ekstra data, som vi kan anvende i firestore efterfølgende.
-    const customerRef = firestore().collection('Customer').doc(uid);
-    const customerData = {
-      email: email,
-      // Her gemmer vi ekstra filer som vi ønsker, at gemme.
-      address: userData?.address ,
-      phone: userData?.phone,
-      fullName: userData?.fullName,
-      name: userData?.name || userData?.fullName,
-      companyname: userData?.companyname,
-      cvrnumber: userData?.cvrnumber,
-      housenumber: userData?.housenumber,
-      createdAt: firestore.FieldValue.serverTimestamp(),
-    };
-    await customerRef.set(customerData);
-
-    console.log('A Customer has been successfully created at :', uid);
-    return 0;
-  } catch (error) {
-    console.error('Fejl under oprettelse:', error);
-    return -1;
-  }
-}
+// export async function createCustomerWithEmail(email: string, password: string, userData: any): Promise<number> {
+//   try {
+//     //Here a usual account has been made
+//     const userCredential = await auth().createUserWithEmailAndPassword(email, password);
+//     const uid = userCredential.user.uid;
+//
+//     //Dette her gemmer ekstra data, som vi kan anvende i firestore efterfølgende.
+//     const customerRef = firestore().collection('Customer').doc(uid);
+//     const customerData = {
+//       email: email,
+//       // Her gemmer vi ekstra filer som vi ønsker, at gemme.
+//       address: userData?.address ,
+//       phone: userData?.phone,
+//       fullName: userData?.fullName,
+//       name: userData?.name || userData?.fullName,
+//       companyname: userData?.companyname,
+//       cvrnumber: userData?.cvrnumber,
+//       housenumber: userData?.housenumber,
+//       createdAt: firestore.FieldValue.serverTimestamp(),
+//     };
+//     await customerRef.set(customerData);
+//
+//     console.log('A Customer has been successfully created at :', uid);
+//     return 0;
+//   } catch (error) {
+//     console.error('Fejl under oprettelse:', error);
+//     return -1;
+//   }
+// }
 
 // export async function createCustomerWithEmail(email: string, password: string, userData?: any): Promise<number> {
 //   try {
