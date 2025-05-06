@@ -68,12 +68,13 @@ const HomeScreen = ({navigation}: any) => {
             <NormalText text={'Overblik over dine afsluttede sager. Tryk på sagen for at se flere informationer.'} fontSize={16}/>
           </View>
 
-          <ActiveCaseBox onPress={() => navigation.navigate('CaseScreen')} title1={'Manglende dørhåndtag'} title2={'Aftalt tid: 26/11, kl: 12:30'}
+          <ActiveCaseBox onPress={() => navigation.navigate('CompletedCaseScreen')} title1={'Manglende dørhåndtag'} title2={'Aftalt tid: 26/11, kl: 12:30'}
                          backgroundColor={'#ffffff'} textColor1={'#D8D8CE'} textSize1={20} textColor2={'#D8D8CE'} textSize2={16}
                          caseContainerHeight={200} caseContainerWidth={'100%'} caseContainerBorderRadius={10}
                          textContainerHeight1={40} textContainerWidth1={'80%'} textContainerBorderRadius1={5} textContainerBackgroundColor1={'transparent'}
                          textContainerHeight2={50} textContainerWidth2={'80%'} textContainerBorderRadius2={5} textContainerBackgroundColor2={'transparent'}
                          icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}
+                         step={1}
           />
 
         </View>

@@ -27,12 +27,16 @@ export async function signupWithEmail(email: string, password: string) {
   }
 };
 
-export const signupWithAllInformation = async (name: string, email: string, password: string, confirmPassword: string,
+export const signupWithAllInformation = async (userId: string, name: string, email: string, password: string, confirmPassword: string,
                                                        companyName: string, cvrNumber: string, address: string, houseNumber: string, phoneNumber: string) => {
   console.log('The system is currently processing the following information ' + ':' + name, email, password,
     companyName, cvrNumber, address, houseNumber, phoneNumber);
   try {
-    const docRef = await firestore().collection('Customer').add({
+    if (!userId) {
+      console.log('A User is not logged in');
+    }
+
+    await firestore().collection('Customer').doc(userId).set({
       name,
       email,
       password,
@@ -41,8 +45,9 @@ export const signupWithAllInformation = async (name: string, email: string, pass
       cvrNumber,
       address,
       houseNumber,
+      phoneNumber,
     });
-    console.log('The Document has the following ID: ', docRef.id);
+    console.log('The Document has the following ID: ', userId);
   } catch (error) {
     console.log('An Error occurred while adding the following ID: ', error);
     throw error;
@@ -53,10 +58,10 @@ export const signupWithUser = async (name: string, email: string, password: stri
                                      companyName: string, cvrNumber: string, address: string, houseNumber: string, phoneNumber: string) => {
   console.log('The system is currently processing the folllowing information ' + ':' + name, email, password, companyName, cvrNumber, address, houseNumber, phoneNumber);
   try {
-    const signupWithOnlyEmail = await signupWithEmail(email, password);
-    await signupWithAllInformation(name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
-    console.log('The User has been created with the following Information: ' + name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
-    return signupWithOnlyEmail;
+    const userId = await signupWithEmail(email, password);
+    await signupWithAllInformation(userId, name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
+    console.log('The User has been created with the following Information: ' + userId, name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
+    return userId;
   } catch (error) {
     console.log('An Error occurred while creating the following User: ', error);
     throw error;

@@ -9,7 +9,7 @@ import {
 import GlobalStyles from '../styling/GlobalStyles.tsx';
 
 interface InputFieldAreaProps {
-  value?: string;
+  value?: any;
   onChangeText?: (text: string) => void;
   placeholder?: string;
   fieldIconBackground?: string;

@@ -39,7 +39,7 @@ const LoginScreen = ({navigation}: any) => {
                                 value={email} onChangeText={setEmail} containerHeight={50} containerRadius={20} whenPassword={false}/>
 
 
-                <InputFieldArea fieldIcon={lockIcon} displayIcon={lockIcon} fieldIconSize={28} textColor={'#ff0000'} placeholder={'Password'}
+                <InputFieldArea fieldIcon={lockIcon} displayIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Password'}
                                 value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20} whenPassword={true}/>
 
 

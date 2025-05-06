@@ -29,6 +29,9 @@ const PropertyInfoScreen = ({navigation}: any) => {
                   placeholder="Vælg en mulighed"
                   containerHeight={40}
                   containerWidth={300}
+                  optionsHeight={200}
+                  optionsWidth={300}
+                  textColor={'#ffffff'}
                   search={false}
                   dropdownItemTextStyle={{}}
                   searchBoxStyles={{}}
@@ -48,7 +51,6 @@ const PropertyInfoScreen = ({navigation}: any) => {
             </View>
           </ImageBackground>
         </View>
-        {/* ... resten uændret ... */}
         <View style={styles.bottomSection}>
           <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Virksomhedsnavn'} />
           <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Størrelse'} />

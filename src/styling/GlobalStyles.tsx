@@ -25,6 +25,8 @@ export const electricityIcon = require('../assets/OLD_ElectricityIcon.png');
 export const waterIcon = require('../assets/OLD_WaterIcon.png');
 export const hammerIcon = require('../assets/OLD_HammerIcon.png');
 export const paintingIcon = require('../assets/OLD_PaintingIcon.png');
+export const calenderIcon = require('../assets/OLD_CalenderIcon.png');
+export const screwDriverIcon = require('../assets/OLD_ScrewDriverIcon.png');
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,

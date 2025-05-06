@@ -26,7 +26,7 @@ const SplashScreen = ({duration = 5000}) => {
             resourceName={'old_animation_2'}
             autoplay={true}
             fit={Fit.Contain}
-            style={{width: 200, height: 200}}
+            style={{ width: '50%', height: '50%' }}
           />
         </View>
       </ImageBackground>

@@ -23,6 +23,7 @@ import ContactScreen from './src/screens/gallery_area/settings/ContactScreen.tsx
 import CaseTitle from './src/screens/gallery_area/case/CaseTitle.tsx';
 import CaseImage from './src/screens/gallery_area/case/CaseImage.tsx';
 import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx';
+import CompletedCaseScreen from './src/screens/gallery_area/case/CompletedCaseScreen.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -124,6 +125,7 @@ function HomeNavigation() {
       <Stack.Screen name={'CaseTitle'} component={CaseTitle} />
       <Stack.Screen name={'CaseImage'} component={CaseImage} />
       <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
+      <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
     </Stack.Navigator>
   );
 }
@@ -135,6 +137,7 @@ function CaseNavigation(){
       <Stack.Screen name={'CaseTitle'} component={CaseTitle} />
       <Stack.Screen name={'CaseImage'} component={CaseImage} />
       <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
+      <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
     </Stack.Navigator>
   );
 }
