@@ -18,7 +18,7 @@ const CompletedCaseScreen = ({ navigation }: any) => {
         <NormalText text="Done! Sagen er afsluttet!" fontSize={15} fontWeight="600" />
 
         <InputFieldArea fieldIcon={calenderIcon} fieldIconBackground="#D8D8CE" fieldIconSize={28}
-          textColor="#000000" placeholder="Password" value={password} onChangeText={setPassword}
+          textColor="#000000" placeholder="Tirsdag d. 31. Maj 2025" value={password} onChangeText={setPassword}
           containerHeight={48} containerRadius={18} whenPassword={false} />
 
         <TextBox title={

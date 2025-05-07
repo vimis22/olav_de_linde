@@ -17,7 +17,7 @@ interface MenuOptionsProps {
   iconSize?: number;
   iconBackground?: string;
 }
-const MenuOptions: React.FC<MenuOptionsProps> = ({onPress, title, icon, backgroundColor, textColor = '#ffffff', height = '10%', width = '100%', borderRadius = 10, borderWidth = 1,borderColor = 'black', fontSize, iconSize, iconBackground}) => {
+const MenuOptions: React.FC<MenuOptionsProps> = ({onPress, title, icon, backgroundColor, textColor = '#ffffff', height = '10%', width = '100%', borderRadius = 10, borderWidth, borderColor = 'black', fontSize, iconSize, iconBackground}) => {
   return (
     <TouchableOpacity style={[styles.menuOptionsBox, {backgroundColor, height: height, width: width, borderWidth: borderWidth, borderRadius: borderRadius, borderColor: borderColor}]} onPress={onPress}>
       <View style={[styles.iconCircle, {width: iconSize ?? 40, height: iconSize ?? 40, borderRadius: (iconSize ?? 40) / 2, backgroundColor: iconBackground}]}>
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     borderRadius: 6,
+    gap: 10,
   },
   iconCircle: {
     justifyContent: 'center',

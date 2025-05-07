@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageBackground, StyleSheet, View, ScrollView, Text} from 'react-native';
+import {ImageBackground, StyleSheet, View, ScrollView, Image, TouchableOpacity} from 'react-native';
 import GlobalStyles, {
   atIcon,
   callIcon,
@@ -7,18 +7,42 @@ import GlobalStyles, {
   userIcon,
   wallpaperBackground,
 } from '../../../styling/GlobalStyles.tsx';
-import CircularBox from '../../../components/CircularBox.tsx';
-import CaseScreen from '../case/CaseScreen.tsx';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import {deleteUser} from '../../../functions/manager_services/AuthenticationManager.tsx';
+import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
+import PopupScreen from '../../../components/PopupScreen.tsx';
 const ProfileScreen = ({navigation}: any) => {
   const [deleteProfile, setDeleteProfile] = useState(false);
   const [visible, _setVisible] = useState(false);
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const imageSelection = (imageUri: string) => {
+    setProfileImage(imageUri);
+    setSuccess(true);
+    setTimeout(() => setSuccess(false), 2000);
+  };
+
+  const {addImage} = ImageManager({
+    onImageSelected: imageSelection,
+  });
+
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       <ScrollView contentContainerStyle={{ alignItems: 'center', justifyContent: 'center', marginTop: 50 }}>
-        <CircularBox onPress={() => CaseScreen} height={200} width={200} borderRadius={100} />
+        <View>
+          <TouchableOpacity onPress={() => addImage()}>
+            <View style={styles.profileImageCircle}>
+              {profileImage ? (
+                <Image source={{uri: profileImage}} style={styles.profileImage} />
+              ) : null}
+            </View>
+          </TouchableOpacity>
+
+          <PopupScreen visible={success} title={'TILFØJET!!'} onRequestClose={() => setSuccess(false)} />
+        </View>
+
         <View style={styles.bottomSection}>
             <InputFieldArea whenPassword={false} displayIcon={userIcon} fieldIcon={userIcon} value={'Henrik'} />
             <InputFieldArea whenPassword={false} fieldIcon={callIcon} value={'81911310'} />
@@ -51,7 +75,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
-
+  profileImageCircle: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: '#bbb',
+  },
+  profileImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 60,
+    resizeMode: 'cover',
+  },
 });
 
 

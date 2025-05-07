@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageBackground, View, StyleSheet, Text, ScrollView} from 'react-native';
+import {ImageBackground, View, StyleSheet, ScrollView} from 'react-native';
 import GlobalStyles, {
   alphabetIcon,
   houseIcon, imageIcon,

@@ -24,6 +24,7 @@ import CaseTitle from './src/screens/gallery_area/case/CaseTitle.tsx';
 import CaseImage from './src/screens/gallery_area/case/CaseImage.tsx';
 import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx';
 import CompletedCaseScreen from './src/screens/gallery_area/case/CompletedCaseScreen.tsx';
+import {ProfileImageProvider} from './src/functions/providers/ProfileImageProvider.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,25 +46,27 @@ export default function App() {
 
 
     return (
-      <GestureHandlerRootView style={{flex: 1}}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName={'SplashScreen'} screenOptions={{headerShown: false}}>
-            <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
-            <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
-            <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
-            <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
-            <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
-            <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
-            <Stack.Screen name={'SignupVerification'} component={SignupVerification} />
-            <Stack.Screen name={'BiometricsVerification'} component={BiometricsVerification} />
-            <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
-            <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
-            <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
-            <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
-            <Stack.Screen name={'HomeScreen'} component={NavbarNavigation} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </GestureHandlerRootView>
+      <ProfileImageProvider>
+        <GestureHandlerRootView style={{flex: 1}}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName={'SplashScreen'} screenOptions={{headerShown: false}}>
+              <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
+              <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
+              <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
+              <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
+              <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
+              <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
+              <Stack.Screen name={'SignupVerification'} component={SignupVerification} />
+              <Stack.Screen name={'BiometricsVerification'} component={BiometricsVerification} />
+              <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
+              <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
+              <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
+              <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
+              <Stack.Screen name={'HomeScreen'} component={NavbarNavigation} />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </ProfileImageProvider>
     );
 };
 
@@ -143,12 +146,14 @@ function CaseNavigation(){
 }
 function SettingsNavigation(){
   return (
-    <Stack.Navigator initialRouteName={'SettingsScreen'}>
-      <Stack.Screen name={'SettingsScreen'} component={SettingsScreen} />
-      <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
-      <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
-      <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
-    </Stack.Navigator>
+    <ProfileImageProvider>
+      <Stack.Navigator initialRouteName={'SettingsScreen'}>
+        <Stack.Screen name={'SettingsScreen'} component={SettingsScreen} />
+        <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
+        <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
+        <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
+      </Stack.Navigator>
+    </ProfileImageProvider>
   );
 }
 const styles = StyleSheet.create({

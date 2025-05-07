@@ -18,6 +18,10 @@ interface PopupScreenProps {
   optionTextColor2?: string;
   optionTextBackgroundColor1?: string;
   optionTextBackgroundColor2?: string;
+  optionTextBorderRadiusColor1?: string;
+  optionTextBorderRadiusColor2?: string;
+  optionTextBorderWidth1?: number;
+  optionTextBorderWidth2?: number;
   optionText3?: string;
   onOption3?: () => void;
   optionTextColor3?: string;
@@ -28,7 +32,7 @@ interface PopupScreenProps {
 
 const PopupScreen: React.FC<PopupScreenProps> = ({title, description, backgroundColor = '#ffffff', titleColor = '#000000', descriptionColor = '#000000', height = 'auto', width = 300, borderRadius = 10,
   optionText1, optionText2, onEnable, onDisable, optionTextColor1 = '#000000', optionTextColor2 = '#000000', optionTextBackgroundColor1 = '#ffffff', optionTextBackgroundColor2 = '#ffffff',
-  optionText3, onOption3, optionTextColor3 = '#000000', optionTextBackgroundColor3 = '#ffffff', visible = true, onRequestClose = () => {}}) => {
+  optionText3, onOption3, optionTextColor3 = '#000000', optionTextBackgroundColor3 = '#ffffff', optionTextBorderRadiusColor1 = '#ffffff', optionTextBorderRadiusColor2 = '#ffffff', optionTextBorderWidth1 = 1, optionTextBorderWidth2 = 1, visible = true, onRequestClose = () => {}}) => {
   return (
     <Modal visible={visible} animationType="fade" transparent={true} onRequestClose={onRequestClose}>
       <View style={[styles.modalOverlay, {backgroundColor: 'transparent'}]}>
@@ -50,16 +54,16 @@ const PopupScreen: React.FC<PopupScreenProps> = ({title, description, background
                 </Text>
               </TouchableOpacity>
             ) : (
-              <View>
+              <View style={styles.optionContainer}>
                 {optionText1 && onEnable && (
-                  <TouchableOpacity onPress={onEnable} style={[styles.button, {backgroundColor: optionTextBackgroundColor1}]}>
+                  <TouchableOpacity onPress={onEnable} style={[styles.button, {backgroundColor: optionTextBackgroundColor1, borderColor: optionTextBorderRadiusColor1, borderWidth: optionTextBorderWidth1}]}>
                     <Text style={[styles.buttonText, {color: optionTextColor1}]}>
                       {optionText1}
                     </Text>
                   </TouchableOpacity>
                 )}
                 {optionText2 && onDisable && (
-                  <TouchableOpacity onPress={onDisable} style={[styles.button, {backgroundColor: optionTextBackgroundColor2}]}>
+                  <TouchableOpacity onPress={onDisable} style={[styles.button, {backgroundColor: optionTextBackgroundColor2, borderColor: optionTextBorderRadiusColor2, borderWidth: optionTextBorderWidth2}]}>
                     <Text
                       style={[styles.buttonText, {color: optionTextColor2}]}>
                       {optionText2}
