@@ -19,7 +19,7 @@ const ForgotPasswordScreen = ({navigation}: any) => {
 
             <View style={GlobalStyles.textContainer}>
                 <InputFieldArea fieldIcon={userIcon} fieldIconSize={28} textColor={'#000000'}
-                label={'Email'} placeholder={'Email'}
+                placeholder={'Email'}
                 value={email} onChangeText={setEmail} height={50} borderRadius={20}/>
 
                 <NormalText text={'Indtast din email, så sender vi en mail til gendannelse af password'} fontSize={14} textColor={'#5C6855'}/>

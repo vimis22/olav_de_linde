@@ -24,21 +24,10 @@ const CaseTitle = ({navigation}: any) => {
                     { key: '3', value: 'Vestergade 13, 5000 Odense C' },
                     { key: '4', value: 'Rewentlovsvej 132, 5000 Odense C' },
                   ]}
-                  setSelected={setSelectedValue}
-                  dropdownStyles={styles.dropdownStyles}
-                  dropdownItemStyles={styles.dropdownStyles}
-                  backgroundColor={'#868595'}
-                  placeholder="Vælg en mulighed"
-                  containerHeight={40}
-                  containerWidth={300}
-                  search={false}
-                  dropdownItemTextStyle={{}}
-                  searchBoxStyles={{}}
-                  searchBoxTextStyle={{}}
-                  optionsHeight={180}
-                  optionsWidth={300}
-                  textColor={'#ffffff'}
-                />
+                  setSelected={setSelectedValue} dropdownStyles={styles.dropdownStyles} dropdownItemStyles={styles.dropdownStyles}
+                  backgroundColor={'#868595'} placeholder="Vælg en mulighed" containerHeight={40} containerWidth={300}
+                  search={false} dropdownItemTextStyle={{}} searchBoxStyles={{}} searchBoxTextStyle={{}} optionsHeight={180}
+                  optionsWidth={300} textColor={'#ffffff'} />
               </View>
               <View style={styles.iconRoot}>
                 <IconText onPress={() => navigation.navigate('PropertyInfoScreen')} icon={houseIcon} backgroundColor={'#868595'} borderWidth={1} height={40} width={30} />
@@ -47,11 +36,10 @@ const CaseTitle = ({navigation}: any) => {
           </ImageBackground>
           <View style={styles.bottomSection}>
             <TextFieldArea placeholder={'Titel'} onChangeText={setTitle} value={title} />
+
             <TextFieldArea placeholder={'Beskriv din sag'} onChangeText={setDescription} value={description} />
-            <ActionButton onPress={async () => {await createCase(title, description); navigation.navigate('CaseImage');}}
-              title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'}
-              height={50} width={100} borderColor={'#5C6855'}
-            />
+
+            <ActionButton onPress={async () => navigation.navigate('CaseImage', {title, description})} title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
 
             <PropertyProgressIndicator step={2} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}/>
           </View>

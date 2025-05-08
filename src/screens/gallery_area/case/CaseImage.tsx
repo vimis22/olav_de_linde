@@ -7,15 +7,11 @@ import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {createCase} from '../../../functions/manager_services/CaseManager.tsx';
-import {useRoute} from '@react-navigation/native';
 
-const CaseImage = ({navigation}: any) => {
+const CaseImage = ({navigation, route}: any) => {
   const [imageLink, setImageLink] = useState<string | null>(null);
   const [_selectedValue, setSelectedValue] = useState('');
-  const route = useRoute();
-  // const {title, description} = route.params;
-  createCase(title, description,imageLink);
+  const {title = '', description = ''} = route.params || {};
 
   const handleSelectImage = async () => {
     const imageDisplay = await launchImageLibrary({mediaType: 'photo'});
@@ -69,9 +65,16 @@ const CaseImage = ({navigation}: any) => {
                 imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} imageContainerHeight={50} imageContainerWidth={50}
                 imageContainerBackgroundColor={'#ffffff'} textContainerHeight={0} textContainerWidth={0}
               />
+              {imageLink && (
+                <ImageBackground
+                  source={{ uri: imageLink }}
+                  style={{ width: 100, height: 100, marginTop: 10, borderRadius: 12, overflow: 'hidden' }}
+                  resizeMode="cover"
+                />
+              )}
             </View>
 
-            <ActionButton onPress={() => navigation.navigate('CaseTechnicians')} title={'Næste'} backgroundColor={'transparent'}
+            <ActionButton onPress={() => navigation.navigate('CaseTechnicians', {title, description})} title={'Næste'} backgroundColor={'transparent'}
               textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
 
             <PropertyProgressIndicator step={3} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'} />

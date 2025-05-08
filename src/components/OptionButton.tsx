@@ -3,7 +3,8 @@ import {TouchableOpacity, Text, Image, View, ImageSourcePropType} from 'react-na
 import GlobalStyles from '../styling/GlobalStyles.tsx';
 
 interface OptionButtonProps{
-    onPress: () => void;
+    value?: any;
+    onPress: (value?: any) => void;
     title: string;
     backgroundColor: string;
     textColor?: string;
@@ -22,7 +23,7 @@ interface OptionButtonProps{
     highlightColor?: string;
     highlightTextColor?: string;
 }
-const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width = '100%',
+const OptionButton: React.FC<OptionButtonProps> = ({value, onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width = '100%',
                                                        fieldIconSize = 40, fontSize, fieldIconBackground = '#4CAF50', fieldIcon, tickMarkIcon = false,
                                                      borderRadius, borderWidth, borderColor, highlight = false, highlightOnPress = false, highlightColor = '#FFEE99' , highlightTextColor = '#222222'}) => {
   const [isHighlighted, setIsHighlighted] = React.useState(false);
@@ -30,7 +31,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({onPress, title, backgroundCo
     if (highlightOnPress) {
       setIsHighlighted(prev => !prev);
     }
-    onPress();
+    onPress(value);
   };
 
   const currentTextColor = highlight || isHighlighted ? highlightTextColor : textColor;
