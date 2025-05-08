@@ -1,17 +1,28 @@
 import React, {useState} from 'react';
-import {View, ImageBackground, ScrollView, StyleSheet} from 'react-native';
+import {View, ImageBackground, StyleSheet} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import DropdownMenu from '../../../components/DropdownMenu.tsx';
 import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {createCase} from '../../../functions/manager_services/CaseManager.tsx';
+import {useRoute} from '@react-navigation/native';
 
 const CaseImage = ({navigation}: any) => {
-  const addImage = () => {
-    // TODO: Implementér billede-tilføjelsesfunktionalitet her
-  };
+  const [imageLink, setImageLink] = useState<string | null>(null);
   const [_selectedValue, setSelectedValue] = useState('');
+  const route = useRoute();
+  // const {title, description} = route.params;
+  createCase(title, description,imageLink);
+
+  const handleSelectImage = async () => {
+    const imageDisplay = await launchImageLibrary({mediaType: 'photo'});
+    if (imageDisplay.assets && imageDisplay.assets.length > 0) {
+      setImageLink(imageDisplay.assets[0].uri ?? null);
+    }
+  };
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -43,14 +54,8 @@ const CaseImage = ({navigation}: any) => {
                 />
               </View>
               <View style={styles.iconRoot}>
-                <IconText
-                  onPress={() => navigation.navigate('PropertyInfoScreen')}
-                  icon={houseIcon}
-                  backgroundColor={'#868595'}
-                  borderWidth={1}
-                  height={40}
-                  width={30}
-                />
+                <IconText onPress={() => navigation.navigate('PropertyInfoScreen')} icon={houseIcon}
+                  backgroundColor={'#868595'} borderWidth={1} height={40} width={30} />
               </View>
             </View>
           </ImageBackground>
@@ -59,7 +64,7 @@ const CaseImage = ({navigation}: any) => {
 
             <View>
               <CaseBox
-                onPress={addImage} title={'Add Image'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
+                onPress={handleSelectImage} title={'Add Image'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
                 fieldIcon={imageIcon} caseContainerHeight={80} caseContainerWidth={80} caseContainerBorderRadius={20}
                 imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} imageContainerHeight={50} imageContainerWidth={50}
                 imageContainerBackgroundColor={'#ffffff'} textContainerHeight={0} textContainerWidth={0}

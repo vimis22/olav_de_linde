@@ -25,10 +25,10 @@ interface CaseBoxProps{
 };
 
 const CaseBox: React.FC<CaseBoxProps> = ({onPress, title, backgroundColor = '#ffffff', textColor = '#000000',
-                                           caseContainerHeight = 250, caseContainerWidth = 150, caseContainerBorderRadius = 10, fieldIcon, imageContainerBackgroundColor = '#ffec00', textContainerBackgroundColor = '#ffffff',
-                                         textContainerHeight = 50, textContainerWidth = '100%', textContainerBorderRadius = 10, textContainerBorderColor = '#ffec00', imageContainerHeight = 50, imageContainerWidth = 50, imageContainerBorderRadius = 25, imageContainerBorderColor = '#000000', imageContainerBorderWidth = 3}) => {
+                                          caseContainerHeight = 250, caseContainerWidth = 150, caseContainerBorderRadius = 10, fieldIcon, imageContainerBackgroundColor = '#ffec00', textContainerBackgroundColor = '#ffffff',
+                                        textContainerHeight = 50, textContainerWidth = '100%', textContainerBorderRadius = 10, textContainerBorderColor = '#ffec00', imageContainerHeight = 50, imageContainerWidth = 50, imageContainerBorderRadius = 25, imageContainerBorderColor = '#000000', imageContainerBorderWidth = 3}) => {
   return (
-    <TouchableOpacity style={[styles.caseContainer, { backgroundColor, height: caseContainerHeight, width: caseContainerWidth, borderRadius: caseContainerBorderRadius }]} onPress={onPress}>
+    <TouchableOpacity style={[styles.caseContainer, {backgroundColor, height: caseContainerHeight, width: caseContainerWidth, borderRadius: caseContainerBorderRadius }]} onPress={onPress}>
       <View style={[ styles.imageContainer, {height: imageContainerHeight, width: imageContainerWidth, backgroundColor: imageContainerBackgroundColor, borderRadius: imageContainerBorderRadius, borderColor: imageContainerBorderColor, borderWidth: imageContainerBorderWidth}]}>
         <Image source={fieldIcon} style={[GlobalStyles.icon, {height: '100%', width: '100%', borderRadius: imageContainerBorderRadius}]} resizeMode={'contain'}/>
       </View>

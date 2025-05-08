@@ -19,7 +19,6 @@ import CaseScreen from './src/screens/gallery_area/case/CaseScreen.tsx';
 import SettingsScreen from './src/screens/gallery_area/settings/SettingsScreen.tsx';
 import ProfileScreen from './src/screens/gallery_area/settings/ProfileScreen.tsx';
 import PasswordScreen from './src/screens/gallery_area/settings/PasswordScreen.tsx';
-import ContactScreen from './src/screens/gallery_area/settings/ContactScreen.tsx';
 import CaseTitle from './src/screens/gallery_area/case/CaseTitle.tsx';
 import CaseImage from './src/screens/gallery_area/case/CaseImage.tsx';
 import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx';
@@ -61,7 +60,6 @@ export default function App() {
               <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
               <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
               <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
-              <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
               <Stack.Screen name={'HomeScreen'} component={NavbarNavigation} />
             </Stack.Navigator>
           </NavigationContainer>
@@ -151,7 +149,6 @@ function SettingsNavigation(){
         <Stack.Screen name={'SettingsScreen'} component={SettingsScreen} />
         <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
         <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
-        <Stack.Screen name={'ContactScreen'} component={ContactScreen} />
       </Stack.Navigator>
     </ProfileImageProvider>
   );

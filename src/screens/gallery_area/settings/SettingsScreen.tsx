@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageBackground, View, StyleSheet, Image} from 'react-native';
+import {ImageBackground, View, StyleSheet, Image, Linking} from 'react-native';
 import GlobalStyles, {callIcon, documentIcon, lockIcon, logIcon, protectionIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import MenuOptions from '../../../components/MenuOptions.tsx';
@@ -34,13 +34,13 @@ const SettingsScreen = ({navigation}: any) => {
         <MenuOptions icon={lockIcon} onPress={() => navigation.navigate('PasswordScreen')} title={'KODEORD'}
           iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'}
           height={'11%'} width={'110%'} borderRadius={10} borderWidth={3} />
-        <MenuOptions icon={callIcon} onPress={() => navigation.navigate('ContactScreen')} title={'KONTAKT'}
+        <MenuOptions icon={callIcon} onPress={() => Linking.openURL('https://www.olavdelinde.dk/kontakt/')} title={'KONTAKT'}
           iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'}
           height={'11%'} width={'110%'} borderRadius={10} borderWidth={3} />
-        <MenuOptions icon={documentIcon} onPress={() => navigation.navigate('HomeScreen')} title={'VILKÅR OG BETINGELSER'}
+        <MenuOptions icon={documentIcon} onPress={() => Linking.openURL('https://www.olavdelinde.dk')} title={'VILKÅR OG BETINGELSER'}
           iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'} height={'11%'}
           width={'110%'} borderRadius={10} borderWidth={3} />
-        <MenuOptions icon={protectionIcon} onPress={() => navigation.navigate('HomeScreen')} title={'DATAHÅNDTERING'}
+        <MenuOptions icon={protectionIcon} onPress={() => Linking.openURL('https://www.olavdelinde.dk')} title={'DATAHÅNDTERING'}
           iconBackground={'#5C6855'} backgroundColor={'transparent'} textColor={'black'}
           height={'11%'} width={'110%'} borderRadius={10} borderWidth={3} />
         <MenuOptions icon={logIcon} onPress={() => setLogout(true)} title={'LOGOUT'}
