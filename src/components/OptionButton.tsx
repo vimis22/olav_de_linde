@@ -22,10 +22,11 @@ interface OptionButtonProps{
     highlightOnPress?: boolean;
     highlightColor?: string;
     highlightTextColor?: string;
+    selected?: boolean;
 }
 const OptionButton: React.FC<OptionButtonProps> = ({value, onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width = '100%',
                                                        fieldIconSize = 40, fontSize, fieldIconBackground = '#4CAF50', fieldIcon, tickMarkIcon = false,
-                                                     borderRadius, borderWidth, borderColor, highlight = false, highlightOnPress = false, highlightColor = '#FFEE99' , highlightTextColor = '#222222'}) => {
+                                                     borderRadius, borderWidth, borderColor, highlight = false, highlightOnPress = false, highlightColor = '#FFEE99' , highlightTextColor = '#222222', selected}) => {
   const [isHighlighted, setIsHighlighted] = React.useState(false);
   const highlightPress = () => {
     if (highlightOnPress) {
@@ -35,9 +36,9 @@ const OptionButton: React.FC<OptionButtonProps> = ({value, onPress, title, backg
   };
 
   const currentTextColor = highlight || isHighlighted ? highlightTextColor : textColor;
-
+  const currentBackgroundColor = highlight || isHighlighted ? highlightColor : backgroundColor;
   return (
-        <TouchableOpacity style={[GlobalStyles.circleContainer, { backgroundColor: highlight || isHighlighted ? highlightColor : backgroundColor,
+        <TouchableOpacity style={[GlobalStyles.circleContainer, { backgroundColor: currentBackgroundColor,
           height, width, borderRadius, borderWidth, borderColor }]} onPress={highlightPress}>
             {tickMarkIcon && (
                 <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
@@ -48,7 +49,7 @@ const OptionButton: React.FC<OptionButtonProps> = ({value, onPress, title, backg
                   )}
                 </View>
             )}
-            <Text style={[GlobalStyles.textInput, { color: currentTextColor, fontSize: fontSize }]}>{title}</Text>
+            <Text style={[GlobalStyles.textInput, selected && { color: currentTextColor, fontSize: fontSize }]}>{title}</Text>
         </TouchableOpacity>
     );
 };
