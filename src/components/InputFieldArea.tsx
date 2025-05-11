@@ -18,15 +18,20 @@ interface InputFieldAreaProps {
   displayIcon?: ImageSourcePropType;
   hideIcon?: ImageSourcePropType;
   passwordBackgroundColor?: string;
-  containerHeight?: number;
+  containerHeight?: any;
+  containerWidth?: any;
   containerRadius?: number;
+  marginLeft?: any;
+  marginRight?: any;
+  marginTop?: any;
+  marginBottom?: any;
   fieldIconSize?: number;
   backgroundColor?: string;
   textColor?: string;
 }
 
 const InputFieldArea: React.FC<InputFieldAreaProps> = ({value, onChangeText, placeholder = 'TEXT', fieldIcon, fieldIconBackground = '#5C6855', whenPassword = false,
-  displayIcon, hideIcon, passwordBackgroundColor = '#000000', containerHeight = 60, containerRadius = 30, fieldIconSize = 40, backgroundColor = '#ffffff', textColor = '#000000'}) => {
+  displayIcon, hideIcon, passwordBackgroundColor = '#000000', containerHeight = 60, containerWidth, containerRadius = 30, fieldIconSize = 40, backgroundColor = '#ffffff', textColor = '#000000', marginTop, marginRight, marginLeft, marginBottom}) => {
   const [whenPasswordIsVisible, setWhenPasswordIsVisible] = useState(false);
 
   const makePasswordVisible = () => {
@@ -34,7 +39,7 @@ const InputFieldArea: React.FC<InputFieldAreaProps> = ({value, onChangeText, pla
   };
 
   return (
-    <View style={[GlobalStyles.circleContainer, {height: containerHeight, borderRadius: containerRadius, backgroundColor}]}>
+    <View style={[GlobalStyles.circleContainer, {height: containerHeight, width: containerWidth, borderRadius: containerRadius, backgroundColor, marginLeft: marginLeft, marginRight: marginRight, marginTop: marginTop, marginBottom: marginBottom}]}>
       <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize, borderRadius: fieldIconSize / 2, backgroundColor: fieldIconBackground}]}>
         <Image source={fieldIcon} style={GlobalStyles.icon} resizeMode={'contain'} />
       </View>

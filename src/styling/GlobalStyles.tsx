@@ -27,6 +27,7 @@ export const hammerIcon = require('../assets/OLD_HammerIcon.png');
 export const paintingIcon = require('../assets/OLD_PaintingIcon.png');
 export const calenderIcon = require('../assets/OLD_CalenderIcon.png');
 export const screwDriverIcon = require('../assets/OLD_ScrewDriverIcon.png');
+export const penIcon = require('../assets/OLD_PenIcon.png');
 export default StyleSheet.create({
     pageContainer: {
         flex: 1,
