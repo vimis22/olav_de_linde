@@ -6,11 +6,17 @@ interface NormalTextProps {
     textColor?: string;
     fontSize?: number;
     fontWeight?: TextStyle['fontWeight'];
+    backgroundColor?: string;
+    borderRadius?: any;
+    marginTop?: any;
+    marginBottom?: any;
+    marginLeft?: any;
+    marginRight?: any;
 }
 
-const NormalText: React.FC<NormalTextProps> = ({text, textColor = '#000000', fontSize = 10, fontWeight = 'normal'}) => {
+const NormalText: React.FC<NormalTextProps> = ({text, backgroundColor, textColor = '#000000', borderRadius, fontSize = 10, fontWeight = 'normal', marginTop, marginBottom, marginLeft, marginRight}) => {
     return (
-        <View>
+        <View style={[{backgroundColor, borderRadius, marginTop, marginBottom, marginLeft, marginRight}]}>
             <Text style={[styles.text, {color: textColor, fontSize: fontSize, fontWeight: fontWeight}]}>{text}</Text>
         </View>
     );
