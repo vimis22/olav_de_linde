@@ -6,16 +6,22 @@ import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import PopupScreen from '../../../components/PopupScreen.tsx';
+import AcuteEmployee from '../../../components/AcuteEmployee.tsx';
 
 const CaseScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
   const [enablePopup, setEnablePopup] = useState(true);
+  const [showAcuteEmployee, setShowAcuteEmployee] = useState(false);
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       {enablePopup ? (
-        <PopupScreen title={'Velkommen'} description={'Vælg venligst den ejendom du vil oprette en sag for'} height={200} width={200} optionText3={'Forstået'}
-          optionTextColor3={'#ffffff'} optionTextBackgroundColor3={'#5C6855'} onOption3={() => setEnablePopup(false)} backgroundColor={'#000000'}
-          titleColor={'#ffffff'} descriptionColor={'#ffffff'} visible={true} />
+        <PopupScreen title={'Akut situation?'} description={'Ring op og få direkte kontrakt'}
+                     height={200} width={300} optionText1={'Ja'} optionText2={'Nej'}
+                     optionTextColor1={'#CB4F00'} optionTextBackgroundColor1={'#FFFFFF'} optionTextBorderRadiusColor1={'#CB4F00'} optionTextBorderWidth1={1}
+                     optionTextColor2={'#FFFFFF'} optionTextBackgroundColor2={'#5C6855'} optionTextBorderRadiusColor2={'#5C6855'} optionTextBorderWidth2={1}
+                     onEnable={() => {setEnablePopup(false); setShowAcuteEmployee(true); navigation.navigate('AcuteEmployee');}} onDisable={() => {setEnablePopup(false); setShowAcuteEmployee(false);}}
+                     backgroundColor={'#FFFFFF'} titleColor={'#000000'} descriptionColor={'#000000'} visible={true}
+        />
       ) : (
         <ScrollView>
           <View style={styles.topSection}>

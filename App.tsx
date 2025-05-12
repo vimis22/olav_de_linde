@@ -25,6 +25,7 @@ import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx
 import CompletedCaseScreen from './src/screens/gallery_area/case/CompletedCaseScreen.tsx';
 import {ProfileImageProvider} from './src/functions/providers/ProfileImageProvider.tsx';
 import ExperimentalChat from './src/screens/gallery_area/case/ExperimentalChat.tsx';
+import AcuteEmployee from './src/components/AcuteEmployee.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -129,6 +130,7 @@ function HomeNavigation() {
       <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
       <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
       <Stack.Screen name={'ExperimentalChat'} component={ExperimentalChat} />
+      <Stack.Screen name={'AcuteEmployee'} component={AcuteEmployee} />
     </Stack.Navigator>
   );
 }
@@ -142,6 +144,7 @@ function CaseNavigation(){
       <Stack.Screen name={'CaseTechnicians'} component={CaseTechnicians} />
       <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
       <Stack.Screen name={'ExperimentalChat'} component={ExperimentalChat} />
+      <Stack.Screen name={'AcuteEmployee'} component={AcuteEmployee} />
     </Stack.Navigator>
   );
 }
