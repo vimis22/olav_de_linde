@@ -68,7 +68,7 @@ export const signupWithUser = async (name: string, email: string, password: stri
   }
 };
 
-export async function logout(){
+export async function loggingout(){
   try {
     await auth().signOut();
     console.log('User has been logged out');
@@ -115,4 +115,4 @@ export const deleteUser = async () => {
   }
 };
 
-
+module.exports = {loginWithEmail, signupWithEmail, signupWithUser, logout: loggingout, updateLoginWithCredentials, resetPasswordWithEmail, deleteUser, signupWithAllInformation};

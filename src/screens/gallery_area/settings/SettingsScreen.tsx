@@ -1,14 +1,31 @@
 import React, {useState} from 'react';
-import {ImageBackground, View, StyleSheet, Image, Linking} from 'react-native';
+import {ImageBackground, View, StyleSheet, Image, Linking, Alert} from 'react-native';
 import GlobalStyles, {callIcon, documentIcon, lockIcon, logIcon, protectionIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import MenuOptions from '../../../components/MenuOptions.tsx';
 import {useProfileImage} from '../../../functions/providers/ProfileImageProvider.tsx';
 import PopupScreen from '../../../components/PopupScreen.tsx';
-
+import {loggingout} from '../../../functions/manager_services/AuthenticationManager.tsx';
+import auth from '@react-native-firebase/auth';
 const SettingsScreen = ({navigation}: any) => {
   const [logout, setLogout] = useState(false);
   const {profileImage} = useProfileImage();
+
+  /*
+  @link https://reactnavigation.org/docs/navigation-actions/#reset
+   */
+  const handleLogout = async () => {
+    try{
+      await auth().signOut();
+      navigation.reset({
+        index: 0,
+        routes: [{name: 'LoginScreen'}],
+      });
+    } catch (error: any){
+      console.error('The Logout has failed', error?.code, error?.message);
+      Alert.alert('The Logout has failed', error?.message ?? 'No Message');
+    }
+  };
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -52,7 +69,7 @@ const SettingsScreen = ({navigation}: any) => {
               height={200} width={300} optionText1={'Ja'} optionText2={'Nej'}
               optionTextColor1={'#CB4F00'} optionTextBackgroundColor1={'#FFFFFF'} optionTextBorderRadiusColor1={'#CB4F00'} optionTextBorderWidth1={1}
               optionTextColor2={'#FFFFFF'} optionTextBackgroundColor2={'#5C6855'} optionTextBorderRadiusColor2={'#5C6855'} optionTextBorderWidth2={1}
-              onEnable={() => {setLogout(false);navigation.navigate('LoginScreen');}} onDisable={() => setLogout(false)}
+              onEnable={() => handleLogout()} onDisable={() => setLogout(false)}
               backgroundColor={'#FFFFFF'} titleColor={'#000000'} descriptionColor={'#000000'} visible={true}
             />
           )

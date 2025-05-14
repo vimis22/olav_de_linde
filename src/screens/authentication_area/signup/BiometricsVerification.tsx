@@ -28,8 +28,8 @@ const BiometricsVerification = ({navigation}: any) => {
             </TouchableOpacity>
 
             <View style={styles.navigationBox}>
-                <NormalText text={'Afventer Godkendelse'} fontSize={20} textColor={'#000000'} fontWeight={'bold'} />
-                <NormalText text={'Når vi har en godkendt oprettelsen fa din profil kn du logge ind. Vent venligst indtil da.'} fontSize={18}/>
+                <NormalText text={'Hurtigere Login?'} fontSize={20} textColor={'#000000'} fontWeight={'bold'} />
+                <NormalText text={'Du kan logge ind hurtigere med ansigtsgenkendelse eller fingeraftryk. Vil du give tilladelse til at appen kan bruge dit biometriske login?'} fontSize={18}/>
                 <ActionButton onPress={handleSkipNavigation} title={'Aktiver'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
                 <ActionButton onPress={createThreeButtonAlert} title={'Spring over'}
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: '25%',
+    textAlign: 'center',
   },
 });
 export default BiometricsVerification;

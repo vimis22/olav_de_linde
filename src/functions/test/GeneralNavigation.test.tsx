@@ -1,0 +1,11 @@
+import React from 'react';
+import {render, fireEvent} from '@testing-library/react-native';
+import App from '../../../App.tsx';
+
+test('Navigation towards the next screen, when a button is pressed', async () => {
+  const {getByTestId, findByText} = render(<App />);
+  const button = getByTestId('actionButton');
+  fireEvent.press(button);
+  const text = await findByText('Afventer Godkendelse');
+  expect(text).toBeTruthy();
+});

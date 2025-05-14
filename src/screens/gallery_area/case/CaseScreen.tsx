@@ -6,12 +6,10 @@ import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import PopupScreen from '../../../components/PopupScreen.tsx';
-import AcuteEmployee from '../../../components/AcuteEmployee.tsx';
-
 const CaseScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
   const [enablePopup, setEnablePopup] = useState(true);
-  const [showAcuteEmployee, setShowAcuteEmployee] = useState(false);
+  const [, setShowAcuteEmployee] = useState(false);
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       {enablePopup ? (
@@ -48,7 +46,7 @@ const CaseScreen = ({navigation}: any) => {
               </View>
             </ImageBackground>
             <View style={styles.bottomSection}>
-              <ActionButton onPress={() => navigation.navigate('CaseTitle')} title={'Næste'} backgroundColor={'transparent'}
+              <ActionButton testID={'actionButton'} onPress={() => navigation.navigate('CaseTitle')} title={'Næste'} backgroundColor={'transparent'}
                 textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
 
               <PropertyProgressIndicator step={1} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'} />

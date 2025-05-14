@@ -6,6 +6,7 @@ import ActionButton from '../../../components/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
 import {loginWithEmail } from '../../../functions/manager_services/AuthenticationManager.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
+import actionButton from '../../../components/ActionButton.tsx';
 
 
 const LoginScreen = ({navigation}: any) => {
@@ -43,7 +44,7 @@ const LoginScreen = ({navigation}: any) => {
                                 value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20} whenPassword={true}/>
 
 
-                <ActionButton onPress={handleLogin} title={'Login'}
+                <ActionButton testID={'actionButton'} onPress={handleLogin} title={'Login'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
 
 

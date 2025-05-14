@@ -12,14 +12,15 @@ interface ActionButtonProps {
   borderColor?: string;
   borderWidth?: number;
   visible?: boolean;
+  testID?: any;
 }
 
 const ActionButton: React.FC<ActionButtonProps> = ({onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 250,
-  width = 150, borderColor = '#5C6855', borderWidth = 1, visible = true,}) => {
+  width = 150, borderColor = '#5C6855', borderWidth = 1, visible = true, testID = 'actionButton'}) => {
   if (!visible) return null;
   return (
     <TouchableOpacity style={[GlobalStyles.button, {backgroundColor, height, width, borderColor, borderWidth}]}
-      onPress={onPress}>
+      onPress={onPress} testID={testID}>
       <Text style={[GlobalStyles.buttonText, {color: textColor}]}>{title}</Text>
     </TouchableOpacity>
   );

@@ -6,7 +6,7 @@ import NormalText from '../../../components/NormalText.tsx';
 const SignupVerification = ({navigation}: any) => {
     return(
         <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-            <TouchableOpacity style={GlobalStyles.logoImageContainer} onPress={() => navigation.navigate('HomeScreen')}>
+            <TouchableOpacity style={GlobalStyles.logoImageContainer} onPress={() => navigation.navigate('BiometricsVerification')}>
                 <Image source={houseLocationImage} style={GlobalStyles.mainLogo} />
             </TouchableOpacity>
 

@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import CreateCompanySignup from './src/screens/authentication_area/signup/CreateCompanySignup.tsx';
-import SplashScreen from './src/screens/authentication_area/SplashScreen.tsx';
+import SplashScreen from './src/screens/authentication_area/login/SplashScreen.tsx';
 import LoginScreen from './src/screens/authentication_area/login/LoginScreen.tsx';
 import ForgotPasswordScreen from './src/screens/authentication_area/signup/ForgotPasswordScreen.tsx';
 import auth from '@react-native-firebase/auth';
