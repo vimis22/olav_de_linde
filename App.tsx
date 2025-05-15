@@ -25,7 +25,7 @@ import CaseTechnicians from './src/screens/gallery_area/case/CaseTechnicians.tsx
 import CompletedCaseScreen from './src/screens/gallery_area/case/CompletedCaseScreen.tsx';
 import {ProfileImageProvider} from './src/functions/providers/ProfileImageProvider.tsx';
 import ExperimentalChat from './src/screens/gallery_area/case/ExperimentalChat.tsx';
-import AcuteEmployee from './src/components/AcuteEmployee.tsx';
+import AcuteEmployee from './src/screens/gallery_area/case/AcuteEmployee.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
