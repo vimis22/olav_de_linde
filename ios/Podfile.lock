@@ -3039,10 +3039,10 @@ PODS:
     - React-perflogger (= 0.78.0)
     - React-utils (= 0.78.0)
   - RecaptchaInterop (101.0.0)
-  - rive-react-native (9.2.1):
+  - rive-react-native (9.3.1):
     - React-Core
-    - RiveRuntime (= 6.7.4)
-  - RiveRuntime (6.7.4)
+    - RiveRuntime (= 6.8.2)
+  - RiveRuntime (6.8.2)
   - RNCPicker (2.11.0):
     - DoubleConversion
     - glog
@@ -3628,8 +3628,8 @@ SPEC CHECKSUMS:
   ReactCodegen: 0f8899ac1bad260bf3b362ee848ef67a70b5a306
   ReactCommon: a30b578194de911fbe1698efb8247bfe4cb6abff
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
-  rive-react-native: 7d5145e9581744c0849f3153320b8a24f96f07f3
-  RiveRuntime: 1748a5e12764dbb732894ac719691f6abd4cad22
+  rive-react-native: 22c19bead92d03d4e406e2a45624d0d49d78aee9
+  RiveRuntime: 3fca5c9a94b0a17cb05289b8a91fea6ebe921bb4
   RNCPicker: 21ca53c5927e9a7ad03eb4712dc55395114ebcc8
   RNFBApp: 4105e54d9ca4a1c10893a032268470f670181110
   RNFBAuth: 68dcd5fc893659b68b63646b1ff54d59001cb21a
