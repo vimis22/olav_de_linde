@@ -6,8 +6,6 @@ import ActionButton from '../../../components/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
 import {loginWithEmail } from '../../../functions/manager_services/AuthenticationManager.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
-import actionButton from '../../../components/ActionButton.tsx';
-
 
 const LoginScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');

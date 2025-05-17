@@ -29,7 +29,9 @@ const CreatePasswordSignup = ({navigation, route}: any) => {
         }
         _setIsLoading(true);
         await signupWithUser(name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
-        navigation.navigate('SignupVerification');
+        navigation.navigate('SignupVerification', {
+          name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber,
+        });
       } catch (error) {
         console.log('The Signup has failed', error);
         Alert.alert('The Signup has failed');

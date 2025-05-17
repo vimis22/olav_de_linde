@@ -22,7 +22,7 @@
     "react-native-reanimated": "^3.17.1",
     "react-native-safe-area-context": "^5.3.0",
     "react-native-screens": "^4.9.2",
-    "rive-react-native": "^9.2.1"
+    "rive-react-native": "^9.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
