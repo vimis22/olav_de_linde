@@ -24,6 +24,7 @@ interface OptionButtonProps{
     highlightTextColor?: string;
     selected?: boolean;
 }
+
 const OptionButton: React.FC<OptionButtonProps> = ({value, onPress, title, backgroundColor = '#ffec00', textColor = '#000000', height = 60, width = '100%',
                                                        fieldIconSize = 40, fontSize, fieldIconBackground = '#4CAF50', fieldIcon, tickMarkIcon = false,
                                                      borderRadius, borderWidth, borderColor, highlight = false, highlightOnPress = false, highlightColor = '#FFEE99' , highlightTextColor = '#222222', selected}) => {
