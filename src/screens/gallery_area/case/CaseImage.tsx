@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {View, ImageBackground, StyleSheet} from 'react-native';
+import {View, ImageBackground, StyleSheet, ScrollView} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
-import DropdownMenu from '../../../components/DropdownMenu.tsx';
-import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import CaseBox from '../../../components/CaseBox.tsx';
 import {launchImageLibrary} from 'react-native-image-picker';
+import NormalText from '../../../components/NormalText.tsx';
 
 const CaseImage = ({navigation, route}: any) => {
   const [imageLink, setImageLink] = useState<string | null>(null);
-  const [_selectedValue, setSelectedValue] = useState('');
+  const [_selectedValue, _setSelectedValue] = useState('');
   const {title = '', description = ''} = route.params || {};
 
   const handleSelectImage = async () => {
@@ -22,45 +21,17 @@ const CaseImage = ({navigation, route}: any) => {
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-        <View style={styles.topSection}>
-          <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}>
-            <View style={styles.dropdownContainer}>
-              <View style={styles.dropdownRoot}>
-                <DropdownMenu
-                  data={[
-                    {key: '1', value: 'Edisionsvej 2, 5000 Odense C'},
-                    {key: '2', value: 'Risingvej 65, 5000 Odense C'},
-                    {key: '3', value: 'Vestergade 13, 5000 Odense C'},
-                    {key: '4', value: 'Rewentlovsvej 132, 5000 Odense C'},
-                  ]}
-                  setSelected={setSelectedValue}
-                  dropdownStyles={styles.dropdownStyles}
-                  dropdownItemStyles={styles.dropdownStyles}
-                  backgroundColor={'#868595'}
-                  placeholder="Vælg en mulighed"
-                  containerHeight={40}
-                  containerWidth={300}
-                  search={false}
-                  dropdownItemTextStyle={{}}
-                  searchBoxStyles={{}}
-                  searchBoxTextStyle={{}}
-                  optionsHeight={180}
-                  optionsWidth={300}
-                  textColor={'#ffffff'}
-                />
-              </View>
-              <View style={styles.iconRoot}>
-                <IconText onPress={() => navigation.navigate('PropertyInfoScreen')} icon={houseIcon}
-                  backgroundColor={'#868595'} borderWidth={1} height={40} width={30} />
-              </View>
-            </View>
-          </ImageBackground>
+        <ScrollView style={styles.topSection}>
+          <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}/>
           <View style={styles.bottomSection}>
-            {/*Mangler en tekstbesked herhenne.*/}
-
+            <View style={styles.caseDescriptionContainer}>
+              <NormalText text={'Manglende Dørhåndtag'} fontSize={20} fontWeight={'bold'}/>
+              <NormalText text={'På anden sal, for enden af trappen, mangler et dørhåndtag til mødelokalet indefra. Det er derfor muligt at lukke sig selv inde i lokalet. Vi har indtil nu sat...'} fontSize={12}/>
+            </View>
             <View>
               <CaseBox
-                onPress={handleSelectImage} title={'Add Image'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
+                title={''}
+                onPress={handleSelectImage} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
                 fieldIcon={imageIcon} caseContainerHeight={80} caseContainerWidth={80} caseContainerBorderRadius={20}
                 imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} imageContainerHeight={50} imageContainerWidth={50}
                 imageContainerBackgroundColor={'#ffffff'} textContainerHeight={0} textContainerWidth={0}
@@ -79,7 +50,7 @@ const CaseImage = ({navigation, route}: any) => {
 
             <PropertyProgressIndicator step={3} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'} />
           </View>
-        </View>
+        </ScrollView>
     </ImageBackground>
   );
 };
@@ -123,6 +94,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
     gap: 20,
+  },
+  caseDescriptionContainer: {
+    backgroundColor: '#FFFFFF',
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    width: '75%',
+    marginRight: '25%',
   },
 });
 

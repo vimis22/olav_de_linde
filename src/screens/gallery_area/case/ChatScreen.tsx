@@ -82,7 +82,7 @@ const ChatScreen: React.FC<ChatScreenProps> = ({room}) => {
   return (
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Textnpm </Text>
+          <Text style={styles.headerTitle}>Textnpm</Text>
         </View>
         <FlatList data={messages} keyExtractor={item => item.id} renderItem={renderItem} contentContainerStyle={styles.messages} />
         <View style={styles.newMessageForm}>

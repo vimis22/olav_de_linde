@@ -4,18 +4,19 @@ import GlobalStyles, {biometricsVerificationImage, wallpaperBackground} from '..
 import NormalText from '../../../components/NormalText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 
-const BiometricsVerification = ({navigation}: any) => {
-    const handleSkipNavigation = async () => {
-        navigation.navigate('NotificationVerification');
-    };
+const BiometricsVerification = ({navigation, route}: any) => {
+  const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};
+  const handleSkipNavigation = async () => {
+      navigation.navigate('NotificationVerification', {name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber});
+  };
 
     const createThreeButtonAlert = () => {
       Alert.alert('Vil du bruge <biometri> for at logge ind?', 'Det er nemmere, hurtigere og mere sikkert.' ,[
         {text: 'Nej',
-          onPress: () => navigation.navigate('NotificationVerification'),
+          onPress: () => handleSkipNavigation(),
         },
         {text: 'Brug <biometri>',
-          onPress: () => navigation.navigate('NotificationVerification'),
+          onPress: () => handleSkipNavigation(),
           style: 'cancel',
         },
       ]);

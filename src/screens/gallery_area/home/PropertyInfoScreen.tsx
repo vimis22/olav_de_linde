@@ -4,9 +4,10 @@ import {ImageBackground, ScrollView, StyleSheet,  View} from 'react-native';
 import DropdownMenu from '../../../components/DropdownMenu.tsx';
 import IconText from '../../../components/IconText.tsx';
 import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import DropdownValues from '../../../components/DropdownValues.tsx';
 
 const PropertyInfoScreen = ({navigation}: any) => {
-  const [_selectedValue, setSelectedValue] = useState('');
+  const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -16,17 +17,12 @@ const PropertyInfoScreen = ({navigation}: any) => {
             <View style={styles.dropdownContainer}>
               <View style={styles.dropdownRoot}>
                 <DropdownMenu
-                  data={[
-                    { key: '1', value: 'Edisionsvej 2, 5000 Odense C' },
-                    { key: '2', value: 'Risingvej 65, 5000 Odense C' },
-                    { key: '3', value: 'Vestergade 13, 5000 Odense C' },
-                    { key: '4', value: 'Rewentlovsvej 132, 5000 Odense C' },
-                  ]}
+                  data={DropdownValues}
                   setSelected={setSelectedValue}
                   dropdownStyles={styles.dropdownStyles}
                   dropdownItemStyles={styles.dropdownStyles}
                   backgroundColor={'#868595'}
-                  placeholder="Vælg en mulighed"
+                  placeholder={DropdownValues[0].value}
                   containerHeight={40}
                   containerWidth={300}
                   optionsHeight={200}

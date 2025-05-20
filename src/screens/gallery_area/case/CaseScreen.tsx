@@ -6,8 +6,9 @@ import IconText from '../../../components/IconText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
 import PopupScreen from '../../../components/PopupScreen.tsx';
+import DropdownValues from '../../../components/DropdownValues.tsx';
 const CaseScreen = ({navigation}: any) => {
-  const [_selectedValue, setSelectedValue] = useState('');
+  const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);
   const [enablePopup, setEnablePopup] = useState(true);
   const [, setShowAcuteEmployee] = useState(false);
   return (
@@ -27,14 +28,9 @@ const CaseScreen = ({navigation}: any) => {
               <View style={styles.dropdownContainer}>
                 <View style={styles.dropdownRoot}>
                   <DropdownMenu
-                    data={[
-                      {key: '1', value: 'Edisionsvej 2, 5000 Odense C'},
-                      {key: '2', value: 'Risingvej 65, 5000 Odense C'},
-                      {key: '3', value: 'Vestergade 13, 5000 Odense C'},
-                      {key: '4', value: 'Rewentlovsvej 132, 5000 Odense C'},
-                    ]}
+                    data={DropdownValues}
                     setSelected={setSelectedValue} dropdownStyles={styles.dropdownStyles} dropdownItemStyles={styles.dropdownStyles}
-                    backgroundColor={'#868595'} placeholder="Vælg en mulighed" containerHeight={40} containerWidth={300}
+                    backgroundColor={'#868595'} placeholder={DropdownValues[0].value} containerHeight={40} containerWidth={300}
                     search={false} dropdownItemTextStyle={{}} searchBoxStyles={{}} searchBoxTextStyle={{}}
                     optionsHeight={180} optionsWidth={300} textColor={'#ffffff'}
                   />

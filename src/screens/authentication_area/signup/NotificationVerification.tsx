@@ -1,21 +1,22 @@
 import React from 'react';
-import {Image, ImageBackground, View, StyleSheet, Alert} from 'react-native';
+import {Image, ImageBackground, View, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import GlobalStyles, {notificationsVerificationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/NormalText.tsx';
 import ActionButton from '../../../components/ActionButton.tsx';
 
-const NotificationVerification = ({navigation}: any) => {
-    const handleSkipNavigation = async () => {
-        navigation.navigate('HomeScreen');
+const NotificationVerification = ({navigation, route}: any) => {
+  const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};
+  const handleNextNavigation = async () => {
+        navigation.navigate('HomeScreen', {name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber});
     };
 
   const createThreeButtonAlert = () => {
     Alert.alert('Vil du tillade notifikationer?', 'Notifikationer kan indeholde alerts, sounds og icon badges' ,[
       {text: 'Tillad ikke',
-        onPress: () => navigation.navigate('HomeScreen'),
+        onPress: () => handleNextNavigation(),
       },
       {text: 'Tillad',
-        onPress: () => navigation.navigate('HomeScreen'),
+        onPress: () => handleNextNavigation(),
         style: 'cancel',
       },
     ]);
@@ -23,14 +24,14 @@ const NotificationVerification = ({navigation}: any) => {
 
     return (
         <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
-            <View style={GlobalStyles.imageContainer} onPress={() => navigation.navigate('BiometricsVerification')}>
+            <TouchableOpacity style={GlobalStyles.imageContainer} onPress={() => handleNextNavigation()}>
                 <Image source={notificationsVerificationImage} style={GlobalStyles.mainLogo} />
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.navigationBox}>
                 <NormalText text={'Afventer Godkendelse'} fontSize={20} textColor={'#000000'} fontWeight={'bold'} />
                 <NormalText text={'Når vi har en godkendt oprettelsen fa din profil kn du logge ind. Vent venligst indtil da.'} fontSize={18}/>
-                <ActionButton onPress={handleSkipNavigation} title={'Aktiver'}
+                <ActionButton onPress={handleNextNavigation} title={'Aktiver'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
                 <ActionButton onPress={createThreeButtonAlert} title={'Spring over'}
                               backgroundColor={'transparent'} textColor={'#FF6A00'} height={50} width={250}/>

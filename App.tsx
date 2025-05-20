@@ -26,6 +26,7 @@ import CompletedCaseScreen from './src/screens/gallery_area/case/CompletedCaseSc
 import {ProfileImageProvider} from './src/functions/providers/ProfileImageProvider.tsx';
 import ExperimentalChat from './src/screens/gallery_area/case/ExperimentalChat.tsx';
 import AcuteEmployee from './src/screens/gallery_area/case/AcuteEmployee.tsx';
+import PropertyInfoScreen from './src/screens/gallery_area/home/PropertyInfoScreen.tsx';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -62,6 +63,7 @@ export default function App() {
               <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
               <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
               <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
+              <Stack.Screen name={'PropertyInfoScreen'} component={PropertyInfoScreen} />
               <Stack.Screen name={'HomeScreen'} component={NavbarNavigation} />
             </Stack.Navigator>
           </NavigationContainer>
@@ -131,6 +133,7 @@ function HomeNavigation() {
       <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
       <Stack.Screen name={'ExperimentalChat'} component={ExperimentalChat} />
       <Stack.Screen name={'AcuteEmployee'} component={AcuteEmployee} />
+      <Stack.Screen name={'PropertyInfoScreen'} component={PropertyInfoScreen} />
     </Stack.Navigator>
   );
 }
@@ -145,6 +148,7 @@ function CaseNavigation(){
       <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
       <Stack.Screen name={'ExperimentalChat'} component={ExperimentalChat} />
       <Stack.Screen name={'AcuteEmployee'} component={AcuteEmployee} />
+      <Stack.Screen name={'ChatScreen'} component={ExperimentalChat} />
     </Stack.Navigator>
   );
 }
