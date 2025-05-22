@@ -48,10 +48,10 @@ const CreatePasswordSignup = ({navigation, route}: any) => {
                 <InputFieldArea fieldIcon={userIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Email'}
                                 value={email} onChangeText={setEmail} containerHeight={50} containerRadius={20} whenPassword={false} />
 
-                <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Kodeord'}
+                <InputFieldArea fieldIcon={lockIcon} displayIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Kodeord'}
                                 value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20} whenPassword={true} />
 
-                <InputFieldArea fieldIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Gentag Kodeord'}
+                <InputFieldArea fieldIcon={lockIcon} displayIcon={lockIcon} fieldIconSize={28} textColor={'#000000'} placeholder={'Gentag Kodeord'}
                                 value={confirmPassword} onChangeText={setConfirmPassword} containerHeight={50} containerRadius={20} whenPassword={true} />
 
                 <ActionButton onPress={() => manageCollectionOfSignup()} title={isLoading ? 'Opretter...' : 'Opret'}
