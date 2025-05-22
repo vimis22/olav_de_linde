@@ -55,12 +55,7 @@ export default function App() {
               <Stack.Screen name={'SplashScreen'} component={SplashScreen} />
               <Stack.Screen name={'LoginScreen'} component={LoginScreen} />
               <Stack.Screen name={'ForgotPasswordScreen'} component={ForgotPasswordScreen} />
-              <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
-              <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
-              <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
-              <Stack.Screen name={'SignupVerification'} component={SignupVerification} />
-              <Stack.Screen name={'BiometricsVerification'} component={BiometricsVerification} />
-              <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
+              <Stack.Screen name={'CreateCompanySignup'} component={AccountSetupNavigation} />
               <Stack.Screen name={'ProfileScreen'} component={ProfileScreen} />
               <Stack.Screen name={'PasswordScreen'} component={PasswordScreen} />
               <Stack.Screen name={'PropertyInfoScreen'} component={PropertyInfoScreen} />
@@ -163,6 +158,20 @@ function SettingsNavigation(){
     </ProfileImageProvider>
   );
 }
+
+function AccountSetupNavigation() {
+  return (
+    <Stack.Navigator initialRouteName={'CreateCompanySignup'}>
+      <Stack.Screen name={'CreateCompanySignup'} component={CreateCompanySignup} />
+      <Stack.Screen name={'CreateNameSignup'} component={CreateNameSignup} />
+      <Stack.Screen name={'CreatePasswordSignup'} component={CreatePasswordSignup} />
+      <Stack.Screen name={'SignupVerification'} component={SignupVerification} />
+      <Stack.Screen name={'BiometricsVerification'} component={BiometricsVerification} />
+      <Stack.Screen name={'NotificationVerification'} component={NotificationVerification} />
+    </Stack.Navigator>
+  );
+}
+
 const styles = StyleSheet.create({
   tabBar: {
     height: 75,
