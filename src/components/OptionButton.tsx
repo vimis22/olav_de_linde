@@ -41,15 +41,13 @@ const OptionButton: React.FC<OptionButtonProps> = ({value, onPress, title, backg
   return (
         <TouchableOpacity style={[GlobalStyles.circleContainer, { backgroundColor: currentBackgroundColor,
           height, width, borderRadius, borderWidth, borderColor }]} onPress={highlightPress}>
+          <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
+            borderRadius: fieldIconSize / 2, backgroundColor: tickMarkIcon ? fieldIconBackground : '#D3D3D3',
+          }]}>
             {tickMarkIcon && (
-                <View style={[GlobalStyles.iconCircle, {width: fieldIconSize, height: fieldIconSize,
-                    borderRadius: fieldIconSize / 2, backgroundColor: fieldIconBackground,
-                }]}>
-                  {tickMarkIcon && (
-                    <Image source={fieldIcon} style={GlobalStyles.icon} resizeMode={'contain'} />
-                  )}
-                </View>
+              <Image source={fieldIcon} style={GlobalStyles.icon} resizeMode={'contain'} />
             )}
+          </View>
             <Text style={[GlobalStyles.textInput, selected && { color: currentTextColor, fontSize: fontSize }]}>{title}</Text>
         </TouchableOpacity>
     );
