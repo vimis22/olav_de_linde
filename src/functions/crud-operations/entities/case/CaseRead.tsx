@@ -1,12 +1,13 @@
 import firestore from '@react-native-firebase/firestore';
+import { CaseInfo } from './CaseInfo.ts';
 
-export const readCaseById = async (id: string) => {
+export const readCaseById = async (id: string): Promise<CaseInfo | {id: number}> => {
     try {
         const doc = await firestore().collection('Case').doc(id).get();
         if (doc.exists) {
-            return {id: doc.id, ...doc.data()};
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         } else {
-            console.log('Case does not exists');
+            console.log('Case does not exist');
             return {id: -1};
         }
     } catch (error) {
@@ -15,11 +16,11 @@ export const readCaseById = async (id: string) => {
     }
 };
 
-export const readAllCase = async () => {
+export const readAllCase = async (): Promise<CaseInfo[] | {id: number}> => {
     try {
         const snapShot = await firestore().collection('Case').get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+        return snapShot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         });
     } catch (error) {
         console.log('System is not able to fetch all Cases', error);
@@ -27,78 +28,77 @@ export const readAllCase = async () => {
     }
 };
 
-export const readAllCasesByCreationDate = async (creationDate: Date) => {
+export const readAllCasesByCreationDate = async (creationDate: Date): Promise<CaseInfo[] | number> => {
     try {
         const snapShot = await firestore()
-            .collection('Cases')
-            .where('CreationDate','==', creationDate)
+            .collection('Case')
+            .where('createdAt','==', creationDate)
             .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+        return snapShot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         });
     } catch (error) {
-        console.error('System is not able to fetch by CreationDate', error);
+        console.error('System is not able to fetch by createdAt', error);
         return -1;
     }
 };
 
-export const readAllCasesByUpdateDate = async (updateDate: Date) => {
+export const readAllCasesByUpdateDate = async (updateDate: Date): Promise<CaseInfo[] | number> => {
     try {
         const snapShot = await firestore()
-            .collection('Cases')
-            .where('UpdateDate','==', updateDate)
+            .collection('Case')
+            .where('updateDate','==', updateDate)
             .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+        return snapShot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         });
     } catch (error) {
-        console.error('System is not able to fetch by UpdateDate', error);
+        console.error('System is not able to fetch by updateDate', error);
         return -1;
     }
 };
 
-
-export const readAllCasesByDeadline = async (deadline: Date) => {
+export const readAllCasesByDeadline = async (deadline: Date): Promise<CaseInfo[] | number> => {
     try {
         const snapShot = await firestore()
-            .collection('Cases')
-            .where('Deadline','==', deadline)
+            .collection('Case')
+            .where('deadline','==', deadline)
             .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+        return snapShot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         });
     } catch (error) {
-        console.error('System is not able to fetch by Deadline', error);
+        console.error('System is not able to fetch by deadline', error);
         return -1;
     }
 };
 
-export const readAllCasesByTitle = async (title: string) => {
+export const readAllCasesByTitle = async (title: string): Promise<CaseInfo[] | number> => {
     try {
         const snapShot = await firestore()
-            .collection('Cases')
-            .where('Title','==', title)
+            .collection('Case')
+            .where('title','==', title)
             .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+        return snapShot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         });
     } catch (error) {
-        console.error('System is not able to fetch by Title', error);
+        console.error('System is not able to fetch by title', error);
         return -1;
     }
 };
 
-export const readAllCasesByDescription = async (description: string) => {
+export const readAllCasesByDescription = async (description: string): Promise<CaseInfo[] | number> => {
     try {
         const snapShot = await firestore()
-            .collection('Cases')
-            .where('Description','==', description)
+            .collection('Case')
+            .where('description','==', description)
             .get();
-        return snapShot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+        return snapShot.docs.map((doc) => {
+            return {id: doc.id, ...doc.data()} as CaseInfo;
         });
     } catch (error) {
-        console.error('System is not able to fetch by Description', error);
+        console.error('System is not able to fetch by description', error);
         return -1;
     }
 };

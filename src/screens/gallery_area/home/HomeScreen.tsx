@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ImageBackground, View, StyleSheet, ScrollView} from 'react-native';
 import GlobalStyles, {
   alphabetIcon,
@@ -13,9 +13,33 @@ import IconText from '../../../components/textual/IconText.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import ActiveCaseBox from '../../../components/box/ActiveCaseBox.tsx';
 import DropdownValues from '../../../components/menus/DropdownValues.tsx';
+import { readAllCase } from '../../../functions/crud-operations/entities/case/CaseRead.tsx';
+import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 
 const HomeScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);
+  const [cases, setCases] = useState<CaseInfo[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchCases = async () => {
+      try {
+        setLoading(true);
+        const result = await readAllCase();
+        if (Array.isArray(result)) {
+          setCases(result);
+        } else {
+          console.error('Failed to fetch cases:', result);
+        }
+      } catch (error) {
+        console.error('Error fetching cases:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCases();
+  }, []);
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -54,10 +78,53 @@ const HomeScreen = ({navigation}: any) => {
             <NormalText text={'Overblik over dine aktive sager. Tryk på sagen for at se flere informationer.'} fontSize={16}/>
           </View>
 
-          <CaseBox onPress={() => navigation.navigate('CaseScreen')} title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'} fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={'100%'}
-                   caseContainerBorderRadius={10} imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
-                   imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3} textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'}
-          />
+          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollView} contentContainerStyle={styles.scrollViewContent}>
+            <CaseBox
+              onPress={() => navigation.navigate('CaseScreen')}
+              title={'Opret Sag'}
+              backgroundColor={'#ffffff'}
+              textColor={'#D8D8CE'}
+              fieldIcon={plusIcon}
+              caseContainerHeight={200}
+              caseContainerWidth={200}
+              caseContainerBorderRadius={10}
+              imageContainerHeight={60}
+              imageContainerWidth={60}
+              imageContainerBorderRadius={30}
+              imageContainerBackgroundColor={'transparent'}
+              imageContainerBorderColor={'#D8D8CE'}
+              imageContainerBorderWidth={3}
+              textContainerHeight={40}
+              textContainerWidth={'80%'}
+              textContainerBorderRadius={5}
+              textContainerBackgroundColor={'transparent'}
+            />
+
+            {!loading && cases.map((caseItem) => (
+              <CaseBox
+                key={caseItem.id}
+                onPress={() => navigation.navigate('CaseScreen', { caseId: caseItem.id })}
+                title={caseItem.title || 'Untitled Case'}
+                backgroundColor={'#ffffff'}
+                textColor={'#D8D8CE'}
+                fieldIcon={houseIcon}
+                caseContainerHeight={200}
+                caseContainerWidth={200}
+                caseContainerBorderRadius={10}
+                imageContainerHeight={60}
+                imageContainerWidth={60}
+                imageContainerBorderRadius={30}
+                imageContainerBackgroundColor={'transparent'}
+                imageContainerBorderColor={'#D8D8CE'}
+                imageContainerBorderWidth={3}
+                textContainerHeight={40}
+                textContainerWidth={'80%'}
+                textContainerBorderRadius={5}
+                textContainerBackgroundColor={'transparent'}
+              />
+            ))}
+          </ScrollView>
+
 
           <View>
             <NormalText text={'Afsluttede sager'} fontSize={20} fontWeight={'bold'}/>
@@ -119,6 +186,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 10,
     zIndex: 0,
+  },
+  horizontalScrollView: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
+  scrollViewContent: {
+    paddingLeft: 20, // Add padding to the left of the content
+    paddingRight: 20, // Add padding to the right of the content
+    gap: 15, // Add gap between items
   },
   title: {
     fontSize: 20,

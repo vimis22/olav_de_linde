@@ -1,20 +1,16 @@
 import firestore from '@react-native-firebase/firestore';
 import {CaseInfo} from './CaseInfo.ts';
-export const createCase = async (defect: CaseInfo): Promise<number> => {
+export const createCase = async (defect: CaseInfo): Promise<string | number> => {
     try {
-        const batch = firestore().batch();
-
-        const caseRef = firestore().collection('Case').doc(defect.id);
-        batch.set(caseRef, {
-            id: defect.id,
-            title: '',
-            description: '',
-            createdDate: firestore.FieldValue.serverTimestamp(),
+        const docRef = await firestore().collection('Case').add({
+            title: defect.title,
+            description: defect.description,
+            createdAt: firestore.FieldValue.serverTimestamp(),
             updateDate: firestore.FieldValue.serverTimestamp(),
-            Deadline: firestore.FieldValue.serverTimestamp(),
+            deadline: defect.deadline || firestore.FieldValue.serverTimestamp(),
         });
-        await batch.commit();
-        return 1;
+        console.log('Case created with ID: ', docRef.id);
+        return docRef.id;
     } catch (error) {
         console.error('An Error occurred in createCase', error);
         return -1;
