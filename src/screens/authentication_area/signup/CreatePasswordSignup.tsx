@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, View, Alert} from 'react-native';
 import GlobalStyles, {houseIcon, lockIcon, logoImage, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import ProgressIndicator from '../../../components/ProgressIndicator.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
+import ProgressIndicator from '../../../components/progress/ProgressIndicator.tsx';
 import {signupWithUser} from '../../../functions/manager_services/AuthenticationManager.tsx';
 
 const CreatePasswordSignup = ({navigation, route}: any) => {

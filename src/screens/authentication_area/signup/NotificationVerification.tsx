@@ -1,14 +1,17 @@
 import React from 'react';
 import {Image, ImageBackground, View, StyleSheet, Alert, TouchableOpacity} from 'react-native';
 import GlobalStyles, {notificationsVerificationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
 const NotificationVerification = ({navigation, route}: any) => {
   const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};
   const handleNextNavigation = async () => {
-        navigation.navigate('HomeScreen', {name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber});
-    };
+    navigation.reset({
+      index: 0,
+      routes: [{name: 'HomeScreen', params: {name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber,},},],
+    });
+  };
 
   const createThreeButtonAlert = () => {
     Alert.alert('Vil du tillade notifikationer?', 'Notifikationer kan indeholde alerts, sounds og icon badges' ,[

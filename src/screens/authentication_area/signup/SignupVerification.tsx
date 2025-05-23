@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
 import GlobalStyles, {houseLocationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
 
 const SignupVerification = ({navigation, route}: any) => {
   const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};

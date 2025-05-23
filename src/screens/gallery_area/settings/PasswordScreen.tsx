@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View} from 'react-native';
 import GlobalStyles, {lockIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import PopupScreen from '../../../components/PopupScreen.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
+import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
 
 const PasswordScreen = ({navigation}: any) => {

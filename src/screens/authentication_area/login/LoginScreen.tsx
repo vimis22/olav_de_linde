@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {Alert, Image, ImageBackground, Text, View} from 'react-native';
 import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
 import {loginWithEmail } from '../../../functions/manager_services/AuthenticationManager.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
@@ -18,7 +18,10 @@ const LoginScreen = ({navigation}: any) => {
             const user = await loginWithEmail(email, password);
             console.log('The user has logged in', user?.uid);
             Alert.alert('Login Success');
-            navigation.navigate('HomeScreen');
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'HomeScreen'}],
+            });
         } catch (error: any){
             console.error('The Login has failed', error?.code, error?.message);
             Alert.alert('The Login has failed', error?.message ?? 'No Message');

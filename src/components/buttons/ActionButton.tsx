@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
-import GlobalStyles from '../styling/GlobalStyles.tsx';
+import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
 interface ActionButtonProps {
   onPress: () => void;

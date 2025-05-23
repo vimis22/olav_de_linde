@@ -2,7 +2,7 @@ import firestore from '@react-native-firebase/firestore';
 
 export const deleteCasesById = async (id: string) => {
     try {
-        const docRef = firestore().collection('Cases').doc(id);
+        const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
 
         if (!doc.exists) {

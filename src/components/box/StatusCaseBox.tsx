@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import GlobalStyles from '../styling/GlobalStyles.tsx';
+import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
 interface StatusCaseBoxProps{
   onPress: () => void;

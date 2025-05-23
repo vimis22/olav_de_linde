@@ -7,12 +7,12 @@ import GlobalStyles, {
   plusIcon, userIcon,
   wallpaperBackground,
 } from '../../../styling/GlobalStyles.tsx';
-import CaseBox from '../../../components/CaseBox.tsx';
-import DropdownMenu from '../../../components/DropdownMenu.tsx';
-import IconText from '../../../components/IconText.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import ActiveCaseBox from '../../../components/ActiveCaseBox.tsx';
-import DropdownValues from '../../../components/DropdownValues.tsx';
+import CaseBox from '../../../components/box/CaseBox.tsx';
+import DropdownMenu from '../../../components/menus/DropdownMenu.tsx';
+import IconText from '../../../components/textual/IconText.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import ActiveCaseBox from '../../../components/box/ActiveCaseBox.tsx';
+import DropdownValues from '../../../components/menus/DropdownValues.tsx';
 
 const HomeScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);

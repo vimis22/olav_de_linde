@@ -13,5 +13,6 @@ export const createCase = async (title: string, description: string, technicians
     return docRef.id;
   } catch (error) {
     console.log('An Error occurred while adding the following ID: ', error);
+    return -1;
   }
 };

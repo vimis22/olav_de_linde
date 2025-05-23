@@ -15,6 +15,8 @@ export async function loginWithEmail(email: string, password: string){
     }
 }
 
+//mockdata -> signupWithEmail(mockEmail, mockPassword) -> await -> responce
+
 export async function signupWithEmail(email: string, password: string) {
   try {
     const credentials = await auth().createUserWithEmailAndPassword(email, password);

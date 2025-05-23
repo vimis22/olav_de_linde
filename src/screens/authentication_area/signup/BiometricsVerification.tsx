@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, ImageBackground, TouchableOpacity, View, StyleSheet, Alert} from 'react-native';
 import GlobalStyles, {biometricsVerificationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
 const BiometricsVerification = ({navigation, route}: any) => {
   const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};

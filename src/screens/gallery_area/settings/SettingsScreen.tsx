@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {ImageBackground, View, StyleSheet, Image, Linking, Alert} from 'react-native';
 import GlobalStyles, {callIcon, documentIcon, lockIcon, logIcon, protectionIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import MenuOptions from '../../../components/MenuOptions.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import MenuOptions from '../../../components/menus/MenuOptions.tsx';
 import {useProfileImage} from '../../../functions/providers/ProfileImageProvider.tsx';
-import PopupScreen from '../../../components/PopupScreen.tsx';
+import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {loggingout} from '../../../functions/manager_services/AuthenticationManager.tsx';
 import auth from '@react-native-firebase/auth';
 const SettingsScreen = ({navigation}: any) => {

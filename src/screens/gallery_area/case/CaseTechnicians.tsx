@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import {Alert, ImageBackground, StyleSheet, View} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import OptionButton from '../../../components/OptionButton.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import PopupScreen from '../../../components/PopupScreen.tsx';
+import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import OptionButton from '../../../components/buttons/OptionButton.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
+import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {createCase} from '../../../functions/manager_services/CaseManager.tsx';
-import TechnicianValues from '../../../components/TechnicianValues.tsx';
+import TechnicianValues from '../../../components/menus/TechnicianValues.tsx';
 
 
 const CaseTechnicians = ({navigation, route}: any) => {

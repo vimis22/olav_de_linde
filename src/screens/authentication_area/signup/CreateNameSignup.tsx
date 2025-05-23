@@ -7,9 +7,9 @@ import GlobalStyles, {
   userIcon,
   wallpaperBackground,
 } from '../../../styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import ProgressIndicator from '../../../components/ProgressIndicator.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
+import ProgressIndicator from '../../../components/progress/ProgressIndicator.tsx';
 
 const CreateNameSignup = ({navigation, route}: any) => {
     const [name, setName] = useState('');

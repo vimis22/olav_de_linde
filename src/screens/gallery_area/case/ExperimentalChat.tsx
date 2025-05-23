@@ -1,10 +1,10 @@
 import {View, FlatList, StyleSheet, Image} from 'react-native';
 import React, {useState} from 'react';
 import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
-import NormalText from '../../../components/NormalText.tsx';
-import OptionButton from '../../../components/OptionButton.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import OptionButton from '../../../components/buttons/OptionButton.tsx';
 import {imageIcon, penIcon, userIcon} from '../../../styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 
 const mockMessages = [
   {id: '1', sender: 'Vivek Misra', content: 'Message 1', reciever: 'Henrik'},

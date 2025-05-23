@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import OptionButton from '../../../components/OptionButton.tsx';
-import NormalText from '../../../components/NormalText.tsx';
+import OptionButton from '../../../components/buttons/OptionButton.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
 import {electricityIcon, hammerIcon, paintingIcon, waterIcon} from '../../../styling/GlobalStyles.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
 const AcuteEmployee = ({navigation}: any) => {
   const [optionalVisibility1, setOptionalVisibility1] = useState(false);

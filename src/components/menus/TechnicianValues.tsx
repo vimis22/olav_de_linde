@@ -1,4 +1,4 @@
-import {electricityIcon, hammerIcon, paintingIcon, waterIcon} from '../styling/GlobalStyles.tsx';
+import {electricityIcon, hammerIcon, paintingIcon, waterIcon} from '../../styling/GlobalStyles.tsx';
 
 const TechnicianValues = [
   { key: '1', value: 'VICEVÆRT', icon: paintingIcon },

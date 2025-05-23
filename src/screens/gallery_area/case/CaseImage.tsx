@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
 import {View, ImageBackground, StyleSheet, ScrollView} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import CaseBox from '../../../components/CaseBox.tsx';
+import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
+import CaseBox from '../../../components/box/CaseBox.tsx';
 import {launchImageLibrary} from 'react-native-image-picker';
-import NormalText from '../../../components/NormalText.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
 
 const CaseImage = ({navigation, route}: any) => {
   const [imageLink, setImageLink] = useState<string | null>(null);

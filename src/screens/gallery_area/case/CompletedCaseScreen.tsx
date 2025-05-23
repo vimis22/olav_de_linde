@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, View, ScrollView } from 'react-native';
-import NormalText from '../../../components/NormalText.tsx';
-import CaseProgressIndicator from '../../../components/CaseProgressIndicator.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import CaseProgressIndicator from '../../../components/progress/CaseProgressIndicator.tsx';
 import {calenderIcon, locationIcon, pentiaHouseBackground, screwDriverIcon, tickMarkIcon, userIcon} from '../../../styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import TextBox from '../../../components/TextBox.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
+import TextBox from '../../../components/box/TextBox.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
 const CompletedCaseScreen = ({ navigation }: any) => {
   const [password, setPassword] = useState('');

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground,} from '../../../styling/GlobalStyles.tsx';
-import DropdownMenu from '../../../components/DropdownMenu.tsx';
-import IconText from '../../../components/IconText.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
-import PopupScreen from '../../../components/PopupScreen.tsx';
-import DropdownValues from '../../../components/DropdownValues.tsx';
+import DropdownMenu from '../../../components/menus/DropdownMenu.tsx';
+import IconText from '../../../components/textual/IconText.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
+import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
+import PopupScreen from '../../../components/menus/PopupScreen.tsx';
+import DropdownValues from '../../../components/menus/DropdownValues.tsx';
 const CaseScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);
   const [enablePopup, setEnablePopup] = useState(true);

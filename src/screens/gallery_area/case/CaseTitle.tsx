@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
-import PropertyProgressIndicator from '../../../components/PropertyProgressIndicator.tsx';
-import TextFieldArea from '../../../components/TextFieldArea.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
+import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
+import TextFieldArea from '../../../components/textual/TextFieldArea.tsx';
 const CaseTitle = ({navigation}: any) => {
   const [, _setSelectedValue] = useState('');
   const [title, setTitle] = useState('');

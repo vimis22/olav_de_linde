@@ -7,11 +7,11 @@ import GlobalStyles, {
   userIcon,
   wallpaperBackground,
 } from '../../../styling/GlobalStyles.tsx';
-import InputFieldArea from '../../../components/InputFieldArea.tsx';
-import ActionButton from '../../../components/ActionButton.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
+import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import {deleteUser} from '../../../functions/manager_services/AuthenticationManager.tsx';
 import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
-import PopupScreen from '../../../components/PopupScreen.tsx';
+import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 const ProfileScreen = ({navigation}: any) => {
   const [deleteProfile, setDeleteProfile] = useState(false);
   const [visible, _setVisible] = useState(false);
