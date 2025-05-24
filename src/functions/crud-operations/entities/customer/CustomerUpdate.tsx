@@ -7,10 +7,13 @@ export const updateCustomer = async (customerInfo: UserInfo) => {
         const docRef = firestore().collection('Customer').doc(id);
         const doc = await docRef.get();
 
-        if (!doc.exists){
-            console.log('System cannot recognize customer information');
+        if (doc.exists){
+            console.log('Updating customer information');
             await docRef.update(updatedData);
             return updatedData;
+        } else {
+            console.log('System cannot recognize customer information');
+            return -1;
         }
     } catch (error) {
         console.error('An Error occurred while updating the customer', error);
@@ -189,5 +192,3 @@ export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo
         console.error('An Error occured while updating the phone number through email', error);
     };
 };
-
-

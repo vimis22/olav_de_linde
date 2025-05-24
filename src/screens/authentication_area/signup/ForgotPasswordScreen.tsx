@@ -11,6 +11,23 @@ import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 const ForgotPasswordScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    const handleResetPassword = async () => {
+        if (!email) {
+            setErrorMessage('Indtast venligst din email');
+            return;
+        }
+
+        try {
+            await resetPasswordWithEmail(email);
+            setErrorMessage('');
+            setNotificationsEnabled(true);
+        } catch (error) {
+            console.error('Error sending password reset email:', error);
+            setErrorMessage('An Error occured while sending the password. Please check your email');
+        }
+    };
     return (
         <ImageBackground source={wallpaperBackground} style={globalStyles.backgroundImage} resizeMode={'cover'}>
             <View style={GlobalStyles.logoImageContainer}>
@@ -24,7 +41,9 @@ const ForgotPasswordScreen = ({navigation}: any) => {
 
                 <NormalText text={'Indtast din email, så sender vi en mail til gendannelse af password'} fontSize={14} textColor={'#5C6855'}/>
 
-                <ActionButton onPress={async ()=> {await resetPasswordWithEmail && setNotificationsEnabled(true)}} title={'Send'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
+                {errorMessage ? <NormalText text={errorMessage} fontSize={14} textColor={'red'}/> : null}
+
+                <ActionButton onPress={handleResetPassword} title={'Send'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
               {notificationsEnabled && (
                 <View>
                   <PopupScreen title={'Check din mail'} description={'Vi har sendt en mail til dig med et link til gendannelse af dit kodeord'} height={200} width={200}

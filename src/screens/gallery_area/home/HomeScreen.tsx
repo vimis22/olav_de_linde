@@ -12,14 +12,16 @@ import DropdownMenu from '../../../components/menus/DropdownMenu.tsx';
 import IconText from '../../../components/textual/IconText.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import ActiveCaseBox from '../../../components/box/ActiveCaseBox.tsx';
-import DropdownValues from '../../../components/menus/DropdownValues.tsx';
+import UserAddressDropdownValues from '../../../components/menus/UserAddressDropdownValues.tsx';
 import { readAllCase } from '../../../functions/crud-operations/entities/case/CaseRead.tsx';
 import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 
 const HomeScreen = ({navigation}: any) => {
-  const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);
+  const [_selectedValue, setSelectedValue] = useState('');
   const [cases, setCases] = useState<CaseInfo[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const addressValues = UserAddressDropdownValues();
 
   useEffect(() => {
     const fetchCases = async () => {
@@ -49,12 +51,21 @@ const HomeScreen = ({navigation}: any) => {
             <View style={styles.dropdownContainer}>
               <View style={styles.dropdownRoot}>
                 <DropdownMenu
-                  data={DropdownValues}
-                  setSelected={setSelectedValue} dropdownStyles={styles.dropdownStyles} dropdownItemStyles={styles.dropdownStyles}
-                  backgroundColor={'#868595'} placeholder={DropdownValues[0].value}
-                  containerHeight={40} containerWidth={300} search={false}
-                  dropdownItemTextStyle={{}} searchBoxStyles={{}} searchBoxTextStyle={{}}
-                  optionsHeight={200} optionsWidth={300} textColor={'#ffffff'}
+                  data={addressValues}
+                  setSelected={setSelectedValue}
+                  dropdownStyles={styles.dropdownStyles}
+                  dropdownItemStyles={styles.dropdownStyles}
+                  backgroundColor={'#868595'}
+                  placeholder={addressValues && addressValues.length > 0 ? addressValues[0].value : 'Indlæser adresse...'}
+                  containerHeight={40}
+                  containerWidth={300}
+                  search={false}
+                  dropdownItemTextStyle={{}}
+                  searchBoxStyles={{}}
+                  searchBoxTextStyle={{}}
+                  optionsHeight={200}
+                  optionsWidth={300}
+                  textColor={'#ffffff'}
                 />
               </View>
 
@@ -80,7 +91,7 @@ const HomeScreen = ({navigation}: any) => {
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollView} contentContainerStyle={styles.scrollViewContent}>
             <CaseBox
-              onPress={() => navigation.navigate('CaseScreen')}
+              onPress={() => navigation.navigate('CaseTab')}
               title={'Opret Sag'}
               backgroundColor={'#ffffff'}
               textColor={'#D8D8CE'}
@@ -103,7 +114,7 @@ const HomeScreen = ({navigation}: any) => {
             {!loading && cases.map((caseItem) => (
               <CaseBox
                 key={caseItem.id}
-                onPress={() => navigation.navigate('CaseScreen', { caseId: caseItem.id })}
+                onPress={() => navigation.navigate('CaseDetailsScreen', { caseId: caseItem.id })}
                 title={caseItem.title || 'Untitled Case'}
                 backgroundColor={'#ffffff'}
                 textColor={'#D8D8CE'}

@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {ImageBackground, View, StyleSheet, Image, Linking, Alert} from 'react-native';
+import {ImageBackground, View, StyleSheet, Image, Linking, Alert, ActivityIndicator} from 'react-native';
 import GlobalStyles, {callIcon, documentIcon, lockIcon, logIcon, protectionIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import MenuOptions from '../../../components/menus/MenuOptions.tsx';
 import {useProfileImage} from '../../../functions/providers/ProfileImageProvider.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import {loggingout} from '../../../functions/manager_services/AuthenticationManager.tsx';
 import auth from '@react-native-firebase/auth';
+import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 const SettingsScreen = ({navigation}: any) => {
   const [logout, setLogout] = useState(false);
   const {profileImage} = useProfileImage();
+  const {userInfoData, isLoading} = GetProfileInformation();
 
   /*
   @link https://reactnavigation.org/docs/navigation-actions/#reset
@@ -31,7 +32,11 @@ const SettingsScreen = ({navigation}: any) => {
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       <View style={styles.topSection}>
         <View style={styles.topInterNameSection}>
-          <NormalText text={'HEJ, HENRIK!'} fontSize={18} fontWeight={'bold'} />
+          {isLoading ? (
+            <ActivityIndicator size="large" color="#5C6855" />
+          ) : (
+            <NormalText text={`Hej ${userInfoData?.name || 'bruger'}`} fontSize={18} fontWeight={'bold'} />
+          )}
           <NormalText text={'Du har 2 lejemål'} fontSize={13} fontWeight={'bold'} />
         </View>
 

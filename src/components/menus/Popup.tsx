@@ -1,8 +1,8 @@
 import {View} from 'react-native';
-import NormalText from '../../components/textual/NormalText.tsx';
-import ActionButton from '../../components/buttons/ActionButton.tsx';
+import NormalText from '../textual/NormalText.tsx';
+import ActionButton from '../buttons/ActionButton.tsx';
 import globalStyles from '../../styling/GlobalStyles.tsx';
-import LoginScreen from '../authentication_area/login/LoginScreen.tsx';
+import LoginScreen from '../../screens/authentication_area/login/LoginScreen.tsx';
 
 
 /*

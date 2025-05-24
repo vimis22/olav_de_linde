@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {ImageBackground, ScrollView, StyleSheet, View} from 'react-native';
+import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
@@ -8,8 +9,52 @@ const CaseTitle = ({navigation}: any) => {
   const [, _setSelectedValue] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
+  const [pendingNavigation, setPendingNavigation] = useState<{ screen: string, params?: any } | null>(null);
+
+  const handleNavigation = (screenName: string, params?: any) => {
+    navigation.navigate(screenName, params);
+  };
+
+  const confirmNavigation = () => {
+    if (pendingNavigation) {
+      setShowExitConfirmation(false);
+      navigation.navigate(pendingNavigation.screen, pendingNavigation.params);
+      setPendingNavigation(null);
+    }
+  };
+
+  const cancelNavigation = () => {
+    setShowExitConfirmation(false);
+    setPendingNavigation(null);
+  };
+
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
+      {showExitConfirmation && (
+        <PopupScreen
+          title={'Er du sikker?'}
+          description={'Vil du forlade denne side? Dine ændringer vil ikke blive gemt.'}
+          height={200}
+          width={300}
+          optionText1={'Ja'}
+          optionText2={'Nej'}
+          optionTextColor1={'#FFFFFF'}
+          optionTextBackgroundColor1={'#CB4F00'}
+          optionTextBorderRadiusColor1={'#CB4F00'}
+          optionTextBorderWidth1={0}
+          optionTextColor2={'#FFFFFF'}
+          optionTextBackgroundColor2={'#5C6855'}
+          optionTextBorderRadiusColor2={'#5C6855'}
+          optionTextBorderWidth2={0}
+          onEnable={confirmNavigation}
+          onDisable={cancelNavigation}
+          backgroundColor={'#F9F9F4'}
+          titleColor={'#333333'}
+          descriptionColor={'#555555'}
+          visible={true}
+        />
+      )}
         <ScrollView style={styles.topSection}>
           <ImageBackground source={pentiaHouseBackground} style={styles.houseImage}/>
           <View style={styles.bottomSection}>
@@ -17,7 +62,7 @@ const CaseTitle = ({navigation}: any) => {
 
             <TextFieldArea placeholder={'Beskriv din sag'} onChangeText={setDescription} value={description} />
 
-            <ActionButton onPress={async () => navigation.navigate('CaseImage', {title, description})} title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
+            <ActionButton onPress={() => handleNavigation('CaseImage', {title, description})} title={'Næste'} backgroundColor={'transparent'} textColor={'#5C6855'} height={50} width={100} borderColor={'#5C6855'} />
 
             <PropertyProgressIndicator step={2} icon1={houseIcon} icon2={alphabetIcon} icon3={imageIcon} icon4={userIcon} progressColor={'#5C6855'}/>
           </View>

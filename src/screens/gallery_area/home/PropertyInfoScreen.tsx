@@ -4,10 +4,12 @@ import {ImageBackground, ScrollView, StyleSheet,  View} from 'react-native';
 import DropdownMenu from '../../../components/menus/DropdownMenu.tsx';
 import IconText from '../../../components/textual/IconText.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
-import DropdownValues from '../../../components/menus/DropdownValues.tsx';
+import UserAddressDropdownValues from '../../../components/menus/UserAddressDropdownValues.tsx';
 
 const PropertyInfoScreen = ({navigation}: any) => {
-  const [_selectedValue, setSelectedValue] = useState(DropdownValues[0].value);
+  const [_selectedValue, setSelectedValue] = useState('');
+
+  const addressValues = UserAddressDropdownValues();
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -17,12 +19,12 @@ const PropertyInfoScreen = ({navigation}: any) => {
             <View style={styles.dropdownContainer}>
               <View style={styles.dropdownRoot}>
                 <DropdownMenu
-                  data={DropdownValues}
+                  data={addressValues}
                   setSelected={setSelectedValue}
                   dropdownStyles={styles.dropdownStyles}
                   dropdownItemStyles={styles.dropdownStyles}
                   backgroundColor={'#868595'}
-                  placeholder={DropdownValues[0].value}
+                  placeholder={addressValues && addressValues.length > 0 ? addressValues[0].value : 'Indlæser adresse...'}
                   containerHeight={40}
                   containerWidth={300}
                   optionsHeight={200}
@@ -48,11 +50,11 @@ const PropertyInfoScreen = ({navigation}: any) => {
           </ImageBackground>
         </View>
         <View style={styles.bottomSection}>
-          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Virksomhedsnavn'} />
-          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Størrelse'} />
-          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'??'} />
-          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Forbrug'} />
-          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={'Regninger'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={''} placeholder={'Virksomhedsnavn'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={''} placeholder={'Størrelse'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={''} placeholder={'Bygningstype'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={''} placeholder={'Forbrug'} />
+          <InputFieldArea whenPassword={false} fieldIcon={houseIcon} value={''} placeholder={'Regninger'} />
         </View>
       </ScrollView>
     </ImageBackground>

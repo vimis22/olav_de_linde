@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import App from '../../../App.tsx';
+import App from '../../navigation/App.tsx';
 
 test('Navigation towards the next screen, when a button is pressed', async () => {
   const {getByTestId, findByText} = render(<App />);

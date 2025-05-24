@@ -5,4 +5,11 @@ export type CaseInfo = {
     creationDate?: Date,
     updateDate?: Date,
     deadline?: Date,
+    status?: string,
+    statusStep?: number,
+    resident?: string,
+    caretaker?: string,
+    landlord?: string,
+    imageUrl?: string,
+    documents?: string[],
 }

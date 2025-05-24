@@ -7,13 +7,15 @@ export const deleteCustomerById = async (customerId: UserInfo) => {
         const doc = await docRef.get();
 
         if (!doc.exists) {
-            console.log('System has successfully deleted the customer by the email', customerId.id);
+            console.log('Customer with ID does not exist:', customerId.id);
+            return -1;
         }
 
         await docRef.delete();
+        console.log('Customer with ID successfully deleted:', customerId.id);
         return 1;
     } catch (error) {
-        console.log('An Error occurred while updating the employee by ID', error);
+        console.error('An Error occurred while deleting the customer by ID:', error);
         return -1;
     }
 };
