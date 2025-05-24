@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {ImageBackground, View, StyleSheet, ScrollView} from 'react-native';
 import GlobalStyles, {
   alphabetIcon,
@@ -15,6 +15,7 @@ import ActiveCaseBox from '../../../components/box/ActiveCaseBox.tsx';
 import UserAddressDropdownValues from '../../../components/menus/UserAddressDropdownValues.tsx';
 import { readAllCase } from '../../../functions/crud-operations/entities/case/CaseRead.tsx';
 import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
+import { useFocusEffect } from '@react-navigation/native';
 
 const HomeScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
@@ -23,25 +24,31 @@ const HomeScreen = ({navigation}: any) => {
 
   const addressValues = UserAddressDropdownValues();
 
-  useEffect(() => {
-    const fetchCases = async () => {
-      try {
-        setLoading(true);
-        const result = await readAllCase();
-        if (Array.isArray(result)) {
-          setCases(result);
-        } else {
-          console.error('Failed to fetch cases:', result);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchCases = async () => {
+        try {
+          setLoading(true);
+          const result = await readAllCase();
+          if (Array.isArray(result)) {
+            setCases(result);
+          } else {
+            console.error('Failed to fetch cases:', result);
+          }
+        } catch (error) {
+          console.error('Error fetching cases:', error);
+        } finally {
+          setLoading(false);
         }
-      } catch (error) {
-        console.error('Error fetching cases:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+      };
 
-    fetchCases();
-  }, []);
+      fetchCases();
+
+      return () => {
+        // Cleanup function if needed
+      };
+    }, [])
+  );
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -91,7 +98,11 @@ const HomeScreen = ({navigation}: any) => {
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollView} contentContainerStyle={styles.scrollViewContent}>
             <CaseBox
-              onPress={() => navigation.navigate('CaseTab')}
+              onPress={() => navigation.navigate('CaseTab', {
+                screen: 'CaseScreen',
+                initial: true,
+                params: {}
+              })}
               title={'Opret Sag'}
               backgroundColor={'#ffffff'}
               textColor={'#D8D8CE'}

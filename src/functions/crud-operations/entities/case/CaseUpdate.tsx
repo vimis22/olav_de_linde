@@ -7,10 +7,13 @@ export const updateCase = async (caseInfo: CaseInfo) => {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
 
-        if (!doc.exists) {
-            console.log('System cannot recognize case information');
+        if (doc.exists) {
             await docRef.update(updatedData);
+            console.log('Case updated successfully');
             return updatedData;
+        } else {
+            console.log('System cannot recognize case information');
+            return -2;
         }
     } catch (error) {
         console.log('An Error occurred while updating the case', error);
@@ -49,13 +52,14 @@ export const updateCaseByDeadline = async (id: string, deadline: Date) => {
     try {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
-        if (!doc.exists) {
-            console.log('Case has been found with Deadline: ' + deadline);
+        if (doc.exists) {
+            await docRef.update({deadline: deadline});
+            console.log('System has updated the case with deadline: ' + deadline);
             return 1;
+        } else {
+            console.log('No case found with ID: ' + id);
+            return -2;
         }
-
-        await docRef.update({deadline: deadline});
-        console.log('System has updated the' + deadline + 'with: ' + deadline);
     } catch (error) {
         console.error('An Error has occurred while updating by Deadline', error);
         return -1;
@@ -66,13 +70,14 @@ export const updateCaseByTitle = async (id: string, title: string) => {
     try {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
-        if (!doc.exists) {
-            console.log('Non Customer has been found with Title: ' + title);
+        if (doc.exists) {
+            await docRef.update({title: title});
+            console.log('System has updated the case with title: ' + title);
             return 1;
+        } else {
+            console.log('No case found with ID: ' + id);
+            return -2;
         }
-
-        await docRef.update({title: title});
-        console.log('System has updated the' + title + 'with: ' + title);
     } catch (error) {
         console.error('An Error has occurred while updating by Title', error);
         return -1;
@@ -83,17 +88,16 @@ export const updateCaseByDescription = async (id: string, description: string) =
     try {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
-        if (!doc.exists) {
-            console.log('Non Customer has been found with Description: ' + description);
+        if (doc.exists) {
+            await docRef.update({description: description});
+            console.log('System has updated the case with description: ' + description);
             return 1;
+        } else {
+            console.log('No case found with ID: ' + id);
+            return -2;
         }
-
-        await docRef.update({description: description});
-        console.log('System has updated the' + description + 'with: ' + description);
     } catch (error) {
         console.error('An Error has occurred while updating by Description', error);
         return -1;
     }
 };
-
-

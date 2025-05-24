@@ -189,8 +189,16 @@ const CaseDetailsScreen = ({ navigation, route }: any) => {
             fieldIconBackground="#D8D8CE"
             fieldIconSize={28}
             textColor="#000000"
-            placeholder={caseData.deadline.toDateString()}
-            value={caseData.deadline.toDateString()}
+            placeholder={typeof caseData.deadline.toDateString === 'function'
+              ? caseData.deadline.toDateString()
+              : caseData.deadline instanceof Date
+                ? caseData.deadline.toDateString()
+                : new Date(caseData.deadline.seconds * 1000).toDateString()}
+            value={typeof caseData.deadline.toDateString === 'function'
+              ? caseData.deadline.toDateString()
+              : caseData.deadline instanceof Date
+                ? caseData.deadline.toDateString()
+                : new Date(caseData.deadline.seconds * 1000).toDateString()}
             onChangeText={() => {}}
             containerHeight={48}
             containerRadius={18}

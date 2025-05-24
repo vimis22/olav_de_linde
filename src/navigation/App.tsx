@@ -76,21 +76,17 @@ function NavbarNavigation(){
   const [showExitConfirmation, setShowExitConfirmation] = useState(false);
   const [pendingTab, setPendingTab] = useState(null);
 
-  // Function to handle tab press
   const handleTabPress = (tabName) => {
-    // If we're in CaseTab and trying to navigate away, show confirmation
     if (currentTab === 'CaseTab' && tabName !== 'CaseTab') {
       setPendingTab(tabName);
       setShowExitConfirmation(true);
-      return true; // Prevent default navigation
+      return true;
     }
 
-    // Otherwise, allow navigation
     setCurrentTab(tabName);
-    return false; // Allow default navigation
+    return false;
   };
 
-  // Confirm navigation away from CaseTab
   const confirmNavigation = () => {
     if (pendingTab) {
       setCurrentTab(pendingTab);
@@ -99,7 +95,6 @@ function NavbarNavigation(){
     }
   };
 
-  // Cancel navigation away from CaseTab
   const cancelNavigation = () => {
     setShowExitConfirmation(false);
     setPendingTab(null);
@@ -178,7 +173,22 @@ function NavbarNavigation(){
         })}
       >
         <Tab.Screen name={'HomeTab'} component={HomeNavigation} />
-        <Tab.Screen name={'CaseTab'} component={CaseNavigation} />
+        <Tab.Screen
+          name={'CaseTab'}
+          component={CaseNavigation}
+          options={{ unmountOnBlur: true }}
+          listeners={({ navigation, route: _route }) => ({
+            tabPress: (e) => {
+              e.preventDefault();
+              navigation.navigate('CaseTab', {
+                screen: 'CaseScreen',
+                params: {},
+              });
+            },
+            blur: () => {
+            },
+          })}
+        />
         <Tab.Screen name={'SettingsTab'} component={SettingsNavigation} />
       </Tab.Navigator>
     </>
@@ -204,7 +214,9 @@ function HomeNavigation() {
 
 function CaseNavigation(){
   return (
-    <Stack.Navigator initialRouteName={'CaseScreen'}>
+    <Stack.Navigator
+      initialRouteName={'CaseScreen'}
+    >
       <Stack.Screen name={'CaseScreen'} component={CaseScreen} />
       <Stack.Screen name={'CaseTitle'} component={CaseTitle} />
       <Stack.Screen name={'CaseImage'} component={CaseImage} />
