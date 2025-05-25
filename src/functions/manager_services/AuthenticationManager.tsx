@@ -100,7 +100,7 @@ export const resetPasswordWithEmail = async (email: string) => {
     console.log('Reset link has been sent to: ', email);
   } catch (error) {
     console.log('An Error occurred while sending the email', error);
-    throw error; // Re-throw the error so it can be caught by the caller
+    throw error;
   }
 };
 
