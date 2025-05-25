@@ -1,5 +1,23 @@
 import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
+import auth from '@react-native-firebase/auth';
+
+export const deleteCustomerAccount = async () => {
+  const user = await auth().currentUser;
+  if (user) {
+    try {
+      await firestore().collection('Customer').doc(user.uid).delete();
+      await user.delete();
+      console.log('User account has been deleted');
+    } catch (error) {
+      console.log('An unexpected error occured during account deletion', error);
+      throw error;
+    }
+  } else {
+    console.log('A User has not logged in');
+    throw new Error('User not logged in');
+  }
+};
 
 export const deleteCustomerById = async (customerId: UserInfo) => {
     try {

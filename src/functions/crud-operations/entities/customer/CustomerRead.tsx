@@ -1,10 +1,34 @@
 import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+
+export async function loginCustomer(email: string, password: string) {
+    try {
+        const credentials = await auth().signInWithEmailAndPassword(email, password);
+        const userId = credentials.user.uid;
+        const docRef = await firestore().collection('Customer').doc(userId).get();
+        const userInfoData = docRef.data();
+        console.log('Login with Email: ' + userInfoData + ' succeeded');
+        return credentials.user;
+    } catch (error: any) {
+        console.log('An unexpected error occurred in Login with Firestore and Authentication', error);
+        throw error;
+    }
+}
+
+export async function logoutCustomer() {
+  try {
+    await auth().signOut();
+    console.log('User has been logged out');
+  } catch (error) {
+    console.log('An unexpected error occured during logout', error);
+    throw error;
+  }
+}
 
 export const getCustomerById = async (id: string) => {
     try {
         const doc = await firestore().collection('Customer').doc(id).get();
         if (doc.exists) {
-            //Dette her return er default.
             return {id: doc.id, ...doc.data()};
         } else {
             console.log('Customer does not exist');
@@ -58,4 +82,3 @@ export const getAllCustomerByEmail = async (email: string) => {
         return {id: -2};
     }
 };
-

@@ -4,7 +4,7 @@ import GlobalStyles, {houseIcon, lockIcon, logoImage, userIcon, wallpaperBackgro
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ProgressIndicator from '../../../components/progress/ProgressIndicator.tsx';
-import {signupWithUser} from '../../../functions/manager_services/AuthenticationManager.tsx';
+import {createCustomer} from '../../../functions/crud-operations/entities/customer/CustomerCreate.tsx';
 
 const CreatePasswordSignup = ({navigation, route}: any) => {
     const [email, setEmail] = useState('');
@@ -28,13 +28,27 @@ const CreatePasswordSignup = ({navigation, route}: any) => {
           return;
         }
         _setIsLoading(true);
-        await signupWithUser(name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber);
+
+        await createCustomer({
+          name,
+          email,
+          password,
+          confirmPassword,
+          companyName,
+          cvrNumber,
+          address,
+          houseNumber,
+          phoneNumber,
+        });
+
         navigation.navigate('SignupVerification', {
           name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber,
         });
       } catch (error) {
         console.log('The Signup has failed', error);
         Alert.alert('The Signup has failed');
+      } finally {
+        _setIsLoading(false);
       }
     };
 

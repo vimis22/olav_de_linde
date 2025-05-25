@@ -9,12 +9,11 @@ import GlobalStyles, {
 } from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
-import {deleteUser} from '../../../functions/manager_services/AuthenticationManager.tsx';
+import {deleteCustomerAccount} from '../../../functions/crud-operations/entities/customer/CustomerDelete.tsx';
 import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 import {updateCustomer} from '../../../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
-import {deleteCustomerById} from '../../../functions/crud-operations/entities/customer/CustomerDelete.tsx';
 import auth from '@react-native-firebase/auth';
 const ProfileScreen = ({navigation}: any) => {
   const [deleteProfile, setDeleteProfile] = useState(false);
@@ -176,20 +175,15 @@ const ProfileScreen = ({navigation}: any) => {
                   <ActionButton
                     onPress={async () => {
                       try {
-                        const currentUser = auth().currentUser;
-                        if (currentUser) {
-                          // First delete customer data from Firestore
-                          await deleteCustomerById({ id: currentUser.uid });
-                          // Then delete the authentication account
-                          await deleteUser();
-                          // Show success message
-                          setDeleteSuccess(true);
-                          // Navigate after a short delay
-                          setTimeout(() => {
-                            setDeleteSuccess(false);
-                            navigation.navigate('CaseImage');
-                          }, 2000);
-                        }
+                        // Delete the customer account (both auth and Firestore data)
+                        await deleteCustomerAccount();
+                        // Show success message
+                        setDeleteSuccess(true);
+                        // Navigate after a short delay
+                        setTimeout(() => {
+                          setDeleteSuccess(false);
+                          navigation.navigate('CaseImage');
+                        }, 2000);
                       } catch (error) {
                         console.error('Error deleting profile:', error);
                       }

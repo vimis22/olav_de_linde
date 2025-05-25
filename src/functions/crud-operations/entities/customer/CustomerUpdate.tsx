@@ -1,5 +1,32 @@
 import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
+import auth from '@react-native-firebase/auth';
+
+export async function updateCustomerPassword(password: string) {
+  const user = await auth().currentUser;
+  if (user) {
+    try {
+      await user.updatePassword(password);
+      console.log('Password has been updated');
+    } catch (error) {
+      console.log('An unexpected error occured during password update', error);
+      throw error;
+    }
+  } else {
+    console.log('A User is not logged in');
+    throw new Error('User not logged in');
+  }
+}
+
+export const resetCustomerPassword = async (email: string) => {
+  try {
+    await auth().sendPasswordResetEmail(email);
+    console.log('Reset link has been sent to: ', email);
+  } catch (error) {
+    console.log('An Error occurred while sending the email', error);
+    throw error;
+  }
+};
 
 export const updateCustomer = async (customerInfo: UserInfo) => {
     try {

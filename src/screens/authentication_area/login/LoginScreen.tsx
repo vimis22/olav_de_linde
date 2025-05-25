@@ -4,7 +4,7 @@ import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
-import {loginWithEmail } from '../../../functions/manager_services/AuthenticationManager.tsx';
+import {loginCustomer} from '../../../functions/crud-operations/entities/customer/CustomerRead.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
 
 const LoginScreen = ({navigation}: any) => {
@@ -15,7 +15,7 @@ const LoginScreen = ({navigation}: any) => {
     const handleLogin = async () => {
         try{
             console.log('Inserted values', email, password);
-            const user = await loginWithEmail(email, password);
+            const user = await loginCustomer(email, password);
             console.log('The user has logged in', user?.uid);
             Alert.alert('Login Success');
             navigation.reset({

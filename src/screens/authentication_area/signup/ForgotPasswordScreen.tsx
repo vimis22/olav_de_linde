@@ -5,7 +5,7 @@ import GlobalStyles from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
-import {resetPasswordWithEmail} from '../../../functions/manager_services/AuthenticationManager.tsx';
+import {resetCustomerPassword} from '../../../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 
 const ForgotPasswordScreen = ({navigation}: any) => {
@@ -20,7 +20,7 @@ const ForgotPasswordScreen = ({navigation}: any) => {
         }
 
         try {
-            await resetPasswordWithEmail(email);
+            await resetCustomerPassword(email);
             setErrorMessage('');
             setNotificationsEnabled(true);
         } catch (error) {

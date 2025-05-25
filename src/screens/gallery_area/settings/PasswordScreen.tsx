@@ -7,7 +7,7 @@ import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
-import {updateLoginWithCredentials, resetPasswordWithEmail} from '../../../functions/manager_services/AuthenticationManager.tsx';
+import {updateCustomerPassword, resetCustomerPassword} from '../../../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
 import auth from '@react-native-firebase/auth';
 import { EmailAuthProvider } from '@react-native-firebase/auth';
 
@@ -89,7 +89,7 @@ const PasswordScreen = ({_navigation}: any) => {
         return;
       }
 
-      await updateLoginWithCredentials(newPassword);
+      await updateCustomerPassword(newPassword);
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 2000);
       setEditMode(false);
@@ -111,7 +111,7 @@ const PasswordScreen = ({_navigation}: any) => {
         return;
       }
 
-      await resetPasswordWithEmail(currentUser.email);
+      await resetCustomerPassword(currentUser.email);
       setResetSuccess(true);
       setTimeout(() => setResetSuccess(false), 2000);
     } catch (error) {

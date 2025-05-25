@@ -1,10 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
-// These imports are for reference to match the example in the issue description
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth, db } from "./firebase";
-// import { doc, setDoc } from "firebase/firestore";
 
 export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<number> => {
     try {
@@ -36,61 +32,102 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
     }
 };
 
-// export async function createCustomerWithEmail(email: string, password: string, userData: any): Promise<number> {
-//   try {
-//     //Here a usual account has been made
-//     const userCredential = await auth().createUserWithEmailAndPassword(email, password);
-//     const uid = userCredential.user.uid;
-//
-//     //Dette her gemmer ekstra data, som vi kan anvende i firestore efterfølgende.
-//     const customerRef = firestore().collection('Customer').doc(uid);
-//     const customerData = {
-//       email: email,
-//       // Her gemmer vi ekstra filer som vi ønsker, at gemme.
-//       address: userData?.address ,
-//       phone: userData?.phone,
-//       fullName: userData?.fullName,
-//       name: userData?.name || userData?.fullName,
-//       companyname: userData?.companyname,
-//       cvrnumber: userData?.cvrnumber,
-//       housenumber: userData?.housenumber,
-//       createdAt: firestore.FieldValue.serverTimestamp(),
-//     };
-//     await customerRef.set(customerData);
-//
-//     console.log('A Customer has been successfully created at :', uid);
-//     return 0;
-//   } catch (error) {
-//     console.error('Fejl under oprettelse:', error);
-//     return -1;
-//   }
-// }
 
-// export async function createCustomerWithEmail(email: string, password: string, userData?: any): Promise<number> {
-//   try {
-//     const credentials = await auth().createUserWithEmailAndPassword(email, password);
-//     const {uid} = credentials.user;
-//     const customerRef = firestore().collection('Customer').doc(uid);
-//     const customerData = {
-//       email: email,
-//       password: password,
-//       firstName: userData?.firstName || '',
-//       lastName: userData?.lastName || '',
-//       companyname: userData?.companyName || '',
-//       address: userData?.address || '',
-//       cvrnumber: userData?.cvrNumber || 0,
-//       phone: userData?.phoneNumber || '',
-//       floor: userData?.floor || '',
-//       sharesAddress: userData?.sharesAddress || false,
-//       createAt: firestore.FieldValue.serverTimestamp(),
-//       isActive: userData?.isActive || true,
-//     };
-//     await customerRef.set(customerData);
-//
-//     console.log(`Customer document created for user: ${uid}`);
-//     return 0;
-//   } catch (error) {
-//     console.error('An Error occured in createCustomerWithEmail:', error);
-//     return -1;
-//   }
-// }
+/**
+ * Creates a new user with email and password in Firebase Authentication
+ * @param email User's email
+ * @param password User's password
+ * @returns The user ID if successful
+ */
+export async function createCustomerAuth(email: string, password: string): Promise<string> {
+  try {
+    const credentials = await auth().createUserWithEmailAndPassword(email, password);
+    const userId = credentials.user.uid;
+    console.log('Creation of User: ' + credentials.user + ' succeeded with Firestore document');
+    return userId;
+  } catch (error: any) {
+    console.log('An unexpected error occurred during signup in firebase authentication', error);
+    throw error;
+  }
+}
+
+/**
+ * Creates a customer in Firestore with the given information
+ * @param userId User ID from Firebase Authentication
+ * @param customerInfo Customer information
+ * @returns 1 if successful, -1 if error
+ */
+export const createCustomerData = async (
+  userId: string,
+  customerInfo: {
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword?: string,
+    companyName: string,
+    cvrNumber: string,
+    address: string,
+    houseNumber: string,
+    phoneNumber: string
+  }
+): Promise<number> => {
+  try {
+    if (!userId) {
+      console.log('A User is not logged in');
+      return -1;
+    }
+
+    await firestore().collection('Customer').doc(userId).set({
+      name: customerInfo.name,
+      email: customerInfo.email,
+      password: customerInfo.password,
+      confirmPassword: customerInfo.confirmPassword,
+      companyname: customerInfo.companyName,
+      cvrnumber: customerInfo.cvrNumber,
+      address: customerInfo.address,
+      housenumber: customerInfo.houseNumber,
+      phone: customerInfo.phoneNumber,
+      createAt: firestore.FieldValue.serverTimestamp(),
+    });
+    console.log('The Document has the following ID: ', userId);
+    return 1;
+  } catch (error) {
+    console.log('An Error occurred while adding the following ID: ', error);
+    return -1;
+  }
+};
+
+/**
+ * Creates a new customer with authentication and data storage
+ * @param customerInfo Customer information
+ * @returns The user ID if successful
+ */
+export const createCustomer = async (
+  customerInfo: {
+    name: string,
+    email: string,
+    password: string,
+    confirmPassword?: string,
+    companyName: string,
+    cvrNumber: string,
+    address: string,
+    houseNumber: string,
+    phoneNumber: string
+  }
+): Promise<string | number> => {
+  try {
+    const userId = await createCustomerAuth(customerInfo.email, customerInfo.password);
+    const result = await createCustomerData(userId, customerInfo);
+
+    if (result === 1) {
+      console.log('The User has been created with the following Information: ' + userId);
+      return userId;
+    } else {
+      return result;
+    }
+  } catch (error) {
+    console.log('An Error occurred while creating the following User: ', error);
+    throw error;
+  }
+};
+
