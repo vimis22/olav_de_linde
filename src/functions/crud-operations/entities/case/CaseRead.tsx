@@ -1,22 +1,23 @@
 import firestore from '@react-native-firebase/firestore';
 import { CaseInfo } from './CaseInfo.ts';
+import {EnumMessages} from '../../EnumMessages.ts';
 
-export const readCaseById = async (id: string): Promise<CaseInfo | {id: number}> => {
+export const readCaseById = async (id: string): Promise<CaseInfo | string> => {
     try {
         const doc = await firestore().collection('Case').doc(id).get();
         if (doc.exists) {
             return {id: doc.id, ...doc.data()} as CaseInfo;
         } else {
             console.log('Case does not exist');
-            return {id: -1};
+            return EnumMessages(-2);
         }
     } catch (error) {
         console.log('System is not able to fetch Case by Id', error);
-        return {id: -2};
+        return EnumMessages(-1);
     }
 };
 
-export const readAllCase = async (): Promise<CaseInfo[] | {id: number}> => {
+export const readAllCase = async (): Promise<CaseInfo[] | string> => {
     try {
         const snapShot = await firestore().collection('Case').get();
         return snapShot.docs.map((doc) => {
@@ -24,11 +25,11 @@ export const readAllCase = async (): Promise<CaseInfo[] | {id: number}> => {
         });
     } catch (error) {
         console.log('System is not able to fetch all Cases', error);
-        return {id: -2};
+        return EnumMessages(-1);
     }
 };
 
-export const readAllCasesByCreationDate = async (creationDate: Date): Promise<CaseInfo[] | number> => {
+export const readAllCasesByCreationDate = async (creationDate: Date): Promise<CaseInfo[] | string> => {
     try {
         const snapShot = await firestore()
             .collection('Case')
@@ -39,11 +40,11 @@ export const readAllCasesByCreationDate = async (creationDate: Date): Promise<Ca
         });
     } catch (error) {
         console.error('System is not able to fetch by createdAt', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const readAllCasesByUpdateDate = async (updateDate: Date): Promise<CaseInfo[] | number> => {
+export const readAllCasesByUpdateDate = async (updateDate: Date): Promise<CaseInfo[] | string> => {
     try {
         const snapShot = await firestore()
             .collection('Case')
@@ -54,11 +55,11 @@ export const readAllCasesByUpdateDate = async (updateDate: Date): Promise<CaseIn
         });
     } catch (error) {
         console.error('System is not able to fetch by updateDate', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const readAllCasesByDeadline = async (deadline: Date): Promise<CaseInfo[] | number> => {
+export const readAllCasesByDeadline = async (deadline: Date): Promise<CaseInfo[] | string> => {
     try {
         const snapShot = await firestore()
             .collection('Case')
@@ -69,11 +70,11 @@ export const readAllCasesByDeadline = async (deadline: Date): Promise<CaseInfo[]
         });
     } catch (error) {
         console.error('System is not able to fetch by deadline', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const readAllCasesByTitle = async (title: string): Promise<CaseInfo[] | number> => {
+export const readAllCasesByTitle = async (title: string): Promise<CaseInfo[] | string> => {
     try {
         const snapShot = await firestore()
             .collection('Case')
@@ -84,11 +85,11 @@ export const readAllCasesByTitle = async (title: string): Promise<CaseInfo[] | n
         });
     } catch (error) {
         console.error('System is not able to fetch by title', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const readAllCasesByDescription = async (description: string): Promise<CaseInfo[] | number> => {
+export const readAllCasesByDescription = async (description: string): Promise<CaseInfo[] | string> => {
     try {
         const snapShot = await firestore()
             .collection('Case')
@@ -99,6 +100,6 @@ export const readAllCasesByDescription = async (description: string): Promise<Ca
         });
     } catch (error) {
         console.error('System is not able to fetch by description', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };

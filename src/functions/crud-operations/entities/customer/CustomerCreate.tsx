@@ -1,11 +1,12 @@
 import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
+import {EnumMessages} from '../../EnumMessages.ts';
 
-export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<number> => {
+export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<string> => {
     try {
         if (!allCustomersInfo || allCustomersInfo.length === 0) {
-            return -2;
+            return EnumMessages(-2);
         }
 
         const batch = firestore().batch();
@@ -25,20 +26,14 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
             });
         });
         await batch.commit();
-        return 1;
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error occured in createCustomer', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
 
-/**
- * Creates a new user with email and password in Firebase Authentication
- * @param email User's email
- * @param password User's password
- * @returns The user ID if successful
- */
 export async function createCustomerAuth(email: string, password: string): Promise<string> {
   try {
     const credentials = await auth().createUserWithEmailAndPassword(email, password);
@@ -51,75 +46,46 @@ export async function createCustomerAuth(email: string, password: string): Promi
   }
 }
 
-/**
- * Creates a customer in Firestore with the given information
- * @param userId User ID from Firebase Authentication
- * @param customerInfo Customer information
- * @returns 1 if successful, -1 if error
- */
 export const createCustomerData = async (
   userId: string,
-  customerInfo: {
-    name: string,
-    email: string,
-    password: string,
-    confirmPassword?: string,
-    companyName: string,
-    cvrNumber: string,
-    address: string,
-    houseNumber: string,
-    phoneNumber: string
-  }
-): Promise<number> => {
+  customerInfo: UserInfo
+): Promise<string> => {
   try {
     if (!userId) {
       console.log('A User is not logged in');
-      return -1;
+      return EnumMessages(-1); // FAILED
     }
 
     await firestore().collection('Customer').doc(userId).set({
       name: customerInfo.name,
       email: customerInfo.email,
       password: customerInfo.password,
-      confirmPassword: customerInfo.confirmPassword,
       companyname: customerInfo.companyName,
-      cvrnumber: customerInfo.cvrNumber,
+      cvrnumber: customerInfo.cvrnumber,
       address: customerInfo.address,
-      housenumber: customerInfo.houseNumber,
-      phone: customerInfo.phoneNumber,
+      housenumber: customerInfo.housenumber,
+      phone: customerInfo.phone,
       createAt: firestore.FieldValue.serverTimestamp(),
     });
     console.log('The Document has the following ID: ', userId);
-    return 1;
+    return EnumMessages(1);
   } catch (error) {
     console.log('An Error occurred while adding the following ID: ', error);
-    return -1;
+    return EnumMessages(-1);
   }
 };
 
-/**
- * Creates a new customer with authentication and data storage
- * @param customerInfo Customer information
- * @returns The user ID if successful
- */
 export const createCustomer = async (
-  customerInfo: {
-    name: string,
-    email: string,
-    password: string,
-    confirmPassword?: string,
-    companyName: string,
-    cvrNumber: string,
-    address: string,
-    houseNumber: string,
-    phoneNumber: string
-  }
-): Promise<string | number> => {
+  customerInfo: UserInfo
+): Promise<string> => {
   try {
+    if (!customerInfo.email || !customerInfo.password) {
+      return EnumMessages(-1);
+    }
     const userId = await createCustomerAuth(customerInfo.email, customerInfo.password);
     const result = await createCustomerData(userId, customerInfo);
 
-    if (result === 1) {
+    if (result === EnumMessages(1)){
       console.log('The User has been created with the following Information: ' + userId);
       return userId;
     } else {
@@ -127,7 +93,6 @@ export const createCustomer = async (
     }
   } catch (error) {
     console.log('An Error occurred while creating the following User: ', error);
-    throw error;
+    return EnumMessages(-1);
   }
 };
-

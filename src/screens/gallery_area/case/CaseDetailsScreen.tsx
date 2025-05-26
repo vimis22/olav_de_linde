@@ -1,324 +1,188 @@
-import React, { useState, useEffect } from 'react';
-import { Image, StyleSheet, View, ScrollView, ActivityIndicator, Text, Alert, TextInput } from 'react-native';
+import React from 'react';
+import { Image, StyleSheet, View, ScrollView, ActivityIndicator, Text, TextInput } from 'react-native';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import CaseProgressIndicator from '../../../components/progress/CaseProgressIndicator.tsx';
 import { calenderIcon, locationIcon, pentiaHouseBackground, screwDriverIcon, tickMarkIcon, userIcon } from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import TextBox from '../../../components/box/TextBox.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
-import { readCaseById } from '../../../functions/crud-operations/entities/case/CaseRead.tsx';
-import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
-import { updateCaseByDescription } from '../../../functions/crud-operations/entities/case/CaseUpdate.tsx';
-import { deleteCaseById } from '../../../functions/crud-operations/entities/case/CaseDelete.tsx';
-
+import useCaseDetails from '../../../hooks/useCaseDetails.tsx';
 const CaseDetailsScreen = ({ navigation, route }: any) => {
-  const [caseData, setCaseData] = useState<CaseInfo | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedDescription, setEditedDescription] = useState<string>('');
+  const {caseData, loading, error, isEditing, editedDescription, setEditedDescription, handleEdit, handleSave, handleDelete, formatDate} = useCaseDetails(route?.params?.caseId, navigation);
 
-  useEffect(() => {
-    const fetchCaseData = async () => {
-      const caseId = route?.params?.caseId;
-      if (!caseId) {
-        setError('No case ID provided');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        setLoading(true);
-        setError(null);
-        const result = await readCaseById(caseId);
-
-        if ('id' in result && typeof result.id === 'number' && result.id < 0) {
-          setError('Could not fetch case details');
-        } else {
-          const caseResult = result as CaseInfo;
-          setCaseData(caseResult);
-          setEditedDescription(caseResult.description || '');
-        }
-      } catch (err) {
-        console.error('Error fetching case:', err);
-        setError('An error occurred while fetching case details');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCaseData();
-  }, [route?.params?.caseId]);
-
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleSave = async () => {
-    if (!caseData || !caseData.id) return;
-
-    try {
-      setLoading(true);
-      const result = await updateCaseByDescription(caseData.id, editedDescription);
-
-      if (result === 1 || result === undefined) {
-        // Update was successful
-        setCaseData({
-          ...caseData,
-          description: editedDescription
-        });
-        setIsEditing(false);
-        Alert.alert('Success', 'Case description updated successfully');
-      } else {
-        Alert.alert('Error', 'Failed to update case description');
-      }
-    } catch (err) {
-      console.error('Error updating case:', err);
-      Alert.alert('Error', 'An error occurred while updating the case');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDelete = async () => {
-    if (!caseData || !caseData.id) return;
-
-    Alert.alert(
-      'Confirm Delete',
-      'Are you sure you want to delete this case?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              setLoading(true);
-              const result = await deleteCaseById(caseData.id);
-
-              if (result === 1) {
-                Alert.alert('Success', 'Case deleted successfully', [
-                  { text: 'OK', onPress: () => navigation.goBack() }
-                ]);
-              } else {
-                Alert.alert('Error', 'Failed to delete case');
-                setLoading(false);
-              }
-            } catch (err) {
-              console.error('Error deleting case:', err);
-              Alert.alert('Error', 'An error occurred while deleting the case');
-              setLoading(false);
-            }
-          },
-        },
-      ]
-    );
-  };
-
+  //@link https://github.com/herodev-ch/ReactNativeDream/blob/learn/firebase/src/screens/HomeScreen.tsx
   if (loading) {
-    return (
-      <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#5C6855" />
-      </View>
-    );
+    return <LoadingView />;
   }
 
   if (error) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>{error}</Text>
-        <ActionButton
-          backgroundColor="#5C6855"
-          onPress={() => navigation.goBack()}
-          title="Go Back"
-          textColor="#ffffff"
-          height={48}
-          width={220}
-        />
-      </View>
-    );
+    return <ErrorView error={error} onGoBack={() => navigation.goBack()} />;
   }
 
   if (!caseData) {
-    return (
-      <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>No case data found</Text>
-        <ActionButton
-          backgroundColor="#5C6855"
-          onPress={() => navigation.goBack()}
-          title="Go Back"
-          textColor="#ffffff"
-          height={48}
-          width={220}
-        />
-      </View>
-    );
+    return <ErrorView error="No case data found" onGoBack={() => navigation.goBack()} />;
   }
-
-  const statusStep = caseData.statusStep || 1;
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.modal}>
-        <NormalText text={caseData.title} fontSize={22} fontWeight="bold" />
-
-        <CaseProgressIndicator
-          step={statusStep}
-          icon1={locationIcon}
-          icon2={userIcon}
-          icon3={calenderIcon}
-          icon4={screwDriverIcon}
-          icon5={tickMarkIcon}
-        />
-
-        <NormalText
-          text={caseData.status || "Under behandling"}
-          fontSize={15}
-          fontWeight="600"
+        <CaseHeader
+          title={caseData.title}
+          statusStep={caseData.statusStep || 1}
+          status={caseData.status || 'Under behandling'}
         />
 
         {caseData.deadline && (
-          <InputFieldArea
-            fieldIcon={calenderIcon}
-            fieldIconBackground="#D8D8CE"
-            fieldIconSize={28}
-            textColor="#000000"
-            placeholder={typeof caseData.deadline.toDateString === 'function'
-              ? caseData.deadline.toDateString()
-              : caseData.deadline instanceof Date
-                ? caseData.deadline.toDateString()
-                : new Date(caseData.deadline.seconds * 1000).toDateString()}
-            value={typeof caseData.deadline.toDateString === 'function'
-              ? caseData.deadline.toDateString()
-              : caseData.deadline instanceof Date
-                ? caseData.deadline.toDateString()
-                : new Date(caseData.deadline.seconds * 1000).toDateString()}
-            onChangeText={() => {}}
-            containerHeight={48}
-            containerRadius={18}
-            whenPassword={false}
-            editable={false}
-          />
+          <DeadlineDisplay deadline={caseData.deadline} formatDate={formatDate} />
         )}
 
-        {isEditing ? (
-          <View style={styles.editContainer}>
-            <TextInput
-              style={styles.editInput}
-              value={editedDescription}
-              onChangeText={setEditedDescription}
-              multiline
-              numberOfLines={4}
-              placeholder="Enter case description"
-            />
-          </View>
-        ) : (
-          <TextBox
-            title={caseData.description}
-            backgroundColor="#ffffff"
-            textColor="black"
-            textSize={12}
-            caseContainerHeight={140}
-            caseContainerWidth="100%"
-            caseContainerBorderRadius={10}
-            textContainerHeight={100}
-            textContainerWidth="90%"
-            textContainerBorderRadius={5}
-            textContainerBackgroundColor="transparent"
-          />
-        )}
+        <DescriptionSection
+          isEditing={isEditing}
+          description={caseData.description}
+          editedDescription={editedDescription}
+          setEditedDescription={setEditedDescription}
+        />
 
-        {/* People associated with the case */}
-        <View style={styles.peopleContainer}>
-          {caseData.resident && (
-            <View style={styles.personRow}>
-              <Image source={userIcon} style={styles.personIcon} />
-              <NormalText text={`Beboer: ${caseData.resident}`} fontSize={14} />
-            </View>
-          )}
+        <AssignedEmployeeSection
+          resident={caseData.resident}
+          caretaker={caseData.caretaker}
+          landlord={caseData.landlord}
+        />
 
-          {caseData.caretaker && (
-            <View style={styles.personRow}>
-              <Image source={userIcon} style={styles.personIcon} />
-              <NormalText text={`Vicevært: ${caseData.caretaker}`} fontSize={14} />
-            </View>
-          )}
+        <ImageSection
+          imageUrl={caseData.imageUrl}
+          onChatPress={() => navigation.navigate('ExperimentalChat')}
+        />
 
-          {caseData.landlord && (
-            <View style={styles.personRow}>
-              <Image source={userIcon} style={styles.personIcon} />
-              <NormalText text={`Udlejer: ${caseData.landlord}`} fontSize={14} />
-            </View>
-          )}
-        </View>
-
-        {/* Image section */}
-        <View style={styles.imageBackgroundContainer}>
-          <Image
-            source={caseData.imageUrl ? { uri: caseData.imageUrl } : pentiaHouseBackground}
-            style={styles.backgroundImage}
-            resizeMode="cover"
-          />
-          <View style={styles.overlay}>
-            <ActionButton
-              backgroundColor="#ff008b"
-              onPress={() => navigation.navigate('ExperimentalChat')}
-              title={'Chat'}
-              textColor="#ffffff"
-              height={48}
-              width={220}
-            />
-          </View>
-        </View>
-
-        {/* Documents section */}
         {caseData.documents && caseData.documents.length > 0 && (
-          <View style={styles.documentsContainer}>
-            <NormalText text="Dokumenter" fontSize={16} fontWeight="bold" />
-            {caseData.documents.map((doc, index) => (
-              <Text key={index} style={styles.documentLink}>
-                {`Dokument ${index + 1}`}
-              </Text>
-            ))}
-          </View>
+          <DocumentsSection documents={caseData.documents} />
         )}
 
-        <View style={styles.actionButtonsRow}>
-          {isEditing ? (
-            <ActionButton
-              backgroundColor={'#5C6855'}
-              onPress={handleSave}
-              title={'Gem'}
-              textColor={'#ffffff'}
-              height={44}
-              width={120}
-            />
-          ) : (
-            <ActionButton
-              backgroundColor={'#BDC8B9'}
-              onPress={handleEdit}
-              title={'Rediger'}
-              textColor={'#ffffff'}
-              height={44}
-              width={120}
-            />
-          )}
-          <ActionButton
-            backgroundColor={'#CB4F00'}
-            onPress={handleDelete}
-            title="Slet"
-            textColor={"#ffffff"}
-            height={44}
-            width={120}
-          />
-        </View>
+        <ActionButtonsRow
+          isEditing={isEditing}
+          onEdit={handleEdit}
+          onSave={handleSave}
+          onDelete={handleDelete}
+        />
       </View>
     </ScrollView>
   );
 };
+
+//Here I have created a LoaderView which loads the CaseDetails upon starting.
+const LoadingView = () => (
+  <View style={styles.loadingContainer}>
+    <ActivityIndicator size="large" color="#5C6855" />
+  </View>
+);
+
+//Here I have created a ErrorView where i have created.
+const ErrorView = ({ error, onGoBack }: { error: string, onGoBack: () => void }) => (
+  <View style={styles.errorContainer}>
+    <Text style={styles.errorText}>{error}</Text>
+    <ActionButton backgroundColor="#5C6855" onPress={onGoBack} title="Go Back"
+      textColor="#ffffff" height={48} width={220} />
+  </View>
+);
+
+//Here I have created a Case Header, where title and progress of case is displayed
+const CaseHeader = ({ title, statusStep, status }: { title: string, statusStep: number, status: string }) => (
+  <>
+    <NormalText text={title} fontSize={22} fontWeight="bold" />
+    <CaseProgressIndicator step={statusStep} icon1={locationIcon} icon2={userIcon} icon3={calenderIcon} icon4={screwDriverIcon} icon5={tickMarkIcon} />
+    <NormalText text={status} fontSize={15} fontWeight="600" />
+  </>
+);
+
+//Here I have displayed the deadline. Note that it is the present time and not a selected one.
+const DeadlineDisplay = ({ deadline, formatDate }: { deadline: any, formatDate: (date: any) => string }) => (
+  <InputFieldArea fieldIcon={calenderIcon} fieldIconBackground="#D8D8CE" fieldIconSize={28} textColor="#000000" placeholder={formatDate(deadline)} value={formatDate(deadline)}
+    onChangeText={() => {}} containerHeight={48} containerRadius={18} whenPassword={false} editable={false} />
+);
+const DescriptionSection = ({isEditing, description, editedDescription, setEditedDescription}: {
+  isEditing: boolean,
+  description: string,
+  editedDescription: string,
+  setEditedDescription: (text: string) => void
+}) => (
+  isEditing ? (
+    <View style={styles.editContainer}>
+      <TextInput style={styles.editInput} value={editedDescription}
+        onChangeText={setEditedDescription} multiline numberOfLines={4} placeholder="Enter case description" />
+    </View>
+  ) : (
+    <TextBox title={description} backgroundColor="#ffffff" textColor="black" textSize={12}
+      caseContainerHeight={140} caseContainerWidth="100%" caseContainerBorderRadius={10} textContainerHeight={100}
+      textContainerWidth="90%" textContainerBorderRadius={5} textContainerBackgroundColor="transparent"
+    />
+  )
+);
+
+const AssignedEmployeeSection = ({resident, caretaker, landlord}: {resident?: string, caretaker?: string, landlord?: string}) => (
+  <View style={styles.peopleContainer}>
+    {resident && (
+      <View style={styles.personRow}>
+        <Image source={userIcon} style={styles.personIcon} />
+        <NormalText text={`Beboer: ${resident}`} fontSize={14} />
+      </View>
+    )}
+
+    {caretaker && (
+      <View style={styles.personRow}>
+        <Image source={userIcon} style={styles.personIcon} />
+        <NormalText text={`Vicevært: ${caretaker}`} fontSize={14} />
+      </View>
+    )}
+
+    {landlord && (
+      <View style={styles.personRow}>
+        <Image source={userIcon} style={styles.personIcon} />
+        <NormalText text={`Udlejer: ${landlord}`} fontSize={14} />
+      </View>
+    )}
+  </View>
+);
+
+const ImageSection = ({imageUrl, onChatPress}: {imageUrl?: string, onChatPress: () => void}) => (
+  <View style={styles.imageBackgroundContainer}>
+    <Image
+      source={imageUrl ? { uri: imageUrl } : pentiaHouseBackground}
+      style={styles.backgroundImage}
+      resizeMode="cover"
+    />
+    <View style={styles.overlay}>
+      <ActionButton backgroundColor="#ff008b" onPress={onChatPress} title={'Chat'}
+        textColor="#ffffff" height={48} width={220} />
+    </View>
+  </View>
+);
+
+
+const DocumentsSection = ({ documents }: { documents: any[] }) => (
+  <View style={styles.documentsContainer}>
+    <NormalText text="Dokumenter" fontSize={16} fontWeight="bold" />
+    {documents.map((doc, index) => (
+      <Text key={index} style={styles.documentLink}>
+        {`Dokument ${index + 1}`}
+      </Text>
+    ))}
+  </View>
+);
+
+
+const ActionButtonsRow = ({isEditing, onEdit, onSave, onDelete}: {isEditing: boolean, onEdit: () => void, onSave: () => void, onDelete: () => void}) => (
+  <View style={styles.actionButtonsRow}>
+    {isEditing ? (
+      <ActionButton backgroundColor={'#5C6855'} onPress={onSave} title={'Gem'}
+        textColor={'#ffffff'} height={44} width={120} />
+    ) : (
+      <ActionButton backgroundColor={'#BDC8B9'} onPress={onEdit} title={'Rediger'}
+        textColor={'#ffffff'} height={44} width={120} />
+    )}
+    <ActionButton backgroundColor={'#CB4F00'} onPress={onDelete} title="Slet"
+      textColor={'#ffffff'} height={44} width={120} />
+  </View>
+);
 
 const styles = StyleSheet.create({
   loadingContainer: {

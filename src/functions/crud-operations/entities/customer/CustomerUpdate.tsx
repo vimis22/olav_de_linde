@@ -1,6 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
+import {EnumMessages} from '../../EnumMessages.ts';
 
 export async function updateCustomerPassword(password: string) {
   const user = await auth().currentUser;
@@ -28,7 +29,7 @@ export const resetCustomerPassword = async (email: string) => {
   }
 };
 
-export const updateCustomer = async (customerInfo: UserInfo) => {
+export const updateCustomer = async (customerInfo: UserInfo): Promise<string | UserInfo> => {
     try {
         const {id, ...updatedData} = customerInfo;
         const docRef = firestore().collection('Customer').doc(id);
@@ -37,37 +38,37 @@ export const updateCustomer = async (customerInfo: UserInfo) => {
         if (doc.exists){
             console.log('Updating customer information');
             await docRef.update(updatedData);
-            return updatedData;
+            return updatedData as UserInfo;
         } else {
             console.log('System cannot recognize customer information');
-            return -1;
+            return EnumMessages(-1); // FAILED
         }
     } catch (error) {
         console.error('An Error occurred while updating the customer', error);
-        return -1;
+        return EnumMessages(-1); // FAILED
     }
 };
 
-export const updateEmailForCustomer = async (customerId: string, newEmail: string) => {
+export const updateEmailForCustomer = async (customerId: string, newEmail: string): Promise<string> => {
     try {
-        //Kan man overveje at tage ting som er i fælleskab og smide den over i en metode.
         const docRef = firestore().collection('Customer').doc(customerId);
         const doc = await docRef.get();
 
         if (!doc.exists) {
             console.log('Non Customer has been found with ID: ' + customerId);
-            return 1;
+            return EnumMessages(0);
         }
 
         await docRef.update({Email: newEmail});
         console.log('System has updated the ' + customerId + ' with: ' + newEmail);
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error has occurred while updating by ID', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updateEmailForCustomerByEmail = async (oldEmail: string, newEmail: string) => {
+export const updateEmailForCustomerByEmail = async (oldEmail: string, newEmail: string): Promise<string> => {
     try {
         const snapShot = await firestore()
             .collection('Customer')
@@ -76,39 +77,40 @@ export const updateEmailForCustomerByEmail = async (oldEmail: string, newEmail: 
 
         if (snapShot.empty) {
             console.log('No Customer has been found with the email: ' + newEmail);
-            return -2;
+            return EnumMessages(-2);
         }
 
         const docRef = snapShot.docs[0].ref;
         await docRef.update({ Email: newEmail});
         console.log('System has updated email from: :' + oldEmail + ' to' + newEmail);
+        return EnumMessages(1);
     } catch (error) {
         console.log('An Error occurred while updating the email by an old email ', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updatePasswordForCustomer = async (employeeId: string, password: string) => {
+export const updatePasswordForCustomer = async (customerId: string, password: string): Promise<string> => {
     try {
-        const docRef = firestore().collection('Customer').doc(employeeId);
+        const docRef = firestore().collection('Customer').doc(customerId);
         const doc = await docRef.get();
 
         if (!doc.exists) {
-            console.log('Non Customer has been found with ID: ${employeeId}`');
-            return;
+            console.log(`Non Customer has been found with ID: ${customerId}`);
+            return EnumMessages(-2);
         }
 
         await docRef.update({Password: password});
-        console.log('System has updated the: ' + employeeId + 'with ' + password);
+        console.log('System has updated the: ' + customerId + 'with ' + password);
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error has occured while updating by ID', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updatePasswordForCustomerByEmail = async (password: string, email: string) => {
+export const updatePasswordForCustomerByEmail = async (password: string, email: string): Promise<string> => {
     try {
-        //Husk, at de områder hvor der står byEmail skal kopiere følgende sætning.
         const snapShot = await firestore()
             .collection('Customer')
             .where('Email','==',email)
@@ -116,28 +118,28 @@ export const updatePasswordForCustomerByEmail = async (password: string, email: 
 
         if (snapShot.empty) {
             console.log('No Customer has been found with the email: ' + email);
-            return -2;
+            return EnumMessages(-2);
         }
         const docRef = snapShot.docs[0].ref;
-        //Husk, at denne sætning fortæller hvad vi ønsker at opdatere og ændre.
         await docRef.update({ Password: password});
 
         console.log('Sucesss has been made in updating their Password by Email');
-        return 1;
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error has occured while updating the Telephone Number', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
 
-export const updateAddressForCustomer = async (customerInfo: UserInfo) => {
+export const updateAddressForCustomer = async (customerInfo: UserInfo): Promise<string> => {
     try {
         const docRef = firestore().collection('Customer').doc(customerInfo.id);
         const doc = await docRef.get();
 
         if (!doc.exists){
-            return console.log('The Customer has not been found');
+            console.log('The Customer has not been found');
+            return EnumMessages(-2);
         }
 
         await docRef.update({
@@ -145,14 +147,14 @@ export const updateAddressForCustomer = async (customerInfo: UserInfo) => {
             Housenumber: customerInfo.housenumber,
         });
 
-        return customerInfo.id;
+        return EnumMessages(1);
     } catch (error) {
         console.log('An Error occured while updating the address', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) => {
+export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo): Promise<string> => {
     try {
         const snapShot = await firestore()
             .collection('Customer')
@@ -160,7 +162,8 @@ export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) =>
             .get();
 
         if (snapShot.empty){
-            console.log('The address of Employee has not been found');
+            console.log('The address of Customer has not been found');
+            return EnumMessages(-2);
         }
 
         const docRef = snapShot.docs[0].ref;
@@ -171,20 +174,21 @@ export const updateAddressForCustomerByEmail = async (customerInfo: UserInfo) =>
         });
 
         console.log('System has succesfully updated the email: ', customerInfo.email);
-        return 1;
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error occured while updating the address by Email', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updatePhoneNumberForCustomer = async (customerInfo: UserInfo) => {
+export const updatePhoneNumberForCustomer = async (customerInfo: UserInfo): Promise<string> => {
     try {
         const docRef = firestore().collection('Customer').doc(customerInfo.id);
         const doc = await docRef.get();
 
         if (!doc.exists) {
             console.log('System could not find the user');
+            return EnumMessages(-2);
         }
 
         await docRef.update({
@@ -192,13 +196,14 @@ export const updatePhoneNumberForCustomer = async (customerInfo: UserInfo) => {
         });
 
         console.log('System was succesful in updating the users telehphone number', customerInfo.id);
-        return 1;
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error occured while updating the Telephone Number', customerInfo.id);
+        return EnumMessages(-1);
     }
 };
 
-export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo) => {
+export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo): Promise<string> => {
     try {
         const snapShot = await firestore()
             .collection('Customer')
@@ -206,16 +211,20 @@ export const updatePhoneNumberForCustomerByEmail = async (customerInfo: UserInfo
             .get();
 
         if(snapShot.empty) {
-            const docRef = snapShot.docs[0].ref;
-
-            await docRef.update({
-                Phone: customerInfo.phone,
-            });
-
-            console.log('System has updated the employees phone number, by this email' , customerInfo.email);
-            return 1;
+            console.log('No customer found with email:', customerInfo.email);
+            return EnumMessages(-2);
         }
+
+        const docRef = snapShot.docs[0].ref;
+
+        await docRef.update({
+            Phone: customerInfo.phone,
+        });
+
+        console.log('System has updated the customer\'s phone number, by this email' , customerInfo.email);
+        return EnumMessages(1);
     } catch(error) {
         console.error('An Error occured while updating the phone number through email', error);
-    };
+        return EnumMessages(-1);
+    }
 };

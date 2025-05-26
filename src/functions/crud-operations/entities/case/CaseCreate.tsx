@@ -1,7 +1,8 @@
 import firestore from '@react-native-firebase/firestore';
 import {CaseInfo} from './CaseInfo.ts';
+import {EnumMessages} from '../../EnumMessages.ts';
 
-export const createCaseFromInfo = async (defect: CaseInfo): Promise<string | number> => {
+export const createCaseFromInfo = async (defect: CaseInfo): Promise<string> => {
     try {
         const docRef = await firestore().collection('Case').add({
             title: defect.title,
@@ -11,14 +12,14 @@ export const createCaseFromInfo = async (defect: CaseInfo): Promise<string | num
             deadline: defect.deadline || firestore.FieldValue.serverTimestamp(),
         });
         console.log('Case created with ID: ', docRef.id);
-        return docRef.id;
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error occurred in createCase', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const createCase = async (title: string, description: string, technicians: string) => {
+export const createCase = async (title: string, description: string, technicians: string): Promise<string> => {
   console.log('The System is currently processing the following information ' +
     ':', title, description);
   try {
@@ -28,9 +29,10 @@ export const createCase = async (title: string, description: string, technicians
       technicians,
       createdAt: firestore.FieldValue.serverTimestamp(),
     });
-    return docRef.id;
+    console.log('Case created with ID: ', docRef.id);
+    return EnumMessages(1);
   } catch (error) {
     console.log('An Error occurred while adding the following ID: ', error);
-    return -1;
+    return EnumMessages(-1);
   }
 };

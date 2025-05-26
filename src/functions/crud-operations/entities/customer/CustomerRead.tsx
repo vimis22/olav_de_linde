@@ -1,5 +1,7 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import {UserInfo} from '../../UserInfo.ts';
+import {EnumMessages} from '../../EnumMessages.ts';
 
 export async function loginCustomer(email: string, password: string) {
     try {
@@ -25,49 +27,49 @@ export async function logoutCustomer() {
   }
 }
 
-export const getCustomerById = async (id: string) => {
+export const getCustomerById = async (id: string): Promise<UserInfo | string> => {
     try {
         const doc = await firestore().collection('Customer').doc(id).get();
         if (doc.exists) {
-            return {id: doc.id, ...doc.data()};
+            return {id: doc.id, ...doc.data()} as UserInfo;
         } else {
             console.log('Customer does not exist');
-            return {id: -1};
+            return EnumMessages(-2);
         }
     } catch (error) {
         console.log('System is not able to fetch Customer by Id', error);
-        return {id: -2};
+        return EnumMessages(-1);
     }
 };
 
-export const getAllCustomer = async () => {
+export const getAllCustomer = async (): Promise<UserInfo[] | string> => {
     try{
         const snapshot = await firestore().collection('Customer').get();
         return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+            return {id: doc.id, ...doc.data()} as UserInfo;
         });
     } catch (error) {
         console.log('System is not able fetch all Customers', error);
-        return {id: -2};
+        return EnumMessages(-1);
     }
 };
 
-export const getAllCustomerByName = async (name: string) => {
+export const getAllCustomerByName = async (name: string): Promise<UserInfo[] | string> => {
     try {
         const snapshot = await firestore()
             .collection('Customer')
             .where('Name','==',name)
             .get();
         return snapshot.docs.map((doc: {id: any; data: () => any}) => {
-            return {id: doc.id, ...doc.data()};
+            return {id: doc.id, ...doc.data()} as UserInfo;
         });
     } catch (error) {
         console.error('System is not able fetch by Customer Name', error);
-        return {id: -2};
+        return EnumMessages(-1);
     }
 };
 
-export const getAllCustomerByEmail = async (email: string) => {
+export const getAllCustomerByEmail = async (email: string): Promise<UserInfo[] | string> => {
     try {
         const snapshot = await firestore()
             .collection('Customer')
@@ -76,9 +78,9 @@ export const getAllCustomerByEmail = async (email: string) => {
         return snapshot.docs.map((doc: {id: any; data: () => any}) => ({
             id: doc.id,
             ...doc.data(),
-        }));
+        } as UserInfo));
     } catch (error) {
         console.error('System is not able fetch Customer by Email', error);
-        return {id: -2};
+        return EnumMessages(-1);
     }
 };

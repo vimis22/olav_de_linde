@@ -1,7 +1,8 @@
 import firestore from '@react-native-firebase/firestore';
 import {CaseInfo} from './CaseInfo.ts';
+import {EnumMessages} from '../../EnumMessages.ts';
 
-export const updateCase = async (caseInfo: CaseInfo) => {
+export const updateCase = async (caseInfo: CaseInfo): Promise<CaseInfo | string> => {
     try {
         const {id, ...updatedData} = caseInfo;
         const docRef = firestore().collection('Case').doc(id);
@@ -10,22 +11,22 @@ export const updateCase = async (caseInfo: CaseInfo) => {
         if (doc.exists) {
             await docRef.update(updatedData);
             console.log('Case updated successfully');
-            return updatedData;
+            return updatedData as CaseInfo;
         } else {
             console.log('System cannot recognize case information');
-            return -2;
+            return EnumMessages(-2);
         }
     } catch (error) {
         console.log('An Error occurred while updating the case', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
 
-export const updateAllUsers = async (allCases: CaseInfo[]): Promise<number> => {
+export const updateAllUsers = async (allCases: CaseInfo[]): Promise<string> => {
     try {
         if (!allCases || allCases.length === 0) {
-            return -2;
+            return EnumMessages(-2);
         }
 
         const batch = firestore().batch();
@@ -41,63 +42,63 @@ export const updateAllUsers = async (allCases: CaseInfo[]): Promise<number> => {
             });
         });
         await batch.commit();
-        return 1;
+        return EnumMessages(1);
     } catch (error) {
         console.error('An Error occurred in updating allCases', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updateCaseByDeadline = async (id: string, deadline: Date) => {
+export const updateCaseByDeadline = async (id: string, deadline: Date): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
         if (doc.exists) {
             await docRef.update({deadline: deadline});
             console.log('System has updated the case with deadline: ' + deadline);
-            return 1;
+            return EnumMessages(1);
         } else {
             console.log('No case found with ID: ' + id);
-            return -2;
+            return EnumMessages(-2);
         }
     } catch (error) {
         console.error('An Error has occurred while updating by Deadline', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updateCaseByTitle = async (id: string, title: string) => {
+export const updateCaseByTitle = async (id: string, title: string): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
         if (doc.exists) {
             await docRef.update({title: title});
             console.log('System has updated the case with title: ' + title);
-            return 1;
+            return EnumMessages(1);
         } else {
             console.log('No case found with ID: ' + id);
-            return -2;
+            return EnumMessages(-2);
         }
     } catch (error) {
         console.error('An Error has occurred while updating by Title', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
 
-export const updateCaseByDescription = async (id: string, description: string) => {
+export const updateCaseByDescription = async (id: string, description: string): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);
         const doc = await docRef.get();
         if (doc.exists) {
             await docRef.update({description: description});
             console.log('System has updated the case with description: ' + description);
-            return 1;
+            return EnumMessages(1);
         } else {
             console.log('No case found with ID: ' + id);
-            return -2;
+            return EnumMessages(-2);
         }
     } catch (error) {
         console.error('An Error has occurred while updating by Description', error);
-        return -1;
+        return EnumMessages(-1);
     }
 };
