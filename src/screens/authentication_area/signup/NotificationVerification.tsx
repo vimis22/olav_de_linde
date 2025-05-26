@@ -9,7 +9,7 @@ const NotificationVerification = ({navigation, route}: any) => {
   const handleNextNavigation = async () => {
     navigation.reset({
       index: 0,
-      routes: [{name: 'HomeScreen', params: {name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber,},},],
+      routes: [{name: 'HomeScreen', params: {name, email, password, confirmPassword, companyName, cvrNumber, address, houseNumber, phoneNumber}}],
     });
   };
 

@@ -1,5 +1,5 @@
 // @ link https://github.com/mrbenhowl/mocking-firebase-initializeApp-and-firebase-auth-using-jest/tree/master
-// @ link https://reactnavigation.org/docs/testing/?utm_source=chatgpt.com
+// @ link https://reactnavigation.org/docs/testing/?utm
 
 import {createCase} from '../crud-operations/entities/case/CaseCreate.tsx';
 import firestore from '@react-native-firebase/firestore';

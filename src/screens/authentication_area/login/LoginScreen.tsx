@@ -1,32 +1,15 @@
 import React, {useState} from 'react';
-import {Alert, Image, ImageBackground, Text, View} from 'react-native';
+import {Image, ImageBackground, Text, View} from 'react-native';
 import GlobalStyles, {lockIcon, logoImage, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
-import {loginCustomer} from '../../../functions/crud-operations/entities/customer/CustomerRead.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
+import { handleLogin } from '../../../hooks/AuthenticationManager.tsx';
 
 const LoginScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-
-    const handleLogin = async () => {
-        try{
-            console.log('Inserted values', email, password);
-            const user = await loginCustomer(email, password);
-            console.log('The user has logged in', user?.uid);
-            Alert.alert('Login Success');
-            navigation.reset({
-              index: 0,
-              routes: [{name: 'HomeScreen'}],
-            });
-        } catch (error: any){
-            console.error('The Login has failed', error?.code, error?.message);
-            Alert.alert('The Login has failed', error?.message ?? 'No Message');
-        }
-    };
 
 
     return (
@@ -45,7 +28,7 @@ const LoginScreen = ({navigation}: any) => {
                                 value={password} onChangeText={setPassword} containerHeight={50} containerRadius={20} whenPassword={true}/>
 
 
-                <ActionButton testID={'actionButton'} onPress={handleLogin} title={'Login'}
+                <ActionButton testID={'actionButton'} onPress={() => handleLogin(email, password, navigation)} title={'Login'}
                               backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250}/>
 
 

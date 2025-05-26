@@ -2,24 +2,20 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
-// Define the shape of our context
 interface UserAddressContextType {
   userAddress: { key: string; value: string } | null;
   loading: boolean;
   error: string | null;
 }
 
-// Create the context with a default value
 const UserAddressContext = createContext<UserAddressContextType>({
   userAddress: null,
   loading: true,
   error: null,
 });
 
-// Hook to use the context
 export const useUserAddress = () => useContext(UserAddressContext);
 
-// Provider component
 interface UserAddressProviderProps {
   children: ReactNode;
 }
@@ -35,7 +31,6 @@ export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ childr
         setLoading(true);
         setError(null);
 
-        // Get the current user
         const currentUser = auth().currentUser;
         if (!currentUser) {
           setError('No user is logged in');
@@ -43,7 +38,6 @@ export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ childr
           return;
         }
 
-        // Get the user's data from Firestore
         const userDoc = await firestore().collection('Customer').doc(currentUser.uid).get();
 
         if (!userDoc.exists) {
@@ -59,17 +53,15 @@ export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ childr
           return;
         }
 
-        // Create an address object in the format expected by the dropdown
         let addressValue = userData.address;
 
-        // If there's a house number, append it to the address
         if (userData.houseNumber) {
           addressValue += `, ${userData.houseNumber}`;
         }
 
         setUserAddress({
           key: '1',
-          value: addressValue
+          value: addressValue,
         });
       } catch (err) {
         console.error('Error fetching user address:', err);

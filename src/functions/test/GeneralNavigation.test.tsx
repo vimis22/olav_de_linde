@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
-import App from '../../navigation/App.tsx';
+import App from '../../app_navigation/App.tsx';
 
 jest.mock('@react-navigation/native', () => {
   return {

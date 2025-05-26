@@ -10,32 +10,15 @@ import NormalText from '../../../components/textual/NormalText.tsx';
 import {createCaseFromInfo} from '../../../functions/crud-operations/entities/case/CaseCreate.tsx';
 import {CaseInfo} from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 import {updateCaseByDescription} from '../../../functions/crud-operations/entities/case/CaseUpdate.tsx';
-
+import { useCaseManager } from '../../../hooks/CaseCreationManager.tsx';
 const CaseImage = ({navigation, route}: any) => {
   const [imageLink, setImageLink] = useState<string | null>(null);
   const [_selectedValue, _setSelectedValue] = useState('');
   const {title = '', description = ''} = route.params || {};
   const [caseId, setCaseId] = useState<string | null>(null);
   const [_loading, setLoading] = useState(false);
-  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState<{ screen: string, params?: any } | null>(null);
+  const {handleNavigation, confirmNavigation, cancelNavigation, showExitConfirmation} = useCaseManager(navigation, route.params);
 
-  const handleNavigation = (screenName: string, params?: any) => {
-    navigation.navigate(screenName, params);
-  };
-
-  const confirmNavigation = () => {
-    if (pendingNavigation) {
-      setShowExitConfirmation(false);
-      navigation.navigate(pendingNavigation.screen, pendingNavigation.params);
-      setPendingNavigation(null);
-    }
-  };
-
-  const cancelNavigation = () => {
-    setShowExitConfirmation(false);
-    setPendingNavigation(null);
-  };
 
   useEffect(() => {
     const createNewCase = async () => {

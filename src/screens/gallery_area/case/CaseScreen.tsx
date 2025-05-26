@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ImageBackground, ScrollView, StyleSheet, View, Text, ActivityIndicator, Alert} from 'react-native';
+import {ImageBackground, ScrollView, StyleSheet, View, Text, ActivityIndicator} from 'react-native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import DropdownMenu from '../../../components/menus/DropdownMenu.tsx';
 import IconText from '../../../components/textual/IconText.tsx';
@@ -11,15 +11,16 @@ import { readCaseById } from '../../../functions/crud-operations/entities/case/C
 import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import AcuteEmployeeModal from '../../../components/modals/AcuteEmployeeModal.tsx';
+import { useCaseManager } from '../../../hooks/CaseCreationManager.tsx';
+
 const CaseScreen = ({navigation, route}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
-  const [enablePopup, setEnablePopup] = useState(true);
-  const [modalState, setModalState] = useState<'question' | 'acuteEmployee'>('question');
   const [caseData, setCaseData] = useState<CaseInfo | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState<{screen: string, params?: any} | null>(null);
+
+  const {handleBackPress, handleNavigation, confirmNavigation, cancelNavigation,
+    showExitConfirmation, modalState, setModalState, enablePopup, setEnablePopup, handleHomeNavigation} = useCaseManager(navigation);
 
   const addressValues = UserAddressDropdownValues();
 
@@ -46,32 +47,6 @@ const CaseScreen = ({navigation, route}: any) => {
 
     fetchCaseData();
   }, [route?.params?.caseId]);
-
-  const handleCallPress = () => {
-    setEnablePopup(false);
-    Alert.alert('Ringer op...');
-  };
-
-  const handleBackPress = () => {
-    setModalState('question');
-  };
-
-  const handleNavigation = (screenName: string, params?: any) => {
-    navigation.navigate(screenName, params);
-  };
-
-  const confirmNavigation = () => {
-    if (pendingNavigation) {
-      setShowExitConfirmation(false);
-      navigation.navigate(pendingNavigation.screen, pendingNavigation.params);
-      setPendingNavigation(null);
-    }
-  };
-
-  const cancelNavigation = () => {
-    setShowExitConfirmation(false);
-    setPendingNavigation(null);
-  };
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -103,7 +78,7 @@ const CaseScreen = ({navigation, route}: any) => {
         modalState === 'question' ? (
           <PopupScreen
             title={'Akut situation?'}
-            description={'Ring op og få direkte kontakt'}
+            description={'Gå til hjemmeskærmen'}
             height={200}
             width={300}
             optionText1={'Ja'}
@@ -132,7 +107,7 @@ const CaseScreen = ({navigation, route}: any) => {
             onRequestClose={() => setModalState('question')}
           >
             <AcuteEmployeeModal
-              onCallPress={handleCallPress}
+              onHomeNavigation={() => handleHomeNavigation()}
               onBackPress={handleBackPress}
             />
           </PopupScreen>

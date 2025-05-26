@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ImageBackground, View, StyleSheet, ScrollView} from 'react-native';
 import GlobalStyles, {
   alphabetIcon,
@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}: any) => {
   const addressValues = UserAddressDropdownValues();
 
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       const fetchCases = async () => {
         try {
           setLoading(true);
@@ -41,11 +41,8 @@ const HomeScreen = ({navigation}: any) => {
           setLoading(false);
         }
       };
-
       fetchCases();
-
       return () => {
-        // Cleanup function if needed
       };
     }, [])
   );
@@ -214,9 +211,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   scrollViewContent: {
-    paddingLeft: 20, // Add padding to the left of the content
-    paddingRight: 20, // Add padding to the right of the content
-    gap: 15, // Add gap between items
+    paddingLeft: 20,
+    paddingRight: 20,
+    gap: 15,
   },
   title: {
     fontSize: 20,

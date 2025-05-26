@@ -2,7 +2,6 @@ import React from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { useUserAddress } from '../../functions/providers/UserAddressProvider';
 
-// This component returns the user's address in the format expected by the dropdown menu
 const UserAddressDropdownValues = () => {
   const { userAddress, loading, error } = useUserAddress();
 
@@ -16,11 +15,8 @@ const UserAddressDropdownValues = () => {
 
   if (error || !userAddress) {
     console.error('Error loading user address:', error);
-    // Return a default address if there's an error or no address found
     return [{ key: '1', value: 'Adresse ikke fundet' }];
   }
-
-  // Return an array with just the user's address
   return [userAddress];
 };
 

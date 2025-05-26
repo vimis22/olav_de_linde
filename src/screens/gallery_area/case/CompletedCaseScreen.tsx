@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
-    elevation: 6, // Til Android
+    elevation: 6,
     alignItems: 'center',
   },
   headerText: {

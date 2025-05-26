@@ -12,7 +12,7 @@ import UserAddressProvider from '../functions/providers/UserAddressProvider.tsx'
 import PropertyInfoScreen from '../screens/gallery_area/home/PropertyInfoScreen.tsx';
 import AccountSetupNavigation from './AccountSetupNavigation.tsx';
 import TabNavigation from './TabNavigation.tsx';
-import useAuth from '../hooks/useAuth.tsx';
+import { useAuth } from '../hooks/AuthenticationManager.tsx';
 
 const Stack = createStackNavigator();
 

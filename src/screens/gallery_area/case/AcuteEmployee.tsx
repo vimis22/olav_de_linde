@@ -145,8 +145,8 @@ const AcuteEmployee = ({navigation}: any) => {
         )}
       </View>
       <ActionButton
-        onPress={() => navigation.navigate('LoginScreen')}
-        title={'Ring Op'}
+        onPress={() => navigation.navigate('HomeTab')}
+        title={'Gå til Hjem'}
         backgroundColor={'#F9F9F4'}
         borderColor={'#CB4F00'}
         textColor={'#CB4F00'}

@@ -20,7 +20,6 @@ const CaseDetailsScreen = ({ navigation, route }: any) => {
 
   useEffect(() => {
     const fetchCaseData = async () => {
-      // Check if we have a caseId in the route params
       const caseId = route?.params?.caseId;
       if (!caseId) {
         setError('No case ID provided');
@@ -34,7 +33,6 @@ const CaseDetailsScreen = ({ navigation, route }: any) => {
         const result = await readCaseById(caseId);
 
         if ('id' in result && typeof result.id === 'number' && result.id < 0) {
-          // Error fetching case
           setError('Could not fetch case details');
         } else {
           const caseResult = result as CaseInfo;
@@ -114,8 +112,8 @@ const CaseDetailsScreen = ({ navigation, route }: any) => {
               Alert.alert('Error', 'An error occurred while deleting the case');
               setLoading(false);
             }
-          }
-        }
+          },
+        },
       ]
     );
   };
@@ -160,7 +158,6 @@ const CaseDetailsScreen = ({ navigation, route }: any) => {
     );
   }
 
-  // Determine the status step (default to 1 if not specified)
   const statusStep = caseData.statusStep || 1;
 
   return (

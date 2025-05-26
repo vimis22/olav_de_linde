@@ -15,6 +15,7 @@ interface ChatScreenProps{
 /*
 @link https://www.youtube.com/watch?v=0gLr-pBIPhI&t=2179s
 @link https://github.com/machadop1407/react-firebase-chat-app/blob/main/src/components/Chat.js
+This has not been used but is instead a Experiment.
  */
 
 const ChatScreen: React.FC<ChatScreenProps> = ({room}) => {

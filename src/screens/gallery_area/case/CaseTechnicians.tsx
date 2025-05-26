@@ -1,5 +1,5 @@
-import React, {useState, useCallback} from 'react';
-import {Alert, ImageBackground, StyleSheet, View, BackHandler} from 'react-native';
+import React, {useCallback} from 'react';
+import {ImageBackground, StyleSheet, View, BackHandler} from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
@@ -7,16 +7,12 @@ import NormalText from '../../../components/textual/NormalText.tsx';
 import OptionButton from '../../../components/buttons/OptionButton.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import {createCase} from '../../../functions/crud-operations/entities/case/CaseCreate.tsx';
-import {updateCaseByDescription} from '../../../functions/crud-operations/entities/case/CaseUpdate.tsx';
 import TechnicianValues from '../../../components/menus/TechnicianValues.tsx';
+import { useCaseManager } from '../../../hooks/CaseCreationManager.tsx';
 
 
 const CaseTechnicians = ({navigation, route}: any) => {
-  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
-  const [selectedTechnician, setSelectedTechnician] = useState<string>('');
-  const [_isLoading, setIsLoading] = useState(false);
-  const {title = '', description = '', caseId = null} = route.params || {};
+  const {selectedTechnician, notificationsEnabled, handleTechnicianSelect, handleHomeNavigation, manageCollectionOfCaseInfo, title} = useCaseManager(navigation, route.params);
 
   useFocusEffect(
     useCallback(() => {
@@ -32,43 +28,6 @@ const CaseTechnicians = ({navigation, route}: any) => {
     }, [notificationsEnabled, navigation])
   );
 
-
-  const handleTechnicianSelect = (value: string) => {
-    setSelectedTechnician(value);
-  };
-  const handleHomeNavigation = () => {
-    setNotificationsEnabled(false);
-    navigation.navigate('HomeTab');
-  };
-  const manageCollectionOfCaseInfo = async () => {
-    try {
-      if (!title || !description || !selectedTechnician) {
-        Alert.alert('Please fill in all the fields');
-        return;
-      }
-
-      setIsLoading(true);
-
-      if (caseId) {
-        console.log('Updating existing case with ID:', caseId);
-
-        const updatedDescription = `${description}\n\nAssigned to: ${selectedTechnician}`;
-        await updateCaseByDescription(caseId, updatedDescription);
-        console.log('Case updated with technician info');
-      } else {
-        console.log('Creating new case');
-        await createCase(title, description, selectedTechnician);
-      }
-
-      setNotificationsEnabled(true);
-    } catch (error) {
-      console.log('Case is not being registered', error);
-      Alert.alert('Case is not being registered');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
       <View style={styles.bottomSection}>
@@ -78,7 +37,7 @@ const CaseTechnicians = ({navigation, route}: any) => {
         </View>
         <View>
           {TechnicianValues.map(tech => (
-            <OptionButton key={tech.key} value={tech.value} onPress={handleTechnicianSelect} title={tech.value} backgroundColor={'#FFFFFF'}
+            <OptionButton key={tech.key} value={tech.value} onPress={() => handleTechnicianSelect(tech.value)} title={tech.value} backgroundColor={'#FFFFFF'}
               fieldIconBackground={'#5C6855'} fieldIcon={tech.icon} tickMarkIcon={true} highlight={selectedTechnician === tech.value}
               highlightColor={'#5C6855'} highlightTextColor={'#FFFFFF'} borderRadius={20} borderWidth={1} borderColor={'#5C6855'} />
           ))}

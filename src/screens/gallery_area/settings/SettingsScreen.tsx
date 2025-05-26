@@ -1,32 +1,16 @@
 import React, {useState} from 'react';
-import {ImageBackground, View, StyleSheet, Image, Linking, Alert, ActivityIndicator} from 'react-native';
+import {ImageBackground, View, StyleSheet, Image, Linking, ActivityIndicator} from 'react-native';
 import GlobalStyles, {callIcon, documentIcon, lockIcon, logIcon, protectionIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import MenuOptions from '../../../components/menus/MenuOptions.tsx';
 import {useProfileImage} from '../../../functions/providers/ProfileImageProvider.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import auth from '@react-native-firebase/auth';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
+import {handleLogout} from '../../../hooks/AuthenticationManager.tsx';
 const SettingsScreen = ({navigation}: any) => {
   const [logout, setLogout] = useState(false);
   const {profileImage} = useProfileImage();
   const {userInfoData, isLoading} = GetProfileInformation();
-
-  /*
-  @link https://reactnavigation.org/docs/navigation-actions/#reset
-   */
-  const handleLogout = async () => {
-    try{
-      await auth().signOut();
-      navigation.reset({
-        index: 0,
-        routes: [{name: 'LoginScreen'}],
-      });
-    } catch (error: any){
-      console.error('The Logout has failed', error?.code, error?.message);
-      Alert.alert('The Logout has failed', error?.message ?? 'No Message');
-    }
-  };
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -74,7 +58,7 @@ const SettingsScreen = ({navigation}: any) => {
               height={200} width={300} optionText1={'Ja'} optionText2={'Nej'}
               optionTextColor1={'#CB4F00'} optionTextBackgroundColor1={'#FFFFFF'} optionTextBorderRadiusColor1={'#CB4F00'} optionTextBorderWidth1={1}
               optionTextColor2={'#FFFFFF'} optionTextBackgroundColor2={'#5C6855'} optionTextBorderRadiusColor2={'#5C6855'} optionTextBorderWidth2={1}
-              onEnable={() => handleLogout()} onDisable={() => setLogout(false)}
+              onEnable={() => handleLogout(navigation)} onDisable={() => setLogout(false)}
               backgroundColor={'#FFFFFF'} titleColor={'#000000'} descriptionColor={'#000000'} visible={true}
             />
           )

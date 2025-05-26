@@ -6,11 +6,11 @@ import {electricityIcon, hammerIcon, paintingIcon, waterIcon} from '../../stylin
 import ActionButton from '../buttons/ActionButton.tsx';
 
 interface AcuteEmployeeModalProps {
-  onCallPress: () => void;
+  onHomeNavigation: (technicianType: string) => void;
   onBackPress?: () => void;
 }
 
-const AcuteEmployeeModal: React.FC<AcuteEmployeeModalProps> = ({onCallPress, onBackPress}) => {
+const AcuteEmployeeModal: React.FC<AcuteEmployeeModalProps> = ({onHomeNavigation, onBackPress}) => {
   const [optionalVisibility1, setOptionalVisibility1] = useState(false);
   const [optionalVisibility2, setOptionalVisibility2] = useState(false);
   const [optionalVisibility3, setOptionalVisibility3] = useState(false);
@@ -152,13 +152,14 @@ const AcuteEmployeeModal: React.FC<AcuteEmployeeModalProps> = ({onCallPress, onB
       </View>
       <View style={styles.buttonContainer}>
         <ActionButton
-          onPress={onCallPress}
-          title={'Ring Op'}
+          onPress={() => onHomeNavigation(technicians)}
+          title={'Ring op'}
           backgroundColor={'#F9F9F4'}
           borderColor={'#CB4F00'}
           textColor={'#CB4F00'}
           height={50}
           width={100}
+          disabled={!technicians}
         />
         {onBackPress && (
           <ActionButton
