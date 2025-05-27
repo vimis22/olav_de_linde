@@ -1,12 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {ImageBackground, View, StyleSheet, ScrollView} from 'react-native';
-import GlobalStyles, {
-  alphabetIcon,
-  houseIcon, imageIcon,
-  pentiaHouseBackground,
-  plusIcon, userIcon,
-  wallpaperBackground,
-} from '../../../styling/GlobalStyles.tsx';
+import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground, plusIcon, userIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import CaseBox from '../../../components/box/CaseBox.tsx';
 import DropdownMenu from '../../../components/menus/DropdownMenu.tsx';
 import IconText from '../../../components/textual/IconText.tsx';
@@ -55,33 +49,16 @@ const HomeScreen = ({navigation}: any) => {
             <View style={styles.dropdownContainer}>
               <View style={styles.dropdownRoot}>
                 <DropdownMenu
-                  data={addressValues}
-                  setSelected={setSelectedValue}
-                  dropdownStyles={styles.dropdownStyles}
-                  dropdownItemStyles={styles.dropdownStyles}
-                  backgroundColor={'#868595'}
-                  placeholder={addressValues && addressValues.length > 0 ? addressValues[0].value : 'Indlæser adresse...'}
-                  containerHeight={40}
-                  containerWidth={300}
-                  search={false}
-                  dropdownItemTextStyle={{}}
-                  searchBoxStyles={{}}
-                  searchBoxTextStyle={{}}
-                  optionsHeight={200}
-                  optionsWidth={300}
-                  textColor={'#ffffff'}
-                />
+                  data={addressValues} setSelected={setSelectedValue} dropdownStyles={styles.dropdownStyles} dropdownItemStyles={styles.dropdownStyles}
+                  backgroundColor={'#868595'} placeholder={addressValues && addressValues.length > 0 ? addressValues[0].value : 'Indlæser adresse...'}
+                  containerHeight={40} containerWidth={300} search={false} dropdownItemTextStyle={{}}
+                  searchBoxStyles={{}} searchBoxTextStyle={{}} optionsHeight={200} optionsWidth={300} textColor={'#ffffff'} />
               </View>
 
               <View style={styles.iconRoot}>
                 <IconText
                   onPress={() => navigation.navigate('PropertyInfoScreen')}
-                  icon={houseIcon}
-                  backgroundColor={'#868595'}
-                  borderWidth={1}
-                  height={40}
-                  width={30}
-                />
+                  icon={houseIcon} backgroundColor={'#868595'} borderWidth={1} height={40} width={30} />
               </View>
             </View>
           </ImageBackground>
@@ -95,52 +72,18 @@ const HomeScreen = ({navigation}: any) => {
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.horizontalScrollView} contentContainerStyle={styles.scrollViewContent}>
             <CaseBox
-              onPress={() => navigation.navigate('CaseTab', {
-                screen: 'CaseScreen',
-                initial: true,
-                params: {}
-              })}
-              title={'Opret Sag'}
-              backgroundColor={'#ffffff'}
-              textColor={'#D8D8CE'}
-              fieldIcon={plusIcon}
-              caseContainerHeight={200}
-              caseContainerWidth={200}
-              caseContainerBorderRadius={10}
-              imageContainerHeight={60}
-              imageContainerWidth={60}
-              imageContainerBorderRadius={30}
-              imageContainerBackgroundColor={'transparent'}
-              imageContainerBorderColor={'#D8D8CE'}
-              imageContainerBorderWidth={3}
-              textContainerHeight={40}
-              textContainerWidth={'80%'}
-              textContainerBorderRadius={5}
-              textContainerBackgroundColor={'transparent'}
-            />
+              onPress={() => navigation.navigate('CaseTab', {screen: 'CaseScreen', initial: true, params: {}})}
+              title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
+              fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={200} caseContainerBorderRadius={10}
+              imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
+              imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3}
+              textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'} />
 
             {!loading && cases.map((caseItem) => (
-              <CaseBox
-                key={caseItem.id}
-                onPress={() => navigation.navigate('CaseDetailsScreen', { caseId: caseItem.id })}
-                title={caseItem.title || 'Untitled Case'}
-                backgroundColor={'#ffffff'}
-                textColor={'#D8D8CE'}
-                fieldIcon={houseIcon}
-                caseContainerHeight={200}
-                caseContainerWidth={200}
-                caseContainerBorderRadius={10}
-                imageContainerHeight={60}
-                imageContainerWidth={60}
-                imageContainerBorderRadius={30}
-                imageContainerBackgroundColor={'transparent'}
-                imageContainerBorderColor={'#D8D8CE'}
-                imageContainerBorderWidth={3}
-                textContainerHeight={40}
-                textContainerWidth={'80%'}
-                textContainerBorderRadius={5}
-                textContainerBackgroundColor={'transparent'}
-              />
+              <CaseBox key={caseItem.id} onPress={() => navigation.navigate('CaseDetailsScreen', { caseId: caseItem.id })} title={caseItem.title || 'Untitled Case'} backgroundColor={'#ffffff'}
+                textColor={'#D8D8CE'} fieldIcon={houseIcon} caseContainerHeight={200} caseContainerWidth={200} caseContainerBorderRadius={10}
+                imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'} imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3}
+                textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'} />
             ))}
           </ScrollView>
 
