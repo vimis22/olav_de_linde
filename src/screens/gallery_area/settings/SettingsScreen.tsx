@@ -6,7 +6,7 @@ import MenuOptions from '../../../components/menus/MenuOptions.tsx';
 import {useProfileImage} from '../../../functions/providers/ProfileImageProvider.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
-import {handleLogout} from '../../../hooks/AuthenticationManager.tsx';
+import {handleLogout} from '../../../functions/hooks/AuthenticationManager.tsx';
 const SettingsScreen = ({navigation}: any) => {
   const [logout, setLogout] = useState(false);
   const {profileImage} = useProfileImage();

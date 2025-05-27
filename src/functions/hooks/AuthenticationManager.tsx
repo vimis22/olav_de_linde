@@ -1,8 +1,8 @@
-import {loginCustomer} from '../functions/crud-operations/entities/customer/CustomerRead.tsx';
+import {loginCustomer} from '../crud-operations/entities/customer/CustomerRead.tsx';
 import {Alert} from 'react-native';
 import { useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
-import {resetCustomerPassword} from '../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
+import {resetCustomerPassword} from '../crud-operations/entities/customer/CustomerUpdate.tsx';
 
 export const handleLogin = async (email: string, password: string, navigation: any) => {
   try{

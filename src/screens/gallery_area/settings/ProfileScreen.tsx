@@ -5,7 +5,7 @@ import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
-import {useProfileSettingsManager} from '../../../hooks/ProfileSettingsManager.tsx';
+import {useProfileSettingsManager} from '../../../functions/hooks/ProfileSettingsManager.tsx';
 const ProfileScreen = ({navigation, route}: any) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');

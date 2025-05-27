@@ -6,7 +6,7 @@ import { tabBarStyles, EXITCONFIRMATIONPROPS } from './AppConfigurationValues.ts
 import HomeNavigation from './HomeNavigation.tsx';
 import CaseNavigation from './CaseNavigation.tsx';
 import SettingsNavigation from './SettingsNavigation.tsx';
-import useTabNavigation from '../hooks/useTabNavigation.tsx';
+import useTabNavigation from '../functions/hooks/useTabNavigation.tsx';
 
 const Tab = createBottomTabNavigator();
 

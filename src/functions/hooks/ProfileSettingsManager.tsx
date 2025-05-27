@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import ImageManager from '../functions/manager_services/ImageManager.tsx';
+import ImageManager from '../manager_services/ImageManager.tsx';
 import auth from '@react-native-firebase/auth';
-import {updateCustomer} from '../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
-import {deleteCustomerAccount} from '../functions/crud-operations/entities/customer/CustomerDelete.tsx';
+import {updateCustomer} from '../crud-operations/entities/customer/CustomerUpdate.tsx';
+import {deleteCustomerAccount} from '../crud-operations/entities/customer/CustomerDelete.tsx';
 
 export const useProfileSettingsManager = (_navigation: any, _initialParams: any) => {
   const [deleteProfile, setDeleteProfile] = useState(false);

@@ -6,7 +6,7 @@ import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
-import {usePasswordSettingsManager} from '../../../hooks/PasswordSettingsManager.tsx';
+import {usePasswordSettingsManager} from '../../../functions/hooks/PasswordSettingsManager.tsx';
 
 const PasswordScreen = ({navigation, route}: any) => {
   const {profileImage, editMode, success, setSuccess, saveSuccess, setSaveSuccess, resetSuccess, setResetSuccess, passwordError, currentPassword, newPassword, confirmPassword,

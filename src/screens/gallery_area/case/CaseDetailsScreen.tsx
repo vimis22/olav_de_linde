@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, ScrollView } from 'react-native';
-import useCaseDetails from '../../../hooks/useCaseDetails.tsx';
+import useCaseDetails from '../../../functions/hooks/useCaseDetails.tsx';
 import LoadingView from '../../../components/casedetails/LoadingView.tsx';
 import ErrorView from '../../../components/casedetails/ErrorView.tsx';
 import CaseHeader from '../../../components/casedetails/CaseHeader.tsx';

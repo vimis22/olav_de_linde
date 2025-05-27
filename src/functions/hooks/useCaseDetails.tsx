@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'react-native';
-import { CaseInfo } from '../functions/crud-operations/entities/case/CaseInfo.ts';
-import { readCaseById } from '../functions/crud-operations/entities/case/CaseRead.tsx';
-import { updateCaseByDescription } from '../functions/crud-operations/entities/case/CaseUpdate.tsx';
-import { deleteCaseById } from '../functions/crud-operations/entities/case/CaseDelete.tsx';
+import { CaseInfo } from '../crud-operations/entities/case/CaseInfo.ts';
+import { readCaseById } from '../crud-operations/entities/case/CaseRead.tsx';
+import { updateCaseByDescription } from '../crud-operations/entities/case/CaseUpdate.tsx';
+import { deleteCaseById } from '../crud-operations/entities/case/CaseDelete.tsx';
 
 //Here we have included the logic of displaying, editing and deleting cases.
 export const useCaseDetails = (caseId: string | undefined, navigation: any) => {

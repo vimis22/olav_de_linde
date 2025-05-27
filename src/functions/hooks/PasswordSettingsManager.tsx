@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import ImageManager from '../functions/manager_services/ImageManager.tsx';
+import ImageManager from '../manager_services/ImageManager.tsx';
 import auth, {EmailAuthProvider} from '@react-native-firebase/auth';
-import {resetCustomerPassword, updateCustomerPassword,} from '../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
+import {resetCustomerPassword, updateCustomerPassword,} from '../crud-operations/entities/customer/CustomerUpdate.tsx';
 
 export const usePasswordSettingsManager = (_navigation: any, _initialParams: any) => {
   const [profileImage, setProfileImage] = useState<string | null>(null);

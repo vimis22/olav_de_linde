@@ -5,7 +5,7 @@ import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
-import { handleLogin } from '../../../hooks/AuthenticationManager.tsx';
+import { handleLogin } from '../../../functions/hooks/AuthenticationManager.tsx';
 
 const LoginScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');

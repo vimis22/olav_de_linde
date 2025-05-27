@@ -6,7 +6,7 @@ import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import {handleResetPassword} from '../../../hooks/AuthenticationManager.tsx';
+import {handleResetPassword} from '../../../functions/hooks/AuthenticationManager.tsx';
 
 const ForgotPasswordScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');

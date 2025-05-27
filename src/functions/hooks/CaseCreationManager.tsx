@@ -1,7 +1,7 @@
 import {Alert} from 'react-native';
 import {useState} from 'react';
-import {updateCaseByDescription} from '../functions/crud-operations/entities/case/CaseUpdate.tsx';
-import {createCase} from '../functions/crud-operations/entities/case/CaseCreate.tsx';
+import {updateCaseByDescription} from '../crud-operations/entities/case/CaseUpdate.tsx';
+import {createCase} from '../crud-operations/entities/case/CaseCreate.tsx';
 import {useStackNavigation} from './useStackNavigation.tsx';
 
 export const useCaseManager = (navigation: any, initialParams?: any) => {

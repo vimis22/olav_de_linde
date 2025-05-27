@@ -8,7 +8,7 @@ import OptionButton from '../../../components/buttons/OptionButton.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import TechnicianValues from '../../../components/menus/TechnicianValues.tsx';
-import { useCaseManager } from '../../../hooks/CaseCreationManager.tsx';
+import { useCaseManager } from '../../../functions/hooks/CaseCreationManager.tsx';
 
 
 const CaseTechnicians = ({navigation, route}: any) => {

@@ -11,7 +11,7 @@ import { readCaseById } from '../../../functions/crud-operations/entities/case/C
 import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import AcuteEmployeeModal from '../../../components/modals/AcuteEmployeeModal.tsx';
-import { useCaseManager } from '../../../hooks/CaseCreationManager.tsx';
+import { useCaseManager } from '../../../functions/hooks/CaseCreationManager.tsx';
 
 const CaseScreen = ({navigation, route}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
