@@ -49,7 +49,7 @@ const ProfileScreen = ({navigation, route}: any) => {
           {isLoading ? (
             <ActivityIndicator size="large" color="#5C6855" />
           ) : userInfoData ? (
-            <View>
+            <View style={styles.profileInputs}>
                 <InputFieldArea whenPassword={false} displayIcon={userIcon} fieldIcon={userIcon}
                   value={name} onChangeText={setName} placeholder="Navn" editable={editMode} />
                 <InputFieldArea whenPassword={false} fieldIcon={callIcon} value={phone}
@@ -113,6 +113,11 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 60,
     resizeMode: 'cover',
+  },
+  profileInputs: {
+    width: '100%',
+    marginVertical: 20,
+    alignItems: 'center',
   },
   errorText: {
     color: '#CB4F00',
