@@ -1,135 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, ImageBackground, ScrollView, StyleSheet, TouchableOpacity, View, ActivityIndicator, Text} from 'react-native';
 import GlobalStyles, {lockIcon, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
-import {updateCustomerPassword, resetCustomerPassword} from '../../../functions/crud-operations/entities/customer/CustomerUpdate.tsx';
-import auth from '@react-native-firebase/auth';
-import { EmailAuthProvider } from '@react-native-firebase/auth';
+import {usePasswordSettingsManager} from '../../../hooks/PasswordSettingsManager.tsx';
 
-const PasswordScreen = ({_navigation}: any) => {
-  const [profileImage, setProfileImage] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [saveSuccess, setSaveSuccess] = useState(false);
-  const [resetSuccess, setResetSuccess] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+const PasswordScreen = ({navigation, route}: any) => {
+  const {profileImage, editMode, success, setSuccess, saveSuccess, setSaveSuccess, resetSuccess, setResetSuccess, passwordError, currentPassword, newPassword, confirmPassword,
+    addImage, handleCurrentPasswordChange, handleNewPasswordChange, handleConfirmPasswordChange, editPasswordInformation, handleForgotPassword} = usePasswordSettingsManager(navigation, route?.params);
   const {isLoading} = GetProfileInformation();
-
-  const imageSelection = (imageUri: string) => {
-    setProfileImage(imageUri);
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 2000);
-  };
-
-  const {addImage} = ImageManager({
-    onImageSelected: imageSelection,
-  });
-
-  const handleCurrentPasswordChange = (text: string) => {
-    setCurrentPassword(text);
-    if (passwordError) {
-      setPasswordError('');
-    }
-  };
-
-  const handleNewPasswordChange = (text: string) => {
-    setNewPassword(text);
-    if (passwordError) {
-      setPasswordError('');
-    }
-  };
-
-  const handleConfirmPasswordChange = (text: string) => {
-    setConfirmPassword(text);
-    if (passwordError) {
-      setPasswordError('');
-    }
-  };
-
-  const savePasswordChanges = async () => {
-    try {
-      setPasswordError('');
-
-      if (!currentPassword) {
-        setPasswordError('Indtast venligst dit nuværende kodeord.');
-        return;
-      }
-
-      if (!newPassword) {
-        setPasswordError('Indtast venligst et nyt kodeord.');
-        return;
-      }
-
-      if (newPassword !== confirmPassword) {
-        console.error('Passwords do not match');
-        setPasswordError('Adgangskoderne matcher ikke. Prøv igen.');
-        return;
-      }
-
-      const user = auth().currentUser;
-      if (!user || !user.email) {
-        setPasswordError('Bruger ikke fundet. Log ind igen.');
-        return;
-      }
-
-      try {
-        const credential = EmailAuthProvider.credential(user.email, currentPassword);
-        await user.reauthenticateWithCredential(credential);
-      } catch (error) {
-        console.error('Re-authentication failed:', error);
-        setPasswordError('Nuværende kodeord er forkert. Prøv igen.');
-        return;
-      }
-
-      await updateCustomerPassword(newPassword);
-      setSaveSuccess(true);
-      setTimeout(() => setSaveSuccess(false), 2000);
-      setEditMode(false);
-
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-    } catch (error) {
-      console.error('Error updating password:', error);
-      setPasswordError('Der opstod en fejl ved opdatering af adgangskoden.');
-    }
-  };
-
-  const handleForgotPassword = async () => {
-    try {
-      const currentUser = auth().currentUser;
-      if (!currentUser || !currentUser.email) {
-        console.error('No user is currently logged in or email is not available');
-        return;
-      }
-
-      await resetCustomerPassword(currentUser.email);
-      setResetSuccess(true);
-      setTimeout(() => setResetSuccess(false), 2000);
-    } catch (error) {
-      console.error('Error sending password reset email:', error);
-    }
-  };
-
-  const toggleEditMode = () => {
-    if (editMode) {
-      savePasswordChanges();
-    } else {
-      setEditMode(true);
-      setPasswordError('');
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-    }
-  };
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>
@@ -161,35 +43,11 @@ const PasswordScreen = ({_navigation}: any) => {
               {editMode && (
                 <View style={styles.passwordInputs}>
                   <NormalText text={'Nuværende kodeord'} fontSize={12} />
-                  <InputFieldArea
-                    whenPassword={true}
-                    displayIcon={lockIcon}
-                    fieldIcon={lockIcon}
-                    value={currentPassword}
-                    onChangeText={handleCurrentPasswordChange}
-                    placeholder="Nuværende kodeord"
-                    editable={true}
-                  />
+                  <InputFieldArea whenPassword={true} displayIcon={lockIcon} fieldIcon={lockIcon} value={currentPassword} onChangeText={handleCurrentPasswordChange} placeholder="Nuværende kodeord" editable={true} />
                   <NormalText text={'Nyt kodeord'} fontSize={12} />
-                  <InputFieldArea
-                    whenPassword={true}
-                    displayIcon={lockIcon}
-                    fieldIcon={lockIcon}
-                    value={newPassword}
-                    onChangeText={handleNewPasswordChange}
-                    placeholder="Nyt kodeord"
-                    editable={true}
-                  />
+                  <InputFieldArea whenPassword={true} displayIcon={lockIcon} fieldIcon={lockIcon} value={newPassword} onChangeText={handleNewPasswordChange} placeholder="Nyt kodeord" editable={true} />
                   <NormalText text={'Gentag nyt kodeord'} fontSize={12} />
-                  <InputFieldArea
-                    whenPassword={true}
-                    displayIcon={lockIcon}
-                    fieldIcon={lockIcon}
-                    value={confirmPassword}
-                    onChangeText={handleConfirmPasswordChange}
-                    placeholder="Gentag nyt kodeord"
-                    editable={true}
-                  />
+                  <InputFieldArea whenPassword={true} displayIcon={lockIcon} fieldIcon={lockIcon} value={confirmPassword} onChangeText={handleConfirmPasswordChange} placeholder="Gentag nyt kodeord" editable={true} />
                   {passwordError ? (
                     <Text style={styles.errorText}>{passwordError}</Text>
                   ) : null}
@@ -197,25 +55,10 @@ const PasswordScreen = ({_navigation}: any) => {
               )}
 
               <View style={styles.buttonContainer}>
-                <ActionButton
-                  onPress={toggleEditMode}
-                  title={editMode ? 'Gem' : 'Rediger'}
-                  backgroundColor={'#5C6855'}
-                  textColor={'#ffffff'}
-                  height={50}
-                  width={250}
-                />
+                <ActionButton onPress={editPasswordInformation} title={editMode ? 'Gem' : 'Rediger'} backgroundColor={'#5C6855'} textColor={'#ffffff'} height={50} width={250} />
 
                 {editMode && (
-                  <ActionButton
-                    onPress={handleForgotPassword}
-                    title={'Glemt Adgangskode'}
-                    backgroundColor={'transparent'}
-                    textColor={'#CB4F00'}
-                    borderColor={'#CB4F00'}
-                    height={50}
-                    width={250}
-                  />
+                  <ActionButton onPress={handleForgotPassword} title={'Glemt Adgangskode'} backgroundColor={'transparent'} textColor={'#CB4F00'} borderColor={'#CB4F00'} height={50} width={250} />
                 )}
               </View>
             </>
