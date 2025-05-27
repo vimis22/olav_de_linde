@@ -46,14 +46,11 @@ export async function createCustomerAuth(email: string, password: string): Promi
   }
 }
 
-export const createCustomerData = async (
-  userId: string,
-  customerInfo: UserInfo
-): Promise<string> => {
+export const createCustomerData = async (userId: string, customerInfo: UserInfo): Promise<string> => {
   try {
     if (!userId) {
       console.log('A User is not logged in');
-      return EnumMessages(-1); // FAILED
+      return EnumMessages(-1);
     }
 
     await firestore().collection('Customer').doc(userId).set({

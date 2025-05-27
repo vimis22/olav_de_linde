@@ -22,7 +22,7 @@ export async function logoutCustomer() {
     await auth().signOut();
     console.log('User has been logged out');
   } catch (error) {
-    console.log('An unexpected error occured during logout', error);
+    console.log('An unexpected error occurred during logout', error);
     throw error;
   }
 }

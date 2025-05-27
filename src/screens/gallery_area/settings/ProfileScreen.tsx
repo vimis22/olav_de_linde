@@ -83,10 +83,8 @@ const ProfileScreen = ({navigation}: any) => {
 
   const toggleEditMode = () => {
     if (editMode) {
-      // If currently in edit mode, save changes
       saveProfileChanges();
     } else {
-      // Enter edit mode
       setEditMode(true);
     }
   };

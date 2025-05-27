@@ -16,18 +16,22 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
 
   //Here we have tried to fetch the case data from the caseId
   const fetchCaseData = useCallback(async () => {
+    //Here we are trying to fetch our caseId, when it is not present. We should recieve a false an empty value.
     if (!caseId) {
       setError('No case ID provided');
       setLoading(false);
       return;
     }
-
+    //Here is the opposite going on. When the caseId is being fetched, then it is read as an instance of object via the result attribute.
+    //Usually when we use instances of objects then we are able to access the attributes of the object.
+    //And in this context, we see in the else-statement that the CaseData is being fetched as in instance, this means that we are trying to fetch info from CaseInfo.
+    //The information from CaseInfo is displayed by setCaseData useState and when made changes to description, we simply apply the setEditedDescription.
     try {
       setLoading(true);
       setError(null);
       const result = await readCaseById(caseId);
 
-      if ('id' in result && typeof result.id === 'number' && result.id < 0) {
+      if (typeof result === 'string') {
         setError('Could not fetch case details');
       } else {
         const caseResult = result as CaseInfo;
@@ -54,13 +58,16 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
 
   //Here we are saving the edited description to the database.
   const handleSave = async () => {
+    //Here we are trying to fetch the caseId, when it is not present. We should recieve a false an empty value.
     if (!caseData || !caseData.id) return;
 
+    //Here we are trying to save the description by applying the recent change from editedCaseDescription on a specific case.
+    //We expect the EnumMessage to be 1 or Success if the edited description is saved after editing successfully.
     try {
       setLoading(true);
       const result = await updateCaseByDescription(caseData.id, editedDescription);
 
-      if (result === 1 || result === undefined) {
+      if (result === 'SUCCESS' || result === undefined) {
         setCaseData({
           ...caseData,
           description: editedDescription,
@@ -90,7 +97,7 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
               setLoading(true);
               const result = await deleteCaseById(caseData.id);
 
-              if (result === 1) {
+              if (result === 'SUCCESS') {
                 Alert.alert('Success', 'Case deleted successfully', [
                   { text: 'OK', onPress: () => navigation.goBack() },
                 ]);
@@ -110,15 +117,22 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
   };
 
   //This updates the date automatically with the setting of deadline.
+  //What initially is happening here is that we have taken an undefined object of date.
+  //This object returns Date which matches with Local time that the case has been created with.
+  //It is important to note, that this method is called in the CaseDetailsScreen.tsx file to create a deadline for case-issue.
   const formatDate = (date: any): string => {
-    if (typeof date?.toDateString === 'function') {
-      return date.toDateString();
-    } else if (date instanceof Date) {
-      return date.toDateString();
-    } else if (date?.seconds) {
-      return new Date(date.seconds * 1000).toDateString();
+    let dateObject = date;
+    if (!date) {
+      return new Date().toLocaleString();
     }
-    return 'No date available';
+    if (date.seconds) {
+      dateObject = new Date(date.seconds * 1000);
+    }
+    if (dateObject instanceof Date && !(dateObject.getTime())) {
+      return dateObject.toLocaleString();
+    }
+
+    return new Date().toLocaleString();
   };
 
   return {caseData, loading, error, isEditing, editedDescription, setEditedDescription, handleEdit, handleSave, handleDelete, formatDate};
