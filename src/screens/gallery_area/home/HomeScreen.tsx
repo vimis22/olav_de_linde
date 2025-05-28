@@ -74,7 +74,7 @@ const HomeScreen = ({navigation}: any) => {
             <CaseBox
               onPress={() => navigation.navigate('CaseTab', {screen: 'CaseScreen', initial: true, params: {}})}
               title={'Opret Sag'} backgroundColor={'#ffffff'} textColor={'#D8D8CE'}
-              fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={200} caseContainerBorderRadius={10}
+              fieldIcon={plusIcon} caseContainerHeight={200} caseContainerWidth={350} caseContainerBorderRadius={10}
               imageContainerHeight={60} imageContainerWidth={60} imageContainerBorderRadius={30} imageContainerBackgroundColor={'transparent'}
               imageContainerBorderColor={'#D8D8CE'} imageContainerBorderWidth={3}
               textContainerHeight={40} textContainerWidth={'80%'} textContainerBorderRadius={5} textContainerBackgroundColor={'transparent'} />
