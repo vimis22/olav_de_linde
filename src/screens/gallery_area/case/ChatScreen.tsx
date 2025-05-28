@@ -1,152 +1,154 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import firestore, {where, query, orderBy, onSnapshot, serverTimestamp} from '@react-native-firebase/firestore';
-import {FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOpacity} from 'react-native';
-import auth from '@react-native-firebase/auth';
-import {Platform, View} from 'react-native';
+import {View, FlatList, StyleSheet, Image} from 'react-native';
+import React, {useState} from 'react';
+import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
+import NormalText from '../../../components/textual/NormalText.tsx';
+import OptionButton from '../../../components/buttons/OptionButton.tsx';
+import {imageIcon, penIcon, userIcon} from '../../../styling/GlobalStyles.tsx';
+import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 
-interface Message{
-  id: string;
-}
-
-interface ChatScreenProps{
-  room: string;
-}
-
-/*
-@link https://www.youtube.com/watch?v=0gLr-pBIPhI&t=2179s
-@link https://github.com/machadop1407/react-firebase-chat-app/blob/main/src/components/Chat.js
-This has not been used but is instead a Experiment.
- */
-
-const ChatScreen: React.FC<ChatScreenProps> = ({room}) => {
-  const [newMessage, setNewMessage] = useState('');
-  const [messages, setMessages] = useState<Message[]>([]);
-  const messagesReference = firestore().collection('MessageEmployee');
+const mockMessages = [
+  {id: '1', sender: 'Vivek Misra', content: 'Message 1', reciever: 'Henrik'},
+  {id: '2', sender: 'Henrik Stærkær', content: 'Message 2', reciever: 'Vivek'},
+];
 
 
-  useEffect(() => {
-    const currentUser = auth().currentUser;
-    if (!room || !currentUser) {
-      setMessages([]);
-      return;
+const ChatScreen = () => {
+  const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState(mockMessages);
+
+  const attachProvider = ImageManager({
+    onImageSelected: (imageUri) => {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          id: Date.now().toString(),
+          sender: 'Vivek',
+          content: '',
+          reciever: 'Henrik',
+          image: imageUri,
+        },
+      ]);
+    },
+  });
+  const sendMessage = () => {
+    if (message.trim()){
+      setMessages([...messages,
+        {id: '3',
+          sender: 'Vivek',
+          content: message,
+          reciever: 'Henrik'}]);
+      setMessage('');
     }
-    const queryMessages = query(
-        messagesReference,
-        where('room', '==', room),
-        orderBy('createdAt','asc')
-    );
-    const unsubscribe = onSnapshot(queryMessages, snapshot => {
-      const fetchedMessages: Message[] = [];
-      snapshot.forEach((doc) => {
-        fetchedMessages.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      setMessages(prevMessages => {
-        const prevMessagesStr = JSON.stringify(prevMessages);
-        const fetchedMessagesStr = JSON.stringify(fetchedMessages);
-        if (prevMessagesStr === fetchedMessagesStr) {
-          return prevMessages;
-        }
-        return fetchedMessages;
-      });
-    });
+  };
 
 
-    return () => unsubscribe();
-  }, [room, messagesReference]);
+  const renderMessageContainer = ({item}: any) => (
+    <View style={styles.messageContainer}>
+      <View style={styles.messageContent}>
+        <NormalText text={item.sender} fontSize={16} textColor={'#000000'} fontWeight={'bold'}/>
+        {item.content ? (
+          <NormalText text={item.content} borderRadius={50} backgroundColor={'#D8D8CE'} fontSize={16} textColor={'black'}/>
 
-
-  const handleSubmit = useCallback(async () => {
-    const currentUser = auth().currentUser;
-    if (!newMessage.trim() || !currentUser || !room) {
-      return;
-    }
-    await messagesReference.add({
-      message: newMessage,
-      createdAt: serverTimestamp(),
-      sender: currentUser.uid,
-      room,
-    });
-    setNewMessage('');
-  }, [newMessage, messagesReference, room]);
-
-  const renderItem = useCallback(({item}: {item: Message}) => (
-      <View>
-        <Text style={styles.user}>{item.id}</Text>
+        ) : null}
+        {item.image ? (
+          <Image style={styles.messageImage}
+                 source={{uri: item.image}}
+                 resizeMode={'contain'}
+          />
+        ) : null}
       </View>
-      ),
-    [],
+    </View>
   );
-
   return (
-      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Textnpm</Text>
-        </View>
-        <FlatList data={messages} keyExtractor={item => item.id} renderItem={renderItem} contentContainerStyle={styles.messages} />
-        <View style={styles.newMessageForm}>
-          <TextInput style={styles.newMessageInput} placeholder={'Skriv din besked her'} value={newMessage} onChangeText={setNewMessage} onSubmitEditing={handleSubmit}/>
-          <TouchableOpacity style={styles.sendButton} onPress={handleSubmit}>
-            <Text style={styles.sendButtonText}>Send</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+    <View style={styles.pageContainer}>
+      <FlatList
+        data={messages}
+        renderItem={renderMessageContainer}
+        keyExtractor={item => item.id}
+        style={styles.messageListContainer}
+      />
+      <View style={styles.inputContainer}>
+        <OptionButton fieldIcon={imageIcon} fieldIconBackground={'#5C6855'} tickMarkIcon={userIcon} fieldIconSize={28} backgroundColor={'transparent'} textColor={'#000000'} borderRadius={'10%'}
+                      height={'75%'} width={'12%'} onPress={() => attachProvider.addImage()} />
+        <InputFieldArea fieldIcon={penIcon} fieldIconSize={28} backgroundColor={'#ffffff'} textColor={'#000000'} placeholder={'Skriv....'}
+                        value={message} onChangeText={(text) => setMessage(text)} containerHeight={'75%'} containerWidth={'78%'} containerRadius={50}
+                        marginLeft={'8%'} returnKeyType={'send'} onSubmitEditing={sendMessage} />
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  pageContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFFFFF',
   },
-  header: {
-    padding: 16,
-    alignItems: 'center',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: '#ccc',
+  messageContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 10,
   },
-  headerTitle: {
-    fontSize: 18,
+  messageContent: {
+    flex: 1,
+  },
+  messageTime: {
     fontWeight: 'bold',
+    marginBottom: 5,
+    color: 'white',
   },
-  messages: {
-    padding: 16,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderColor: '#ccc',
+  messageText: {
+    marginBottom: 5,
+    color: 'black',
+    backgroundColor: '#e6e6e6',
+    borderRadius: 5,
+    padding: 10,
   },
-  newMessageForm: {
+  messageImage: {
+    width: '100%',
+    height: 200,
+    marginBottom: 5,
+    borderRadius: 5,
+  },
+  messagePersonInfo: {
+    color: 'white',
+    marginBottom: 15,
+  },
+  messageListContainer: {
     flex: 1,
-    height: 40,
-    paddingHorizontal: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+    padding: 10,
   },
-  newMessageInput: {
+  inputContainer: {
+    flexDirection: 'row',
+    borderTopWidth: 1,
+    borderColor: '#D8D8CE',
+    backgroundColor: '#D8D8CE',
+  },
+  inputFieldText: {
     flex: 1,
-    height: 40,
-    paddingHorizontal: 8,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+    backgroundColor: 'white',
+    borderRadius: 5,
+    padding: 10,
   },
-  sendButton: {
-    marginLeft: 8,
-    paddingHorizontal: 16,
-    borderRadius: 4,
-    backgroundColor: '#007aff',
+  buttonContainer: {
+    marginLeft: 10,
+    backgroundColor: 'green',
+    borderRadius: 5,
+    padding: 10,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center',
   },
-  sendButtonText: {
-    color: '#fff',
-    fontSize: 16,
-  },
-  user: {
-    fontSize: 16,
+  buttonText: {
+    color: 'white',
     fontWeight: 'bold',
+  },
+  cameraButtonContainer: {
+    marginRight: 10,
+    backgroundColor: '#ffc700',
+    borderRadius: 5,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
+
 export default ChatScreen;

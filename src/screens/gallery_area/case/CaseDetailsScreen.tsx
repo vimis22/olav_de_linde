@@ -54,7 +54,7 @@ const CaseDetailsScreen = ({ navigation, route }: any) => {
 
         <ImageSection
           imageUrl={caseData.imageUrl}
-          onChatPress={() => navigation.navigate('ExperimentalChat')}
+          onChatPress={() => navigation.navigate('ChatScreen')}
         />
 
         {caseData.documents && caseData.documents.length > 0 && (

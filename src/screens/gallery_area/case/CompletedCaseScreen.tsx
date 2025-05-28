@@ -31,7 +31,7 @@ const CompletedCaseScreen = ({ navigation }: any) => {
         <View style={styles.imageBackgroundContainer}>
           <Image source={pentiaHouseBackground} style={styles.backgroundImage} resizeMode="cover" />
           <View style={styles.overlay}>
-            <ActionButton backgroundColor="#ff008b" onPress={() => navigation.navigate('ExperimentalChat')} title={'Chat'} textColor="#ffffff" height={48} width={220} />
+            <ActionButton backgroundColor="#ff008b" onPress={() => navigation.navigate('ChatScreen')} title={'Chat'} textColor="#ffffff" height={48} width={220} />
           </View>
         </View>
 
