@@ -2,6 +2,11 @@ import firestore from '@react-native-firebase/firestore';
 import {CaseInfo} from './CaseInfo.ts';
 import {EnumMessages} from '../../EnumMessages.ts';
 
+/**
+ * Updates a case in the Firestore database based on the provided case information.
+ * @param caseInfo - The case information containing title, description, and optional deadline.
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const updateCase = async (caseInfo: CaseInfo): Promise<CaseInfo | string> => {
     try {
         const {id, ...updatedData} = caseInfo;
@@ -22,7 +27,11 @@ export const updateCase = async (caseInfo: CaseInfo): Promise<CaseInfo | string>
     }
 };
 
-
+/**
+ * Updates all Users related to cases in the Firestore database based on the provided case information.
+ * @param allCases
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const updateAllUsers = async (allCases: CaseInfo[]): Promise<string> => {
     try {
         if (!allCases || allCases.length === 0) {
@@ -49,6 +58,12 @@ export const updateAllUsers = async (allCases: CaseInfo[]): Promise<string> => {
     }
 };
 
+/**
+ * Updates all Cases by Deadline in the Firestore database based on the provided case information.
+ * @param id
+ * @param deadline
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const updateCaseByDeadline = async (id: string, deadline: Date): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);
@@ -66,7 +81,12 @@ export const updateCaseByDeadline = async (id: string, deadline: Date): Promise<
         return EnumMessages(-1);
     }
 };
-
+/**
+ * Updates all Cases by Title in the Firestore database based on the provided case information.
+ * @param id
+ * @param title
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const updateCaseByTitle = async (id: string, title: string): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);
@@ -85,6 +105,12 @@ export const updateCaseByTitle = async (id: string, title: string): Promise<stri
     }
 };
 
+/**
+ * Updates all Cases by Description in the Firestore database based on the provided case information.
+ * @param id
+ * @param description
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const updateCaseByDescription = async (id: string, description: string): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);

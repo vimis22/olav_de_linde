@@ -1,6 +1,11 @@
 import firestore from '@react-native-firebase/firestore';
 import {EnumMessages} from '../../EnumMessages.ts';
 
+/**
+ * Deletes a case from the Firestore database based on the provided case ID.
+ * @param id
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const deleteCaseById = async (id: string): Promise<string> => {
     try {
         const docRef = firestore().collection('Case').doc(id);
