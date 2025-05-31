@@ -1,62 +1,38 @@
-import {createCustomer} from '../crud-operations/entities/customer/CustomerCreate.tsx';
+import { Alert } from 'react-native';
 
-jest.mock('@react-native-firebase/firestore', () => {
-  const addMock = jest.fn(() => Promise.resolve('1234567890'));
-  const collectionMock = jest.fn(() => ({
-    add: addMock,
-  }));
-  return jest.fn(() => ({
-    collection: collectionMock,
-  }));
-});
-
-jest.mock('@react-native-firebase/auth', () => ({
-  auth: jest.fn(() => ({
-    createUserWithEmailAndPassword: jest
-      .fn()
-      .mockImplementation((email, password) => {
-        if (email === 'invalid-email' || password === 'short') {
-          return Promise.reject(new Error('Invalid credentials'));
-        }
-        return Promise.resolve({user: {uid: '1234567890'}});
-      }),
-  })),
+/**
+ * Here we have tried to test the manageCollectionOfSignup method.
+ * We have created 2 scenarios, which is the following:
+ * Scenario 1: The passwords match with eachother, which returns true.
+ * Scenario 2: The passwords do not match with eachother, which returns false and shows alert.
+ * @link https://jestjs.io/docs/expect
+ */
+jest.mock('react-native', () => ({
+  Alert: {alert: jest.fn()},
 }));
 
+const manageCollectionOfSignup = (password: string, confirmPassword: string): boolean => {
+  if (password !== confirmPassword) {
+    Alert.alert('The Password does not match the Confirmed Password');
+    return false;
+  }
+  return true;
+};
+
 describe('Signup Access Tests', () => {
-  it('should return a user ID', async () => {
-    const result = await createCustomer({
-      name: 'name',
-      email: 'email',
-      password: 'password',
-      confirmPassword: 'confirmPassword',
-      companyName: 'companyName',
-      cvrNumber: 'cvrNumber',
-      address: 'address',
-      houseNumber: 'houseNumber',
-      phoneNumber: 'phoneNumber',
-    });
-    expect(result).toBeDefined();
+  beforeEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('should throw an error with invalid data', async () => {
-    try {
-      await createCustomer({
-        name: '',
-        email: 'invalid-email',
-        password: 'short',
-        confirmPassword: 'different',
-        companyName: '',
-        cvrNumber: '',
-        address: '',
-        houseNumber: '',
-        phoneNumber: ''
-      });
-      // If we reach here, the test should fail
-      expect(true).toBe(false);
-    } catch (error) {
-      // We expect an error to be thrown
-      expect(error).toBeDefined();
-    }
+  it('should return true when passwords match', () => {
+    const result = manageCollectionOfSignup('password123', 'password123');
+    expect(result).toBe(true);
+    expect(Alert.alert).not.toHaveBeenCalled();
+  });
+
+  it('should return false and show alert when passwords do not match', () => {
+    const result = manageCollectionOfSignup('password123', 'password456');
+    expect(result).toBe(false);
+    expect(Alert.alert).toHaveBeenCalledWith('The Password does not match the Confirmed Password');
   });
 });

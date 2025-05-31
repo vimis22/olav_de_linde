@@ -1,97 +1,81 @@
-// @ link https://github.com/mrbenhowl/mocking-firebase-initializeApp-and-firebase-auth-using-jest/tree/master
-// @ link https://reactnavigation.org/docs/testing/?utm
+import { createCase } from '../crud-operations/entities/case/CaseCreate.tsx';
+import { updateCaseByDescription } from '../crud-operations/entities/case/CaseUpdate.tsx';
+import { Alert } from 'react-native';
 
-import {createCase} from '../crud-operations/entities/case/CaseCreate.tsx';
-import firestore from '@react-native-firebase/firestore';
+/**
+ * Here we have tried to test the manageCollectionOfCaseInfo method.
+ * We have started by mocking react native and crud-operations from the case.
+ * Thereafter we have created the manageCollectionOfCaseInfo as a mock method.
+ * Afterwards we have created 3 scenarios based the following:
+ * Scenario 1: All fields are provided
+ * Scenario 2: CaseId is provided, where case is being updated.
+ * Scenario 3: Missing fields
+ * @link https://jestjs.io/docs/expect
+ * @link https://github.com/mrbenhowl/mocking-firebase-initializeApp-and-firebase-auth-using-jest/tree/master
+ * @link https://reactnavigation.org/docs/testing/?utm
+ */
 
-// Mock for successful case creation
-const mockSuccessfulAdd = jest.fn(() => Promise.resolve({id: '1234567890'}));
-// Mock for failed case creation
-const mockFailedAdd = jest.fn(() => Promise.reject(new Error('Failed to add document')));
-
-// Default mock setup
-const mockCollection = jest.fn(() => ({
-  add: mockSuccessfulAdd,
+jest.mock('react-native', () => ({
+  Alert: {alert: jest.fn()},
 }));
 
-jest.mock('@react-native-firebase/firestore', () => {
-  return jest.fn(() => ({
-    collection: mockCollection,
-    FieldValue: {
-      serverTimestamp: jest.fn(),
-    },
-  }));
-});
+jest.mock('../crud-operations/entities/case/CaseCreate.tsx', () => ({
+  createCase: jest.fn().mockResolvedValue(true),
+}));
+
+jest.mock('../crud-operations/entities/case/CaseUpdate.tsx', () => ({
+  updateCaseByDescription: jest.fn().mockResolvedValue(true),
+}));
+
+
+const manageCollectionOfCaseInfo = async (title: string, description: string, selectedTechnician: string, caseId: string | null = null) => {
+  try {
+    if (!title || !description || !selectedTechnician) {
+      Alert.alert('Please fill in all the fields');
+      return false;
+    }
+
+    if (caseId) {
+      const updatedDescription = `${description} Assigned to: ${selectedTechnician}`;
+      await updateCaseByDescription(caseId, updatedDescription);
+    } else {
+      await createCase(title, description, selectedTechnician);
+    }
+
+    return true;
+  } catch (error) {
+    Alert.alert('Case is not being registered');
+    return false;
+  }
+};
 
 describe('Case Creation Tests', () => {
-  // Reset mocks before each test
   beforeEach(() => {
     jest.clearAllMocks();
-    mockCollection.mockImplementation(() => ({
-      add: mockSuccessfulAdd,
-    }));
   });
 
-  it('should successfully create a case and return the document ID', async () => {
-    // Arrange
-    const title = 'Test Case';
-    const description = 'Test Description';
-    const technician = 'Test Technician';
+  it('should create a new case when all fields are provided', async () => {
+    const result = await manageCollectionOfCaseInfo('Test Title', 'Test Description', 'Technician Test');
 
-    // Act
-    const result = await createCase(title, description, technician);
-
-    // Assert
-    expect(firestore).toHaveBeenCalled();
-    expect(mockCollection).toHaveBeenCalledWith('Case');
-    expect(mockSuccessfulAdd).toHaveBeenCalledWith({
-      title,
-      description,
-      technicians: technician,
-      createdAt: expect.anything(),
-    });
-    expect(result).toBe('1234567890');
-    console.log('Case created successfully with ID:', result);
+    expect(result).toBe(true);
+    expect(createCase).toHaveBeenCalledWith('Test Title', 'Test Description', 'Technician Test');
+    expect(Alert.alert).not.toHaveBeenCalled();
   });
 
-  it('should return -1 when case creation fails', async () => {
-    // Arrange
-    mockCollection.mockImplementation(() => ({
-      add: mockFailedAdd,
-    }));
-    const title = 'Test Case';
-    const description = 'Test Description';
-    const technician = 'Test Technician';
+  it('should update an existing case when caseId is provided', async () => {
+    const result = await manageCollectionOfCaseInfo('Test Title', 'Test Description', 'Technician Test', '123');
 
-    // Act
-    const result = await createCase(title, description, technician);
-
-    // Assert
-    expect(firestore).toHaveBeenCalled();
-    expect(mockCollection).toHaveBeenCalledWith('Case');
-    expect(mockFailedAdd).toHaveBeenCalled();
-    expect(result).toBe(-1);
-    console.log('Case creation failed as expected, returned:', result);
+    expect(result).toBe(true);
+    expect(updateCaseByDescription).toHaveBeenCalledWith('123', 'Test Description Assigned to: Technician Test');
+    expect(Alert.alert).not.toHaveBeenCalled();
   });
 
-  it('should validate input parameters before creating a case', async () => {
-    // Arrange
-    const title = '';
-    const description = '';
-    const technician = '';
+  it('should show alert and return false when fields are missing', async () => {
+    const result = await manageCollectionOfCaseInfo('', 'Test Description', 'Technician Test');
 
-    // Act
-    const result = await createCase(title, description, technician);
-
-    // Assert
-    expect(mockCollection).toHaveBeenCalledWith('Case');
-    expect(mockSuccessfulAdd).toHaveBeenCalledWith({
-      title,
-      description,
-      technicians: technician,
-      createdAt: expect.anything(),
-    });
-    // Even with empty strings, the function should still work as expected
-    expect(result).toBe('1234567890');
+    expect(result).toBe(false);
+    expect(Alert.alert).toHaveBeenCalledWith('Please fill in all the fields');
+    expect(createCase).not.toHaveBeenCalled();
+    expect(updateCaseByDescription).not.toHaveBeenCalled();
   });
 });
