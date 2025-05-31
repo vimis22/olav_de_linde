@@ -9,6 +9,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
+/**
+ * This is the navigation map for the account setup screens.
+ * @constructor
+ */
 export default function AccountSetupNavigation() {
   return (
     <Stack.Navigator initialRouteName={'CreateCompanySignup'}>

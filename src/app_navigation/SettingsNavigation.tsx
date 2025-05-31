@@ -7,6 +7,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
+/**
+ * This is the navigation map for the settings screens.
+ * @constructor
+ */
 export default function SettingsNavigation(){
   return (
     <ProfileImageProvider>

@@ -1,5 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text, StyleSheet, View} from 'react-native';
+
+/**
+ * This is a TextBox component.
+ * @TextBoxProps - defines the properties of the box.
+ * @TextBox - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface TextBoxProps{
   title: string;
   backgroundColor: string;

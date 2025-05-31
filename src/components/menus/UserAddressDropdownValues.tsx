@@ -1,7 +1,11 @@
 import React from 'react';
 import { ActivityIndicator, View, StyleSheet } from 'react-native';
 import { useUserAddress } from '../../functions/providers/UserAddressProvider';
-
+/**
+ * This is a UserAddressDropdownValues component.
+ * Recieves address and other functions from the useUserAddress Provider.
+ * Returns the information after loading the address.
+ */
 const UserAddressDropdownValues = () => {
   const { userAddress, loading, error } = useUserAddress();
 

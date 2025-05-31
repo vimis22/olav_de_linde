@@ -16,6 +16,10 @@ import { useAuth } from '../functions/hooks/AuthenticationManager.tsx';
 
 const Stack = createStackNavigator();
 
+/**
+ * This is the central navigation map. This is where all the screens are linked together.
+ * @constructor App
+ */
 export default function App() {
     useAuth();
     LogBox.ignoreLogs(['AsyncStorage has been extracted']);

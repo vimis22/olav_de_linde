@@ -4,14 +4,17 @@ import CreateCompanySignup from '../../screens/authentication_area/signup/Create
 import CreateNameSignup from '../../screens/authentication_area/signup/CreateNameSignup.tsx';
 import CreatePasswordSignup from '../../screens/authentication_area/signup/CreatePasswordSignup.tsx';
 
-/*
-@link https://medium.com/@senalisa/creating-a-customizable-multi-step-progress-component-in-react-native-1678f4a0ae45
+/**
+ * This is a StepProgress Component, which shows a progress bar with 3 steps for the user to complete.
+ * The user can go back and forth between the steps, which reduces the percentage based on the step in the case-filing and status process.
+ * @param navigation
+ * @link https://medium.com/@senalisa/creating-a-customizable-multi-step-progress-component-in-react-native-1678f4a0ae45
  */
 const StepProgress = ({navigation}: any) => {
-    const [step, setStep] = useState(1);
-    const totalSteps = 3;
+  const [step, setStep] = useState(1);
+  const totalSteps = 3;
 
-    const handleNext = () => {
+  const handleNext = () => {
         setStep(prevStep => Math.min(prevStep + 1, totalSteps));
     };
 

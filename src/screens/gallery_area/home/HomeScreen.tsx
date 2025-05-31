@@ -11,6 +11,12 @@ import { readAllCase } from '../../../functions/crud-operations/entities/case/Ca
 import { CaseInfo } from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 import { useFocusEffect } from '@react-navigation/native';
 
+/**
+ * HomeScreen is the main screen of the application, where the user lands after logging in.
+ * @param navigation - navigation object from react-navigation.
+ * @constructor - creates a new HomeScreen component.
+ * @returns - The Screen reloads in the background, thus returning cases in a map with other styled elements.
+ */
 const HomeScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
   const [cases, setCases] = useState<CaseInfo[]>([]);

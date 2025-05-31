@@ -8,6 +8,11 @@ import {
 } from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
+/**
+ * The InputFieldArea is component used to recieve input in placeholder.
+ * @InputFieldAreaProps - defines the properties of the box.
+ * @InputFieldArea - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface InputFieldAreaProps {
   value?: any;
   onChangeText?: (text: string) => void;

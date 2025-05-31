@@ -2,7 +2,11 @@ import NormalText from '../textual/NormalText.tsx';
 import CaseProgressIndicator from '../progress/CaseProgressIndicator.tsx';
 import {calenderIcon, locationIcon, screwDriverIcon, tickMarkIcon, userIcon} from '../../styling/GlobalStyles.tsx';
 import React from 'react';
-
+/**
+ * This is a CaseHeader component.
+ * @CaseHeaderProps - defines the properties of the box.
+ * @CaseHeader - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface CaseHeaderProps {
   title: string;
   statusStep: number;

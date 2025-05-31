@@ -1,7 +1,11 @@
 import React from 'react';
 import {ImageSourcePropType, TouchableOpacity, View, Text, Image, StyleSheet} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
-
+/**
+ * This is a MenuOptions component.
+ * @MenuOptionsProps - defines the properties of the box.
+ * @MenuOptions - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface MenuOptionsProps {
   onPress: () => void;
   title: string;

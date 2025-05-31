@@ -1,6 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, Text, TextStyle} from 'react-native';
 
+/**
+ * This is a NormalText component, and is mostly used as a normal text instead of <Text>
+ * @NormalTextProps - defines the properties of the box.
+ * @NormalText - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface NormalTextProps {
     text: string;
     textColor?: string;

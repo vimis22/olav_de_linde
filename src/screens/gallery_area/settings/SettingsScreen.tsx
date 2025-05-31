@@ -7,6 +7,13 @@ import {useProfileImage} from '../../../functions/providers/ProfileImageProvider
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 import {handleLogout} from '../../../functions/hooks/AuthenticationManager.tsx';
+
+/**
+ * SettingsScreen is where the user is able to navigate to other options regarding user-information and privacy.
+ * @param navigation - navigation object from react-navigation.
+ * @constructor - creates a new SettingsScreen.
+ * @returns - SettingsScreen with styled elements..
+ */
 const SettingsScreen = ({navigation}: any) => {
   const [logout, setLogout] = useState(false);
   const {profileImage} = useProfileImage();

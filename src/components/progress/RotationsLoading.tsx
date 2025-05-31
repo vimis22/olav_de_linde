@@ -1,9 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, Easing, ViewStyle} from 'react-native';
-
-/*
-    @link https://reactnative.dev/docs/animated
-    The inspiration for this code has been taken from the link, standing above.
+/**
+ * This is a RotationsLoading component, which has been used for experiments regarding the SplashScreen.
+ *     The inspiration for this code has been taken from the link, standing below in @link.
+ * @RotationsLoadingProps - defines the properties of the box.
+ * @RotationsLoading - Is the component, that recieves props as parameters and returns a styled box.
+ * @link https://reactnative.dev/docs/animated
  */
 interface RotationsLoadingProps{
     children: React.ReactNode;

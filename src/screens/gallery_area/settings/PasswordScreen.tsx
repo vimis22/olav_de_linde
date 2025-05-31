@@ -8,6 +8,13 @@ import {GetProfileInformation} from '../../../functions/manager_services/Profile
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import {usePasswordSettingsManager} from '../../../functions/hooks/PasswordSettingsManager.tsx';
 
+/**
+ * PasswordScreen is where the user is able to change their password through Edit and Save Button.
+ * @param navigation - navigation object from react-navigation.
+ * @param route - route object from react-navigation.
+ * @constructor - creates a new PasswordScreen.
+ * @returns - PasswordScreen with styled elements..
+ */
 const PasswordScreen = ({navigation, route}: any) => {
   const {profileImage, editMode, success, setSuccess, saveSuccess, setSaveSuccess, resetSuccess, setResetSuccess, passwordError, currentPassword, newPassword, confirmPassword,
     addImage, handleCurrentPasswordChange, handleNewPasswordChange, handleConfirmPasswordChange, editPasswordInformation, handleForgotPassword} = usePasswordSettingsManager(navigation, route?.params);

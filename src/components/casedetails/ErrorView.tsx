@@ -1,7 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import ActionButton from '../buttons/ActionButton.tsx';
 import React from 'react';
-
+/**
+ * This is a ErrorView component.
+ * @ErrorViewProps - defines the properties of the box.
+ * @ErrorView - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface ErrorViewProps {
   error: string;
   onGoBack: () => void;

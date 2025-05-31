@@ -6,6 +6,12 @@ import IconText from '../../../components/textual/IconText.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import UserAddressDropdownValues from '../../../components/menus/UserAddressDropdownValues.tsx';
 
+/**
+ * PropertyInfoScreen is where the user is able to view their property information.
+ * @param navigation - navigation object from react-navigation.
+ * @constructor - creates a new PropertyInfoScreen component.
+ * @returns - The Screen shows the property information via styled elements.
+ */
 const PropertyInfoScreen = ({navigation}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
 

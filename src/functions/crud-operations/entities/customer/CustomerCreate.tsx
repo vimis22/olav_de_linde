@@ -33,7 +33,12 @@ export const createAllCustomers = async (allCustomersInfo: UserInfo[]): Promise<
     }
 };
 
-
+/**
+ * Creates a new user in the firebase authentication with email and password.
+ * @param email - The email of the user.
+ * @param password - The password of the user.
+ * @returns Returns the user id of the created user or an error.
+ */
 export async function createCustomerAuth(email: string, password: string): Promise<string> {
   try {
     const credentials = await auth().createUserWithEmailAndPassword(email, password);
@@ -46,6 +51,12 @@ export async function createCustomerAuth(email: string, password: string): Promi
   }
 }
 
+/**
+ * Creates a new user in the firestore database with the provided user information.
+ * @param userId - The user id of the created user.
+ * @param customerInfo - The user information containing name, email, password, company name, cvr number, address, housenumber, phone.
+ * @returns Returns an Enum based on SUCCESS or FAILED.
+ */
 export const createCustomerData = async (userId: string, customerInfo: UserInfo): Promise<string> => {
   try {
     if (!userId) {
@@ -72,9 +83,12 @@ export const createCustomerData = async (userId: string, customerInfo: UserInfo)
   }
 };
 
-export const createCustomer = async (
-  customerInfo: UserInfo
-): Promise<string> => {
+/**
+ * Is the overall main method for the creation of a new user by calling the createCustomerAuth and createCustomerData methods.
+ * @param customerInfo - The user information containing name, email, password, company name, cvr number, address, housenumber, phone.
+ * @returns Returns an Enum based on SUCCESS or FAILED.
+ */
+export const createCustomer = async (customerInfo: UserInfo): Promise<string> => {
   try {
     if (!customerInfo.email || !customerInfo.password) {
       return EnumMessages(-1);

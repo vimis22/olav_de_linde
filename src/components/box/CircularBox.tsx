@@ -1,6 +1,11 @@
 import React from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 
+/**
+ * This is a CircularBox component.
+ * @CircularBoxProps - defines the properties of the box.
+ * @CircularBox - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface CircularBoxProps{
   onPress: () => void;
   backgroundColor?: string;

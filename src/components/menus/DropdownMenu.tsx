@@ -2,8 +2,11 @@ import React from 'react';
 import { SelectList } from 'react-native-dropdown-select-list';
 import {TouchableOpacity} from 'react-native';
 
-/*
-@link https://www.youtube.com/watch?v=J9raEY-1KPQ
+/**
+ * This is a DropdownMenu component.
+ * @DropdownMenuProps - defines the properties of the box.
+ * @DropdownMenu - Is the component, that recieves props as parameters and returns a styled box.
+ * @link https://www.youtube.com/watch?v=J9raEY-1KPQ
  */
 interface DropdownMenuProps {
     data: any;

@@ -6,6 +6,13 @@ import OptionButton from '../../../components/buttons/OptionButton.tsx';
 import {imageIcon, penIcon, userIcon} from '../../../styling/GlobalStyles.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 
+/**
+ * ChatScreen is a component that is used to display a chat between two users, based on MockData.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled screen which is a ChatScreen.
+ */
 const mockMessages = [
   {id: '1', sender: 'Vivek Misra', content: 'Message 1', reciever: 'Henrik'},
   {id: '2', sender: 'Henrik Stærkær', content: 'Message 2', reciever: 'Vivek'},

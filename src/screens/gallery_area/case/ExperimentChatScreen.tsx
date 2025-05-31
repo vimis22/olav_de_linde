@@ -4,6 +4,15 @@ import {FlatList, KeyboardAvoidingView, StyleSheet, Text, TextInput, TouchableOp
 import auth from '@react-native-firebase/auth';
 import {Platform, View} from 'react-native';
 
+/**
+ * ExperimentChatScreen is a component that has been used to chat with the employee. It is still under construction.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled ChatScreen that should have worked with firebase datastore.
+ * @link https://www.youtube.com/watch?v=0gLr-pBIPhI&t=2179s
+ * @link https://github.com/machadop1407/react-firebase-chat-app/blob/main/src/components/Chat.js
+ */
 interface Message{
   id: string;
 }
@@ -11,12 +20,6 @@ interface Message{
 interface ExperimentChatScreenProps{
   room: string;
 }
-
-/*
-@link https://www.youtube.com/watch?v=0gLr-pBIPhI&t=2179s
-@link https://github.com/machadop1407/react-firebase-chat-app/blob/main/src/components/Chat.js
-This has not been used but is instead a Experiment.
- */
 
 const ExperimentChatScreen: React.FC<ExperimentChatScreenProps> = ({room}) => {
   const [newMessage, setNewMessage] = useState('');

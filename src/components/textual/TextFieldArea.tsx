@@ -2,6 +2,11 @@ import React from 'react';
 import {TextInput, View} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
+/**
+ * The TextFieldArea is component used to recieve input in placeholder.
+ * @TextFieldAreaProps - defines the properties of the box.
+ * @TextFieldArea - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface TextFieldAreaProps {
   value: any;
   onChangeText?: (text: string) => void;

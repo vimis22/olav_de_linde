@@ -1,17 +1,20 @@
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-/*
-@link https://github.com/oblador/react-native-progress/blob/master/Example/App.tsx
-@link https://www.npmjs.com/package/react-native-progress
- */
 
-interface ProgressIndicatorProps{
-    step: number;
-    icon1: any;
-    icon2: any;
-    icon3: any;
-    width?: number;
-    height?: number;
+/**
+ * This is the progress indicator component, which shows the progress of the user in the HomeScreen.
+ * @ProgressIndicatorProps - defines the properties of the component.
+ * @ProgressIndicator - Is the component, that recieves props as parameters and returns a styled box.
+ * @link https://github.com/oblador/react-native-progress/blob/master/Example/App.tsx
+ * @link https://www.npmjs.com/package/react-native-progress
+ */
+interface ProgressIndicatorProps {
+  step: number;
+  icon1: any;
+  icon2: any;
+  icon3: any;
+  width?: number;
+  height?: number;
     progressColor?: string;
     backgroundColor?: string;
 }

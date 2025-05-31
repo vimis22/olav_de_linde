@@ -13,6 +13,13 @@ import NormalText from '../../../components/textual/NormalText.tsx';
 import AcuteEmployeeModal from '../../../components/modals/AcuteEmployeeModal.tsx';
 import { useCaseManager } from '../../../functions/hooks/CaseCreationManager.tsx';
 
+/**
+ * CaseScreen is where the user is able to view their property case.
+ * @param navigation - navigation object from react-navigation.
+ * @param route - route object from react-navigation.
+ * @constructor - creates a new CaseScreen component.
+ * @returns - The Screen collects case information from fetchCaseData and then sends it to the next screen.
+ */
 const CaseScreen = ({navigation, route}: any) => {
   const [_selectedValue, setSelectedValue] = useState('');
   const [caseData, setCaseData] = useState<CaseInfo | null>(null);

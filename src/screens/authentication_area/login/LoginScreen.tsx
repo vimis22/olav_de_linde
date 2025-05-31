@@ -7,6 +7,11 @@ import ForgotPasswordScreen from '../signup/ForgotPasswordScreen.tsx';
 import CreateCompanySignup from '../signup/CreateCompanySignup.tsx';
 import { handleLogin } from '../../../functions/hooks/AuthenticationManager.tsx';
 
+/**
+ * LoginScreen is displayed after the SplashScreen and after Logging out.
+ * @param navigation - the navigation object from the parent component.
+ * @constructor - returns a LoginScreen with a textfield for email and password.
+ */
 const LoginScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

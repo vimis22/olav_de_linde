@@ -10,6 +10,10 @@ import useTabNavigation from '../functions/hooks/useTabNavigation.tsx';
 
 const Tab = createBottomTabNavigator();
 
+/**
+ * This is the navigation map for the app.
+ * @constructor
+ */
 export default function TabNavigation() {
   const {showExitConfirmation, handleTabPress, confirmNavigation, cancelNavigation} = useTabNavigation();
   return (

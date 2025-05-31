@@ -6,6 +6,12 @@ import OptionButton from '../../../components/buttons/OptionButton.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ProgressIndicator from '../../../components/progress/ProgressIndicator.tsx';
 
+/**
+ * CreateCompanySignup is a component that is used to create a company profile.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with a textfield for company name, cvr number, address and house number.
+ */
 const CreateCompanySignup = ({navigation}: any) => {
     const [companyName, setCompanyName] = useState('');
     const [cvrNumber, setCVRNumber] = useState('');

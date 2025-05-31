@@ -2,6 +2,11 @@ import React from 'react';
 import {TouchableOpacity, Text, Image, StyleSheet, View} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
+/**
+ * This is a CaseBox component.
+ * @CaseBoxProps - defines the properties of the box.
+ * @CaseBox - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface CaseBoxProps{
     onPress: () => void;
     title: string;

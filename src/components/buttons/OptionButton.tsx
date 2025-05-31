@@ -1,7 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, View, ImageSourcePropType} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
-
+/**
+ * This is a OptionButton component.
+ * @OptionButtonProps - defines the properties of the box.
+ * @OptionButton - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface OptionButtonProps{
     value?: any;
     onPress: (value?: any) => void;

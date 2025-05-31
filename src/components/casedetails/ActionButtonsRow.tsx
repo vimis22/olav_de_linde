@@ -2,6 +2,11 @@ import {StyleSheet, View} from 'react-native';
 import ActionButton from '../buttons/ActionButton.tsx';
 import React from 'react';
 
+/**
+ * This is a ActionButtonsRow component.
+ * @ActionButtonsRowProps - defines the properties of the box.
+ * @ActionButtonsRow - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface ActionButtonsRowProps {
   isEditing: boolean,
   onEdit: () => void,

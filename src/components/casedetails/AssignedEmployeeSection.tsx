@@ -3,6 +3,11 @@ import {userIcon} from '../../styling/GlobalStyles.tsx';
 import NormalText from '../textual/NormalText.tsx';
 import React from 'react';
 
+/**
+ * This is a AssignedEmployeeSection component.
+ * @AssignedEmployeeSectionProps - defines the properties of the box.
+ * @AssignedEmployeeSection - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface AssignedEmployeeSectionProps {
   resident?: string,
   caretaker?: string,

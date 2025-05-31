@@ -2,6 +2,10 @@ import firestore from '@react-native-firebase/firestore';
 import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
 
+/**
+ * Deletes the current user's account from the Firestore database.
+ * @returns Promises a result based on Enums, which is either SUCCESS or FAILED during execution.
+ */
 export const deleteCustomerAccount = async () => {
   const user = await auth().currentUser;
   if (user) {

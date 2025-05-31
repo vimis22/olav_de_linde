@@ -4,10 +4,12 @@ import ActionButton from '../buttons/ActionButton.tsx';
 import globalStyles from '../../styling/GlobalStyles.tsx';
 import LoginScreen from '../../screens/authentication_area/login/LoginScreen.tsx';
 
+/**
+ * This is a Popup component.
+ * @Popup - Is the component, that recieves navigation as parameter and returns a styled box.
+ * @link https://blog.logrocket.com/creating-a-pop-up-modal-in-react-native/
+ */
 
-/*
-@link https://blog.logrocket.com/creating-a-pop-up-modal-in-react-native/
-*/
 const Popup = ({navigation}:any) => {
     return (
         <View style={globalStyles.popupContainer}>

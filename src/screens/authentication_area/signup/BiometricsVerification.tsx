@@ -4,6 +4,13 @@ import GlobalStyles, {biometricsVerificationImage, wallpaperBackground} from '..
 import NormalText from '../../../components/textual/NormalText.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
+/**
+ * BiometricsVerification is a component that is used to verify if the user wants to use biometrics for login.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with a textfield for name and phone number.
+ */
 const BiometricsVerification = ({navigation, route}: any) => {
   const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};
   const handleSkipNavigation = async () => {

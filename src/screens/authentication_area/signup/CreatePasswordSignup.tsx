@@ -6,6 +6,13 @@ import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ProgressIndicator from '../../../components/progress/ProgressIndicator.tsx';
 import {createCustomer} from '../../../functions/crud-operations/entities/customer/CustomerCreate.tsx';
 
+/**
+ * CreatePasswordSignup is a component that is used to create a password.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with a textfield for name, email, password, confirm password, phone number, company name, cvr number, address and house number.
+ */
 const CreatePasswordSignup = ({navigation, route}: any) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

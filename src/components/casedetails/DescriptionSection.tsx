@@ -1,7 +1,11 @@
 import {StyleSheet, TextInput, View} from 'react-native';
 import TextBox from '../box/TextBox.tsx';
 import React from 'react';
-
+/**
+ * This is a DescriptionSection component.
+ * @DescriptionSectionProps - defines the properties of the box.
+ * @DescriptionSection - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface DescriptionSectionProps {
   isEditing: boolean,
   description: string,

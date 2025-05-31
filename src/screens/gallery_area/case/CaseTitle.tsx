@@ -5,29 +5,12 @@ import GlobalStyles, {alphabetIcon, houseIcon, imageIcon, pentiaHouseBackground,
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PropertyProgressIndicator from '../../../components/progress/PropertyProgressIndicator.tsx';
 import TextFieldArea from '../../../components/textual/TextFieldArea.tsx';
+import {useStackNavigation} from '../../../functions/hooks/useStackNavigation.tsx';
 const CaseTitle = ({navigation}: any) => {
   const [, _setSelectedValue] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [showExitConfirmation, setShowExitConfirmation] = useState(false);
-  const [pendingNavigation, setPendingNavigation] = useState<{ screen: string, params?: any } | null>(null);
-
-  const handleNavigation = (screenName: string, params?: any) => {
-    navigation.navigate(screenName, params);
-  };
-
-  const confirmNavigation = () => {
-    if (pendingNavigation) {
-      setShowExitConfirmation(false);
-      navigation.navigate(pendingNavigation.screen, pendingNavigation.params);
-      setPendingNavigation(null);
-    }
-  };
-
-  const cancelNavigation = () => {
-    setShowExitConfirmation(false);
-    setPendingNavigation(null);
-  };
+  const {handleNavigation, confirmNavigation, cancelNavigation, showExitConfirmation} = useStackNavigation(navigation);
 
   return (
     <ImageBackground source={wallpaperBackground} style={GlobalStyles.backgroundImage} resizeMode={'cover'}>

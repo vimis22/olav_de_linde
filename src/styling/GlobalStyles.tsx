@@ -1,5 +1,8 @@
 import {StyleSheet} from 'react-native';
 
+/**
+ * GlobalStyles is where common styles among screens are located with reference to icons.
+ */
 export const wallpaperBackground = require('../assets/home/OLD_Background.png');
 export const logoImage = require('../assets/authentication/start/OLD_Logo.png');
 export const houseLocationImage = require('../assets/home/HouseLocationImage.png');
@@ -9,8 +12,6 @@ export const houseIcon = require('../assets/authentication/start/OLD_HouseIcon.p
 export const locationIcon = require('../assets/authentication/start/OLD_LocationIcon.png');
 export const tickMarkIcon = require('../assets/settings/OLD_TickMarkIcon.png');
 export const callIcon = require('../assets/authentication/signup/OLD_CallIcon.png');
-export const locationLoadingIcon = require('../assets/authentication/start/OLD_LocationLoadingIcon.png');
-export const houseLoadingIcon = require('../assets/home/OLD_HouseLoadingIcon.png');
 export const biometricsVerificationImage = require('../assets/authentication/verification/OLD_Biometrics.png');
 export const notificationsVerificationImage = require('../assets/authentication/verification/OLD_Notification.png');
 export const pentiaHouseBackground = require('../assets/case/OLD_PentiaHouse.png');

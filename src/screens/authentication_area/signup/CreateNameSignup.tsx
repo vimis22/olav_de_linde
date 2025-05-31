@@ -11,6 +11,13 @@ import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import ProgressIndicator from '../../../components/progress/ProgressIndicator.tsx';
 
+/**
+ * CreateNameSignup is a component that is used to create a name and phone number.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with a textfield for name and phone number.
+ */
 const CreateNameSignup = ({navigation, route}: any) => {
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');

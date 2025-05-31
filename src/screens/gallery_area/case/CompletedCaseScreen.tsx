@@ -7,6 +7,12 @@ import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import TextBox from '../../../components/box/TextBox.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
+/**
+ * CompletedCaseScreen is a component that is used to display the deta
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box where information regarding the created case is displayed after loading.
+ */
 const CompletedCaseScreen = ({ navigation }: any) => {
   const [password, setPassword] = useState('');
 
@@ -36,10 +42,10 @@ const CompletedCaseScreen = ({ navigation }: any) => {
         </View>
 
         <View style={styles.actionButtonsRow}>
-          <ActionButton backgroundColor={'#BDC8B9'} onPress={() => {/* Har ikke defineret funktionen endnu*/}}
+          <ActionButton backgroundColor={'#BDC8B9'} onPress={() => {/*I have not defined any functions yet*/}}
             title={'Rediger'} textColor={'#ffffff'} height={44} width={120}
           />
-          <ActionButton backgroundColor={'#F9F9F4'} onPress={() => {/* Har ikke defineret funktionen endnu */}} title="Slet" textColor={"#5C6855"} height={44} width={120} />
+          <ActionButton backgroundColor={'#F9F9F4'} onPress={() => {/*I have not defined any functions yet*/}} title="Slet" textColor={"#5C6855"} height={44} width={120} />
         </View>
       </View>
     </ScrollView>

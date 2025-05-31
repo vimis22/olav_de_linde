@@ -6,6 +6,14 @@ import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
 import {useProfileSettingsManager} from '../../../functions/hooks/ProfileSettingsManager.tsx';
+
+/**
+ * ProfileScreen is where the user is able to change their profile through Edit and Save Button.
+ * @param navigation - navigation object from react-navigation.
+ * @param route - route object from react-navigation.
+ * @constructor - creates a new ProfileScreen.
+ * @returns - ProfileScreen with styled elements..
+ */
 const ProfileScreen = ({navigation, route}: any) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -15,7 +23,6 @@ const ProfileScreen = ({navigation, route}: any) => {
   const [houseNumber, setHouseNumber] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState(false);
   const {deleteProfile, setDeleteProfile, profileImage, success, setSuccess, editMode, saveSuccess, setSaveSuccess, editProfileInformation, addImage, handleDeleteAccount} = useProfileSettingsManager(navigation, route.params);
-
   const {userInfoData, isLoading} = GetProfileInformation();
 
   useEffect(() => {

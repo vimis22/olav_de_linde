@@ -5,6 +5,12 @@ import NormalText from '../../../components/textual/NormalText.tsx';
 import {electricityIcon, hammerIcon, paintingIcon, waterIcon} from '../../../styling/GlobalStyles.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
+/**
+ * AcuteEmployee is a component that is used to select the employees in emergency cases.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box that shows options of employees where a buttons leads to calling them and to HomeScreen.
+ */
 const AcuteEmployee = ({navigation}: any) => {
   const [optionalVisibility1, setOptionalVisibility1] = useState(false);
   const [optionalVisibility2, setOptionalVisibility2] = useState(false);

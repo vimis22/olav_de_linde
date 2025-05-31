@@ -1,6 +1,10 @@
 import React from 'react';
 import {Modal, Text, View, TouchableOpacity, StyleSheet} from 'react-native';
-
+/**
+ * This is a PopupScreen component.
+ * @PopupScreenProps - defines the properties of the box.
+ * @PopupScreen - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface PopupScreenProps {
   title?: string;
   description?: string;

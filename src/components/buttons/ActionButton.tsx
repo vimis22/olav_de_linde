@@ -1,7 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
-
+/**
+ * This is a ActionButton component.
+ * @ActionButtonProps - defines the properties of the box.
+ * @ActionButton - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface ActionButtonProps {
   onPress: () => void;
   title: string;

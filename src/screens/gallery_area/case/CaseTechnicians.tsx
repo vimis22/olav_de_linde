@@ -10,7 +10,13 @@ import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import TechnicianValues from '../../../components/menus/TechnicianValues.tsx';
 import { useCaseManager } from '../../../functions/hooks/CaseCreationManager.tsx';
 
-
+/**
+ * CaseTechnicianScreen provides the user with the ability to select a technician for the case.
+ * @param navigation - navigation object from react-navigation.
+ * @param route - route object from react-navigation.
+ * @constructor - creates a new CaseTechnicianScreen.
+ * @returns - a CaseTechnicianScreen.
+ */
 const CaseTechnicians = ({navigation, route}: any) => {
   const {selectedTechnician, notificationsEnabled, handleTechnicianSelect, handleHomeNavigation, manageCollectionOfCaseInfo, title} = useCaseManager(navigation, route.params);
 

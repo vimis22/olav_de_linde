@@ -2,6 +2,11 @@ import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
+/**
+ * This is a StatusCaseBox component.
+ * @StatusCaseBoxProps - defines the properties of the box.
+ * @StatusCaseBox - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface StatusCaseBoxProps{
   onPress: () => void;
   title: string;

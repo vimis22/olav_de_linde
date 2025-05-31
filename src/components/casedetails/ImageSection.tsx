@@ -2,7 +2,11 @@ import {Image, StyleSheet, View} from 'react-native';
 import {pentiaHouseBackground} from '../../styling/GlobalStyles.tsx';
 import ActionButton from '../buttons/ActionButton.tsx';
 import React from 'react';
-
+/**
+ * This is a ImageSection component.
+ * @ImageSectionProps - defines the properties of the box.
+ * @ImageSection - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface ImageSectionProps {
   imageUrl?: string,
   onChatPress: () => void,

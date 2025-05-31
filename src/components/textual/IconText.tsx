@@ -2,6 +2,11 @@ import React from 'react';
 import {ImageSourcePropType, TouchableOpacity, View, Image, StyleSheet} from 'react-native';
 import GlobalStyles from '../../styling/GlobalStyles.tsx';
 
+/**
+ * This IconText is used to navigate between HomeScreen and PropertyInfoScreen.
+ * @IconTextProps - defines the properties of the box.
+ * @IconText - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface IconTextProps {
   onPress: () => void;
   backgroundColor?: string;

@@ -3,6 +3,14 @@ import {Image, ImageBackground, TouchableOpacity, View} from 'react-native';
 import GlobalStyles, {houseLocationImage, wallpaperBackground} from '../../../styling/GlobalStyles.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 
+/**
+ * SignupVerification is a component that is used to verify if the user is logged in.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with a textfield for name and phone number.
+ */
+
 const SignupVerification = ({navigation, route}: any) => {
   const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};
 

@@ -4,6 +4,11 @@ import Rive, { Fit } from 'rive-react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useCallback, useEffect} from 'react';
 
+/**
+ * SplashScreen is displayed when the app is loading with Rive.
+ * @param duration - Is the time that the splash screen is displayed.
+ * @constructor - Is a function that returns a splash screen.
+ */
 const SplashScreen = ({duration = 5000}) => {
   const navigation = useNavigation<any>();
   const changeToNextScreenAfterLoading = useCallback(() => {

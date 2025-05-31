@@ -4,6 +4,13 @@ import GlobalStyles, {notificationsVerificationImage, wallpaperBackground} from 
 import NormalText from '../../../components/textual/NormalText.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 
+/**
+ * NotificationVerification is a component that is used to verify if the user wants to use notifications for login.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with buttons that forward the user to the next screen.
+ */
 const NotificationVerification = ({navigation, route}: any) => {
   const {name = '', email = '', password = '', confirmPassword = '', phoneNumber = '', companyName = '', cvrNumber = '', address = '', houseNumber = ''} = route.params || {};
   const handleNextNavigation = async () => {

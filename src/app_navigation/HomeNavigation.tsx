@@ -6,7 +6,6 @@ import CaseTechnicians from '../screens/gallery_area/case/CaseTechnicians.tsx';
 import CompletedCaseScreen from '../screens/gallery_area/case/CompletedCaseScreen.tsx';
 import CaseDetailsScreen from '../screens/gallery_area/case/CaseDetailsScreen.tsx';
 import ChatScreen from '../screens/gallery_area/case/ChatScreen.tsx';
-import ExperimentChatScreen from '../screens/gallery_area/case/ExperimentChatScreen.tsx';
 import AcuteEmployee from '../screens/gallery_area/case/AcuteEmployee.tsx';
 import PropertyInfoScreen from '../screens/gallery_area/home/PropertyInfoScreen.tsx';
 import React from 'react';
@@ -14,7 +13,10 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-
+/**
+ * This is the navigation map for the home screens.
+ * @constructor
+ */
 export default function HomeNavigation() {
   return (
     <Stack.Navigator initialRouteName={'LandingsScreen'}>
@@ -26,7 +28,6 @@ export default function HomeNavigation() {
       <Stack.Screen name={'CompletedCaseScreen'} component={CompletedCaseScreen} />
       <Stack.Screen name={'CaseDetailsScreen'} component={CaseDetailsScreen} />
       <Stack.Screen name={'ChatScreen'} component={ChatScreen} />
-      <Stack.Screen name={'ExperimentChatScreen'} component={ExperimentChatScreen} />
       <Stack.Screen name={'AcuteEmployee'} component={AcuteEmployee} />
       <Stack.Screen name={'PropertyInfoScreen'} component={PropertyInfoScreen} />
     </Stack.Navigator>

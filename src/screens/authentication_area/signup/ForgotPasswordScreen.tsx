@@ -8,6 +8,12 @@ import NormalText from '../../../components/textual/NormalText.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
 import {handleResetPassword} from '../../../functions/hooks/AuthenticationManager.tsx';
 
+/**
+ * ForgotPasswordScreen is a component that is used to reset the password.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box with a textfield for email that sends request to firebase.
+ */
 const ForgotPasswordScreen = ({navigation}: any) => {
     const [email, setEmail] = useState('');
     const [notificationsEnabled, setNotificationsEnabled] = useState(false);

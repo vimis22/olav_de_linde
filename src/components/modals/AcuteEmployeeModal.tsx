@@ -5,6 +5,11 @@ import NormalText from '../textual/NormalText.tsx';
 import {electricityIcon, hammerIcon, paintingIcon, waterIcon} from '../../styling/GlobalStyles.tsx';
 import ActionButton from '../buttons/ActionButton.tsx';
 
+/**
+ * This is a AcuteEmployeeModal component.
+ * @AcuteEmployeeModalProps - defines the properties of the box.
+ * @AcuteEmployeeModal - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface AcuteEmployeeModalProps {
   onHomeNavigation: (technicianType: string) => void;
   onBackPress?: () => void;
@@ -197,7 +202,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     marginTop: 15,
-  }
+  },
 });
 
 export default AcuteEmployeeModal;

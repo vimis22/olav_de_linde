@@ -3,6 +3,12 @@ import auth from '@react-native-firebase/auth';
 import {UserInfo} from '../../UserInfo.ts';
 import {EnumMessages} from '../../EnumMessages.ts';
 
+/**
+ * Here we are logging in with email and password.
+ * @param email - The email of the user.
+ * @param password - The password of the user.
+ * @returns Returns the user id of the created user or an error.
+ */
 export async function loginCustomer(email: string, password: string) {
     try {
         const credentials = await auth().signInWithEmailAndPassword(email, password);
@@ -17,6 +23,10 @@ export async function loginCustomer(email: string, password: string) {
     }
 }
 
+/**
+ * Here we are logging out the user.
+ * @returns Returns an error if the user is not logged out.
+ */
 export async function logoutCustomer() {
   try {
     await auth().signOut();

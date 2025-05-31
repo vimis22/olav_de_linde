@@ -10,6 +10,14 @@ import AssignedEmployeeSection from '../../../components/casedetails/AssignedEmp
 import ImageSection from '../../../components/casedetails/ImageSection.tsx';
 import DocumentsSection from '../../../components/casedetails/DocumentSection.tsx';
 import ActionButtonsRow from '../../../components/casedetails/ActionButtonsRow.tsx';
+
+/**
+ * CaseDetailsScreen is a component that is used to display the details of a case.
+ * @param navigation - Is a function that is used to navigate to other screens.
+ * @param route - Is a function that is used to get the route parameters.
+ * @constructor - Is a function that returns a styled box.
+ * @returns - A styled box where information regarding the created case is displayed after loading.
+ */
 const CaseDetailsScreen = ({ navigation, route }: any) => {
   const {caseData, loading, error, isEditing, editedDescription, setEditedDescription, handleEdit, handleSave, handleDelete, formatDate} = useCaseDetails(route?.params?.caseId, navigation);
 

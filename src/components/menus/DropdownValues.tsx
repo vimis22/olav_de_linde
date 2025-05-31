@@ -1,3 +1,7 @@
+/**
+ * Dropdown values for the address dropdown.
+ * @type {Array} - Return address-values based on defined key.
+ */
 const DropdownValues = [
   { key: '1', value: 'Edisionsvej 2, 5000 Odense C' },
   { key: '2', value: 'Risingvej 65, 5000 Odense C' },

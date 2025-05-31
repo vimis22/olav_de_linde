@@ -1,5 +1,11 @@
 import React from 'react';
 import {TouchableOpacity, Text, Image, StyleSheet, View} from 'react-native';
+
+/**
+ * This is an ActiveCaseBox component.
+ * @ActiveCaseBoxProps - defines the properties of the box.
+ * @ActiveCaseBox - Is the component, that recieves casebox as parameters and returns a styled box.
+ */
 interface ActiveCaseBoxProps{
   onPress: () => void;
   title1: string;

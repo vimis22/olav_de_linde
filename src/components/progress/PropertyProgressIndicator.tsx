@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
-/*
-@link https://github.com/oblador/react-native-progress/blob/master/Example/App.tsx
-@link https://www.npmjs.com/package/react-native-progress
+/**
+ * This is a PropertyProgressIndicator component, which shows the progress of Property in Property-Filing Process.
+ * @PropertyProgressIndicatorProps - defines the properties of the component.
+ * @PropertyProgressIndicator - Is the component, that recieves props as parameters and returns a styled box.
+ * @link https://github.com/oblador/react-native-progress/blob/master/Example/App.tsx
+ * @link https://www.npmjs.com/package/react-native-progress
  */
-
-interface ProgressIndicatorProps{
+interface ProgressIndicatorProps {
   step: number;
   icon1: any;
   icon2: any;

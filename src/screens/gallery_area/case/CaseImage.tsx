@@ -11,6 +11,14 @@ import {createCaseFromInfo} from '../../../functions/crud-operations/entities/ca
 import {CaseInfo} from '../../../functions/crud-operations/entities/case/CaseInfo.ts';
 import {updateCaseByDescription} from '../../../functions/crud-operations/entities/case/CaseUpdate.tsx';
 import { useCaseManager } from '../../../functions/hooks/CaseCreationManager.tsx';
+
+/**
+ * CaseImage is where the user is able to select an image for their case.
+ * @param navigation - navigation object from react-navigation.
+ * @param route - route object from react-navigation.
+ * @constructor - creates a new CaseImage component.
+ * @returns - a CaseImage component.
+ */
 const CaseImage = ({navigation, route}: any) => {
   const [imageLink, setImageLink] = useState<string | null>(null);
   const [_selectedValue, _setSelectedValue] = useState('');

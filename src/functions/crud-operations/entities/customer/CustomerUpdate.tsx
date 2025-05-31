@@ -3,6 +3,11 @@ import {UserInfo} from '../../UserInfo.ts';
 import auth from '@react-native-firebase/auth';
 import {EnumMessages} from '../../EnumMessages.ts';
 
+/**
+ * Updates the current user's password in the Firestore database.'
+ * @param password - The new password to be updated.
+ * @returns Promises a result based on Error, which is either SUCCESS or FAILED during execution.
+ */
 export async function updateCustomerPassword(password: string) {
   const user = await auth().currentUser;
   if (user) {
@@ -19,6 +24,11 @@ export async function updateCustomerPassword(password: string) {
   }
 }
 
+/**
+ * Sends a password reset email to the specified email address.
+ * @param email - The email address to send the password reset email to.
+ * @returns Promises a result based on Error, which is either SUCCESS or FAILED during execution.
+ */
 export const resetCustomerPassword = async (email: string) => {
   try {
     await auth().sendPasswordResetEmail(email);
@@ -29,6 +39,11 @@ export const resetCustomerPassword = async (email: string) => {
   }
 };
 
+/**
+ * Updates the current user's information in the Firestore database.'
+ * @param customerInfo - The new information to be updated.
+ * @returns Promises a result based on Error, which is either SUCCESS or FAILED during execution.
+ */
 export const updateCustomer = async (customerInfo: UserInfo): Promise<string | UserInfo> => {
     try {
         const {id, ...updatedData} = customerInfo;

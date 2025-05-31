@@ -1,7 +1,11 @@
 import {StyleSheet, Text, View} from 'react-native';
 import NormalText from '../textual/NormalText.tsx';
 import React from 'react';
-
+/**
+ * This is a DocumentSection component.
+ * @DocumentSectionProps - defines the properties of the box.
+ * @DocumentSection - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface DocumentsSectionProps {
   documents: any[]
 }

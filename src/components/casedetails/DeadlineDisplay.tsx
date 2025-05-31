@@ -1,7 +1,11 @@
 import InputFieldArea from '../textual/InputFieldArea.tsx';
 import {calenderIcon} from '../../styling/GlobalStyles.tsx';
 import React from 'react';
-
+/**
+ * This is a DeadlineDisplay component.
+ * @DeadlineDisplayProps - defines the properties of the box.
+ * @DeadlineDisplay - Is the component, that recieves props as parameters and returns a styled box.
+ */
 interface DeadlineDisplayProps {
   deadline: any,
   formatDate: (Date: any) => string;
