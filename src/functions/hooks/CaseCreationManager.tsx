@@ -11,18 +11,29 @@ export const useCaseManager = (navigation: any, initialParams?: any) => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const {handleNavigation, confirmNavigation, cancelNavigation, attemptNavigation, handleHomeNavigation, showExitConfirmation, pendingNavigation} = useStackNavigation(navigation, setNotificationsEnabled);
-
-  //Important to remind, that the values here are called in the intiialparams.
-  //This means, that when we call the navigation method belowin CaseTechnicians, then we equal it to useCaseManager while calling the navigation and params inside.
+  //Important to remind, that the values here are called in the initialparams.
+  //This means, that when we call the navigation method below in CaseTechnicians, then we equal it to useCaseManager while calling the navigation and params inside.
   const { title = '', description = '', caseId = null } = initialParams || {};
 
+  /**
+   * This method is used to handle the back press, and returns the information of different technicians in emergency case via setModalState.
+   */
   const handleBackPress = () => {
     setModalState('question');
   };
 
+  /**
+   * This method is used to select a technician from the list of technicians in CaseTechnicians Screen.
+   * @param value - The value of the technician selected.
+   */
   const handleTechnicianSelect = (value: string) => {
     setSelectedTechnician(value);
   };
+
+  /**
+   * This method is used to manage the collection of case information.
+   * @returns - Returns an error if all case informations are not provided or filled.
+   */
   const manageCollectionOfCaseInfo = async () => {
     try {
       if (!title || !description || !selectedTechnician) {

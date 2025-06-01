@@ -1,6 +1,6 @@
 import {View, FlatList, StyleSheet, Image} from 'react-native';
 import React, {useState} from 'react';
-import ImageManager from '../../../functions/manager_services/ImageManager.tsx';
+import ImageManager from '../../../functions/hooks/ImageManager.tsx';
 import NormalText from '../../../components/textual/NormalText.tsx';
 import OptionButton from '../../../components/buttons/OptionButton.tsx';
 import {imageIcon, penIcon, userIcon} from '../../../styling/GlobalStyles.tsx';

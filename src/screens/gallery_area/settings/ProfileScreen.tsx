@@ -4,7 +4,7 @@ import GlobalStyles, {atIcon, callIcon, houseIcon, locationIcon, userIcon, wallp
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
+import {GetProfileInformation} from '../../../functions/hooks/ProfileSettingsManager.tsx';
 import {useProfileSettingsManager} from '../../../functions/hooks/ProfileSettingsManager.tsx';
 
 /**

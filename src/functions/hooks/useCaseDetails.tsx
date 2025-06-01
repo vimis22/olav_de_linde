@@ -7,7 +7,6 @@ import { deleteCaseById } from '../crud-operations/entities/case/CaseDelete.tsx'
 
 //Here we have included the logic of displaying, editing and deleting cases.
 export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
-  // State management
   const [caseData, setCaseData] = useState<CaseInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -15,7 +14,10 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
   const [editedTitle, setEditedTitle] = useState<string>('');
   const [editedDescription, setEditedDescription] = useState<string>('');
 
-  //Here we have tried to fetch the case data from the caseId
+  /**
+   * This method is used to fetch the case data from the database.
+   * @returns - Returns an error if the case data is not found.
+   */
   const fetchCaseData = useCallback(async () => {
     //Here we are trying to fetch our caseId, when it is not present. We should recieve a false an empty value.
     if (!caseId) {
@@ -48,17 +50,23 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
     }
   }, [caseId]);
 
-  // Fetch case data when the component mounts or caseId changes
+  /**
+   * Fetch case data when the component mounts or caseId changes
+   */
   useEffect(() => {
     fetchCaseData();
   }, [fetchCaseData]);
 
-  //Her we are enabling to edit the case-description.
+  /**
+   * Her we are enabling to edit the case-description.
+   */
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  //Here we are saving the edited title and description to the database.
+  /**
+   * Here we are saving the edited title and description to the database.
+   */
   const handleSave = async () => {
     //Here we are trying to fetch the caseId, when it is not present. We should recieve a false an empty value.
     if (!caseData || !caseData.id) return;
@@ -96,7 +104,10 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
     }
   };
 
-  //This method process the deletion of case, by conducting a confirm-process to ensure that it is being deleted.
+  /**
+   * This method processes the deletion of case, by conducting a confirm-process to ensure that it is being deleted.
+   * @returns - Returns an error if deletion of case is not completed.
+   */
   const handleDelete = async () => {
     if (!caseData || !caseData.id) return;
     Alert.alert('Confirm Delete', 'Are you sure you want to delete this case?', [{text: 'Cancel', style: 'cancel'},

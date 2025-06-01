@@ -4,6 +4,13 @@ import { useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import {resetCustomerPassword} from '../crud-operations/entities/customer/CustomerUpdate.tsx';
 
+/**
+ * The purpose with this method is to handle the login process.
+ * @param email - The email of the user.
+ * @param password - The password of the user.
+ * @param navigation - The navigation object.
+ * @returns - Returns an error if the login fails.
+ */
 export const handleLogin = async (email: string, password: string, navigation: any) => {
   try{
     console.log('Inserted values', email, password);
@@ -20,6 +27,10 @@ export const handleLogin = async (email: string, password: string, navigation: a
   }
 };
 
+/**
+ * The purpose with this method is to handle the authentication state.
+ * @returns - Returns an error if the login fails.
+ */
 export const useAuth = () => {
   useEffect(() => {
     const unsubscribe = auth().onAuthStateChanged((user) => {
@@ -33,6 +44,13 @@ export const useAuth = () => {
   }, []);
 };
 
+/**
+ * The purpose with this method is to handle the reset password process.
+ * @param email - The email of the user.
+ * @param setErrorMessage - The error message.
+ * @param setNotificationsEnabled - The notification enabled.
+ * @returns - Returns an error if the login fails.
+ */
 export const handleResetPassword = async (email: string, setErrorMessage: (message: string) => void, setNotificationsEnabled: (enabled: boolean) => void) => {
   if (!email) {
     setErrorMessage('Indtast venligst din email');
@@ -48,9 +66,12 @@ export const handleResetPassword = async (email: string, setErrorMessage: (messa
   }
 };
 
-/*
-  @link https://reactnavigation.org/docs/navigation-actions/#reset
-   */
+/**
+ * The purpose with this method is to handle the logout process.
+ * @param navigation - The navigation object.
+ * @link https://reactnavigation.org/docs/navigation-actions/#reset
+ * @returns - Returns an error if the login fails.
+ */
 export const handleLogout = async (navigation: any) => {
   try{
     await auth().signOut();
@@ -63,9 +84,4 @@ export const handleLogout = async (navigation: any) => {
     Alert.alert('The Logout has failed', error?.message ?? 'No Message');
   }
 };
-export default {
-  handleLogin,
-  useAuth,
-  handleResetPassword,
-  handleLogout,
-};
+export default {handleLogin, useAuth, handleResetPassword, handleLogout};

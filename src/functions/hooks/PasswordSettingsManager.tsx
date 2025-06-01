@@ -1,7 +1,7 @@
 import {useState} from 'react';
-import ImageManager from '../manager_services/ImageManager.tsx';
+import ImageManager from './ImageManager.tsx';
 import auth, {EmailAuthProvider} from '@react-native-firebase/auth';
-import {resetCustomerPassword, updateCustomerPassword,} from '../crud-operations/entities/customer/CustomerUpdate.tsx';
+import {resetCustomerPassword, updateCustomerPassword} from '../crud-operations/entities/customer/CustomerUpdate.tsx';
 
 export const usePasswordSettingsManager = (_navigation: any, _initialParams: any) => {
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -14,16 +14,27 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
   const [resetSuccess, setResetSuccess] = useState(false);
   const [passwordError, setPasswordError] = useState('');
 
+  /**
+   * The purpose with this method is to handle the image selection.
+   * @param imageUri - The image uri.
+   */
   const imageSelection = (imageUri: string) => {
     setProfileImage(imageUri);
     setSuccess(true);
     setTimeout(() => setSuccess(false), 2000);
   };
 
+  /**
+   * The purpose with this method is to save the imageSelection inside the addImage constant.
+   */
   const {addImage} = ImageManager({
     onImageSelected: imageSelection,
   });
 
+  /**
+   * The purpose with the handleCurrentPasswordChange method is to handle the current password change.
+   * @param text - The text of the current password.
+   */
   const handleCurrentPasswordChange = (text: string) => {
     setCurrentPassword(text);
     if (passwordError) {
@@ -31,6 +42,10 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
     }
   };
 
+  /**
+   * The purpose with the handleNewPasswordChange method is to handle the new password change.
+   * @param text - The text of the new password.
+   */
   const handleNewPasswordChange = (text: string) => {
     setNewPassword(text);
     if (passwordError) {
@@ -38,6 +53,10 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
     }
   };
 
+  /**
+   * The purpose with the handleConfirmPasswordChange method is to handle the confirm password change.
+   * @param text - The text of the confirm password.
+   */
   const handleConfirmPasswordChange = (text: string) => {
     setConfirmPassword(text);
     if (passwordError) {
@@ -45,6 +64,10 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
     }
   };
 
+  /**
+   * The purpose with this method is to save the password changes.
+   * @returns - Returns an error if the login fails.
+   */
   const savePasswordChanges = async () => {
     try {
       setPasswordError('');
@@ -94,6 +117,10 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
     }
   };
 
+  /**
+   * The purpose with this method is to handle the forgot password process.
+   * @returns - Returns an error if the login fails.
+   */
   const handleForgotPassword = async () => {
     try {
       const currentUser = auth().currentUser;
@@ -110,6 +137,10 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
     }
   };
 
+  /**
+   * The purpose with this method is to edit the password information.
+   * @param text - The text of the current password.
+   */
   const editPasswordInformation = () => {
     if (editMode) {
       savePasswordChanges();
@@ -122,10 +153,7 @@ export const usePasswordSettingsManager = (_navigation: any, _initialParams: any
     }
   };
 
-  return {
-    profileImage, setProfileImage, success,
-    setSuccess, editMode, setEditMode, saveSuccess, setSaveSuccess, resetSuccess, setResetSuccess, passwordError, setPasswordError,
-    currentPassword, newPassword, confirmPassword, addImage,
-    handleCurrentPasswordChange, handleNewPasswordChange, handleConfirmPasswordChange, editPasswordInformation, savePasswordChanges, handleForgotPassword,
+  return {profileImage, setProfileImage, success, setSuccess, editMode, setEditMode, saveSuccess, setSaveSuccess, resetSuccess, setResetSuccess, passwordError, setPasswordError,
+    currentPassword, newPassword, confirmPassword, addImage, handleCurrentPasswordChange, handleNewPasswordChange, handleConfirmPasswordChange, editPasswordInformation, savePasswordChanges, handleForgotPassword,
   };
 };

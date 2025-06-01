@@ -5,7 +5,7 @@ import NormalText from '../../../components/textual/NormalText.tsx';
 import MenuOptions from '../../../components/menus/MenuOptions.tsx';
 import {useProfileImage} from '../../../functions/providers/ProfileImageProvider.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
+import {GetProfileInformation} from '../../../functions/hooks/ProfileSettingsManager.tsx';
 import {handleLogout} from '../../../functions/hooks/AuthenticationManager.tsx';
 
 /**

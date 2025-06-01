@@ -4,7 +4,7 @@ import GlobalStyles, {lockIcon, wallpaperBackground} from '../../../styling/Glob
 import NormalText from '../../../components/textual/NormalText.tsx';
 import InputFieldArea from '../../../components/textual/InputFieldArea.tsx';
 import PopupScreen from '../../../components/menus/PopupScreen.tsx';
-import {GetProfileInformation} from '../../../functions/manager_services/ProfileManager.tsx';
+import {GetProfileInformation} from '../../../functions/hooks/ProfileSettingsManager.tsx';
 import ActionButton from '../../../components/buttons/ActionButton.tsx';
 import {usePasswordSettingsManager} from '../../../functions/hooks/PasswordSettingsManager.tsx';
 
