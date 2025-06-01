@@ -20,6 +20,13 @@ interface UserAddressProviderProps {
   children: ReactNode;
 }
 
+/**
+ * The purpose with this method is to fetch the user address from the database and make it available all times.
+ * @param children - The children.
+ * @constructor - The constructor.
+ * @returns - Returns the user address, which displayed through the context.
+ * The context is called inside the App.tsx to make it easy to export the information other places.
+ */
 export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ children }) => {
   const [userAddress, setUserAddress] = useState<{ key: string; value: string } | null>(null);
   const [loading, setLoading] = useState(true);

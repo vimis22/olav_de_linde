@@ -9,6 +9,10 @@ type ProfileImageProviderProps = {
   children: React.ReactNode;
 };
 
+/**
+ * The primary objective with this Provider is to provide a way to share the profile image between components.
+ * Though this has not successfully work, still we have included it to show the idea.
+ */
 const ProfileImageContext = createContext<ProfileImageContextType | undefined>(undefined);
 
 export const useProfileImage = () => {
