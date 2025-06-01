@@ -30,11 +30,3 @@ The user should be able to see the application.</p>
 in order to update the dependencies.</p>
 
 ```npm install```
-
-<h4>Lacks and Problems</h4>
-<p>It is important to notice that under the crud-operations, all the code that has been provided there is not implemented due to problems with firebase.</p>
-<p>The application only allows authentication, signup and case-filing, where it is saved to authentication and datastore.</p>
-<p>Because of price-issues storage has not been included, though notifications are under process since there have been some dependency issues.</p>
-<p>As discussed with the Project Manager. The MVP is in React Native, though we have tried our best to include firebase as much as possible.</p>
-<p>For the Senior Developer, we advise you to look at the managers-folder under the functions-folder instead of crud-operations folder.</p>
-<p>We hope that the senior manager is satisfied with results of the customer-side application.</p>

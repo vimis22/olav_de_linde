@@ -1,7 +1,7 @@
 import UIKit
 import React_RCTAppDelegate
 import ReactAppDependencyProvider
-import FirebaseCore  // 1) Importér Firebase
+import FirebaseCore
 
 @main
 class AppDelegate: RCTAppDelegate {
@@ -9,15 +9,12 @@ class AppDelegate: RCTAppDelegate {
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
   ) -> Bool {
-    // 2) Kald FirebaseApp.configure()
     FirebaseApp.configure()
 
-    // React Native: modulnavn + dependency provider
     self.moduleName = "Olav_De_Linde"
     self.dependencyProvider = RCTAppDependencyProvider()
     self.initialProps = [:]
 
-    // Kald super, så RCTAppDelegate håndterer resten
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
