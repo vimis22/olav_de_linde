@@ -40,12 +40,11 @@ const CreatePasswordSignup = ({navigation, route}: any) => {
           name,
           email,
           password,
-          confirmPassword,
           companyName,
-          cvrNumber,
+          cvrnumber: cvrNumber,
           address,
-          houseNumber,
-          phoneNumber,
+          housenumber: houseNumber,
+          phone: phoneNumber,
         });
 
         navigation.navigate('SignupVerification', {
