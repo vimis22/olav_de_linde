@@ -47,7 +47,7 @@ export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ childr
         }
 
         const userData = userDoc.data();
-        if (!userData || !userData.address) {
+        if (!userData || !userData.address || userData.address.trim() === '') {
           setError('User address not found');
           setLoading(false);
           return;
@@ -55,7 +55,7 @@ export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ childr
 
         let addressValue = userData.address;
 
-        if (userData.housenumber) {
+        if (userData.housenumber && userData.housenumber.trim() !== '') {
           addressValue += `, ${userData.housenumber}`;
         }
 
