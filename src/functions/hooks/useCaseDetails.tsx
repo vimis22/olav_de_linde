@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'react-native';
 import { CaseInfo } from '../crud-operations/entities/case/CaseInfo.ts';
 import { readCaseById } from '../crud-operations/entities/case/CaseRead.tsx';
-import { updateCaseByDescription } from '../crud-operations/entities/case/CaseUpdate.tsx';
+import { updateCase } from '../crud-operations/entities/case/CaseUpdate.tsx';
 import { deleteCaseById } from '../crud-operations/entities/case/CaseDelete.tsx';
 
 //Here we have included the logic of displaying, editing and deleting cases.
@@ -12,6 +12,7 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState<string>('');
   const [editedDescription, setEditedDescription] = useState<string>('');
 
   //Here we have tried to fetch the case data from the caseId
@@ -36,6 +37,7 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
       } else {
         const caseResult = result as CaseInfo;
         setCaseData(caseResult);
+        setEditedTitle(caseResult.title || '');
         setEditedDescription(caseResult.description || '');
       }
     } catch (err) {
@@ -56,26 +58,35 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
     setIsEditing(true);
   };
 
-  //Here we are saving the edited description to the database.
+  //Here we are saving the edited title and description to the database.
   const handleSave = async () => {
     //Here we are trying to fetch the caseId, when it is not present. We should recieve a false an empty value.
     if (!caseData || !caseData.id) return;
 
-    //Here we are trying to save the description by applying the recent change from editedCaseDescription on a specific case.
-    //We expect the EnumMessage to be 1 or Success if the edited description is saved after editing successfully.
+    //Here we are trying to save both the title and description by applying the recent changes to a specific case.
+    //We use updateCase to update both fields at once.
     try {
       setLoading(true);
-      const result = await updateCaseByDescription(caseData.id, editedDescription);
 
-      if (result === 'SUCCESS' || result === undefined) {
+      // Create updated case info with new title and description
+      const updatedCaseInfo: CaseInfo = {
+        ...caseData,
+        title: editedTitle,
+        description: editedDescription
+      };
+
+      const result = await updateCase(updatedCaseInfo);
+
+      if (typeof result !== 'string' || result === 'SUCCESS') {
         setCaseData({
           ...caseData,
+          title: editedTitle,
           description: editedDescription,
         });
         setIsEditing(false);
-        Alert.alert('Success', 'Case description updated successfully');
+        Alert.alert('Success', 'Case updated successfully');
       } else {
-        Alert.alert('Error', 'Failed to update case description');
+        Alert.alert('Error', 'Failed to update case');
       }
     } catch (err) {
       console.error('Error updating case:', err);
@@ -135,7 +146,7 @@ export const useCaseDetails = (caseId: string | undefined, navigation: any) => {
     return new Date().toLocaleString();
   };
 
-  return {caseData, loading, error, isEditing, editedDescription, setEditedDescription, handleEdit, handleSave, handleDelete, formatDate};
+  return {caseData, loading, error, isEditing, editedTitle, setEditedTitle, editedDescription, setEditedDescription, handleEdit, handleSave, handleDelete, formatDate};
 };
 
 export default useCaseDetails;

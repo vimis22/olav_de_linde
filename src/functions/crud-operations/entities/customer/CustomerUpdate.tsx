@@ -12,8 +12,15 @@ export async function updateCustomerPassword(password: string) {
   const user = await auth().currentUser;
   if (user) {
     try {
+      // Update password in Firebase Authentication
       await user.updatePassword(password);
-      console.log('Password has been updated');
+
+      // Update password in Firestore
+      await firestore().collection('Customer').doc(user.uid).update({
+        password: password
+      });
+
+      console.log('Password has been updated in both Authentication and Firestore');
     } catch (error) {
       console.log('An unexpected error occured during password update', error);
       throw error;

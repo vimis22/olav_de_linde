@@ -55,8 +55,8 @@ export const UserAddressProvider: React.FC<UserAddressProviderProps> = ({ childr
 
         let addressValue = userData.address;
 
-        if (userData.houseNumber) {
-          addressValue += `, ${userData.houseNumber}`;
+        if (userData.housenumber) {
+          addressValue += `, ${userData.housenumber}`;
         }
 
         setUserAddress({
